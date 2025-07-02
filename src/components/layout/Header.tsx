@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { useFadeIn } from '@/hooks/useGSAP'
-import { useSmoothScroll } from '@/hooks/useLenis'
+import { scrollToElement } from '@/lib/animations/lenis'
 import { cn } from '@/lib/utils'
 
 const navigation = [
@@ -20,8 +20,8 @@ const navigation = [
 export const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [showAdminLink, setShowAdminLink] = useState(false)
   const headerRef = useFadeIn({ delay: 0.2 })
-  const { scrollTo } = useSmoothScroll()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -34,8 +34,13 @@ export const Header = () => {
 
   const handleSmoothScroll = (href: string) => {
     if (href.startsWith('#')) {
-      scrollTo(href, { offset: -100 })
+      scrollToElement(href, { offset: -100 })
     }
+  }
+
+  const handleLogoDoubleClick = () => {
+    setShowAdminLink(!showAdminLink)
+    setTimeout(() => setShowAdminLink(false), 5000) // Hide after 5 seconds
   }
 
   return (
@@ -51,13 +56,22 @@ export const Header = () => {
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <div className="flex-shrink-0">
+          <div className="flex-shrink-0 relative">
             <Link 
               href="/" 
+              onDoubleClick={handleLogoDoubleClick}
               className="text-2xl font-bold text-foreground hover:text-primary transition-colors"
             >
               Portfolio
             </Link>
+            {showAdminLink && (
+              <Link
+                href="/auth/login"
+                className="absolute top-full left-0 mt-2 text-xs text-content-tertiary hover:text-content-primary bg-surface-card px-2 py-1 rounded border border-border-primary shadow-sm"
+              >
+                Admin
+              </Link>
+            )}
           </div>
 
           {/* Desktop Navigation */}

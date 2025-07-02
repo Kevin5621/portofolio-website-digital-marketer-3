@@ -30,7 +30,7 @@ export function generateSlug(title: string): string {
     .toLowerCase()
     .replace(/[^\w\s-]/g, '') // Remove special characters
     .replace(/[\s_-]+/g, '-') // Replace spaces and underscores with hyphens
-    .replace(/^-+|-+$/g, '') // Remove leading/trailing hyphens
+    .replace(/(^-+|-+$)/g, '') // Remove leading/trailing hyphens
 }
 
 /**
@@ -136,7 +136,7 @@ export function deepClone<T>(obj: T): T {
   
   const cloned = {} as T
   for (const key in obj) {
-    if (Object.prototype.hasOwnProperty.call(obj, key)) {
+    if (Object.hasOwn(obj, key)) {
       cloned[key] = deepClone(obj[key])
     }
   }

@@ -1,7 +1,9 @@
+'use client'
+
 import Link from 'next/link'
 import { ExternalLink, Mail, ArrowUp } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { useSmoothScroll } from '@/hooks/useLenis'
+import { scrollToPosition } from '@/lib/animations/lenis'
 
 const socialLinks = [
   { name: 'GitHub', href: 'https://github.com', icon: ExternalLink },
@@ -26,7 +28,9 @@ const footerLinks = {
 }
 
 export const Footer = () => {
-  const { scrollToTop } = useSmoothScroll()
+  const handleScrollToTop = () => {
+    scrollToPosition(0, { duration: 1.2 })
+  }
 
   return (
     <footer className="bg-background border-t border-border">
@@ -92,7 +96,7 @@ export const Footer = () => {
           <Button
             variant="ghost"
             size="sm"
-            onClick={() => scrollToTop()}
+            onClick={handleScrollToTop}
             className="mt-4 sm:mt-0"
           >
             <ArrowUp className="h-4 w-4 mr-2" />

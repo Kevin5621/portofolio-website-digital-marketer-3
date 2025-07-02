@@ -4,18 +4,17 @@ import { motion } from 'framer-motion'
 import { ArrowDown } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { useTextReveal, useSlideUp, useFadeIn } from '@/hooks/useGSAP'
-import { useSmoothScroll } from '@/hooks/useLenis'
+import { scrollToElement } from '@/lib/animations/lenis'
 
 export const HeroSection = () => {
   const titleRef = useTextReveal({ delay: 0.5 })
   const subtitleRef = useSlideUp({ delay: 0.8 })
   const ctaRef = useFadeIn({ delay: 1.2 })
   const scrollIndicatorRef = useFadeIn({ delay: 1.5 })
-  const { scrollTo } = useSmoothScroll()
 
-  const handleScrollToProjects = () => scrollTo('#projects')
-  const handleScrollToContact = () => scrollTo('#contact')
-  const handleScrollToAbout = () => scrollTo('#about')
+  const handleScrollToProjects = () => scrollToElement('#projects')
+  const handleScrollToContact = () => scrollToElement('#contact')
+  const handleScrollToAbout = () => scrollToElement('#about')
 
   return (
     <section className="min-h-screen flex items-center justify-center relative overflow-hidden">

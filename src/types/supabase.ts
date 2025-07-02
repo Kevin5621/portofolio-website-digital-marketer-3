@@ -7,6 +7,11 @@ export type Json =
   | { [key: string]: Json | undefined }
   | Json[]
 
+// Union type aliases for better maintainability
+export type ProjectStatus = 'draft' | 'published' | 'archived'
+export type BlogPostStatus = 'draft' | 'published' | 'archived'
+export type UserRole = 'admin' | 'user'
+
 export interface Database {
   public: {
     Tables: {
@@ -22,7 +27,7 @@ export interface Database {
           project_url: string | null
           github_url: string | null
           category: string
-          status: 'draft' | 'published' | 'archived'
+          status: ProjectStatus
           featured: boolean
           order_index: number
           created_at: string
@@ -40,7 +45,7 @@ export interface Database {
           project_url?: string | null
           github_url?: string | null
           category: string
-          status?: 'draft' | 'published' | 'archived'
+          status?: ProjectStatus
           featured?: boolean
           order_index?: number
           created_at?: string
@@ -58,7 +63,7 @@ export interface Database {
           project_url?: string | null
           github_url?: string | null
           category?: string
-          status?: 'draft' | 'published' | 'archived'
+          status?: ProjectStatus
           featured?: boolean
           order_index?: number
           created_at?: string
@@ -76,7 +81,7 @@ export interface Database {
           featured_image: string | null
           category: string
           tags: string[]
-          status: 'draft' | 'published' | 'archived'
+          status: BlogPostStatus
           featured: boolean
           published_at: string | null
           reading_time: number
@@ -95,7 +100,7 @@ export interface Database {
           featured_image?: string | null
           category: string
           tags?: string[]
-          status?: 'draft' | 'published' | 'archived'
+          status?: BlogPostStatus
           featured?: boolean
           published_at?: string | null
           reading_time?: number
@@ -114,7 +119,7 @@ export interface Database {
           featured_image?: string | null
           category?: string
           tags?: string[]
-          status?: 'draft' | 'published' | 'archived'
+          status?: BlogPostStatus
           featured?: boolean
           published_at?: string | null
           reading_time?: number
@@ -134,7 +139,7 @@ export interface Database {
           bio: string | null
           website: string | null
           social_links: Json | null
-          role: 'admin' | 'user'
+          role: UserRole
           created_at: string
           updated_at: string
         }
@@ -146,7 +151,7 @@ export interface Database {
           bio?: string | null
           website?: string | null
           social_links?: Json | null
-          role?: 'admin' | 'user'
+          role?: UserRole
           created_at?: string
           updated_at?: string
         }
@@ -158,7 +163,7 @@ export interface Database {
           bio?: string | null
           website?: string | null
           social_links?: Json | null
-          role?: 'admin' | 'user'
+          role?: UserRole
           created_at?: string
           updated_at?: string
         }

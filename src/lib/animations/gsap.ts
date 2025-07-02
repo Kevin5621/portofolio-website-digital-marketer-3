@@ -225,7 +225,7 @@ export const createParallax = (
   }
   
   return ScrollTrigger.create({
-    trigger: trigger || element,
+    trigger: trigger ?? element,
     start: 'top bottom',
     end: 'bottom top',
     scrub: true,
@@ -246,7 +246,7 @@ export const textReveal = (
   const target = typeof element === 'string' ? document.querySelector(element) : element
   if (!target) return tl
   
-  const text = target.textContent || ''
+  const text = target.textContent ?? ''
   target.innerHTML = text
     .split('')
     .map(char => `<span class="char">${char === ' ' ? '&nbsp;' : char}</span>`)
