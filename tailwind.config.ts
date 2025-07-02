@@ -247,6 +247,8 @@ export default {
         // Surface colors (for backgrounds)
         surface: {
           DEFAULT: "hsl(var(--color-surface-default, 0 0% 100%))",
+          background: "hsl(var(--color-surface-background, 0 0% 100%))",
+          card: "hsl(var(--color-surface-card, 0 0% 100%))",
           secondary: "hsl(var(--color-surface-secondary, 210 20% 98%))",
           tertiary: "hsl(var(--color-surface-tertiary, 210 15% 95%))",
           inverse: "hsl(var(--color-surface-inverse, 210 15% 10%))",
@@ -255,28 +257,33 @@ export default {
         // Content colors (for text)
         content: {
           DEFAULT: "hsl(var(--color-content-default, 210 15% 10%))",
+          primary: "hsl(var(--color-content-primary, 210 15% 10%))",
           secondary: "hsl(var(--color-content-secondary, 210 8% 34%))",
           tertiary: "hsl(var(--color-content-tertiary, 210 6% 46%))",
           inverse: "hsl(var(--color-content-inverse, 0 0% 100%))",
           disabled: "hsl(var(--color-content-disabled, 210 8% 64%))",
+          link: "hsl(var(--color-content-link, 224 60% 57%))",
         },
 
         // Interactive colors (for buttons, links, etc.)
         interactive: {
-          DEFAULT: "hsl(224 60% 57%)",  // Default interactive (brand)
-          hover: "hsl(225 57% 47%)",    // Hover state
-          active: "hsl(226 54% 37%)",   // Active/pressed state
-          disabled: "hsl(210 8% 64%)",  // Disabled state
-          focus: "hsl(224 60% 57%)",    // Focus state
+          DEFAULT: "hsl(var(--color-interactive-primary, 224 60% 57%))",
+          primary: "hsl(var(--color-interactive-primary, 224 60% 57%))",
+          secondary: "hsl(var(--color-interactive-secondary, 220 100% 97%))",
+          hover: "hsl(var(--color-interactive-hover, 225 57% 47%))",
+          active: "hsl(var(--color-interactive-active, 226 54% 37%))",
+          disabled: "hsl(var(--color-interactive-disabled, 210 8% 64%))",
+          focus: "hsl(var(--color-interactive-primary, 224 60% 57%))",
         },
 
         // Border colors
         border: {
           DEFAULT: "hsl(var(--color-border-default, 210 12% 90%))",
+          primary: "hsl(var(--color-border-primary, 210 12% 90%))",
           secondary: "hsl(var(--color-border-secondary, 210 10% 82%))",
-          focus: "hsl(224 60% 57%)",    // Focus border
-          error: "hsl(0 84% 60%)",      // Error border
-          success: "hsl(146 59% 44%)",  // Success border
+          focus: "hsl(var(--color-interactive-primary, 224 60% 57%))",
+          error: "hsl(var(--color-state-error, 0 84% 60%))",
+          success: "hsl(var(--color-state-success, 146 59% 44%))",
         },
 
         // Input colors
@@ -284,8 +291,45 @@ export default {
           DEFAULT: "hsl(var(--color-input-default, 0 0% 100%))",
           border: "hsl(var(--color-input-border, 210 12% 90%))",
           placeholder: "hsl(var(--color-input-placeholder, 210 6% 46%))",
-          focus: "hsl(224 60% 57%)",    // Focus color
+          focus: "hsl(var(--color-interactive-primary, 224 60% 57%))",
         },
+
+        // State colors
+        state: {
+          success: "hsl(var(--color-state-success, 146 59% 44%))",
+          warning: "hsl(var(--color-state-warning, 38 92% 50%))",
+          error: "hsl(var(--color-state-error, 0 84% 60%))",
+          info: "hsl(var(--color-state-info, 198 100% 46%))",
+        },
+
+        // Legacy compatibility mappings (to be gradually migrated)
+        background: "hsl(var(--color-surface-background, 0 0% 100%))",
+        foreground: "hsl(var(--color-content-primary, 210 15% 10%))",
+        card: {
+          DEFAULT: "hsl(var(--color-surface-card, 0 0% 100%))",
+          foreground: "hsl(var(--color-content-primary, 210 15% 10%))",
+        },
+        popover: {
+          DEFAULT: "hsl(var(--color-surface-card, 0 0% 100%))",
+          foreground: "hsl(var(--color-content-primary, 210 15% 10%))",
+        },
+        primary: {
+          DEFAULT: "hsl(var(--color-interactive-primary, 224 60% 57%))",
+          foreground: "hsl(var(--color-content-inverse, 0 0% 100%))",
+        },
+        secondary: {
+          DEFAULT: "hsl(var(--color-interactive-secondary, 220 100% 97%))",
+          foreground: "hsl(var(--color-interactive-primary, 224 60% 57%))",
+        },
+        muted: {
+          DEFAULT: "hsl(var(--color-surface-tertiary, 210 15% 95%))",
+          foreground: "hsl(var(--color-content-tertiary, 210 6% 46%))",
+        },
+        destructive: {
+          DEFAULT: "hsl(var(--color-state-error, 0 84% 60%))",
+          foreground: "hsl(var(--color-content-inverse, 0 0% 100%))",
+        },
+        ring: "hsl(var(--color-interactive-primary, 224 60% 57%))",
       },
 
       /* === ANIMATION & TRANSITIONS === */
