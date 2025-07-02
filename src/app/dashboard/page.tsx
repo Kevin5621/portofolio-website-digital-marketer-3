@@ -200,13 +200,13 @@ export default function DashboardPage() {
           <h2 className="text-xl font-semibold mb-4">Recent Activity</h2>
           <div className="space-y-4">
             {stats.recentActivity.length === 0 ? (
-              <p className="text-muted-foreground text-sm">
+              <p className="text-content-tertiary text-sm">
                 No recent activity. Create your first project or blog post!
               </p>
             ) : (
               stats.recentActivity.map((item) => (
                 <div key={item.id} className="flex items-center space-x-3">
-                  <div className="h-8 w-8 bg-muted rounded-full flex items-center justify-center">
+                  <div className="h-8 w-8 bg-surface-tertiary rounded-full flex items-center justify-center">
                     {item.type === 'project' ? (
                       <FolderOpen className="h-4 w-4" />
                     ) : (
@@ -215,7 +215,7 @@ export default function DashboardPage() {
                   </div>
                   <div className="flex-1 min-w-0">
                     <p className="text-sm font-medium truncate">{item.title}</p>
-                    <div className="flex items-center text-xs text-muted-foreground">
+                    <div className="flex items-center text-xs text-content-tertiary">
                       <Calendar className="h-3 w-3 mr-1" />
                       {item.date}
                     </div>

@@ -32,39 +32,39 @@ export default function LoginPage() {
       if (signInError) {
         setError(signInError.message)
       } else {
-        router.push('/dashboard')
+        router.push('/admin')
       }
     } catch (err) {
       setError('An unexpected error occurred')
-      console.error('Login error:', err)
+      console.error('Sign in error:', err)
     } finally {
       setIsLoading(false)
     }
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-muted/30 px-4">
+    <div className="min-h-screen flex items-center justify-center bg-surface-background px-4">
       <Card className="w-full max-w-md p-8">
         <div className="text-center mb-8">
-          <h1 className="text-2xl font-bold">Welcome Back</h1>
-          <p className="text-muted-foreground mt-2">
-            Sign in to access your dashboard
+          <h1 className="text-heading-lg text-content-primary">Admin Login</h1>
+          <p className="text-content-secondary mt-2">
+            Access the portfolio management dashboard
           </p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">
           {error && (
-            <div className="p-3 bg-destructive/10 border border-destructive/20 rounded-md">
-              <p className="text-sm text-destructive">{error}</p>
+            <div className="p-3 bg-state-error/10 border border-state-error/20 rounded-md">
+              <p className="text-body-sm text-state-error">{error}</p>
             </div>
           )}
 
           <div>
-            <label htmlFor="email" className="block text-sm font-medium mb-2">
+            <label htmlFor="email" className="block text-body-md font-medium text-content-primary mb-2">
               Email
             </label>
             <div className="relative">
-              <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
+              <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-content-tertiary h-4 w-4" />
               <Input
                 id="email"
                 type="email"
@@ -72,17 +72,17 @@ export default function LoginPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="your@email.com"
-                className="pl-10"
+                className="input-base pl-10"
               />
             </div>
           </div>
 
           <div>
-            <label htmlFor="password" className="block text-sm font-medium mb-2">
+            <label htmlFor="password" className="block text-body-md font-medium text-content-primary mb-2">
               Password
             </label>
             <div className="relative">
-              <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
+              <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-content-tertiary h-4 w-4" />
               <Input
                 id="password"
                 type={showPassword ? 'text' : 'password'}
@@ -90,12 +90,12 @@ export default function LoginPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Enter your password"
-                className="pl-10 pr-10"
+                className="input-base pl-10 pr-10"
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-content-tertiary hover:text-content-primary"
               >
                 {showPassword ? (
                   <EyeOff className="h-4 w-4" />
@@ -108,12 +108,12 @@ export default function LoginPage() {
 
           <Button
             type="submit"
-            className="w-full"
+            className="button-base button-md button-primary w-full"
             disabled={isLoading}
           >
             {isLoading ? (
               <>
-                <div className="w-4 h-4 border-2 border-default border-t-transparent rounded-full animate-spin mr-2" />
+                <div className="w-4 h-4 border-2 border-content-inverse border-t-transparent rounded-full animate-spin mr-2" />
                 Signing in...
               </>
             ) : (
@@ -123,23 +123,11 @@ export default function LoginPage() {
         </form>
 
         <div className="mt-6 text-center">
-          <p className="text-sm text-muted-foreground">
-            Don&apos;t have an account?{' '}
-            <Link 
-              href="/auth/signup" 
-              className="text-primary hover:underline font-medium"
-            >
-              Sign up
-            </Link>
-          </p>
-        </div>
-
-        <div className="mt-4 text-center">
           <Link 
             href="/" 
-            className="text-sm text-muted-foreground hover:text-primary transition-colors"
+            className="text-body-sm text-content-secondary hover:text-content-link transition-colors"
           >
-            ← Back to Home
+            ← Back to Portfolio
           </Link>
         </div>
       </Card>

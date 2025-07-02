@@ -149,7 +149,7 @@ export function ProjectsSection() {
                     className="object-cover transition-transform duration-500"
                   />
                 </div>
-                <div className="project-overlay absolute inset-0 bg-black/60 opacity-0 flex items-center justify-center space-x-4 transition-opacity duration-300">
+                <div className="project-overlay absolute inset-0 bg-primary opacity-0 flex items-center justify-center space-x-4 transition-opacity duration-300">
                   <Button asChild size="sm" variant="secondary">
                     <Link href={project.liveUrl} target="_blank" rel="noopener noreferrer">
                       <ExternalLink className="w-4 h-4 mr-2" />

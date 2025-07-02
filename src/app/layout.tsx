@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
@@ -20,8 +20,6 @@ export const metadata: Metadata = {
   description: "Crafting exceptional digital experiences through innovative design, cutting-edge technology, and meticulous attention to detail.",
   keywords: ["portfolio", "developer", "designer", "web development", "creative"],
   authors: [{ name: "Creative Developer" }],
-  viewport: "width=device-width, initial-scale=1",
-  themeColor: "#000000",
   openGraph: {
     title: "Premium Portfolio - Creative Developer",
     description: "Crafting exceptional digital experiences through innovative design, cutting-edge technology, and meticulous attention to detail.",
@@ -35,6 +33,12 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#000000",
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -43,7 +47,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-background font-sans`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-surface-background font-sans`}
       >
         <SmoothScrollProvider>
           <Header />

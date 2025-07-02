@@ -11,7 +11,7 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
       ref={ref}
       className={cn(
         // Base card styles using semantic design system
-        'bg-surface-card text-surface-card-foreground',
+        'bg-surface-card text-content-primary',
         'border border-border-primary rounded-lg',
         
         // Variant styles

@@ -84,7 +84,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
       {/* Mobile sidebar overlay */}
       {sidebarOpen && (
         <button
-          className="fixed inset-0 z-40 lg:hidden bg-black/50"
+          className="fixed inset-0 z-40 lg:hidden bg-primary"
           onClick={() => setSidebarOpen(false)}
           onKeyDown={(e) => {
             if (e.key === 'Escape') {

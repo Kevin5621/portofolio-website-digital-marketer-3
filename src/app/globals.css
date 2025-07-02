@@ -77,6 +77,65 @@
   --font-weight-black: 900;
 
   /* =======================================
+     SEMANTIC COLOR SYSTEM
+     ======================================= */
+
+  /* === BRAND COLORS === */
+  --color-brand-50: 220 100% 97%;
+  --color-brand-100: 220 95% 93%;
+  --color-brand-200: 221 87% 86%;
+  --color-brand-300: 222 78% 77%;
+  --color-brand-400: 223 69% 67%;
+  --color-brand-500: 224 60% 57%;
+  --color-brand-600: 225 57% 47%;
+  --color-brand-700: 226 54% 37%;
+  --color-brand-800: 227 51% 27%;
+  --color-brand-900: 228 48% 17%;
+  --color-brand-950: 229 45% 12%;
+  --color-brand-primary: var(--color-brand-500);
+  --color-brand-secondary: 274 60% 57%;
+
+  /* === SURFACE COLORS === */
+  --color-surface-default: 0 0% 100%;
+  --color-surface-background: 0 0% 100%;
+  --color-surface-card: 0 0% 100%;
+  --color-surface-secondary: 210 20% 98%;
+  --color-surface-tertiary: 210 15% 95%;
+  --color-surface-inverse: 210 15% 10%;
+
+  /* === CONTENT COLORS === */
+  --color-content-default: 210 15% 10%;
+  --color-content-primary: 210 15% 10%;
+  --color-content-secondary: 210 8% 34%;
+  --color-content-tertiary: 210 6% 46%;
+  --color-content-inverse: 0 0% 100%;
+  --color-content-disabled: 210 8% 64%;
+  --color-content-link: var(--color-brand-500);
+
+  /* === BORDER COLORS === */
+  --color-border-default: 210 12% 90%;
+  --color-border-primary: 210 12% 90%;
+  --color-border-secondary: 210 10% 82%;
+
+  /* === INPUT COLORS === */
+  --color-input-default: 0 0% 100%;
+  --color-input-border: 210 12% 90%;
+  --color-input-placeholder: 210 6% 46%;
+
+  /* === INTERACTIVE COLORS === */
+  --color-interactive-primary: var(--color-brand-500);
+  --color-interactive-secondary: var(--color-brand-50);
+  --color-interactive-hover: var(--color-brand-600);
+  --color-interactive-active: var(--color-brand-700);
+  --color-interactive-disabled: 210 8% 64%;
+
+  /* === STATE COLORS === */
+  --color-state-success: 146 59% 44%;
+  --color-state-warning: 38 92% 50%;
+  --color-state-error: 0 84% 60%;
+  --color-state-info: 198 100% 46%;
+
+  /* =======================================
      RADIUS & SHADOWS SCALES
      ======================================= */
   
@@ -154,6 +213,19 @@ body {
     text-wrap: balance;
   }
 
+  /* Typography Scale Utilities */
+  .text-display-sm { font-size: var(--font-size-2xl); line-height: var(--line-height-tight); font-weight: var(--font-weight-bold); }
+  .text-display-md { font-size: var(--font-size-3xl); line-height: var(--line-height-tight); font-weight: var(--font-weight-bold); }
+  .text-display-lg { font-size: var(--font-size-4xl); line-height: var(--line-height-tight); font-weight: var(--font-weight-bold); }
+  
+  .text-heading-sm { font-size: var(--font-size-lg); line-height: var(--line-height-snug); font-weight: var(--font-weight-semibold); }
+  .text-heading-md { font-size: var(--font-size-xl); line-height: var(--line-height-snug); font-weight: var(--font-weight-semibold); }
+  .text-heading-lg { font-size: var(--font-size-2xl); line-height: var(--line-height-snug); font-weight: var(--font-weight-semibold); }
+  
+  .text-body-sm { font-size: var(--font-size-sm); line-height: var(--line-height-normal); }
+  .text-body-md { font-size: var(--font-size-base); line-height: var(--line-height-normal); }
+  .text-body-lg { font-size: var(--font-size-lg); line-height: var(--line-height-normal); }
+
   /* Responsive grid auto-fit */
   .grid-auto-fit {
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -171,23 +243,29 @@ body {
 [data-theme="dark"],
 .dark {
   /* Override semantic colors for dark mode */
-  --color-surface-default: hsl(210 15% 10%);
-  --color-surface-secondary: hsl(210 12% 16%);
-  --color-surface-tertiary: hsl(210 10% 24%);
-  --color-surface-inverse: hsl(0 0% 100%);
+  --color-surface-default: 210 15% 10%;
+  --color-surface-background: 210 15% 10%;
+  --color-surface-card: 210 12% 16%;
+  --color-surface-secondary: 210 12% 16%;
+  --color-surface-tertiary: 210 10% 24%;
+  --color-surface-inverse: 0 0% 100%;
 
-  --color-content-default: hsl(0 0% 100%);
-  --color-content-secondary: hsl(210 15% 95%);
-  --color-content-tertiary: hsl(210 12% 90%);
-  --color-content-inverse: hsl(210 15% 10%);
-  --color-content-disabled: hsl(210 8% 64%);
+  --color-content-default: 0 0% 100%;
+  --color-content-primary: 0 0% 100%;
+  --color-content-secondary: 210 15% 95%;
+  --color-content-tertiary: 210 12% 90%;
+  --color-content-inverse: 210 15% 10%;
+  --color-content-disabled: 210 8% 64%;
 
-  --color-border-default: hsl(210 10% 24%);
-  --color-border-secondary: hsl(210 8% 34%);
+  --color-border-default: 210 10% 24%;
+  --color-border-primary: 210 10% 24%;
+  --color-border-secondary: 210 8% 34%;
 
-  --color-input-default: hsl(210 12% 16%);
-  --color-input-border: hsl(210 10% 24%);
-  --color-input-placeholder: hsl(210 8% 64%);
+  --color-input-default: 210 12% 16%;
+  --color-input-border: 210 10% 24%;
+  --color-input-placeholder: 210 8% 64%;
+
+  --color-interactive-secondary: 224 60% 20%;
 
   /* Adjust shadows for dark mode */
   --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.15);

@@ -33,11 +33,11 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           // Variant styles using semantic colors
           {
             // Primary - main brand action
-            'bg-interactive-primary text-interactive-primary-foreground hover:bg-interactive-primary-hover shadow-sm hover:shadow-md': 
+            'bg-interactive-primary text-content-inverse hover:bg-interactive-hover shadow-sm hover:shadow-md': 
               variant === 'primary',
             
             // Secondary - supporting action  
-            'bg-interactive-secondary text-interactive-secondary-foreground hover:bg-interactive-secondary-hover border border-border-primary': 
+            'bg-interactive-secondary text-interactive-primary hover:bg-surface-tertiary border border-border-primary': 
               variant === 'secondary',
             
             // Outline - subtle action
@@ -49,11 +49,11 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
               variant === 'ghost',
             
             // Link - text-based action
-            'text-content-link hover:text-content-link-hover underline-offset-4 hover:underline': 
+            'text-content-link hover:text-interactive-hover underline-offset-4 hover:underline': 
               variant === 'link',
             
             // Destructive - dangerous action
-            'bg-state-error text-state-error-foreground hover:bg-state-error/90 shadow-sm': 
+            'bg-state-error text-content-inverse hover:bg-state-error/90 shadow-sm': 
               variant === 'destructive',
           },
           className
