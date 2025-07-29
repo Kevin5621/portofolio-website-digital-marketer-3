@@ -102,6 +102,29 @@
   --color-surface-secondary: 210 20% 98%;
   --color-surface-tertiary: 210 15% 95%;
   --color-surface-inverse: 210 15% 10%;
+  
+  /* === SEMANTIC COLOR SYSTEM === */
+  --color-primary: 224 60% 57%;             /* Brand blue */
+  --color-primary-foreground: 0 0% 100%;    /* White text on primary */
+  --color-secondary: 274 60% 57%;           /* Purple secondary */
+  --color-secondary-foreground: 0 0% 100%;  /* White text on secondary */
+  --color-accent: 0 0% 100%;                /* White accent */
+  --color-accent-foreground: 220 15% 8%;    /* Dark text on accent */
+  --color-destructive: 0 84% 60%;           /* Red for errors */
+  --color-destructive-foreground: 0 0% 100%; /* White text on destructive */
+  --color-muted: 210 8% 64%;                /* Muted gray */
+  --color-muted-foreground: 210 6% 46%;     /* Muted text */
+  --color-card: 0 0% 100%;                  /* White card background */
+  --color-card-foreground: 220 15% 8%;      /* Dark text on cards */
+  --color-border: 210 12% 90%;              /* Border color */
+  --color-input: 0 0% 100%;                 /* Input background */
+  --color-ring: 224 60% 57%;                /* Focus ring color */
+  
+  /* === BACKGROUND & TEXT COLORS === */
+  --color-background: 0 0% 100%;            /* Light background */
+  --color-foreground: 220 15% 8%;           /* Dark text */
+  --color-background-dark: 220 15% 8%;      /* Dark background */
+  --color-foreground-light: 0 0% 100%;      /* Light text */
 
   /* === CONTENT COLORS === */
   --color-content-default: 210 15% 10%;
@@ -201,8 +224,8 @@ body {
   font-size: var(--font-size-base);
   line-height: var(--line-height-normal);
   font-weight: var(--font-weight-normal);
-  background-color: hsl(var(--color-surface-default, 0 0% 100%));
-  color: hsl(var(--color-content-default, 210 15% 10%));
+  background-color: hsl(var(--color-background));
+  color: hsl(var(--color-foreground));
   transition: background-color 0.2s ease, color 0.2s ease;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -213,9 +236,49 @@ body {
    ======================================= */
 
 @layer utilities {
+  /* Semantic Color Utilities */
+  .bg-background { background-color: hsl(var(--color-background)); }
+  .bg-foreground { background-color: hsl(var(--color-foreground)); }
+  .bg-background-dark { background-color: hsl(var(--color-background-dark)); }
+  .bg-foreground-light { background-color: hsl(var(--color-foreground-light)); }
+  .bg-primary { background-color: hsl(var(--color-primary)); }
+  .bg-secondary { background-color: hsl(var(--color-secondary)); }
+  .bg-accent { background-color: hsl(var(--color-accent)); }
+  .bg-destructive { background-color: hsl(var(--color-destructive)); }
+  .bg-muted { background-color: hsl(var(--color-muted)); }
+  .bg-card { background-color: hsl(var(--color-card)); }
+  .bg-border { background-color: hsl(var(--color-border)); }
+  .bg-input { background-color: hsl(var(--color-input)); }
+
+  .text-background { color: hsl(var(--color-background)); }
+  .text-foreground { color: hsl(var(--color-foreground)); }
+  .text-background-dark { color: hsl(var(--color-background-dark)); }
+  .text-foreground-light { color: hsl(var(--color-foreground-light)); }
+  .text-primary { color: hsl(var(--color-primary)); }
+  .text-secondary { color: hsl(var(--color-secondary)); }
+  .text-accent { color: hsl(var(--color-accent)); }
+  .text-destructive { color: hsl(var(--color-destructive)); }
+  .text-muted { color: hsl(var(--color-muted)); }
+  .text-muted-foreground { color: hsl(var(--color-muted-foreground)); }
+  .text-card { color: hsl(var(--color-card)); }
+  .text-card-foreground { color: hsl(var(--color-card-foreground)); }
+  .text-border { color: hsl(var(--color-border)); }
+  .text-input { color: hsl(var(--color-input)); }
+
+  .border-background { border-color: hsl(var(--color-background)); }
+  .border-foreground { border-color: hsl(var(--color-foreground)); }
+  .border-primary { border-color: hsl(var(--color-primary)); }
+  .border-secondary { border-color: hsl(var(--color-secondary)); }
+  .border-accent { border-color: hsl(var(--color-accent)); }
+  .border-destructive { border-color: hsl(var(--color-destructive)); }
+  .border-muted { border-color: hsl(var(--color-muted)); }
+  .border-card { border-color: hsl(var(--color-card)); }
+  .border-border { border-color: hsl(var(--color-border)); }
+  .border-input { border-color: hsl(var(--color-input)); }
+
   /* Focus visible styles */
   .focus-visible\:outline-brand:focus-visible {
-    outline: 2px solid hsl(var(--color-brand-500));
+    outline: 2px solid hsl(var(--color-primary));
     outline-offset: 2px;
   }
 
@@ -266,29 +329,17 @@ body {
 [data-theme="dark"],
 .dark {
   /* Override semantic colors for dark mode */
-  --color-surface-default: 210 15% 10%;
-  --color-surface-background: 210 15% 10%;
-  --color-surface-card: 210 12% 16%;
-  --color-surface-secondary: 210 12% 16%;
-  --color-surface-tertiary: 210 10% 24%;
-  --color-surface-inverse: 0 0% 100%;
-
-  --color-content-default: 0 0% 100%;
-  --color-content-primary: 0 0% 100%;
-  --color-content-secondary: 210 15% 95%;
-  --color-content-tertiary: 210 12% 90%;
-  --color-content-inverse: 210 15% 10%;
-  --color-content-disabled: 210 8% 64%;
-
-  --color-border-default: 210 10% 24%;
-  --color-border-primary: 210 10% 24%;
-  --color-border-secondary: 210 8% 34%;
-
-  --color-input-default: 210 12% 16%;
-  --color-input-border: 210 10% 24%;
-  --color-input-placeholder: 210 8% 64%;
-
-  --color-interactive-secondary: 224 60% 20%;
+  --color-background: 210 15% 10%;
+  --color-foreground: 0 0% 100%;
+  --color-background-dark: 210 15% 10%;
+  --color-foreground-light: 0 0% 100%;
+  
+  --color-card: 210 12% 16%;
+  --color-card-foreground: 0 0% 100%;
+  --color-border: 210 10% 24%;
+  --color-input: 210 12% 16%;
+  --color-muted: 210 8% 64%;
+  --color-muted-foreground: 210 6% 46%;
 
   /* Adjust shadows for dark mode */
   --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.15);
@@ -446,4 +497,9 @@ html.zoom-compensating {
 
 .zoom-gap-lg {
   gap: calc(1.5rem * var(--zoom-compensation-factor));
+}
+
+/* Hero page specific styles */
+.hero-page header {
+  display: none !important;
 }
