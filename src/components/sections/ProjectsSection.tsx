@@ -1,18 +1,12 @@
 'use client'
 
-import { useHeader } from '@/components/layout/HeaderContext'
-import { useLayoutEffect } from 'react'
-
 export const ProjectsSection = () => {
-  const { setIsWhite } = useHeader()
-  
-  useLayoutEffect(() => {
-    setIsWhite(false)
-    return () => setIsWhite(false)
-  }, [setIsWhite])
-
   return (
-    <section id="work" className="min-h-screen bg-surface-background relative overflow-hidden flex items-center justify-center">
+    <section 
+      id="work" 
+      className="min-h-screen bg-surface-background relative overflow-hidden flex items-center justify-center"
+      data-theme="light"
+    >
       <div className="container mx-auto px-6 md:px-8 py-20 md:py-24">
         <div className="max-w-4xl mx-auto text-center space-y-8 md:space-y-12">
           <div className="space-y-4">

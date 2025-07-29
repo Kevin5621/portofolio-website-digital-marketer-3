@@ -5,7 +5,6 @@ import Link from 'next/link'
 import { Menu, X } from 'lucide-react'
 import { scrollToElement } from '@/lib/animations/lenis'
 import { cn } from '@/lib/utils'
-import { useHeader } from './HeaderContext'
 
 const navigation = [
   { name: 'Home', href: '#home' },
@@ -20,21 +19,36 @@ const socials = [
 ]
 
 export const Header = () => {
-  const { isWhite } = useHeader()
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const [isScrolled, setIsScrolled] = useState(false)
+  const [activeSection, setActiveSection] = useState('home') // Default ke home section
 
-  // Deteksi scroll untuk transformasi header
+  // Intersection Observer untuk mendeteksi section aktif
   useLayoutEffect(() => {
     if (typeof window !== 'undefined') {
-      const handleScroll = () => {
-        const scrollPosition = window.scrollY
-        const heroHeight = window.innerHeight
-        setIsScrolled(scrollPosition > heroHeight * 0.5) // Transform setelah 50% dari tinggi hero
+      const options = {
+        root: null, // viewport
+        rootMargin: '-20% 0px -20% 0px', // Section dianggap aktif jika 60% terlihat
+        threshold: 0.5, // 50% section harus terlihat
       }
 
-      window.addEventListener('scroll', handleScroll)
-      return () => window.removeEventListener('scroll', handleScroll)
+      const observerCallback = (entries: IntersectionObserverEntry[]) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const sectionId = entry.target.id
+            setActiveSection(sectionId)
+          }
+        })
+      }
+
+      const observer = new IntersectionObserver(observerCallback, options)
+
+      // Observe semua section
+      const sections = document.querySelectorAll('section[id]')
+      sections.forEach(section => observer.observe(section))
+
+      return () => {
+        sections.forEach(section => observer.unobserve(section))
+      }
     }
   }, [])
 
@@ -50,19 +64,23 @@ export const Header = () => {
     setIsMobileMenuOpen(false)
   }
 
-  // Logika untuk menentukan apakah menampilkan menu text atau burger
-  const showTextMenu = isWhite && !isScrolled
-  const showBurgerMenu = !isWhite || isScrolled
+  // Logika untuk menentukan tema header berdasarkan section aktif
+  const isDarkSection = activeSection === 'home' // HeroSection adalah dark
+  const isLightSection = ['about', 'work', 'contact'].includes(activeSection)
+
+  // Logika untuk menampilkan menu text atau burger
+  const showTextMenu = isDarkSection && !isMobileMenuOpen
+  const showBurgerMenu = isLightSection || isMobileMenuOpen
 
   return (
     <>
       <header className="fixed top-0 left-0 right-0 z-50 bg-transparent">
         <nav className="max-w-7xl mx-auto px-8 py-6">
           <div className="flex items-center justify-between">
-            {/* Copyright - Adaptif berdasarkan section */}
+            {/* Copyright - Adaptif berdasarkan section aktif */}
             <div className={cn(
               "text-sm transition-colors duration-300",
-              isWhite ? "text-foreground-light" : "text-foreground"
+              isDarkSection ? "text-foreground-light" : "text-foreground"
             )}>
               © Adhara Eka Sakti
             </div>
@@ -88,22 +106,22 @@ export const Header = () => {
               </div>
             )}
 
-            {/* Burger Menu Button - Adaptif berdasarkan background */}
+            {/* Burger Menu Button - Adaptif berdasarkan section aktif */}
             {showBurgerMenu && (
               <button
                 onClick={() => setIsMobileMenuOpen(true)}
                 className={cn(
                   "w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300",
-                  // Adaptasi warna berdasarkan background section
-                  isWhite 
-                    ? "bg-foreground-light hover:bg-foreground-light/90" // Light background, dark button
-                    : "bg-foreground hover:bg-foreground/90" // Dark background, light button
+                  // Adaptasi warna berdasarkan section aktif
+                  isDarkSection 
+                    ? "bg-foreground-light hover:bg-foreground-light/90" // Light button on dark section
+                    : "bg-foreground hover:bg-foreground/90" // Dark button on light section
                 )}
                 aria-label="Open menu"
               >
                 <Menu className={cn(
                   "h-5 w-5 transition-colors duration-300",
-                  isWhite 
+                  isDarkSection 
                     ? "text-background-dark" // Dark icon on light button
                     : "text-background" // Light icon on dark button
                 )} />

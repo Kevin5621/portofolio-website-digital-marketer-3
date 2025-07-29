@@ -1,10 +1,9 @@
-import type { Metadata, Viewport } from "next";
+import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { Header } from "@/components/layout/Header";
-import { HeaderProvider } from "@/components/layout/HeaderContext";
-import { SmoothScrollProvider } from "@/components/layout/SmoothScrollProvider";
 import { ZoomCompensationProvider } from "@/components/layout/ZoomCompensationProvider";
+import { SmoothScrollProvider } from "@/components/layout/SmoothScrollProvider";
+import { Header } from "@/components/layout/Header";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -17,27 +16,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Premium Portfolio - Creative Developer",
-  description: "Crafting exceptional digital experiences through innovative design, cutting-edge technology, and meticulous attention to detail.",
-  keywords: ["portfolio", "developer", "designer", "web development", "creative"],
-  authors: [{ name: "Creative Developer" }],
-  openGraph: {
-    title: "Premium Portfolio - Creative Developer",
-    description: "Crafting exceptional digital experiences through innovative design, cutting-edge technology, and meticulous attention to detail.",
-    type: "website",
-    locale: "en_US",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Premium Portfolio - Creative Developer",
-    description: "Crafting exceptional digital experiences through innovative design, cutting-edge technology, and meticulous attention to detail.",
-  },
-};
-
-export const viewport: Viewport = {
-  width: "device-width",
-  initialScale: 1,
-  themeColor: "#000000",
+  title: "Adhara Eka - Portfolio",
+  description: "Social Media Marketing, Content Creator, Short-Form Video Editor",
 };
 
 export default function RootLayout({
@@ -48,17 +28,12 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-surface-background font-sans`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ZoomCompensationProvider 
-          defaultEnabled={true}
-          smoothTransition={true}
-        >
+        <ZoomCompensationProvider defaultEnabled={true} smoothTransition={true}>
           <SmoothScrollProvider>
-            <HeaderProvider>
-              <Header />
-              <main>{children}</main>
-            </HeaderProvider>
+            <Header />
+            <main>{children}</main>
           </SmoothScrollProvider>
         </ZoomCompensationProvider>
       </body>
