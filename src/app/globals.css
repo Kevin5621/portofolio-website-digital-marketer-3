@@ -105,35 +105,35 @@
   
   /* === SEMANTIC COLOR SYSTEM - MONOCHROME === */
   --color-primary: 40 5% 95%;               /* Light monochrome #F2F1EF */
-  --color-primary-foreground: 220 15% 8%;   /* Dark text on light */
-  --color-secondary: 220 15% 8%;            /* Dark monochrome #282828 */
+  --color-primary-foreground: 0 0% 15.7%;   /* Dark text on light */
+  --color-secondary: 0 0% 15.7%;            /* Dark monochrome #282828 */
   --color-secondary-foreground: 40 5% 95%;  /* Light text on dark */
   --color-accent: 40 5% 95%;                /* Light accent */
-  --color-accent-foreground: 220 15% 8%;    /* Dark text on accent */
+  --color-accent-foreground: 0 0% 15.7%;    /* Dark text on accent */
   --color-destructive: 0 84% 60%;           /* Red for errors */
   --color-destructive-foreground: 0 0% 100%; /* White text on destructive */
   --color-muted: 220 8% 46%;                /* Muted gray */
   --color-muted-foreground: 220 6% 36%;     /* Muted text */
   --color-card: 40 5% 95%;                  /* Light card background */
-  --color-card-foreground: 220 15% 8%;      /* Dark text on cards */
+  --color-card-foreground: 0 0% 15.7%;      /* Dark text on cards */
   --color-border: 220 8% 46%;               /* Border color */
   --color-input: 40 5% 95%;                 /* Input background */
-  --color-ring: 220 15% 8%;                 /* Focus ring color */
+  --color-ring: 0 0% 15.7%;                 /* Focus ring color */
   
   /* === BACKGROUND & TEXT COLORS - MONOCHROME === */
   --color-background: 40 5% 95%;            /* Light background #F2F1EF */
-  --color-foreground: 220 15% 8%;           /* Dark text #282828 */
-  --color-background-dark: 220 15% 8%;      /* Dark background #282828 */
+  --color-foreground: 0 0% 15.7%;           /* Dark text #282828 */
+  --color-background-dark: 0 0% 15.7%;      /* Dark background #282828 */
   --color-foreground-light: 40 5% 95%;      /* Light text #F2F1EF */
 
   /* === CONTENT COLORS - MONOCHROME === */
-  --color-content-default: 220 15% 8%;
-  --color-content-primary: 220 15% 8%;
+  --color-content-default: 0 0% 15.7%;
+  --color-content-primary: 0 0% 15.7%;
   --color-content-secondary: 220 8% 34%;
   --color-content-tertiary: 220 6% 46%;
   --color-content-inverse: 40 5% 95%;
   --color-content-disabled: 220 8% 46%;
-  --color-content-link: 220 15% 8%;
+  --color-content-link: 0 0% 15.7%;
 
   /* === BORDER COLORS - MONOCHROME === */
   --color-border-default: 220 8% 46%;
@@ -265,6 +265,24 @@ body {
   .text-border { color: hsl(var(--color-border)); }
   .text-input { color: hsl(var(--color-input)); }
 
+  /* Content color utilities */
+  .text-content-default { color: hsl(var(--color-content-default)); }
+  .text-content-primary { color: hsl(var(--color-content-primary)); }
+  .text-content-secondary { color: hsl(var(--color-content-secondary)); }
+  .text-content-tertiary { color: hsl(var(--color-content-tertiary)); }
+  .text-content-inverse { color: hsl(var(--color-content-inverse)) !important; }
+  .text-content-disabled { color: hsl(var(--color-content-disabled)); }
+  .text-content-link { color: hsl(var(--color-content-link)); }
+
+  /* Background content utilities */
+  .bg-content-default { background-color: hsl(var(--color-content-default)); }
+  .bg-content-primary { background-color: hsl(var(--color-content-primary)); }
+  .bg-content-secondary { background-color: hsl(var(--color-content-secondary)); }
+  .bg-content-tertiary { background-color: hsl(var(--color-content-tertiary)); }
+  .bg-content-inverse { background-color: hsl(var(--color-content-inverse)); }
+  .bg-content-disabled { background-color: hsl(var(--color-content-disabled)); }
+  .bg-content-link { background-color: hsl(var(--color-content-link)); }
+
   .border-background { border-color: hsl(var(--color-background)); }
   .border-foreground { border-color: hsl(var(--color-foreground)); }
   .border-primary { border-color: hsl(var(--color-primary)); }
@@ -329,9 +347,9 @@ body {
 [data-theme="dark"],
 .dark {
   /* Override semantic colors for dark mode - monochrome */
-  --color-background: 220 15% 8%;
+  --color-background: 0 0% 15.7%;
   --color-foreground: 40 5% 95%;
-  --color-background-dark: 220 15% 8%;
+  --color-background-dark: 0 0% 15.7%;
   --color-foreground-light: 40 5% 95%;
   
   --color-card: 220 12% 16%;
@@ -340,6 +358,15 @@ body {
   --color-input: 220 12% 16%;
   --color-muted: 220 8% 46%;
   --color-muted-foreground: 220 6% 36%;
+
+  /* Override content colors for dark mode */
+  --color-content-default: 40 5% 95%;
+  --color-content-primary: 40 5% 95%;
+  --color-content-secondary: 220 8% 64%;
+  --color-content-tertiary: 220 6% 46%;
+  --color-content-inverse: 0 0% 100%;
+  --color-content-disabled: 220 8% 46%;
+  --color-content-link: 40 5% 95%;
 
   /* Adjust shadows for dark mode */
   --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.15);
@@ -350,6 +377,20 @@ body {
   --shadow-xl: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
   --shadow-2xl: 0 35px 60px -12px rgba(0, 0, 0, 0.45);
   --shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.15);
+}
+
+/* =======================================
+   HERO SECTION SPECIFIC STYLES
+   ======================================= */
+
+/* Ensure white text in HeroSection */
+section[data-theme="dark"] h1,
+section[data-theme="dark"] .text-content-inverse {
+  color: white !important;
+}
+
+section[data-theme="dark"] .text-white {
+  color: white !important;
 }
 
 /* =======================================
