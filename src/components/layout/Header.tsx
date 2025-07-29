@@ -75,11 +75,11 @@ export const Header = () => {
   return (
     <>
       <header className="fixed top-0 left-0 right-0 z-50 bg-transparent">
-        <nav className="max-w-7xl mx-auto px-8 py-6">
+        <nav className="w-full px-8 py-12">
           <div className="flex items-center justify-between">
             {/* Copyright - Adaptif berdasarkan section aktif */}
             <div className={cn(
-              "text-sm transition-colors duration-300",
+              "text-2xl transition-colors duration-300",
               isDarkSection ? "text-foreground-light" : "text-foreground"
             )}>
               © Adhara Eka Sakti
@@ -88,7 +88,7 @@ export const Header = () => {
             {/* Desktop Navigation - Menu Text (hanya di Hero Section) */}
             {showTextMenu && (
               <div className="hidden md:block">
-                <div className="flex items-baseline space-x-8">
+                <div className="flex items-baseline space-x-12">
                   {navigation.map((item) => (
                     <Link
                       key={item.name}
@@ -97,7 +97,7 @@ export const Header = () => {
                         e.preventDefault()
                         handleSmoothScroll(item.href)
                       }}
-                      className="text-sm text-foreground-light hover:text-foreground-light/80 transition-colors duration-200"
+                      className="text-2xl text-foreground-light hover:text-foreground-light/80 transition-colors duration-200"
                     >
                       {item.name}
                     </Link>
@@ -111,7 +111,7 @@ export const Header = () => {
               <button
                 onClick={() => setIsMobileMenuOpen(true)}
                 className={cn(
-                  "w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300",
+                  "w-20 h-20 rounded-full flex items-center justify-center transition-all duration-300",
                   // Adaptasi warna berdasarkan section aktif
                   isDarkSection 
                     ? "bg-foreground-light hover:bg-foreground-light/90" // Light button on dark section
@@ -120,7 +120,7 @@ export const Header = () => {
                 aria-label="Open menu"
               >
                 <Menu className={cn(
-                  "h-5 w-5 transition-colors duration-300",
+                  "h-10 w-10 transition-colors duration-300",
                   isDarkSection 
                     ? "text-background-dark" // Dark icon on light button
                     : "text-background" // Light icon on dark button
