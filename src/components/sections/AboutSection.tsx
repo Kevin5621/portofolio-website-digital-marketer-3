@@ -1,180 +1,118 @@
 'use client'
 
-import { useRef, useEffect } from 'react'
-import { gsap } from '@/lib/animations/gsap'
-import { Card } from '@/components/ui/card'
+import { motion } from 'framer-motion'
+import { Button } from '@/components/ui/button'
+import { useSlideUp, useFadeIn } from '@/hooks/useGSAP'
 
-const skills = [
-  { name: 'Frontend Development', level: 95 },
-  { name: 'Backend Development', level: 88 },
-  { name: 'UI/UX Design', level: 85 },
-  { name: 'Database Design', level: 90 },
-  { name: 'DevOps', level: 78 },
-  { name: 'Mobile Development', level: 82 }
-]
-
-const experiences = [
-  {
-    title: 'Senior Full Stack Developer',
-    company: 'Tech Company',
-    period: '2022 - Present',
-    description: 'Leading development of modern web applications using React, Next.js, and Node.js.'
-  },
-  {
-    title: 'Frontend Developer',
-    company: 'Digital Agency',
-    period: '2020 - 2022',
-    description: 'Created responsive and interactive user interfaces for various client projects.'
-  },
-  {
-    title: 'Junior Developer',
-    company: 'Startup',
-    period: '2019 - 2020',
-    description: 'Developed and maintained web applications while learning industry best practices.'
-  }
-]
-
-export function AboutSection() {
-  const containerRef = useRef<HTMLDivElement>(null)
-  const titleRef = useRef<HTMLHeadingElement>(null)
-  const descriptionRef = useRef<HTMLParagraphElement>(null)
-  const skillsRef = useRef<HTMLDivElement>(null)
-  const experienceRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    const container = containerRef.current
-    const title = titleRef.current
-    const description = descriptionRef.current
-    const skillsContainer = skillsRef.current
-    const experienceContainer = experienceRef.current
-
-    if (!container || !title || !description || !skillsContainer || !experienceContainer) return
-
-    // Create timeline for scroll-triggered animations
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: container,
-        start: 'top 80%',
-        end: 'bottom 20%',
-        toggleActions: 'play none none reverse'
-      }
-    })
-
-    // Animate title
-    tl.fromTo(title, 
-      { opacity: 0, y: 50 },
-      { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }
-    )
-
-    // Animate description
-    tl.fromTo(description,
-      { opacity: 0, y: 30 },
-      { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' },
-      '-=0.4'
-    )
-
-    // Animate skills
-    tl.fromTo(skillsContainer.children,
-      { opacity: 0, x: -50 },
-      { 
-        opacity: 1, 
-        x: 0, 
-        duration: 0.6, 
-        stagger: 0.1,
-        ease: 'power3.out'
-      },
-      '-=0.2'
-    )
-
-    // Animate experience cards
-    tl.fromTo(experienceContainer.children,
-      { opacity: 0, y: 50 },
-      { 
-        opacity: 1, 
-        y: 0, 
-        duration: 0.6, 
-        stagger: 0.15,
-        ease: 'power3.out'
-      },
-      '-=0.3'
-    )
-
-    // Animate skill bars
-    const skillBars = skillsContainer.querySelectorAll('.skill-bar')
-    skillBars.forEach((bar, index) => {
-      const progress = bar.querySelector('.skill-progress') as HTMLElement
-      if (progress) {
-        const level = skills[index].level
-        gsap.fromTo(progress,
-          { width: '0%' },
-          { 
-            width: `${level}%`, 
-            duration: 1.2, 
-            delay: 0.5 + (index * 0.1),
-            ease: 'power3.out'
-          }
-        )
-      }
-    })
-
-    return () => {
-      tl.kill()
-    }
-  }, [])
+export const AboutSection = () => {
+  const containerRef = useFadeIn({ delay: 0.2 })
+  const photoRef = useSlideUp({ delay: 0.4 })
+  const contentRef = useSlideUp({ delay: 0.6 })
+  const skillsRef = useSlideUp({ delay: 0.8 })
 
   return (
-    <section id="about" ref={containerRef} className="py-20 bg-muted/30">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 ref={titleRef} className="text-4xl md:text-5xl font-bold mb-6">
-            About Me
-          </h2>
-          <p ref={descriptionRef} className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            I&apos;m a passionate full-stack developer with over 5 years of experience creating 
-            beautiful, functional, and user-friendly digital experiences. I specialize in 
-            modern web technologies and love bringing innovative ideas to life.
-          </p>
-        </div>
-
-        <div className="grid lg:grid-cols-2 gap-12">
-          {/* Skills Section */}
-          <div>
-            <h3 className="text-2xl font-bold mb-8">Technical Skills</h3>
-            <div ref={skillsRef} className="space-y-6">
-              {skills.map((skill) => (
-                <div key={skill.name} className="skill-item">
-                  <div className="flex justify-between mb-2">
-                    <span className="font-medium">{skill.name}</span>
-                    <span className="text-muted-foreground">{skill.level}%</span>
-                  </div>
-                  <div className="skill-bar h-2 bg-muted rounded-full overflow-hidden">
-                    <div 
-                      className="skill-progress h-full bg-gradient-to-r from-primary to-primary/80 rounded-full"
-                      style={{ width: '0%' }}
-                    />
-                  </div>
+    <section 
+      id="about"
+      className="min-h-screen bg-surface-background relative overflow-hidden"
+      ref={containerRef as React.RefObject<HTMLElement>}
+    >
+      {/* Main Content Container */}
+      <div className="container mx-auto px-6 md:px-8 py-20 md:py-24">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center min-h-[80vh]">
+          
+          {/* Left Side - Photo (Continuation) */}
+          <div 
+            ref={photoRef as React.RefObject<HTMLDivElement>}
+            className="relative flex justify-center lg:justify-end"
+          >
+            {/* Full-body photo placeholder - showing continuation from hero */}
+            <div className="relative group">
+              <div className="w-72 h-96 md:w-80 md:h-[500px] bg-gradient-to-b from-neutral-200 to-neutral-300 rounded-lg shadow-xl flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
+                <div className="text-center text-content-tertiary">
+                  <div className="text-4xl md:text-5xl mb-4">👨‍💼</div>
+                  <div className="text-base md:text-lg font-medium">Full Body Photo</div>
+                  <div className="text-sm opacity-75 mt-2">Professional Standing Pose</div>
+                  <div className="text-xs opacity-60 mt-1">Suit & Formal Attire</div>
                 </div>
-              ))}
+              </div>
+              
+              {/* Subtle glow effect */}
+              <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-brand-100/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </div>
           </div>
 
-          {/* Experience Section */}
-          <div>
-            <h3 className="text-2xl font-bold mb-8">Experience</h3>
-            <div ref={experienceRef} className="space-y-6">
-              {experiences.map((exp) => (
-                <Card key={exp.title} className="p-6 hover:shadow-lg transition-shadow duration-300">
-                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-3">
-                    <h4 className="font-semibold text-lg">{exp.title}</h4>
-                    <span className="text-sm text-muted-foreground">{exp.period}</span>
-                  </div>
-                  <p className="font-medium text-primary mb-2">{exp.company}</p>
-                  <p className="text-muted-foreground">{exp.description}</p>
-                </Card>
-              ))}
+          {/* Right Side - Content */}
+          <div 
+            ref={contentRef as React.RefObject<HTMLDivElement>}
+            className="space-y-8 md:space-y-10"
+          >
+            {/* Main Tagline */}
+            <div className="space-y-6">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-content-primary leading-tight">
+                Helping business owners create engaging content.{' '}
+                <span className="text-brand-600">
+                  Together, we will make content that converts.
+                </span>
+              </h2>
+            </div>
+
+            {/* Call-to-Action Button */}
+            <div className="pt-4">
+              <Button 
+                variant="primary" 
+                size="lg"
+                className="bg-content-primary text-content-inverse hover:bg-content-secondary px-8 py-4 text-base font-medium rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
+              >
+                About me
+              </Button>
+            </div>
+
+            {/* Skills/Specializations */}
+            <div 
+              ref={skillsRef as React.RefObject<HTMLDivElement>}
+              className="pt-6 md:pt-8"
+            >
+              <h3 className="text-lg md:text-xl font-semibold text-content-primary mb-6">
+                Specialising in:
+              </h3>
+              
+              <div className="space-y-4">
+                {[
+                  'Market Analysis',
+                  'Content Strategy', 
+                  'Content Production',
+                  'Cross-Platform Management'
+                ].map((skill, index) => (
+                  <motion.div
+                    key={skill}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.1 * index, duration: 0.5 }}
+                    viewport={{ once: true }}
+                    className="group"
+                  >
+                    <div className="flex items-center space-x-4 py-3 px-4 rounded-lg hover:bg-surface-secondary transition-colors duration-200">
+                      <div className="w-2 h-2 bg-brand-500 rounded-full group-hover:scale-125 transition-transform duration-200"></div>
+                      <span className="text-base md:text-lg text-content-primary font-medium group-hover:text-brand-600 transition-colors duration-200">
+                        {skill}
+                      </span>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Subtle background pattern */}
+      <div className="absolute inset-0 opacity-[0.02] pointer-events-none">
+        <div className="absolute inset-0" 
+             style={{
+               backgroundImage: `radial-gradient(circle at 1px 1px, rgb(0,0,0) 1px, transparent 0)`,
+               backgroundSize: '40px 40px'
+             }} 
+        />
       </div>
     </section>
   )
