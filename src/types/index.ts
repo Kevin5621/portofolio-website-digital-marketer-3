@@ -13,6 +13,47 @@ export type Profile = Database['public']['Tables']['profiles']['Row']
 export type ProfileInsert = Database['public']['Tables']['profiles']['Insert']
 export type ProfileUpdate = Database['public']['Tables']['profiles']['Update']
 
+// Zoom Compensation types
+export interface ZoomCompensationOptions {
+  enabled?: boolean
+  minZoom?: number
+  maxZoom?: number
+  debounceDelay?: number
+  smoothTransition?: boolean
+  onZoomChange?: (zoomLevel: number, compensationFactor: number) => void
+}
+
+export interface ZoomState {
+  zoomLevel: number
+  compensationFactor: number
+  isCompensating: boolean
+}
+
+export interface ZoomCompensationContextValue {
+  zoomLevel: number
+  compensationFactor: number
+  isCompensating: boolean
+  isEnabled: boolean
+  setEnabled: (enabled: boolean) => void
+  resetCompensation: () => void
+  forceUpdate: () => void
+}
+
+// Browser detection types
+export interface BrowserZoomInfo {
+  devicePixelRatio: number
+  windowZoom: number
+  visualViewportZoom: number
+  detectedZoom: number
+  method: 'devicePixelRatio' | 'windowRatio' | 'visualViewport' | 'fallback'
+}
+
+// Component props types
+export interface BaseComponentProps {
+  className?: string
+  children?: React.ReactNode
+}
+
 // Additional application types
 export interface NavigationItem {
   href: string

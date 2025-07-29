@@ -4,6 +4,7 @@ import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { SmoothScrollProvider } from "@/components/layout/SmoothScrollProvider";
+import { ZoomCompensationProvider } from "@/components/layout/ZoomCompensationProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -49,11 +50,16 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-surface-background font-sans`}
       >
-        <SmoothScrollProvider>
-          <Header />
-          <main>{children}</main>
-          <Footer />
-        </SmoothScrollProvider>
+        <ZoomCompensationProvider 
+          defaultEnabled={true}
+          smoothTransition={true}
+        >
+          <SmoothScrollProvider>
+            <Header />
+            <main>{children}</main>
+            <Footer />
+          </SmoothScrollProvider>
+        </ZoomCompensationProvider>
       </body>
     </html>
   );
