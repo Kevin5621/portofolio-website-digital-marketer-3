@@ -1,6 +1,6 @@
 import { HeroSection } from '@/components/sections/HeroSection'
 import { AboutSection } from '@/components/sections/AboutSection'
-import { ProjectsSection } from '@/components/sections/ProjectsSection'
+import { SelectedWorks } from '@/components/sections/SelectedWorks'
 import { ContactSection } from '@/components/sections/ContactSection'
 
 export default function Home() {
@@ -8,7 +8,7 @@ export default function Home() {
     <div className="min-h-screen hero-page">
       <HeroSection />
       <AboutSection />
-      <ProjectsSection />
+      <SelectedWorks />
       <ContactSection />
     </div>
   )
