@@ -1,12 +1,12 @@
 'use client'
 
 import { useHeader } from '@/components/layout/HeaderContext'
-import { useEffect } from 'react'
+import { useLayoutEffect } from 'react'
 
 export const ProjectsSection = () => {
   const { setIsWhite } = useHeader()
   
-  useEffect(() => {
+  useLayoutEffect(() => {
     setIsWhite(false)
     return () => setIsWhite(false)
   }, [setIsWhite])

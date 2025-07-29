@@ -5,12 +5,12 @@ import { Globe, ArrowDown } from 'lucide-react'
 import { useTextReveal, useSlideUp, useFadeIn } from '@/hooks/useGSAP'
 import { scrollToElement } from '@/lib/animations/lenis'
 import { useHeader } from '@/components/layout/HeaderContext'
-import { useEffect } from 'react'
+import { useLayoutEffect } from 'react'
 
 export const HeroSection = () => {
   const { setIsWhite } = useHeader()
   
-  useEffect(() => {
+  useLayoutEffect(() => {
     setIsWhite(true)
     return () => setIsWhite(false)
   }, [setIsWhite])

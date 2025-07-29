@@ -4,12 +4,12 @@ import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 import { useSlideUp, useFadeIn } from '@/hooks/useGSAP'
 import { useHeader } from '@/components/layout/HeaderContext'
-import { useEffect } from 'react'
+import { useLayoutEffect } from 'react'
 
 export const AboutSection = () => {
   const { setIsWhite } = useHeader()
   
-  useEffect(() => {
+  useLayoutEffect(() => {
     setIsWhite(false)
     return () => setIsWhite(false)
   }, [setIsWhite])

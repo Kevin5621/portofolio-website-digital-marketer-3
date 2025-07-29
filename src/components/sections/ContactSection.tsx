@@ -5,12 +5,12 @@ import { ArrowUp } from 'lucide-react'
 import { useSlideUp } from '@/hooks/useGSAP'
 import { scrollToElement } from '@/lib/animations/lenis'
 import { useHeader } from '@/components/layout/HeaderContext'
-import { useEffect } from 'react'
+import { useLayoutEffect } from 'react'
 
 export const ContactSection = () => {
   const { setIsWhite } = useHeader()
   
-  useEffect(() => {
+  useLayoutEffect(() => {
     setIsWhite(false)
     return () => setIsWhite(false)
   }, [setIsWhite])

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Link from 'next/link'
 import { Menu, X, ArrowUp } from 'lucide-react'
 import { scrollToElement } from '@/lib/animations/lenis'
@@ -21,17 +21,9 @@ const socials = [
 
 export const Header = () => {
   const { isWhite } = useHeader()
-  const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50)
-    }
 
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
 
   const handleSmoothScroll = (href: string) => {
     if (href.startsWith('#')) {
@@ -45,8 +37,7 @@ export const Header = () => {
     setIsMobileMenuOpen(false)
   }
 
-  // Determine if we should show burger menu (when scrolled or not on hero section)
-  const shouldShowBurger = isScrolled || !isWhite
+
 
   return (
     <>
@@ -63,8 +54,8 @@ export const Header = () => {
               © Adhara Eka Sakti
             </div>
 
-            {/* Desktop Navigation - Show when not scrolled and on hero section */}
-            {!shouldShowBurger && (
+            {/* Desktop Navigation - Show when on hero section */}
+            {isWhite && (
               <div className="hidden md:block">
                 <div className="flex items-baseline space-x-8">
                   {navigation.map((item) => (
@@ -84,22 +75,14 @@ export const Header = () => {
               </div>
             )}
 
-            {/* Burger Menu Button - Show when scrolled or not on hero section */}
-            {shouldShowBurger && (
+            {/* Burger Menu Button - Show when not on hero section */}
+            {!isWhite && (
               <button
                 onClick={() => setIsMobileMenuOpen(true)}
-                className={cn(
-                  "w-10 h-10 rounded-full flex items-center justify-center transition-colors duration-200",
-                  isWhite 
-                    ? "bg-foreground-light hover:bg-foreground-light/90" 
-                    : "bg-foreground hover:bg-foreground/90"
-                )}
+                className="w-10 h-10 rounded-full flex items-center justify-center transition-colors duration-200 bg-foreground hover:bg-foreground/90"
                 aria-label="Open menu"
               >
-                <Menu className={cn(
-                  "h-5 w-5",
-                  isWhite ? "text-background-dark" : "text-background"
-                )} />
+                <Menu className="h-5 w-5 text-background" />
               </button>
             )}
           </div>
