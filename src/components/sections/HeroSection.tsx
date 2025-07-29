@@ -5,14 +5,19 @@ import { Globe, ArrowDown } from 'lucide-react'
 import { useTextReveal, useSlideUp, useFadeIn } from '@/hooks/useGSAP'
 import { scrollToElement } from '@/lib/animations/lenis'
 import { useHeader } from '@/components/layout/HeaderContext'
-import { useLayoutEffect } from 'react'
+import { useEffect } from 'react'
 
 export const HeroSection = () => {
   const { setIsWhite } = useHeader()
   
-  useLayoutEffect(() => {
-    setIsWhite(true)
-    return () => setIsWhite(false)
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsWhite(true)
+    }, 0)
+    return () => {
+      clearTimeout(timer)
+      setIsWhite(false)
+    }
   }, [setIsWhite])
 
   const photoRef = useSlideUp({ delay: 0.5 })

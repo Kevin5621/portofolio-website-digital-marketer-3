@@ -10,7 +10,7 @@ interface HeaderContextType {
 const HeaderContext = createContext<HeaderContextType | undefined>(undefined)
 
 export const HeaderProvider = ({ children }: { children: ReactNode }) => {
-  const [isWhite, setIsWhite] = useState(false)
+  const [isWhite, setIsWhite] = useState(true)
 
   return (
     <HeaderContext.Provider value={{ isWhite, setIsWhite }}>

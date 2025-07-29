@@ -1,8 +1,8 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useLayoutEffect } from 'react'
 import Link from 'next/link'
-import { Menu, X, ArrowUp } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
 import { scrollToElement } from '@/lib/animations/lenis'
 import { cn } from '@/lib/utils'
 import { useHeader } from './HeaderContext'
@@ -22,8 +22,21 @@ const socials = [
 export const Header = () => {
   const { isWhite } = useHeader()
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(false)
 
+  // Deteksi scroll untuk transformasi header
+  useLayoutEffect(() => {
+    if (typeof window !== 'undefined') {
+      const handleScroll = () => {
+        const scrollPosition = window.scrollY
+        const heroHeight = window.innerHeight
+        setIsScrolled(scrollPosition > heroHeight * 0.5) // Transform setelah 50% dari tinggi hero
+      }
 
+      window.addEventListener('scroll', handleScroll)
+      return () => window.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
 
   const handleSmoothScroll = (href: string) => {
     if (href.startsWith('#')) {
@@ -37,25 +50,25 @@ export const Header = () => {
     setIsMobileMenuOpen(false)
   }
 
-
+  // Logika untuk menentukan apakah menampilkan menu text atau burger
+  const showTextMenu = isWhite && !isScrolled
+  const showBurgerMenu = !isWhite || isScrolled
 
   return (
     <>
-      <header
-        className="fixed top-0 left-0 right-0 z-50 bg-transparent"
-      >
+      <header className="fixed top-0 left-0 right-0 z-50 bg-transparent">
         <nav className="max-w-7xl mx-auto px-8 py-6">
           <div className="flex items-center justify-between">
-            {/* Copyright */}
+            {/* Copyright - Adaptif berdasarkan section */}
             <div className={cn(
-              "text-sm",
+              "text-sm transition-colors duration-300",
               isWhite ? "text-foreground-light" : "text-foreground"
             )}>
               © Adhara Eka Sakti
             </div>
 
-            {/* Desktop Navigation - Show when on hero section */}
-            {isWhite && (
+            {/* Desktop Navigation - Menu Text (hanya di Hero Section) */}
+            {showTextMenu && (
               <div className="hidden md:block">
                 <div className="flex items-baseline space-x-8">
                   {navigation.map((item) => (
@@ -75,19 +88,30 @@ export const Header = () => {
               </div>
             )}
 
-            {/* Burger Menu Button - Show when not on hero section */}
-            {!isWhite && (
+            {/* Burger Menu Button - Adaptif berdasarkan background */}
+            {showBurgerMenu && (
               <button
                 onClick={() => setIsMobileMenuOpen(true)}
-                className="w-10 h-10 rounded-full flex items-center justify-center transition-colors duration-200 bg-foreground hover:bg-foreground/90"
+                className={cn(
+                  "w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300",
+                  // Adaptasi warna berdasarkan background section
+                  isWhite 
+                    ? "bg-foreground-light hover:bg-foreground-light/90" // Light background, dark button
+                    : "bg-foreground hover:bg-foreground/90" // Dark background, light button
+                )}
                 aria-label="Open menu"
               >
-                <Menu className="h-5 w-5 text-background" />
+                <Menu className={cn(
+                  "h-5 w-5 transition-colors duration-300",
+                  isWhite 
+                    ? "text-background-dark" // Dark icon on light button
+                    : "text-background" // Light icon on dark button
+                )} />
               </button>
             )}
           </div>
         </nav>
-              </header>
+      </header>
 
       {/* Mobile Menu Sidebar */}
       {isMobileMenuOpen && (
@@ -99,76 +123,62 @@ export const Header = () => {
           />
           
           {/* Sidebar */}
-          <div
-            className="fixed top-0 right-0 h-full w-1/3 max-w-md bg-background-dark z-50 shadow-2xl"
-          >
-              {/* Close Button */}
-              <div className="absolute top-6 right-6">
-                <button
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="w-10 h-10 bg-foreground-light rounded-full flex items-center justify-center hover:bg-foreground-light/90 transition-colors duration-200"
-                  aria-label="Close menu"
-                >
-                  <X className="h-5 w-5 text-background-dark" />
-                </button>
+          <div className="fixed top-0 right-0 h-full w-1/3 max-w-md bg-background-dark z-50 shadow-2xl">
+            {/* Close Button */}
+            <div className="absolute top-6 right-6">
+              <button
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="w-10 h-10 bg-foreground-light rounded-full flex items-center justify-center hover:bg-foreground-light/90 transition-colors duration-200"
+                aria-label="Close menu"
+              >
+                <X className="h-5 w-5 text-background-dark" />
+              </button>
+            </div>
+
+            {/* Navigation Links */}
+            <div className="pt-24 px-8">
+              <nav className="space-y-6">
+                {navigation.map((item) => (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    onClick={(e) => {
+                      e.preventDefault()
+                      handleSmoothScroll(item.href)
+                    }}
+                    className="block text-lg font-medium text-foreground-light hover:text-foreground-light/80 transition-colors duration-200"
+                  >
+                    {item.name}
+                  </Link>
+                ))}
+              </nav>
+
+              {/* Social Links */}
+              <div className="mt-12 pt-8 border-t border-border">
+                <h3 className="text-sm font-medium text-foreground-light mb-4">Follow</h3>
+                <div className="space-y-4">
+                  {socials.map((social) => (
+                    <button
+                      key={social.name}
+                      onClick={() => handleSocialClick(social.href)}
+                      className="block text-base text-foreground-light hover:text-foreground-light/80 transition-colors duration-200"
+                    >
+                      {social.name}
+                    </button>
+                  ))}
+                </div>
               </div>
 
-              {/* Menu Content */}
-              <div className="flex flex-col h-full px-8 pt-20">
-                <div className="flex-1 space-y-12">
-                  
-                  {/* Navigation Section */}
-                  <div className="space-y-6">
-<div className="text-sm text-muted-foreground font-medium">   
-                    Navigation
-                  </div>
-                  <div className="h-px bg-border"></div>
-                    <div className="space-y-6">
-                                          {navigation.map((item) => (
-                      <div key={item.name}>
-                        <button
-                          onClick={() => handleSmoothScroll(item.href)}
-                          className="text-2xl font-bold text-foreground-light hover:text-foreground-light/80 transition-colors duration-200 text-left"
-                        >
-                          {item.name}
-                        </button>
-                      </div>
-                    ))}
-                    </div>
-                  </div>
-
-                  {/* Socials Section */}
-                  <div className="space-y-6">
-                                      <div className="text-sm text-muted-foreground font-medium">
-                    Socials
-                  </div>
-                  <div className="h-px bg-border"></div>
-                    <div className="flex space-x-6">
-                      {socials.map((social) => (
-                        <div key={social.name}>
-                          <button
-                            onClick={() => handleSocialClick(social.href)}
-                            className="text-base text-foreground-light hover:text-foreground-light/80 transition-colors duration-200 flex items-center gap-2 group"
-                          >
-                            <span>{social.name}</span>
-                            <ArrowUp className="w-4 h-4 rotate-45 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
-                          </button>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-                {/* Logo at bottom */}
-                <div className="pb-8">
-                  <div className="w-8 h-8 bg-foreground-light rounded-full flex items-center justify-center">
-                    <span className="text-sm font-bold text-background-dark">N</span>
-                  </div>
+              {/* Logo/Brand */}
+              <div className="absolute bottom-8 left-8">
+                <div className="text-sm text-foreground-light">
+                  © Adhara Eka Sakti
                 </div>
               </div>
             </div>
-          </>
-        )}
-      </>
-    )
-  }
+          </div>
+        </>
+      )}
+    </>
+  )
+}

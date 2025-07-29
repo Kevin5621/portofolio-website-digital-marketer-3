@@ -1,8 +1,5 @@
 'use client'
 
-import { motion } from 'framer-motion'
-import { Button } from '@/components/ui/button'
-import { useSlideUp, useFadeIn } from '@/hooks/useGSAP'
 import { useHeader } from '@/components/layout/HeaderContext'
 import { useLayoutEffect } from 'react'
 
@@ -14,27 +11,12 @@ export const AboutSection = () => {
     return () => setIsWhite(false)
   }, [setIsWhite])
 
-  const containerRef = useFadeIn({ delay: 0.2 })
-  const photoRef = useSlideUp({ delay: 0.4 })
-  const contentRef = useSlideUp({ delay: 0.6 })
-  const skillsRef = useSlideUp({ delay: 0.8 })
-
   return (
-    <section 
-      id="about"
-      className="min-h-screen bg-background relative overflow-hidden"
-      ref={containerRef as React.RefObject<HTMLElement>}
-    >
-      {/* Main Content Container */}
+    <section id="about" className="min-h-screen bg-background relative overflow-hidden">
       <div className="container mx-auto px-6 md:px-8 py-20 md:py-24">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center min-h-[80vh]">
-          
-          {/* Left Side - Photo (Continuation) */}
-          <div 
-            ref={photoRef as React.RefObject<HTMLDivElement>}
-            className="relative flex justify-center lg:justify-end"
-          >
-            {/* Full-body photo placeholder - showing continuation from hero */}
+          {/* Photo */}
+          <div className="relative flex justify-center lg:justify-end">
             <div className="relative group">
               <div className="w-72 h-96 md:w-80 md:h-[500px] bg-gradient-to-b from-muted to-muted/80 rounded-lg shadow-xl flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
                 <div className="text-center text-muted-foreground">
@@ -44,83 +26,63 @@ export const AboutSection = () => {
                   <div className="text-xs opacity-60 mt-1">Suit & Formal Attire</div>
                 </div>
               </div>
-              
-              {/* Subtle glow effect */}
               <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-brand-100/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </div>
           </div>
 
-          {/* Right Side - Content */}
-          <div 
-            ref={contentRef as React.RefObject<HTMLDivElement>}
-            className="space-y-8 md:space-y-10"
-          >
-            {/* Main Tagline */}
+          {/* Content */}
+          <div className="space-y-8 md:space-y-10">
             <div className="space-y-6">
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight">
-                Helping business owners create engaging content.{' '}
+                Helping business owners create engaging content.
                 <span className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight">
                   Together, we will make content that converts.
                 </span>
               </h2>
             </div>
-
-            {/* Call-to-Action Button */}
+            
             <div className="pt-4">
-              <Button 
-                size="lg"
-                className="bg-foreground text-background hover:bg-foreground/90 px-8 py-4 text-base font-medium rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
-              >
+              <button className="button-base inline-flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-border-focus focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-12 bg-foreground text-background hover:bg-foreground/90 px-8 py-4 text-base font-medium rounded-full shadow-lg hover:shadow-xl transition-all duration-300">
                 About me
-              </Button>
+              </button>
             </div>
-
-            {/* Skills/Specializations */}
-            <div 
-              ref={skillsRef as React.RefObject<HTMLDivElement>}
-              className="pt-6 md:pt-8"
-            >
-              <h3 className="text-lg md:text-xl font-semibold text-foreground mb-6">
-                Specialising in:
-              </h3>
-              
+            
+            <div className="pt-6 md:pt-8">
+              <h3 className="text-lg md:text-xl font-semibold text-foreground mb-6">Specialising in:</h3>
               <div className="space-y-4">
-                {[
-                  'Market Analysis',
-                  'Content Strategy', 
-                  'Content Production',
-                  'Cross-Platform Management'
-                ].map((skill, index) => (
-                  <motion.div
-                    key={skill}
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.1 * index, duration: 0.5 }}
-                    viewport={{ once: true }}
-                    className="group"
-                  >
-                    <div className="flex items-center space-x-4 py-3 px-4 rounded-lg hover:bg-muted transition-colors duration-200">
-                      <div className="w-2 h-2 bg-primary rounded-full group-hover:scale-125 transition-transform duration-200"></div>
-                      <span className="text-base md:text-lg text-foreground font-medium group-hover:text-primary transition-colors duration-200">
-                        {skill}
-                      </span>
-                    </div>
-                  </motion.div>
-                ))}
+                <div className="group" style={{opacity:0,transform:'translateX(-20px)'}}>
+                  <div className="flex items-center space-x-4 py-3 px-4 rounded-lg hover:bg-muted transition-colors duration-200">
+                    <div className="w-2 h-2 bg-primary rounded-full group-hover:scale-125 transition-transform duration-200"></div>
+                    <span className="text-base md:text-lg text-foreground font-medium group-hover:text-primary transition-colors duration-200">Market Analysis</span>
+                  </div>
+                </div>
+                <div className="group" style={{opacity:0,transform:'translateX(-20px)'}}>
+                  <div className="flex items-center space-x-4 py-3 px-4 rounded-lg hover:bg-muted transition-colors duration-200">
+                    <div className="w-2 h-2 bg-primary rounded-full group-hover:scale-125 transition-transform duration-200"></div>
+                    <span className="text-base md:text-lg text-foreground font-medium group-hover:text-primary transition-colors duration-200">Content Strategy</span>
+                  </div>
+                </div>
+                <div className="group" style={{opacity:0,transform:'translateX(-20px)'}}>
+                  <div className="flex items-center space-x-4 py-3 px-4 rounded-lg hover:bg-muted transition-colors duration-200">
+                    <div className="w-2 h-2 bg-primary rounded-full group-hover:scale-125 transition-transform duration-200"></div>
+                    <span className="text-base md:text-lg text-foreground font-medium group-hover:text-primary transition-colors duration-200">Content Production</span>
+                  </div>
+                </div>
+                <div className="group" style={{opacity:0,transform:'translateX(-20px)'}}>
+                  <div className="flex items-center space-x-4 py-3 px-4 rounded-lg hover:bg-muted transition-colors duration-200">
+                    <div className="w-2 h-2 bg-primary rounded-full group-hover:scale-125 transition-transform duration-200"></div>
+                    <span className="text-base md:text-lg text-foreground font-medium group-hover:text-primary transition-colors duration-200">Cross-Platform Management</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-
-      {/* Subtle background pattern */}
+      
+      {/* Background Pattern */}
       <div className="absolute inset-0 opacity-[0.02] pointer-events-none">
-        <div className="absolute inset-0" 
-             style={{
-               backgroundImage: `radial-gradient(circle at 1px 1px, rgb(0,0,0) 1px, transparent 0)`,
-               backgroundSize: '40px 40px'
-             }} 
-        />
+        <div className="absolute inset-0" style={{backgroundImage:'radial-gradient(circle at 1px 1px, rgb(0,0,0) 1px, transparent 0)',backgroundSize:'40px 40px'}}></div>
       </div>
     </section>
   )

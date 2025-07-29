@@ -499,7 +499,4 @@ html.zoom-compensating {
   gap: calc(1.5rem * var(--zoom-compensation-factor));
 }
 
-/* Hero page specific styles */
-.hero-page header {
-  display: none !important;
-}
+
