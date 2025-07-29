@@ -3,8 +3,17 @@
 import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 import { useSlideUp, useFadeIn } from '@/hooks/useGSAP'
+import { useHeader } from '@/components/layout/HeaderContext'
+import { useEffect } from 'react'
 
 export const AboutSection = () => {
+  const { setIsWhite } = useHeader()
+  
+  useEffect(() => {
+    setIsWhite(false)
+    return () => setIsWhite(false)
+  }, [setIsWhite])
+
   const containerRef = useFadeIn({ delay: 0.2 })
   const photoRef = useSlideUp({ delay: 0.4 })
   const contentRef = useSlideUp({ delay: 0.6 })
@@ -13,7 +22,7 @@ export const AboutSection = () => {
   return (
     <section 
       id="about"
-      className="min-h-screen bg-surface-background relative overflow-hidden"
+      className="min-h-screen bg-background relative overflow-hidden"
       ref={containerRef as React.RefObject<HTMLElement>}
     >
       {/* Main Content Container */}
@@ -27,8 +36,8 @@ export const AboutSection = () => {
           >
             {/* Full-body photo placeholder - showing continuation from hero */}
             <div className="relative group">
-              <div className="w-72 h-96 md:w-80 md:h-[500px] bg-gradient-to-b from-neutral-200 to-neutral-300 rounded-lg shadow-xl flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
-                <div className="text-center text-content-tertiary">
+              <div className="w-72 h-96 md:w-80 md:h-[500px] bg-gradient-to-b from-muted to-muted/80 rounded-lg shadow-xl flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
+                <div className="text-center text-muted-foreground">
                   <div className="text-4xl md:text-5xl mb-4">👨‍💼</div>
                   <div className="text-base md:text-lg font-medium">Full Body Photo</div>
                   <div className="text-sm opacity-75 mt-2">Professional Standing Pose</div>
@@ -48,9 +57,9 @@ export const AboutSection = () => {
           >
             {/* Main Tagline */}
             <div className="space-y-6">
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-content-primary leading-tight">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight">
                 Helping business owners create engaging content.{' '}
-                <span className="text-brand-600">
+                <span className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight">
                   Together, we will make content that converts.
                 </span>
               </h2>
@@ -59,9 +68,8 @@ export const AboutSection = () => {
             {/* Call-to-Action Button */}
             <div className="pt-4">
               <Button 
-                variant="primary" 
                 size="lg"
-                className="bg-content-primary text-content-inverse hover:bg-content-secondary px-8 py-4 text-base font-medium rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
+                className="bg-foreground text-background hover:bg-foreground/90 px-8 py-4 text-base font-medium rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
               >
                 About me
               </Button>
@@ -72,7 +80,7 @@ export const AboutSection = () => {
               ref={skillsRef as React.RefObject<HTMLDivElement>}
               className="pt-6 md:pt-8"
             >
-              <h3 className="text-lg md:text-xl font-semibold text-content-primary mb-6">
+              <h3 className="text-lg md:text-xl font-semibold text-foreground mb-6">
                 Specialising in:
               </h3>
               
@@ -91,9 +99,9 @@ export const AboutSection = () => {
                     viewport={{ once: true }}
                     className="group"
                   >
-                    <div className="flex items-center space-x-4 py-3 px-4 rounded-lg hover:bg-surface-secondary transition-colors duration-200">
-                      <div className="w-2 h-2 bg-brand-500 rounded-full group-hover:scale-125 transition-transform duration-200"></div>
-                      <span className="text-base md:text-lg text-content-primary font-medium group-hover:text-brand-600 transition-colors duration-200">
+                    <div className="flex items-center space-x-4 py-3 px-4 rounded-lg hover:bg-muted transition-colors duration-200">
+                      <div className="w-2 h-2 bg-primary rounded-full group-hover:scale-125 transition-transform duration-200"></div>
+                      <span className="text-base md:text-lg text-foreground font-medium group-hover:text-primary transition-colors duration-200">
                         {skill}
                       </span>
                     </div>

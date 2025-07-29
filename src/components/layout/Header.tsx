@@ -2,26 +2,27 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import { useFadeIn } from '@/hooks/useGSAP'
+import { Menu, X, ArrowUp } from 'lucide-react'
 import { scrollToElement } from '@/lib/animations/lenis'
 import { cn } from '@/lib/utils'
+import { useHeader } from './HeaderContext'
 
 const navigation = [
-  { name: 'Home', href: '/' },
-  { name: 'About', href: '/about' },
-  { name: 'Projects', href: '/projects' },
-  { name: 'Blog', href: '/blog' },
-  { name: 'Contact', href: '/contact' },
+  { name: 'Home', href: '#home' },
+  { name: 'Work', href: '#work' },
+  { name: 'About', href: '#about' },
+  { name: 'Contact', href: '#contact' },
+]
+
+const socials = [
+  { name: 'Instagram', href: 'https://instagram.com' },
+  { name: 'LinkedIn', href: 'https://linkedin.com' },
 ]
 
 export const Header = () => {
+  const { isWhite } = useHeader()
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const [showAdminLink, setShowAdminLink] = useState(false)
-  const headerRef = useFadeIn({ delay: 0.2 })
 
   useEffect(() => {
     const handleScroll = () => {
@@ -35,127 +36,156 @@ export const Header = () => {
   const handleSmoothScroll = (href: string) => {
     if (href.startsWith('#')) {
       scrollToElement(href, { offset: -100 })
+      setIsMobileMenuOpen(false)
     }
   }
 
-  const handleLogoDoubleClick = () => {
-    setShowAdminLink(!showAdminLink)
-    setTimeout(() => setShowAdminLink(false), 5000) // Hide after 5 seconds
+  const handleSocialClick = (href: string) => {
+    window.open(href, '_blank')
+    setIsMobileMenuOpen(false)
   }
 
+  // Determine if we should show burger menu (when scrolled or not on hero section)
+  const shouldShowBurger = isScrolled || !isWhite
+
   return (
-    <motion.header
-      ref={headerRef}
-      className={cn(
-        'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
-        isScrolled
-          ? 'bg-background/80 backdrop-blur-md border-b border-border'
-          : 'bg-transparent'
-      )}
-    >
-      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <div className="flex-shrink-0 relative">
-            <Link 
-              href="/" 
-              onDoubleClick={handleLogoDoubleClick}
-              className="text-2xl font-bold text-foreground hover:text-primary transition-colors"
-            >
-              Portfolio
-            </Link>
-            {showAdminLink && (
-              <Link
-                href="/auth/login"
-                className="absolute top-full left-0 mt-2 text-xs text-content-tertiary hover:text-content-primary bg-surface-card px-2 py-1 rounded border border-border-primary shadow-sm"
-              >
-                Admin
-              </Link>
-            )}
-          </div>
-
-          {/* Desktop Navigation */}
-          <div className="hidden md:block">
-            <div className="ml-10 flex items-baseline space-x-8">
-              {navigation.map((item) => (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  onClick={(e) => {
-                    if (item.href.startsWith('#')) {
-                      e.preventDefault()
-                      handleSmoothScroll(item.href)
-                    }
-                  }}
-                  className="text-foreground hover:text-primary transition-colors duration-200 font-medium"
-                >
-                  {item.name}
-                </Link>
-              ))}
+    <>
+      <header
+        className="fixed top-0 left-0 right-0 z-50 bg-transparent"
+      >
+        <nav className="max-w-7xl mx-auto px-8 py-6">
+          <div className="flex items-center justify-between">
+            {/* Copyright */}
+            <div className={cn(
+              "text-sm",
+              isWhite ? "text-foreground-light" : "text-foreground"
+            )}>
+              © Adhara Eka Sakti
             </div>
-          </div>
 
-          {/* CTA Button */}
-          <div className="hidden md:block">
-            <Button asChild>
-              <Link href="/contact">Get In Touch</Link>
-            </Button>
-          </div>
-
-          {/* Mobile menu button */}
-          <div className="md:hidden">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              aria-label="Toggle mobile menu"
-            >
-              {isMobileMenuOpen ? (
-                <X className="h-6 w-6" />
-              ) : (
-                <Menu className="h-6 w-6" />
-              )}
-            </Button>
-          </div>
-        </div>
-
-        {/* Mobile Navigation */}
-        <AnimatePresence>
-          {isMobileMenuOpen && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3 }}
-              className="md:hidden border-t border-border mt-2"
-            >
-              <div className="px-2 pt-2 pb-3 space-y-1">
-                {navigation.map((item) => (
-                  <Link
-                    key={item.name}
-                    href={item.href}
-                    onClick={(e) => {
-                      if (item.href.startsWith('#')) {
+            {/* Desktop Navigation - Show when not scrolled and on hero section */}
+            {!shouldShowBurger && (
+              <div className="hidden md:block">
+                <div className="flex items-baseline space-x-8">
+                  {navigation.map((item) => (
+                    <Link
+                      key={item.name}
+                      href={item.href}
+                      onClick={(e) => {
                         e.preventDefault()
                         handleSmoothScroll(item.href)
-                      }
-                      setIsMobileMenuOpen(false)
-                    }}
-                    className="block px-3 py-2 text-base font-medium text-foreground hover:text-primary transition-colors"
-                  >
-                    {item.name}
-                  </Link>
-                ))}
-                <div className="px-3 py-2">
-                  <Button asChild className="w-full">
-                    <Link href="/contact">Get In Touch</Link>
-                  </Button>
+                      }}
+                      className="text-sm text-foreground-light hover:text-foreground-light/80 transition-colors duration-200"
+                    >
+                      {item.name}
+                    </Link>
+                  ))}
                 </div>
               </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </nav>
-    </motion.header>
-  )
-}
+            )}
+
+            {/* Burger Menu Button - Show when scrolled or not on hero section */}
+            {shouldShowBurger && (
+              <button
+                onClick={() => setIsMobileMenuOpen(true)}
+                className={cn(
+                  "w-10 h-10 rounded-full flex items-center justify-center transition-colors duration-200",
+                  isWhite 
+                    ? "bg-foreground-light hover:bg-foreground-light/90" 
+                    : "bg-foreground hover:bg-foreground/90"
+                )}
+                aria-label="Open menu"
+              >
+                <Menu className={cn(
+                  "h-5 w-5",
+                  isWhite ? "text-background-dark" : "text-background"
+                )} />
+              </button>
+            )}
+          </div>
+        </nav>
+              </header>
+
+      {/* Mobile Menu Sidebar */}
+      {isMobileMenuOpen && (
+        <>
+          {/* Backdrop */}
+          <div
+            className="fixed inset-0 z-40 bg-black/20"
+            onClick={() => setIsMobileMenuOpen(false)}
+          />
+          
+          {/* Sidebar */}
+          <div
+            className="fixed top-0 right-0 h-full w-1/3 max-w-md bg-background-dark z-50 shadow-2xl"
+          >
+              {/* Close Button */}
+              <div className="absolute top-6 right-6">
+                <button
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="w-10 h-10 bg-foreground-light rounded-full flex items-center justify-center hover:bg-foreground-light/90 transition-colors duration-200"
+                  aria-label="Close menu"
+                >
+                  <X className="h-5 w-5 text-background-dark" />
+                </button>
+              </div>
+
+              {/* Menu Content */}
+              <div className="flex flex-col h-full px-8 pt-20">
+                <div className="flex-1 space-y-12">
+                  
+                  {/* Navigation Section */}
+                  <div className="space-y-6">
+<div className="text-sm text-muted-foreground font-medium">   
+                    Navigation
+                  </div>
+                  <div className="h-px bg-border"></div>
+                    <div className="space-y-6">
+                                          {navigation.map((item) => (
+                      <div key={item.name}>
+                        <button
+                          onClick={() => handleSmoothScroll(item.href)}
+                          className="text-2xl font-bold text-foreground-light hover:text-foreground-light/80 transition-colors duration-200 text-left"
+                        >
+                          {item.name}
+                        </button>
+                      </div>
+                    ))}
+                    </div>
+                  </div>
+
+                  {/* Socials Section */}
+                  <div className="space-y-6">
+                                      <div className="text-sm text-muted-foreground font-medium">
+                    Socials
+                  </div>
+                  <div className="h-px bg-border"></div>
+                    <div className="flex space-x-6">
+                      {socials.map((social) => (
+                        <div key={social.name}>
+                          <button
+                            onClick={() => handleSocialClick(social.href)}
+                            className="text-base text-foreground-light hover:text-foreground-light/80 transition-colors duration-200 flex items-center gap-2 group"
+                          >
+                            <span>{social.name}</span>
+                            <ArrowUp className="w-4 h-4 rotate-45 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Logo at bottom */}
+                <div className="pb-8">
+                  <div className="w-8 h-8 bg-foreground-light rounded-full flex items-center justify-center">
+                    <span className="text-sm font-bold text-background-dark">N</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </>
+        )}
+      </>
+    )
+  }

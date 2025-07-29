@@ -4,9 +4,17 @@ import { motion } from 'framer-motion'
 import { Globe, ArrowDown } from 'lucide-react'
 import { useTextReveal, useSlideUp, useFadeIn } from '@/hooks/useGSAP'
 import { scrollToElement } from '@/lib/animations/lenis'
+import { useHeader } from '@/components/layout/HeaderContext'
+import { useEffect } from 'react'
 
 export const HeroSection = () => {
-  const headerRef = useFadeIn({ delay: 0.2 })
+  const { setIsWhite } = useHeader()
+  
+  useEffect(() => {
+    setIsWhite(true)
+    return () => setIsWhite(false)
+  }, [setIsWhite])
+
   const photoRef = useSlideUp({ delay: 0.5 })
   const skillsRef = useSlideUp({ delay: 0.8 })
   const locationRef = useSlideUp({ delay: 0.6 })
@@ -17,24 +25,6 @@ export const HeroSection = () => {
 
   return (
     <section className="min-h-screen relative overflow-hidden" style={{ backgroundColor: '#282828' }}>
-      {/* Header Navigation */}
-      <header 
-        ref={headerRef as React.RefObject<HTMLElement>}
-        className="absolute top-0 left-0 right-0 z-50 px-4 md:px-8 py-4 md:py-6 flex justify-between items-center"
-      >
-        {/* Copyright */}
-        <div className="text-xs md:text-sm text-white">
-          © Adhara Eka Sakti
-        </div>
-
-        {/* Navigation */}
-        <nav className="flex gap-4 md:gap-8">
-          <a href="#home" className="text-xs md:text-sm text-white hover:text-gray-300 transition-colors">Home</a>
-          <a href="#work" className="text-xs md:text-sm text-white hover:text-gray-300 transition-colors">Work</a>
-          <a href="#about" className="text-xs md:text-sm text-white hover:text-gray-300 transition-colors">About</a>
-          <a href="#contact" className="text-xs md:text-sm text-white hover:text-gray-300 transition-colors">Contact</a>
-        </nav>
-      </header>
 
       {/* Main Content */}
       <div className="relative h-screen flex items-center justify-center px-8">

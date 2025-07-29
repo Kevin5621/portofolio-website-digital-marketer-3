@@ -103,54 +103,54 @@
   --color-surface-tertiary: 210 15% 95%;
   --color-surface-inverse: 210 15% 10%;
   
-  /* === SEMANTIC COLOR SYSTEM === */
-  --color-primary: 224 60% 57%;             /* Brand blue */
-  --color-primary-foreground: 0 0% 100%;    /* White text on primary */
-  --color-secondary: 274 60% 57%;           /* Purple secondary */
-  --color-secondary-foreground: 0 0% 100%;  /* White text on secondary */
-  --color-accent: 0 0% 100%;                /* White accent */
+  /* === SEMANTIC COLOR SYSTEM - MONOCHROME === */
+  --color-primary: 40 5% 95%;               /* Light monochrome #F2F1EF */
+  --color-primary-foreground: 220 15% 8%;   /* Dark text on light */
+  --color-secondary: 220 15% 8%;            /* Dark monochrome #282828 */
+  --color-secondary-foreground: 40 5% 95%;  /* Light text on dark */
+  --color-accent: 40 5% 95%;                /* Light accent */
   --color-accent-foreground: 220 15% 8%;    /* Dark text on accent */
   --color-destructive: 0 84% 60%;           /* Red for errors */
   --color-destructive-foreground: 0 0% 100%; /* White text on destructive */
-  --color-muted: 210 8% 64%;                /* Muted gray */
-  --color-muted-foreground: 210 6% 46%;     /* Muted text */
-  --color-card: 0 0% 100%;                  /* White card background */
+  --color-muted: 220 8% 46%;                /* Muted gray */
+  --color-muted-foreground: 220 6% 36%;     /* Muted text */
+  --color-card: 40 5% 95%;                  /* Light card background */
   --color-card-foreground: 220 15% 8%;      /* Dark text on cards */
-  --color-border: 210 12% 90%;              /* Border color */
-  --color-input: 0 0% 100%;                 /* Input background */
-  --color-ring: 224 60% 57%;                /* Focus ring color */
+  --color-border: 220 8% 46%;               /* Border color */
+  --color-input: 40 5% 95%;                 /* Input background */
+  --color-ring: 220 15% 8%;                 /* Focus ring color */
   
-  /* === BACKGROUND & TEXT COLORS === */
-  --color-background: 0 0% 100%;            /* Light background */
-  --color-foreground: 220 15% 8%;           /* Dark text */
-  --color-background-dark: 220 15% 8%;      /* Dark background */
-  --color-foreground-light: 0 0% 100%;      /* Light text */
+  /* === BACKGROUND & TEXT COLORS - MONOCHROME === */
+  --color-background: 40 5% 95%;            /* Light background #F2F1EF */
+  --color-foreground: 220 15% 8%;           /* Dark text #282828 */
+  --color-background-dark: 220 15% 8%;      /* Dark background #282828 */
+  --color-foreground-light: 40 5% 95%;      /* Light text #F2F1EF */
 
-  /* === CONTENT COLORS === */
-  --color-content-default: 210 15% 10%;
-  --color-content-primary: 210 15% 10%;
-  --color-content-secondary: 210 8% 34%;
-  --color-content-tertiary: 210 6% 46%;
-  --color-content-inverse: 0 0% 100%;
-  --color-content-disabled: 210 8% 64%;
-  --color-content-link: var(--color-brand-500);
+  /* === CONTENT COLORS - MONOCHROME === */
+  --color-content-default: 220 15% 8%;
+  --color-content-primary: 220 15% 8%;
+  --color-content-secondary: 220 8% 34%;
+  --color-content-tertiary: 220 6% 46%;
+  --color-content-inverse: 40 5% 95%;
+  --color-content-disabled: 220 8% 46%;
+  --color-content-link: 220 15% 8%;
 
-  /* === BORDER COLORS === */
-  --color-border-default: 210 12% 90%;
-  --color-border-primary: 210 12% 90%;
-  --color-border-secondary: 210 10% 82%;
+  /* === BORDER COLORS - MONOCHROME === */
+  --color-border-default: 220 8% 46%;
+  --color-border-primary: 220 8% 46%;
+  --color-border-secondary: 220 6% 36%;
 
-  /* === INPUT COLORS === */
-  --color-input-default: 0 0% 100%;
-  --color-input-border: 210 12% 90%;
-  --color-input-placeholder: 210 6% 46%;
+  /* === INPUT COLORS - MONOCHROME === */
+  --color-input-default: 40 5% 95%;
+  --color-input-border: 220 8% 46%;
+  --color-input-placeholder: 220 6% 46%;
 
-  /* === INTERACTIVE COLORS === */
-  --color-interactive-primary: var(--color-brand-500);
-  --color-interactive-secondary: var(--color-brand-50);
-  --color-interactive-hover: var(--color-brand-600);
-  --color-interactive-active: var(--color-brand-700);
-  --color-interactive-disabled: 210 8% 64%;
+  /* === INTERACTIVE COLORS - MONOCHROME === */
+  --color-interactive-primary: 220 15% 8%;
+  --color-interactive-secondary: 40 5% 95%;
+  --color-interactive-hover: 220 8% 34%;
+  --color-interactive-active: 220 6% 36%;
+  --color-interactive-disabled: 220 8% 46%;
 
   /* === STATE COLORS === */
   --color-state-success: 146 59% 44%;
@@ -323,23 +323,23 @@ body {
 }
 
 /* =======================================
-   DARK MODE OVERRIDES
+   DARK MODE OVERRIDES - MONOCHROME
    ======================================= */
 
 [data-theme="dark"],
 .dark {
-  /* Override semantic colors for dark mode */
-  --color-background: 210 15% 10%;
-  --color-foreground: 0 0% 100%;
-  --color-background-dark: 210 15% 10%;
-  --color-foreground-light: 0 0% 100%;
+  /* Override semantic colors for dark mode - monochrome */
+  --color-background: 220 15% 8%;
+  --color-foreground: 40 5% 95%;
+  --color-background-dark: 220 15% 8%;
+  --color-foreground-light: 40 5% 95%;
   
-  --color-card: 210 12% 16%;
-  --color-card-foreground: 0 0% 100%;
-  --color-border: 210 10% 24%;
-  --color-input: 210 12% 16%;
-  --color-muted: 210 8% 64%;
-  --color-muted-foreground: 210 6% 46%;
+  --color-card: 220 12% 16%;
+  --color-card-foreground: 40 5% 95%;
+  --color-border: 220 10% 24%;
+  --color-input: 220 12% 16%;
+  --color-muted: 220 8% 46%;
+  --color-muted-foreground: 220 6% 36%;
 
   /* Adjust shadows for dark mode */
   --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.15);

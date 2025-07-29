@@ -1,15 +1,22 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { ArrowUp, Menu } from 'lucide-react'
-import { useFadeIn, useSlideUp } from '@/hooks/useGSAP'
+import { ArrowUp } from 'lucide-react'
+import { useSlideUp } from '@/hooks/useGSAP'
 import { scrollToElement } from '@/lib/animations/lenis'
+import { useHeader } from '@/components/layout/HeaderContext'
+import { useEffect } from 'react'
 
 export const ContactSection = () => {
-  const headerRef = useFadeIn({ delay: 0.2 })
+  const { setIsWhite } = useHeader()
+  
+  useEffect(() => {
+    setIsWhite(false)
+    return () => setIsWhite(false)
+  }, [setIsWhite])
+
   const leftContentRef = useSlideUp({ delay: 0.4 })
   const rightContentRef = useSlideUp({ delay: 0.6 })
-  const backToTopRef = useFadeIn({ delay: 0.8 })
 
   const handleBackToTop = () => scrollToElement('#home')
   const handleGetInTouch = () => {
@@ -18,21 +25,6 @@ export const ContactSection = () => {
 
   return (
     <section id="contact" className="min-h-screen bg-background relative">
-      {/* Header */}
-      <header 
-        ref={headerRef as React.RefObject<HTMLElement>}
-        className="absolute top-0 left-0 right-0 z-50 px-8 py-6 flex justify-between items-center"
-      >
-        {/* Copyright */}
-        <div className="text-sm text-foreground">
-          © Adhara Eka Sakti
-        </div>
-
-        {/* Hamburger Menu */}
-        <button className="w-10 h-10 bg-foreground rounded-full flex items-center justify-center">
-          <Menu className="w-5 h-5 text-background" />
-        </button>
-      </header>
 
       {/* Main Content */}
       <div className="relative h-screen flex items-center px-8">
@@ -112,7 +104,6 @@ export const ContactSection = () => {
 
         {/* Back to Top */}
         <motion.button
-          ref={backToTopRef as React.RefObject<HTMLButtonElement>}
           onClick={handleBackToTop}
           className="absolute bottom-8 right-8 flex items-center gap-2 text-foreground hover:text-primary transition-colors duration-300 group"
           whileHover={{ y: -2 }}

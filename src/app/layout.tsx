@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
+import { HeaderProvider } from "@/components/layout/HeaderContext";
 import { SmoothScrollProvider } from "@/components/layout/SmoothScrollProvider";
 import { ZoomCompensationProvider } from "@/components/layout/ZoomCompensationProvider";
 
@@ -54,8 +55,10 @@ export default function RootLayout({
           smoothTransition={true}
         >
           <SmoothScrollProvider>
-            <Header />
-            <main>{children}</main>
+            <HeaderProvider>
+              <Header />
+              <main>{children}</main>
+            </HeaderProvider>
           </SmoothScrollProvider>
         </ZoomCompensationProvider>
       </body>
