@@ -39,7 +39,7 @@ export const useScrollResponsiveMarquee = (
     const separator = direction === 'horizontal' ? ' ' : '\n'
     
     // Create clones for both left and right sides
-    const repeatCount = 3 // 3 copies on each side + 1 original = 7 total
+    const repeatCount = 9 // 3 copies on each side + 1 original = 7 total
     const clones = Array(repeatCount * 2 + 1).fill(originalText).join(separator)
     element.textContent = clones
 
