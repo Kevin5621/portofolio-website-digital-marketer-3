@@ -29,7 +29,7 @@ export const AboutSection = () => {
         {/* VIEWPORT 1 - Desktop: Right side content, Mobile: Below photo */}
         <div className="absolute top-0 left-0 md:left-1/3 w-full md:w-2/3 h-screen flex items-start justify-start z-20">
           <div className="px-8 md:px-12 lg:px-16 pt-16 md:pt-20 mt-96 md:mt-0">
-            <h2 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-content-primary leading-tight">
+            <h2 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-semibold text-content-primary leading-tight">
               Helping business<br />
               owners create<br />
               engaging content.<br />
@@ -53,19 +53,19 @@ export const AboutSection = () => {
           <div className="px-8 md:px-12 lg:px-16 pb-16 md:pb-20">
             <div className="space-y-6">
               <div className="space-y-4">
-                <div className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-content-primary font-black">
+                <div className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-content-primary font-semibold">
                   Specialising in:
                 </div>
-                <div className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-content-primary font-black">
+                <div className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-content-primary font-semibold">
                   Market Analysis
                 </div>
-                <div className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-content-primary font-black">
+                <div className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-content-primary font-semibold">
                   Content Strategy
                 </div>
-                <div className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-content-primary font-black">
+                <div className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-content-primary font-semibold">
                   Content Production
                 </div>
-                <div className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-content-primary font-black">
+                <div className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-content-primary font-semibold">
                   Cross-Platform Management
                 </div>
               </div>
