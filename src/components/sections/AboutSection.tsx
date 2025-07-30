@@ -1,82 +1,87 @@
 'use client'
 
+import Image from 'next/image'
+
 export const AboutSection = () => {
   return (
     <section 
       id="about" 
-      className="min-h-screen bg-background relative overflow-hidden"
+      className="min-h-[200vh] bg-background relative overflow-hidden"
       data-theme="light"
     >
-      <div className="container mx-auto px-6 md:px-8 py-20 md:py-24">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center min-h-[80vh]">
-          {/* Photo */}
-          <div className="relative flex justify-center lg:justify-end">
-            <div className="relative group">
-              <div className="w-72 h-96 md:w-80 md:h-[500px] bg-gradient-to-b from-muted to-muted/80 rounded-lg shadow-xl flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
-                <div className="text-center text-muted-foreground">
-                  <div className="text-4xl md:text-5xl mb-4">👨‍💼</div>
-                  <div className="text-base md:text-lg font-medium">Full Body Photo</div>
-                  <div className="text-sm opacity-75 mt-2">Professional Standing Pose</div>
-                  <div className="text-xs opacity-60 mt-1">Suit & Formal Attire</div>
-                </div>
-              </div>
-              <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-brand-100/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            </div>
+      {/* Container for both viewports */}
+      <div className="relative h-[200vh]">
+        
+        {/* Photo Container - Spans 2 viewports on desktop, full width on mobile */}
+        <div className="absolute left-0 top-0 w-full md:w-1/3 h-full z-10">
+          <div className="relative w-full h-full">
+            <Image 
+              src="/landing/about-man.png" 
+              alt="About - Digital Designer"
+              width={1920}
+              height={2160}
+              className="w-full h-full object-cover object-center"
+              priority
+            />
           </div>
+        </div>
 
-          {/* Content */}
-          <div className="space-y-8 md:space-y-10">
+        {/* VIEWPORT 1 - Desktop: Right side content, Mobile: Below photo */}
+        <div className="absolute top-0 left-0 md:left-1/3 w-full md:w-2/3 h-screen flex items-start justify-start z-20">
+          <div className="px-8 md:px-12 lg:px-16 pt-16 md:pt-20 mt-96 md:mt-0">
+            <h2 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-content-primary leading-tight">
+              Helping business<br />
+              owners create<br />
+              engaging content.<br />
+              Together, we will make<br />
+              content that converts.
+            </h2>
+          </div>
+        </div>
+
+        {/* ABOUT ME - Center text between viewports */}
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-30 hidden md:block">
+          <div className="bg-background/90 backdrop-blur-sm rounded-2xl px-12 py-6 shadow-lg">
+            <h3 className="text-3xl lg:text-4xl xl:text-5xl font-medium text-content-primary text-center">
+              about me
+            </h3>
+          </div>
+        </div>
+
+        {/* VIEWPORT 2 - Desktop: Right side content, Mobile: Below viewport 1 */}
+        <div className="absolute left-0 md:left-1/3 w-full md:w-2/3 h-screen flex items-end justify-start z-20" style={{top: '100vh'}}>
+          <div className="px-8 md:px-12 lg:px-16 pb-16 md:pb-20">
             <div className="space-y-6">
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight">
-                Helping business owners create engaging content.
-                <span className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight">
-                  Together, we will make content that converts.
-                </span>
-              </h2>
-            </div>
-            
-            <div className="pt-4">
-              <button className="button-base inline-flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-border-focus focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-12 bg-foreground text-background hover:bg-foreground/90 px-8 py-4 text-base font-medium rounded-full shadow-lg hover:shadow-xl transition-all duration-300">
-                About me
-              </button>
-            </div>
-            
-            <div className="pt-6 md:pt-8">
-              <h3 className="text-lg md:text-xl font-semibold text-foreground mb-6">Specialising in:</h3>
               <div className="space-y-4">
-                <div className="group" style={{opacity:0,transform:'translateX(-20px)'}}>
-                  <div className="flex items-center space-x-4 py-3 px-4 rounded-lg hover:bg-muted transition-colors duration-200">
-                    <div className="w-2 h-2 bg-primary rounded-full group-hover:scale-125 transition-transform duration-200"></div>
-                    <span className="text-base md:text-lg text-foreground font-medium group-hover:text-primary transition-colors duration-200">Market Analysis</span>
-                  </div>
+                <div className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-content-primary font-black">
+                  Specialising in:
                 </div>
-                <div className="group" style={{opacity:0,transform:'translateX(-20px)'}}>
-                  <div className="flex items-center space-x-4 py-3 px-4 rounded-lg hover:bg-muted transition-colors duration-200">
-                    <div className="w-2 h-2 bg-primary rounded-full group-hover:scale-125 transition-transform duration-200"></div>
-                    <span className="text-base md:text-lg text-foreground font-medium group-hover:text-primary transition-colors duration-200">Content Strategy</span>
-                  </div>
+                <div className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-content-primary font-black">
+                  Market Analysis
                 </div>
-                <div className="group" style={{opacity:0,transform:'translateX(-20px)'}}>
-                  <div className="flex items-center space-x-4 py-3 px-4 rounded-lg hover:bg-muted transition-colors duration-200">
-                    <div className="w-2 h-2 bg-primary rounded-full group-hover:scale-125 transition-transform duration-200"></div>
-                    <span className="text-base md:text-lg text-foreground font-medium group-hover:text-primary transition-colors duration-200">Content Production</span>
-                  </div>
+                <div className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-content-primary font-black">
+                  Content Strategy
                 </div>
-                <div className="group" style={{opacity:0,transform:'translateX(-20px)'}}>
-                  <div className="flex items-center space-x-4 py-3 px-4 rounded-lg hover:bg-muted transition-colors duration-200">
-                    <div className="w-2 h-2 bg-primary rounded-full group-hover:scale-125 transition-transform duration-200"></div>
-                    <span className="text-base md:text-lg text-foreground font-medium group-hover:text-primary transition-colors duration-200">Cross-Platform Management</span>
-                  </div>
+                <div className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-content-primary font-black">
+                  Content Production
+                </div>
+                <div className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-content-primary font-black">
+                  Cross-Platform Management
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-[0.02] pointer-events-none">
-        <div className="absolute inset-0" style={{backgroundImage:'radial-gradient(circle at 1px 1px, rgb(0,0,0) 1px, transparent 0)',backgroundSize:'40px 40px'}}></div>
+
+        {/* Mobile: About Me section - visible only on mobile */}
+        <div className="md:hidden absolute top-full left-0 w-full h-auto z-30 bg-background py-12">
+          <div className="px-8">
+            <h3 className="text-3xl font-medium text-content-primary text-center mb-8">
+              about me
+            </h3>
+          </div>
+        </div>
+
       </div>
     </section>
   )
