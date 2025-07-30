@@ -1,5 +1,7 @@
 'use client'
 
+import { LiquidButton } from '../ui/liquid-button'
+
 export const SelectedWorks = () => {
   return (
     <section 
@@ -26,9 +28,16 @@ export const SelectedWorks = () => {
           </div>
           
           <div className="pt-8">
-            <button className="bg-content-primary text-content-inverse px-12 py-4 text-lg md:text-xl font-medium rounded-full">
+            <LiquidButton 
+              variant="primary"
+              size="md"
+              onClick={() => {
+                // Handle view all projects action
+                console.log('View all projects clicked')
+              }}
+            >
               view all projects
-            </button>
+            </LiquidButton>
           </div>
         </div>
       </div>

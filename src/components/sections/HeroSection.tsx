@@ -21,8 +21,7 @@ export const HeroSection = () => {
     offset: 0
   })
 
-  // Debug: Log when component mounts
-  console.log('HeroSection mounted, nameMarqueeRef:', nameMarqueeRef, 'photoParallaxRef:', photoParallaxRef)
+
 
   // =======================================
   // CUSTOM POSITIONING FOR DESKTOP
