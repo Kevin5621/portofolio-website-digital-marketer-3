@@ -7,8 +7,7 @@ export const HeroSection = () => {
   // =======================================
   // SCROLL-RESPONSIVE MARQUEE ANIMATION
   // =======================================
-  const nameMarqueeRef = useHorizontalScrollMarquee({
-    speed: 0.3,
+  const nameMarqueeRef = useHorizontalScrollMarquee<HTMLHeadingElement>({
     ease: 'power1.out'
   })
 

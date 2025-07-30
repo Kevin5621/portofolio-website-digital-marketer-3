@@ -13,10 +13,10 @@ interface ScrollMarqueeConfig {
  * Hook for scroll-responsive infinite scrolling text animation
  * Text moves left when scrolling down, right when scrolling up
  */
-export const useScrollResponsiveMarquee = (
+export const useScrollResponsiveMarquee = <T extends HTMLElement = HTMLElement>(
   config: ScrollMarqueeConfig = {}
-): React.RefObject<HTMLElement | null> => {
-  const elementRef = useRef<HTMLElement>(null)
+): React.RefObject<T | null> => {
+  const elementRef = useRef<T>(null)
   const animationRef = useRef<gsap.core.Timeline | null>(null)
   const scrollDirection = useRef(0)
   const lastScrollY = useRef(0)
@@ -24,6 +24,7 @@ export const useScrollResponsiveMarquee = (
   const isUpdating = useRef(false)
   const scrollTimeout = useRef<NodeJS.Timeout | null>(null)
   const throttleTimeout = useRef<NodeJS.Timeout | null>(null)
+  const resizeTimeout = useRef<NodeJS.Timeout | null>(null)
 
   const {
     speed = 1.0, // Increased default speed for better performance
@@ -58,9 +59,24 @@ export const useScrollResponsiveMarquee = (
       
       document.body.removeChild(tempElement)
       
-      // Ensure enough clones to cover viewport + buffer for smooth scrolling
-      // Minimum 5 clones, but scale with viewport/text ratio
-      return Math.max(5, Math.ceil((viewportSize * 3) / textSize))
+      // Ensure enough clones for true infinite scroll
+      // Calculate clones needed to cover viewport + generous buffer for seamless scrolling
+      if (textSize <= 0) {
+        return 10 // Fallback for edge cases
+      }
+      
+      // For infinite scroll, we need at least enough clones to cover:
+      // - Current viewport
+      // - Movement buffer (2x viewport for smooth bidirectional scroll)
+      // - Reset buffer (additional space for seamless position reset)
+      const baseClones = Math.ceil((viewportSize * 4) / textSize)
+      
+      // Minimum clones must be enough for smooth infinite effect
+      // For very long text (text > viewport), need at least 3 clones
+      // For short text, need more clones to fill space
+      const minClones = textSize > viewportSize ? 3 : 8
+      
+      return Math.max(minClones, baseClones)
     }
     
     const cloneCount = calculateOptimalCloneCount()
@@ -274,6 +290,45 @@ export const useScrollResponsiveMarquee = (
     // Start idle animation after a short delay
     setTimeout(startIdleAnimation, 1000)
 
+    // Handle window resize to recalculate clones if needed
+    const handleResize = () => {
+      try {
+        const newCloneCount = calculateOptimalCloneCount()
+        if (newCloneCount !== cloneCount) {
+          // Recalculate and update clones if viewport significantly changed
+          const newClones = Array(newCloneCount).fill(originalText).join(separator)
+          element.textContent = newClones
+          
+          // Reset position
+          const newSingleTextDimension = direction === 'horizontal'
+            ? element.scrollWidth / newCloneCount
+            : element.scrollHeight / newCloneCount
+          
+          const newInitialOffset = direction === 'horizontal' 
+            ? { x: -newSingleTextDimension * Math.floor(newCloneCount / 2) }
+            : { y: -newSingleTextDimension * Math.floor(newCloneCount / 2) }
+          gsap.set(element, newInitialOffset)
+          
+          // Restart animation
+          if (animationRef.current) {
+            animationRef.current.kill()
+            animationRef.current = null
+          }
+          startIdleAnimation()
+        }
+      } catch (error) {
+        console.error('Error handling resize:', error)
+      }
+    }
+
+    // Debounced resize handler for performance
+    const debouncedResize = () => {
+      if (resizeTimeout.current) {
+        clearTimeout(resizeTimeout.current)
+      }
+      resizeTimeout.current = setTimeout(handleResize, 300)
+    }
+
     // Recovery mechanism - restart animation if it gets stuck
     const recoveryInterval = setInterval(() => {
       try {
@@ -291,8 +346,9 @@ export const useScrollResponsiveMarquee = (
       }
     }, 15000) // Increased to 15 seconds to be less aggressive on performance
 
-    // Listen to window scroll events
+    // Listen to events
     window.addEventListener('scroll', handleScroll, { passive: true })
+    window.addEventListener('resize', debouncedResize, { passive: true })
 
     // Enhanced cleanup function
     return () => {
@@ -317,8 +373,14 @@ export const useScrollResponsiveMarquee = (
         // Clear recovery interval
         clearInterval(recoveryInterval)
         
-        // Remove scroll listener
+        // Remove event listeners
         window.removeEventListener('scroll', handleScroll)
+        window.removeEventListener('resize', debouncedResize)
+        
+        // Clear resize timeout
+        if (resizeTimeout.current) {
+          clearTimeout(resizeTimeout.current)
+        }
         
         // Reset state flags
         isUpdating.current = false
@@ -335,13 +397,17 @@ export const useScrollResponsiveMarquee = (
 /**
  * Hook for horizontal scroll-responsive marquee (specialized)
  */
-export const useHorizontalScrollMarquee = (config?: Omit<ScrollMarqueeConfig, 'direction'>) => {
-  return useScrollResponsiveMarquee({ ...config, direction: 'horizontal' })
+export const useHorizontalScrollMarquee = <T extends HTMLElement = HTMLHeadingElement>(
+  config?: Omit<ScrollMarqueeConfig, 'direction'>
+) => {
+  return useScrollResponsiveMarquee<T>({ ...config, direction: 'horizontal' })
 }
 
 /**
  * Hook for vertical scroll-responsive marquee (specialized)
  */
-export const useVerticalScrollMarquee = (config?: Omit<ScrollMarqueeConfig, 'direction'>) => {
-  return useScrollResponsiveMarquee({ ...config, direction: 'vertical' })
+export const useVerticalScrollMarquee = <T extends HTMLElement = HTMLElement>(
+  config?: Omit<ScrollMarqueeConfig, 'direction'>
+) => {
+  return useScrollResponsiveMarquee<T>({ ...config, direction: 'vertical' })
 } 
