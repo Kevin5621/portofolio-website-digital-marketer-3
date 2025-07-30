@@ -22,6 +22,7 @@ export const useScrollResponsiveMarquee = (
   const lastScrollY = useRef(0)
   const lastUpdateTime = useRef(0)
   const isUpdating = useRef(false)
+  const scrollTimeout = useRef<NodeJS.Timeout | null>(null)
 
   const {
     speed = 0.5,
@@ -33,30 +34,31 @@ export const useScrollResponsiveMarquee = (
     const element = elementRef.current
     if (!element) return
 
-        // Clone the text for seamless infinite loop
+        // Clone the text for seamless infinite loop - both left and right
     const originalText = element.textContent || ''
-    const separator = config.direction === 'horizontal' ? ' ' : '\n'
-    // Create more copies for seamless infinite scroll
-    const clonedText = originalText + separator + originalText + separator + originalText + separator + originalText + separator + originalText + separator + originalText + separator + originalText
-    element.textContent = clonedText
+    const separator = direction === 'horizontal' ? ' ' : '\n'
+    
+    // Create clones for both left and right sides
+    const repeatCount = 3 // 3 copies on each side + 1 original = 7 total
+    const clones = Array(repeatCount * 2 + 1).fill(originalText).join(separator)
+    element.textContent = clones
 
     // Get the computed dimensions - one complete cycle
-    const textDimension = config.direction === 'horizontal'
-      ? element.scrollWidth / 7  // Since we have 7 copies now (6 + 1 original)
-      : element.scrollHeight / 7
+    const textDimension = direction === 'horizontal'
+      ? element.scrollWidth / (repeatCount * 2 + 1)  // 7 total copies
+      : element.scrollHeight / (repeatCount * 2 + 1)
 
-    // Set initial position
-    const initialPosition = config.direction === 'horizontal' ? { x: 0 } : { y: 0 }
-    gsap.set(element, initialPosition)
-    console.log('GSAP initialized for element:', element) // Debug
-    console.log('Text dimension:', textDimension) // Debug
-    console.log('Config:', config) // Debug
+    // Set initial position - start from middle clone so both sides are filled
+    const initialOffset = direction === 'horizontal' 
+      ? { x: -textDimension * repeatCount } // Start from middle (3rd clone)
+      : { y: -textDimension * repeatCount }
+    gsap.set(element, initialOffset)
 
     // Function to update animation based on scroll direction
     const updateAnimation = (scrollDirection: number) => {
-      // Prevent too frequent updates
+      // Prevent too frequent updates but allow more responsive updates
       const now = Date.now()
-      if (isUpdating.current || (now - lastUpdateTime.current) < 500) {
+      if (isUpdating.current || (now - lastUpdateTime.current) < 100) {
         return
       }
 
@@ -69,79 +71,97 @@ export const useScrollResponsiveMarquee = (
         animationRef.current = null
       }
 
-      const duration = Math.max(5, 20 / (speed * Math.abs(scrollDirection) + 0.1)) // Minimum 5 seconds
-      const isHorizontal = config.direction === 'horizontal'
+      // Fixed duration for consistent speed
+      const duration = 15 // Fixed 15 seconds for consistent speed
+      const isHorizontal = direction === 'horizontal'
 
-      console.log('Updating animation:', { scrollDirection, duration, isHorizontal, textDimension }) // Debug
+      // Get current position to ensure smooth transitions
+      const currentPosition = isHorizontal 
+        ? gsap.getProperty(element, 'x') as number
+        : gsap.getProperty(element, 'y') as number
 
       // Create new animation based on scroll direction
       if (scrollDirection > 0) {
-        // Scrolling down - move from right to left
+        // Scrolling down - move from right to left (negative direction)
+        // Calculate target position relative to current position for seamless loop
         const targetPosition = isHorizontal 
-          ? { x: -textDimension } // Move by one text width for seamless loop
-          : { y: -textDimension }
-        
-        console.log('Creating scroll down animation:', targetPosition) // Debug
+          ? { x: currentPosition - textDimension }
+          : { y: currentPosition - textDimension }
         
         animationRef.current = gsap.timeline({ repeat: -1 })
           .to(element, {
             ...targetPosition,
             duration,
             ease,
-            // Remove onComplete to prevent restart
+            onComplete: () => {
+              // Reset position for seamless loop
+              const resetPos = isHorizontal 
+                ? { x: currentPosition } 
+                : { y: currentPosition }
+              gsap.set(element, resetPos)
+            }
           })
       } else if (scrollDirection < 0) {
-        // Scrolling up - move from left to right
+        // Scrolling up - move from left to right (positive direction)
+        // Calculate target position relative to current position for seamless loop
         const targetPosition = isHorizontal 
-          ? { x: textDimension } // Move by one text width for seamless loop
-          : { y: textDimension }
-        
-        console.log('Creating scroll up animation:', targetPosition) // Debug
+          ? { x: currentPosition + textDimension }
+          : { y: currentPosition + textDimension }
         
         animationRef.current = gsap.timeline({ repeat: -1 })
           .to(element, {
             ...targetPosition,
             duration,
             ease,
-            // Remove onComplete to prevent restart
+            onComplete: () => {
+              // Reset position for seamless loop
+              const resetPos = isHorizontal 
+                ? { x: currentPosition } 
+                : { y: currentPosition }
+              gsap.set(element, resetPos)
+            }
           })
       } else {
         // No scroll - restart idle animation
-        console.log('Restarting idle animation') // Debug
         startIdleAnimation()
       }
 
       // Reset updating flag after a delay
       setTimeout(() => {
         isUpdating.current = false
-      }, 100)
+      }, 50)
     }
 
-    // Scroll event handler with throttling
+    // Scroll event handler with improved throttling
     const handleScroll = () => {
       try {
         const currentScrollY = window.scrollY
         const delta = currentScrollY - lastScrollY.current
         
+        // Clear previous timeout
+        if (scrollTimeout.current) {
+          clearTimeout(scrollTimeout.current)
+        }
+        
         // Determine scroll direction with threshold
-        const threshold = 5 // Increased threshold to reduce sensitivity
+        const threshold = 5 // Slightly higher threshold to reduce sensitivity
         if (Math.abs(delta) > threshold) {
           const newDirection = delta > 0 ? 1 : -1
           
-          // Only update if direction actually changed
+          // Only update animation when direction actually changes
           if (scrollDirection.current !== newDirection) {
             scrollDirection.current = newDirection
-            console.log('Scroll direction:', scrollDirection.current) // Debug
             updateAnimation(scrollDirection.current)
           }
-        } else {
-          // Only reset to idle if we were actually scrolling
+        }
+        
+        // Set timeout to return to idle when scrolling stops
+        scrollTimeout.current = setTimeout(() => {
           if (scrollDirection.current !== 0) {
             scrollDirection.current = 0
-            console.log('Returning to idle') // Debug
             startIdleAnimation()
           }
-        }
+        }, 500) // Wait 500ms after scroll stops
         
         lastScrollY.current = currentScrollY
       } catch (error) {
@@ -164,16 +184,17 @@ export const useScrollResponsiveMarquee = (
         animationRef.current = null
       }
 
-      const duration = 30 // Slower idle animation for smoother effect
-      const isHorizontal = config.direction === 'horizontal'
+      const duration = 25 // Slightly faster idle animation
+      const isHorizontal = direction === 'horizontal'
       const targetPosition = isHorizontal 
         ? { x: -textDimension } // Move by one text width for seamless loop
         : { y: -textDimension }
       
-      console.log('Starting idle animation:', targetPosition) // Debug
-      
-      // Reset position first
-      gsap.set(element, { x: 0, y: 0 })
+      // Reset position to initial offset
+      const resetPosition = direction === 'horizontal' 
+        ? { x: -textDimension * 3 } // Back to middle clone
+        : { y: -textDimension * 3 }
+      gsap.set(element, resetPosition)
       
       animationRef.current = gsap.timeline({ repeat: -1 })
         .to(element, {
@@ -190,10 +211,9 @@ export const useScrollResponsiveMarquee = (
     // Recovery mechanism - restart animation if it gets stuck
     const recoveryInterval = setInterval(() => {
       if (!animationRef.current || !animationRef.current.isActive()) {
-        console.log('Animation stuck detected, restarting...') // Debug
         startIdleAnimation()
       }
-    }, 5000) // Check every 5 seconds
+    }, 10000) // Check every 10 seconds to be less aggressive
 
     // Listen to window scroll events
     window.addEventListener('scroll', handleScroll, { passive: true })
@@ -201,6 +221,10 @@ export const useScrollResponsiveMarquee = (
     return () => {
       if (animationRef.current) {
         animationRef.current.kill()
+      }
+      
+      if (scrollTimeout.current) {
+        clearTimeout(scrollTimeout.current)
       }
       
       clearInterval(recoveryInterval)
