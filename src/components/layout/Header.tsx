@@ -46,8 +46,31 @@ export const Header = () => {
       const sections = document.querySelectorAll('section[id]')
       sections.forEach(section => observer.observe(section))
 
+      // Backup: Scroll event listener untuk mendeteksi section
+      const handleScroll = () => {
+        const scrollPosition = window.scrollY + window.innerHeight / 2
+        
+        const sections = document.querySelectorAll('section[id]')
+        let currentSection = 'home'
+        
+        sections.forEach(section => {
+          const rect = section.getBoundingClientRect()
+          const sectionTop = rect.top + window.scrollY
+          const sectionBottom = sectionTop + rect.height
+          
+          if (scrollPosition >= sectionTop && scrollPosition <= sectionBottom) {
+            currentSection = section.id
+          }
+        })
+        
+        setActiveSection(currentSection)
+      }
+
+      window.addEventListener('scroll', handleScroll, { passive: true })
+
       return () => {
         sections.forEach(section => observer.unobserve(section))
+        window.removeEventListener('scroll', handleScroll)
       }
     }
   }, [])
@@ -69,7 +92,9 @@ export const Header = () => {
   const isLightSection = ['about', 'work', 'contact'].includes(activeSection)
 
   // Logika untuk menampilkan menu text atau burger
+  // Menu text hanya muncul di HeroSection (dark section)
   const showTextMenu = isDarkSection && !isMobileMenuOpen
+  // Burger menu muncul di semua section light (about, work, contact) atau saat mobile menu terbuka
   const showBurgerMenu = isLightSection || isMobileMenuOpen
 
   return (
