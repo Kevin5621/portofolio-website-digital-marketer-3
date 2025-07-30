@@ -29,43 +29,45 @@ export const AboutSection = () => {
         {/* VIEWPORT 1 - Desktop: Right side content, Mobile: Below photo */}
         <div className="absolute top-0 left-0 md:left-1/3 w-full md:w-2/3 h-screen flex items-start justify-start z-20">
           <div className="px-8 md:px-12 lg:px-16 pt-16 md:pt-20 mt-96 md:mt-0">
-            <h2 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-semibold text-content-primary leading-tight">
-              Helping business<br />
-              owners create<br />
-              engaging content.<br />
-              Together, we will make<br />
+            <h2 className="text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-content-primary leading-[0.95]">
+              Helping business
+              owners create
+              engaging content.
+              Together, we will make
               content that converts.
             </h2>
           </div>
         </div>
 
-        {/* ABOUT ME - Center text between viewports */}
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-30 hidden md:block">
-          <div className="bg-background/90 backdrop-blur-sm rounded-2xl px-12 py-6 shadow-lg">
-            <h3 className="text-3xl lg:text-4xl xl:text-5xl font-medium text-content-primary text-center">
-              about me
-            </h3>
+        {/* ABOUT ME - Positioned between viewport 1 and 2 texts */}
+        <div className="absolute left-0 md:left-1/3 w-full md:w-2/3 flex items-center justify-start z-30 md:flex" style={{top: '100vh'}}>
+          <div className="px-8 md:px-12 lg:px-16">
+            <div className="bg-content-primary text-content-inverse rounded-full px-12 py-6 shadow-lg">
+              <span className="text-xl lg:text-2xl xl:text-3xl font-medium">
+                About me
+              </span>
+            </div>
           </div>
         </div>
 
         {/* VIEWPORT 2 - Desktop: Right side content, Mobile: Below viewport 1 */}
         <div className="absolute left-0 md:left-1/3 w-full md:w-2/3 h-screen flex items-end justify-start z-20" style={{top: '100vh'}}>
           <div className="px-8 md:px-12 lg:px-16 pb-16 md:pb-20">
-            <div className="space-y-6">
-              <div className="space-y-4">
-                <div className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-content-primary font-semibold">
+            <div className="space-y-3">
+              <div className="space-y-1">
+                <div className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-content-primary font-semibold leading-[0.9]">
                   Specialising in:
                 </div>
-                <div className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-content-primary font-semibold">
+                <div className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-content-primary font-semibold leading-[0.9]">
                   Market Analysis
                 </div>
-                <div className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-content-primary font-semibold">
+                <div className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-content-primary font-semibold leading-[0.9]">
                   Content Strategy
                 </div>
-                <div className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-content-primary font-semibold">
+                <div className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-content-primary font-semibold leading-[0.9]">
                   Content Production
                 </div>
-                <div className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-content-primary font-semibold">
+                <div className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-content-primary font-semibold leading-[0.9]">
                   Cross-Platform Management
                 </div>
               </div>
