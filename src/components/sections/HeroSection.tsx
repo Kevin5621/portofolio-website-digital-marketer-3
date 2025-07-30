@@ -73,7 +73,7 @@ export const HeroSection = () => {
         <div className={`absolute ${desktopPositions.photo.left} ${desktopPositions.photo.right} ${desktopPositions.photo.top} ${desktopPositions.photo.bottom} z-10`}>
           <div className="w-full h-full overflow-visible">
             <Image 
-              src="/man.png" 
+              src="/landing/hero-man.png" 
               alt="Adhara Eka"
               width={1920}
               height={1080}
