@@ -540,4 +540,39 @@ html.zoom-compensating {
   gap: calc(1.5rem * var(--zoom-compensation-factor));
 }
 
+/* =======================================
+   SCROLLBAR HIDDEN - ALL BROWSERS
+   ======================================= */
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+html {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* Hide scrollbar for all elements */
+* {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+*::-webkit-scrollbar {
+  display: none;  /* Chrome, Safari and Opera */
+}
+
+/* Ensure smooth scrolling still works */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Prevent horizontal scrollbar */
+body {
+  overflow-x: hidden;
+}
+
 
