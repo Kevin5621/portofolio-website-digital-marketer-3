@@ -15,14 +15,15 @@ interface ScrollMarqueeConfig {
  */
 export const useScrollResponsiveMarquee = (
   config: ScrollMarqueeConfig = {}
-) => {
-  const elementRef = useRef<HTMLHeadingElement>(null)
+): React.RefObject<HTMLElement | null> => {
+  const elementRef = useRef<HTMLElement>(null)
   const animationRef = useRef<gsap.core.Timeline | null>(null)
   const scrollDirection = useRef(0)
   const lastScrollY = useRef(0)
   const lastUpdateTime = useRef(0)
   const isUpdating = useRef(false)
   const scrollTimeout = useRef<NodeJS.Timeout | null>(null)
+  const throttleTimeout = useRef<NodeJS.Timeout | null>(null)
 
   const {
     speed = 1.0, // Increased default speed for better performance
@@ -81,7 +82,7 @@ export const useScrollResponsiveMarquee = (
     const updateAnimation = (scrollDirection: number) => {
       // Prevent too frequent updates but allow more responsive updates
       const now = Date.now()
-      if (isUpdating.current || (now - lastUpdateTime.current) < 100) {
+      if (isUpdating.current || (now - lastUpdateTime.current) < 150) {
         return
       }
 
@@ -155,49 +156,64 @@ export const useScrollResponsiveMarquee = (
         startIdleAnimation()
       }
 
-      // Reset updating flag after a delay
+      // Reset updating flag after a delay with proper error handling
       setTimeout(() => {
-        isUpdating.current = false
-      }, 50)
+        try {
+          isUpdating.current = false
+        } catch (error) {
+          console.error('Error resetting updating flag:', error)
+          isUpdating.current = false
+        }
+      }, 100)
     }
 
-    // Scroll event handler with improved throttling
+    // Enhanced scroll event handler with proper throttling
     const handleScroll = () => {
-      try {
-        const currentScrollY = window.scrollY
-        const delta = currentScrollY - lastScrollY.current
-        
-        // Clear previous timeout
-        if (scrollTimeout.current) {
-          clearTimeout(scrollTimeout.current)
-        }
-        
-        // Determine scroll direction with threshold
-        const threshold = 5 // Slightly higher threshold to reduce sensitivity
-        if (Math.abs(delta) > threshold) {
-          const newDirection = delta > 0 ? 1 : -1
-          
-          // Only update animation when direction actually changes
-          if (scrollDirection.current !== newDirection) {
-            scrollDirection.current = newDirection
-            updateAnimation(scrollDirection.current)
-          }
-        }
-        
-        // Set timeout to return to idle when scrolling stops
-        scrollTimeout.current = setTimeout(() => {
-          if (scrollDirection.current !== 0) {
-            scrollDirection.current = 0
-            startIdleAnimation()
-          }
-        }, 500) // Wait 500ms after scroll stops
-        
-        lastScrollY.current = currentScrollY
-      } catch (error) {
-        console.error('Error in scroll handler:', error)
-        // Restart idle animation on error
-        startIdleAnimation()
+      // Clear existing throttle timeout
+      if (throttleTimeout.current) {
+        clearTimeout(throttleTimeout.current)
       }
+      
+      // Throttle scroll events to improve performance
+      throttleTimeout.current = setTimeout(() => {
+        try {
+          const currentScrollY = window.scrollY
+          const delta = currentScrollY - lastScrollY.current
+          
+          // Clear previous timeout
+          if (scrollTimeout.current) {
+            clearTimeout(scrollTimeout.current)
+          }
+          
+          // Determine scroll direction with threshold
+          const threshold = 8 // Increased threshold to reduce sensitivity and improve performance
+          if (Math.abs(delta) > threshold) {
+            const newDirection = delta > 0 ? 1 : -1
+            
+            // Only update animation when direction actually changes
+            if (scrollDirection.current !== newDirection) {
+              scrollDirection.current = newDirection
+              updateAnimation(scrollDirection.current)
+            }
+          }
+          
+          // Set timeout to return to idle when scrolling stops
+          scrollTimeout.current = setTimeout(() => {
+            if (scrollDirection.current !== 0) {
+              scrollDirection.current = 0
+              startIdleAnimation()
+            }
+          }, 600) // Increased to 600ms for better performance
+          
+          lastScrollY.current = currentScrollY
+        } catch (error) {
+          console.error('Error in scroll handler:', error)
+          // Reset states and restart idle animation on error
+          scrollDirection.current = 0
+          isUpdating.current = false
+          startIdleAnimation()
+        }
+      }, 16) // 60fps throttling - approximately 16ms
     }
 
     // Start with a default animation (idle state)
@@ -260,25 +276,56 @@ export const useScrollResponsiveMarquee = (
 
     // Recovery mechanism - restart animation if it gets stuck
     const recoveryInterval = setInterval(() => {
-      if (!animationRef.current || !animationRef.current.isActive()) {
+      try {
+        if (!animationRef.current || !animationRef.current.isActive()) {
+          startIdleAnimation()
+        }
+      } catch (error) {
+        console.error('Error in recovery mechanism:', error)
+        // Force restart on recovery errors
+        if (animationRef.current) {
+          animationRef.current.kill()
+          animationRef.current = null
+        }
         startIdleAnimation()
       }
-    }, 10000) // Check every 10 seconds to be less aggressive
+    }, 15000) // Increased to 15 seconds to be less aggressive on performance
 
     // Listen to window scroll events
     window.addEventListener('scroll', handleScroll, { passive: true })
 
+    // Enhanced cleanup function
     return () => {
-      if (animationRef.current) {
-        animationRef.current.kill()
+      try {
+        // Kill animation
+        if (animationRef.current) {
+          animationRef.current.kill()
+          animationRef.current = null
+        }
+        
+        // Clear all timeouts
+        if (scrollTimeout.current) {
+          clearTimeout(scrollTimeout.current)
+          scrollTimeout.current = null
+        }
+        
+        if (throttleTimeout.current) {
+          clearTimeout(throttleTimeout.current)
+          throttleTimeout.current = null
+        }
+        
+        // Clear recovery interval
+        clearInterval(recoveryInterval)
+        
+        // Remove scroll listener
+        window.removeEventListener('scroll', handleScroll)
+        
+        // Reset state flags
+        isUpdating.current = false
+        scrollDirection.current = 0
+      } catch (error) {
+        console.error('Error during cleanup:', error)
       }
-      
-      if (scrollTimeout.current) {
-        clearTimeout(scrollTimeout.current)
-      }
-      
-      clearInterval(recoveryInterval)
-      window.removeEventListener('scroll', handleScroll)
     }
   }, [speed, ease, direction])
 
