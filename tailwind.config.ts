@@ -85,6 +85,12 @@ export default {
       loose: "var(--line-height-loose)",
     },
 
+    /* === FONT FAMILY === */
+    fontFamily: {
+      'poppins': ['var(--font-poppins)', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'],
+      'sans': ['var(--font-poppins)', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'],
+    },
+
     /* === BORDER RADIUS SCALE === */
     borderRadius: {
       none: "var(--radius-none)",

@@ -220,7 +220,7 @@
    ======================================= */
 
 body {
-  font-family: var(--font-geist-sans);
+  font-family: var(--font-poppins), system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   font-size: var(--font-size-base);
   line-height: var(--line-height-normal);
   font-weight: var(--font-weight-normal);
