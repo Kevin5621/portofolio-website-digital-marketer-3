@@ -121,9 +121,9 @@ export const HeroSection = () => {
             
             {/* Skills Text */}
             <div className="space-y-6">
-              <div className="text-3xl md:text-4xl lg:text-5xl font-semibold">Social Media Marketing</div>
-              <div className="text-3xl md:text-4xl lg:text-5xl font-semibold">Content Creator</div>
-              <div className="text-3xl md:text-4xl lg:text-5xl font-semibold">Short-Form Video Editor</div>
+              <div className="text-3xl md:text-4xl lg:text-5xl font-normal">Social Media Marketing</div>
+              <div className="text-3xl md:text-4xl lg:text-5xl font-normal">Content Creator</div>
+              <div className="text-3xl md:text-4xl lg:text-5xl font-normal">Short-Form Video Editor</div>
             </div>
           </div>
         </div>
