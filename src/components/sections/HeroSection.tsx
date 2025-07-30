@@ -2,6 +2,7 @@
 
 import Image from 'next/image'
 import { useHorizontalScrollMarquee } from '@/hooks/useScrollMarquee'
+import { useParallax } from '@/hooks/useParallax'
 
 export const HeroSection = () => {
   // =======================================
@@ -11,8 +12,17 @@ export const HeroSection = () => {
     ease: 'power1.out'
   })
 
+  // =======================================
+  // PARALLAX EFFECT FOR PHOTO
+  // =======================================
+  const photoParallaxRef = useParallax<HTMLDivElement>({
+    speed: 0.3, // 30% kecepatan scroll normal - lebih subtle
+    direction: 'up', // Bergerak ke atas saat scroll
+    offset: 0
+  })
+
   // Debug: Log when component mounts
-  console.log('HeroSection mounted, nameMarqueeRef:', nameMarqueeRef)
+  console.log('HeroSection mounted, nameMarqueeRef:', nameMarqueeRef, 'photoParallaxRef:', photoParallaxRef)
 
   // =======================================
   // CUSTOM POSITIONING FOR DESKTOP
@@ -85,9 +95,13 @@ export const HeroSection = () => {
           </div>
         </div>
 
-        {/* Photo - Full width, overlapping, focus on face */}
+        {/* Photo - Full width, overlapping, focus on face with parallax effect */}
         <div className={`absolute ${desktopPositions.photo.left} ${desktopPositions.photo.right} ${desktopPositions.photo.top} ${desktopPositions.photo.bottom} z-0`}>
-          <div className="w-full h-full overflow-visible">
+          <div 
+            ref={photoParallaxRef}
+            className="w-full h-full overflow-visible"
+            style={{ willChange: 'transform' }}
+          >
             <Image 
               src="/landing/hero-man.png" 
               alt="Adhara Eka"
