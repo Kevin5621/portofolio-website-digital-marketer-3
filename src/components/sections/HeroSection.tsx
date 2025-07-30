@@ -1,8 +1,20 @@
 'use client'
 
 import Image from 'next/image'
+import { useHorizontalScrollMarquee } from '@/hooks/useScrollMarquee'
 
 export const HeroSection = () => {
+  // =======================================
+  // SCROLL-RESPONSIVE MARQUEE ANIMATION
+  // =======================================
+  const nameMarqueeRef = useHorizontalScrollMarquee({
+    speed: 0.3,
+    ease: 'power1.out'
+  })
+
+  // Debug: Log when component mounts
+  console.log('HeroSection mounted, nameMarqueeRef:', nameMarqueeRef)
+
   // =======================================
   // CUSTOM POSITIONING FOR DESKTOP
   // =======================================
@@ -47,14 +59,14 @@ export const HeroSection = () => {
   return (
     <section 
       id="home" 
-      className="min-h-screen relative overflow-visible bg-background-dark -z-10"
+      className="min-h-screen relative overflow-visible bg-background-dark -z-20"
       data-theme="dark"
     >
       {/* Shadow effect at bottom */}
-      <div className="absolute bottom-0 left-0 right-0 h-108 bg-gradient-to-t from-black/50 to-transparent z-20"></div>
+      <div className="absolute bottom-0 left-0 right-0 h-108 bg-gradient-to-t from-black/50 to-transparent z-10"></div>
       <div className="relative h-screen flex items-center justify-center">
         {/* Location Card - Terpotong di pinggir */}
-        <div className={`absolute ${desktopPositions.locationCard.left} ${desktopPositions.locationCard.right} ${desktopPositions.locationCard.top} ${desktopPositions.locationCard.bottom} ${desktopPositions.locationCard.transform} z-30 hidden md:block`}>
+        <div className={`absolute ${desktopPositions.locationCard.left} ${desktopPositions.locationCard.right} ${desktopPositions.locationCard.top} ${desktopPositions.locationCard.bottom} ${desktopPositions.locationCard.transform} z-20 hidden md:block`}>
           <div className="bg-content-inverse rounded-r-full px-8 md:px-12 py-4 md:py-6 flex items-center gap-8 md:gap-10 shadow-xl">
             <div className="text-left">
               <div className="text-2xl md:text-3xl font-bold text-content">Based</div>
@@ -70,7 +82,7 @@ export const HeroSection = () => {
         </div>
 
         {/* Photo - Full width, overlapping, focus on face */}
-        <div className={`absolute ${desktopPositions.photo.left} ${desktopPositions.photo.right} ${desktopPositions.photo.top} ${desktopPositions.photo.bottom} z-10`}>
+        <div className={`absolute ${desktopPositions.photo.left} ${desktopPositions.photo.right} ${desktopPositions.photo.top} ${desktopPositions.photo.bottom} z-0`}>
           <div className="w-full h-full overflow-visible">
             <Image 
               src="/landing/hero-man.png" 
@@ -84,7 +96,7 @@ export const HeroSection = () => {
         </div>
 
         {/* Skills */}
-        <div className={`absolute ${desktopPositions.skills.left} ${desktopPositions.skills.right} ${desktopPositions.skills.top} ${desktopPositions.skills.bottom} ${desktopPositions.skills.transform} z-30 hidden md:block`}>
+        <div className={`absolute ${desktopPositions.skills.left} ${desktopPositions.skills.right} ${desktopPositions.skills.top} ${desktopPositions.skills.bottom} ${desktopPositions.skills.transform} z-20 hidden md:block`}>
           <div className="text-content-inverse text-left -ml-8">
             {/* Arrow Icon - Di atas text */}
             <div className="mb-2">
@@ -103,15 +115,19 @@ export const HeroSection = () => {
           </div>
         </div>
 
-        {/* Name - Full width, 1 baris */}
-        <div className={`absolute ${desktopPositions.name.left} ${desktopPositions.name.right} ${desktopPositions.name.top} ${desktopPositions.name.bottom} z-40 ${desktopPositions.name.padding}`}>
-          <h1 className="text-[10rem] md:text-[12rem] lg:text-[16rem] xl:text-[20rem] font-black text-content-inverse leading-none tracking-tight text-center">
-            Adhara Eka
+        {/* Name - Full width, 1 baris dengan scroll-responsive marquee */}
+        <div className={`absolute ${desktopPositions.name.left} ${desktopPositions.name.right} ${desktopPositions.name.top} ${desktopPositions.name.bottom} z-30 ${desktopPositions.name.padding}`}>
+          <h1 
+            ref={nameMarqueeRef}
+            className="text-[10rem] md:text-[12rem] lg:text-[16rem] xl:text-[20rem] font-semibold text-content-inverse leading-none tracking-tight text-center whitespace-nowrap overflow-visible"
+            style={{ willChange: 'transform' }}
+          >
+            Adhara Eka -
           </h1>
         </div>
 
         {/* Mobile Skills - TETAP PERTAHANKAN */}
-        <div className="md:hidden absolute bottom-8 left-1/2 transform -translate-x-1/2 z-30">
+        <div className="md:hidden absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20">
           <div className="flex flex-col items-center gap-4 text-content-inverse">
             <div className="bg-content-inverse rounded-full px-6 py-4 flex items-center gap-4 shadow-lg">
               <div className="text-right">
