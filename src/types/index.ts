@@ -1,17 +1,39 @@
-import { Database } from './supabase'
+// Portfolio types
+export interface Project {
+  id: string
+  title: string
+  description: string
+  image_url?: string
+  project_url?: string
+  github_url?: string
+  technologies: string[]
+  category: string
+  featured: boolean
+  created_at: string
+  updated_at: string
+}
 
-// Extract types from Supabase
-export type Project = Database['public']['Tables']['projects']['Row']
-export type ProjectInsert = Database['public']['Tables']['projects']['Insert']
-export type ProjectUpdate = Database['public']['Tables']['projects']['Update']
+export interface BlogPost {
+  id: string
+  title: string
+  content: string
+  excerpt: string
+  image_url?: string
+  author: string
+  published_at: string
+  created_at: string
+  updated_at: string
+}
 
-export type BlogPost = Database['public']['Tables']['blog_posts']['Row']
-export type BlogPostInsert = Database['public']['Tables']['blog_posts']['Insert']
-export type BlogPostUpdate = Database['public']['Tables']['blog_posts']['Update']
-
-export type Profile = Database['public']['Tables']['profiles']['Row']
-export type ProfileInsert = Database['public']['Tables']['profiles']['Insert']
-export type ProfileUpdate = Database['public']['Tables']['profiles']['Update']
+export interface Profile {
+  id: string
+  name: string
+  email: string
+  avatar_url?: string
+  bio?: string
+  created_at: string
+  updated_at: string
+}
 
 // Zoom Compensation types
 export interface ZoomCompensationOptions {
