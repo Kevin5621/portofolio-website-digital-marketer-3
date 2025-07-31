@@ -1,6 +1,6 @@
 'use client'
 
-import { LiquidButton } from '../ui/liquid-button'
+import { MaskButton } from '../ui/mask-button'
 
 export const SelectedWorks = () => {
   return (
@@ -28,8 +28,7 @@ export const SelectedWorks = () => {
           </div>
           
           <div className="pt-8">
-            <LiquidButton 
-              variant="primary"
+            <MaskButton 
               size="md"
               onClick={() => {
                 // Handle view all projects action
@@ -37,7 +36,7 @@ export const SelectedWorks = () => {
               }}
             >
               view all projects
-            </LiquidButton>
+            </MaskButton>
           </div>
         </div>
       </div>
