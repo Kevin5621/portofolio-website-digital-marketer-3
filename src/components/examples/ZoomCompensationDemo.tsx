@@ -40,28 +40,28 @@ export const ZoomCompensationDemo: React.FC = () => {
       <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-xl">
         <h2 className="text-2xl font-semibold mb-4">Status Zoom</h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <div className="text-center p-4 bg-white rounded-lg shadow-sm">
+          <div className="text-center p-4 bg-[#F2F1EF] rounded-lg shadow-sm">
             <div className="text-2xl font-bold text-blue-600">
               {zoomLevel.toFixed(2)}x
             </div>
             <div className="text-sm text-gray-500">Zoom Level</div>
           </div>
           
-          <div className="text-center p-4 bg-white rounded-lg shadow-sm">
+          <div className="text-center p-4 bg-[#F2F1EF] rounded-lg shadow-sm">
             <div className="text-2xl font-bold text-green-600">
               {compensationFactor.toFixed(2)}x
             </div>
             <div className="text-sm text-gray-500">Compensation</div>
           </div>
           
-          <div className="text-center p-4 bg-white rounded-lg shadow-sm">
+          <div className="text-center p-4 bg-[#F2F1EF] rounded-lg shadow-sm">
             <div className={`text-2xl font-bold ${isCompensating ? 'text-yellow-600' : 'text-green-600'}`}>
               {isCompensating ? 'Aktif' : 'Normal'}
             </div>
             <div className="text-sm text-gray-500">Status</div>
           </div>
           
-          <div className="text-center p-4 bg-white rounded-lg shadow-sm">
+          <div className="text-center p-4 bg-[#F2F1EF] rounded-lg shadow-sm">
             <div className="text-lg font-medium text-purple-600">
               {getZoomCategory(zoomLevel)}
             </div>
@@ -78,8 +78,8 @@ export const ZoomCompensationDemo: React.FC = () => {
             onClick={() => setEnabled(!isEnabled)}
             className={`px-6 py-3 rounded-lg font-medium transition-colors ${
               isEnabled 
-                ? 'bg-red-500 hover:bg-red-600 text-white' 
-                : 'bg-green-500 hover:bg-green-600 text-white'
+                ? 'bg-red-500 hover:bg-red-600 text-[#F2F1EF]' 
+                : 'bg-green-500 hover:bg-green-600 text-[#F2F1EF]'
             }`}
           >
             {isEnabled ? 'Disable' : 'Enable'} Kompensasi
@@ -87,7 +87,7 @@ export const ZoomCompensationDemo: React.FC = () => {
           
           <button
             onClick={resetCompensation}
-            className="px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-lg font-medium transition-colors"
+            className="px-6 py-3 bg-blue-500 hover:bg-blue-600 text-[#F2F1EF] rounded-lg font-medium transition-colors"
           >
             Reset Kompensasi
           </button>
@@ -96,8 +96,8 @@ export const ZoomCompensationDemo: React.FC = () => {
             onClick={() => setManualCompensation(!manualCompensation)}
             className={`px-6 py-3 rounded-lg font-medium transition-colors ${
               manualCompensation 
-                ? 'bg-purple-500 hover:bg-purple-600 text-white' 
-                : 'bg-gray-500 hover:bg-gray-600 text-white'
+                ? 'bg-purple-500 hover:bg-purple-600 text-[#F2F1EF]' 
+                : 'bg-gray-500 hover:bg-gray-600 text-[#F2F1EF]'
             }`}
           >
             {manualCompensation ? 'Disable' : 'Enable'} Manual Demo
@@ -113,7 +113,7 @@ export const ZoomCompensationDemo: React.FC = () => {
             Tanpa Kompensasi Zoom
           </h3>
           <div 
-            className="bg-white p-4 rounded-lg shadow-sm"
+            className="bg-[#F2F1EF] p-4 rounded-lg shadow-sm"
             style={{
               // Disable zoom compensation for this demo
               fontSize: '16px',
@@ -125,7 +125,7 @@ export const ZoomCompensationDemo: React.FC = () => {
               Teks ini akan berubah ukuran sesuai zoom browser. 
               Pada zoom tinggi akan terlihat sangat besar, pada zoom rendah akan kecil.
             </p>
-            <button className="px-4 py-2 bg-red-500 text-white rounded">
+            <button className="px-4 py-2 bg-red-500 text-[#F2F1EF] rounded">
               Button Tidak Stabil
             </button>
           </div>
@@ -137,7 +137,7 @@ export const ZoomCompensationDemo: React.FC = () => {
             Dengan Kompensasi Zoom
           </h3>
           <div 
-            className="bg-white p-4 rounded-lg shadow-sm zoom-compensated"
+            className="bg-[#F2F1EF] p-4 rounded-lg shadow-sm zoom-compensated"
             style={manualCompensation ? {
               fontSize: getZoomCompensatedFontSize(16, zoomLevel),
               padding: getZoomCompensatedRem(1, zoomLevel),
@@ -148,7 +148,7 @@ export const ZoomCompensationDemo: React.FC = () => {
               Teks ini akan tetap konsisten ukurannya meskipun user melakukan zoom. 
               Ukuran visual akan selalu sama terlepas dari zoom level browser.
             </p>
-            <button className="px-4 py-2 bg-green-500 text-white rounded">
+            <button className="px-4 py-2 bg-green-500 text-[#F2F1EF] rounded">
               Button Stabil
             </button>
           </div>
@@ -160,7 +160,7 @@ export const ZoomCompensationDemo: React.FC = () => {
         <h3 className="text-xl font-semibold mb-4 text-yellow-700">
           CSS Custom Properties
         </h3>
-        <div className="bg-white p-4 rounded-lg shadow-sm">
+        <div className="bg-[#F2F1EF] p-4 rounded-lg shadow-sm">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm font-mono">
             <div>
               <span className="text-gray-500">--zoom-level:</span>
@@ -186,7 +186,7 @@ export const ZoomCompensationDemo: React.FC = () => {
             <p>
               Element ini menggunakan CSS custom properties untuk kompensasi otomatis.
               <br />
-              <code className="text-sm bg-white px-2 py-1 rounded">
+              <code className="text-sm bg-[#F2F1EF] px-2 py-1 rounded">
                 font-size: calc(1rem * var(--zoom-compensation-factor))
               </code>
             </p>
@@ -199,7 +199,7 @@ export const ZoomCompensationDemo: React.FC = () => {
         <h3 className="text-xl font-semibold mb-4 text-purple-700">
           Performance & Browser Info
         </h3>
-        <div className="bg-white p-4 rounded-lg shadow-sm">
+        <div className="bg-[#F2F1EF] p-4 rounded-lg shadow-sm">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
             <div>
               <div className="text-gray-500">Device Pixel Ratio</div>

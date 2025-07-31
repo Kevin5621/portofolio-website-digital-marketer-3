@@ -5,25 +5,25 @@ Sistem warna semantic yang konsisten untuk seluruh aplikasi portfolio.
 ## 🎨 Color Variables
 
 ### Background Colors
-- `--color-background`: Light background (default: white)
+- `--color-background`: Light background (default: #F2F1EF)
 - `--color-background-dark`: Dark background (default: dark charcoal)
 - `--color-foreground`: Dark text (default: dark gray)
-- `--color-foreground-light`: Light text (default: white)
+- `--color-foreground-light`: Light text (default: #F2F1EF)
 
 ### Semantic Colors
 - `--color-primary`: Brand blue (224 60% 57%)
-- `--color-primary-foreground`: White text on primary
+- `--color-primary-foreground`: Light text on primary (#F2F1EF)
 - `--color-secondary`: Purple secondary (274 60% 57%)
-- `--color-secondary-foreground`: White text on secondary
-- `--color-accent`: White accent
+- `--color-secondary-foreground`: Light text on secondary (#F2F1EF)
+- `--color-accent`: Light accent (#F2F1EF)
 - `--color-accent-foreground`: Dark text on accent
 - `--color-destructive`: Red for errors (0 84% 60%)
-- `--color-destructive-foreground`: White text on destructive
+- `--color-destructive-foreground`: Light text on destructive (#F2F1EF)
 
 ### UI Colors
 - `--color-muted`: Muted gray (210 8% 64%)
 - `--color-muted-foreground`: Muted text (210 6% 46%)
-- `--color-card`: White card background
+- `--color-card`: Light card background (#F2F1EF)
 - `--color-card-foreground`: Dark text on cards
 - `--color-border`: Border color (210 12% 90%)
 - `--color-input`: Input background
@@ -39,10 +39,10 @@ Sistem warna semantic yang konsisten untuk seluruh aplikasi portfolio.
 .bg-foreground-light    /* Light background */
 .bg-primary            /* Brand blue */
 .bg-secondary          /* Purple */
-.bg-accent             /* White */
+.bg-accent             /* Light (#F2F1EF) */
 .bg-destructive        /* Red */
 .bg-muted              /* Gray */
-.bg-card               /* White card */
+.bg-card               /* Light card (#F2F1EF) */
 ```
 
 ### Text Classes
@@ -51,7 +51,7 @@ Sistem warna semantic yang konsisten untuk seluruh aplikasi portfolio.
 .text-foreground-light  /* Light text */
 .text-primary          /* Brand blue */
 .text-secondary        /* Purple */
-.text-accent           /* White */
+.text-accent           /* Light (#F2F1EF) */
 .text-destructive      /* Red */
 .text-muted            /* Gray */
 .text-muted-foreground /* Muted text */
@@ -62,10 +62,10 @@ Sistem warna semantic yang konsisten untuk seluruh aplikasi portfolio.
 ```css
 .border-primary        /* Brand blue */
 .border-secondary      /* Purple */
-.border-accent         /* White */
+.border-accent         /* Light (#F2F1EF) */
 .border-destructive    /* Red */
 .border-muted          /* Gray */
-.border-card           /* White */
+.border-card           /* Light (#F2F1EF) */
 .border-border         /* Default border */
 ```
 
@@ -110,7 +110,7 @@ Untuk menambah warna baru, tambahkan di `globals.css`:
 ```css
 :root {
   --color-custom: 200 50% 50%;
-  --color-custom-foreground: 0 0% 100%;
+  --color-custom-foreground: 40 5% 95%;
 }
 
 /* Utility classes */

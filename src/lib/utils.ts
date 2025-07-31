@@ -190,5 +190,5 @@ export function getContrastColor(hex: string): string {
   if (!rgb) return '#000000'
   
   const brightness = (rgb.r * 299 + rgb.g * 587 + rgb.b * 114) / 1000
-  return brightness > 128 ? '#000000' : '#ffffff'
+  return brightness > 128 ? '#000000' : '#F2F1EF'
 }

@@ -96,9 +96,9 @@
   --color-brand-secondary: 274 60% 57%;
 
   /* === SURFACE COLORS === */
-  --color-surface-default: 0 0% 100%;
-  --color-surface-background: 0 0% 100%;
-  --color-surface-card: 0 0% 100%;
+  --color-surface-default: 40 5% 95%;
+  --color-surface-background: 40 5% 95%;
+  --color-surface-card: 40 5% 95%;
   --color-surface-secondary: 210 20% 98%;
   --color-surface-tertiary: 210 15% 95%;
   --color-surface-inverse: 210 15% 10%;
@@ -111,7 +111,7 @@
   --color-accent: 40 5% 95%;                /* Light accent */
   --color-accent-foreground: 0 0% 15.7%;    /* Dark text on accent */
   --color-destructive: 0 84% 60%;           /* Red for errors */
-  --color-destructive-foreground: 0 0% 100%; /* White text on destructive */
+  --color-destructive-foreground: 40 5% 95%; /* Light text on destructive */
   --color-muted: 220 8% 46%;                /* Muted gray */
   --color-muted-foreground: 220 6% 36%;     /* Muted text */
   --color-card: 40 5% 95%;                  /* Light card background */
@@ -372,7 +372,7 @@ body {
   --color-content-primary: 40 5% 95%;
   --color-content-secondary: 220 8% 64%;
   --color-content-tertiary: 220 6% 46%;
-  --color-content-inverse: 0 0% 100%;
+  --color-content-inverse: 40 5% 95%;
   --color-content-disabled: 220 8% 46%;
   --color-content-link: 40 5% 95%;
 
@@ -391,14 +391,14 @@ body {
    HERO SECTION SPECIFIC STYLES
    ======================================= */
 
-/* Ensure white text in HeroSection */
+/* Ensure light text in HeroSection */
 section[data-theme="dark"] h1,
 section[data-theme="dark"] .text-content-inverse {
-  color: white !important;
+  color: rgb(242,241,239) !important;
 }
 
 section[data-theme="dark"] .text-white {
-  color: white !important;
+  color: rgb(242,241,239) !important;
 }
 
 /* =======================================
@@ -413,7 +413,7 @@ html.zoom-compensating::before {
   top: 0;
   right: 0;
   background: rgba(0, 0, 0, 0.8);
-  color: white;
+  color: rgb(242,241,239);
   padding: 4px 8px;
   font-size: 12px;
   font-family: monospace;

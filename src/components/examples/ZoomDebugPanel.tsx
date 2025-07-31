@@ -31,7 +31,7 @@ export const ZoomDebugPanel: React.FC<ZoomDebugPanelProps> = ({
 
   return (
     <div 
-      className={`fixed bottom-4 left-4 bg-gray-900 text-white p-4 rounded-lg shadow-lg font-mono text-sm max-w-xs z-50 ${className}`}
+      className={`fixed bottom-4 left-4 bg-gray-900 text-[#F2F1EF] p-4 rounded-lg shadow-lg font-mono text-sm max-w-xs z-50 ${className}`}
       style={{ fontSize: '12px' }}
     >
       <div className="mb-3">
