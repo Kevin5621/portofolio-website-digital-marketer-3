@@ -41,7 +41,7 @@ export const IntroSlideUp = ({ onComplete, duration = 1750 }: IntroSlideUpProps)
       setTimeout(() => {
         setIsVisible(false)
         onComplete?.()
-      }, 600) 
+      }, 2000) 
     }, duration)
 
     return () => {
@@ -57,8 +57,9 @@ export const IntroSlideUp = ({ onComplete, duration = 1750 }: IntroSlideUpProps)
       className={`
         fixed inset-0 z-[9999] bg-surface-background 
         flex items-center justify-center
-        transition-transform duration-350 ease-in-out
+        transition-all duration-1000 ease-out
         ${isSliding ? '-translate-y-full' : 'translate-y-0'}
+        ${isSliding ? 'rounded-b-[1500px]' : 'rounded-none'}
       `}
       data-theme="light"
     >

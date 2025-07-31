@@ -103,6 +103,7 @@ export default {
       "2xl": "var(--radius-2xl)",
       "3xl": "var(--radius-3xl)",
       full: "var(--radius-full)",
+      "t-50": "50% 50% 0 0",
     },
 
     /* === SHADOW SCALE === */
