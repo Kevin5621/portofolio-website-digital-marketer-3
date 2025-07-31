@@ -9,7 +9,8 @@ export const HeroSection = () => {
   // SCROLL-RESPONSIVE MARQUEE ANIMATION
   // =======================================
   const nameMarqueeRef = useHorizontalScrollMarquee<HTMLHeadingElement>({
-    ease: 'power1.out'
+    ease: 'power1.out',
+    defaultDirection: 'right' // Arah default dari kiri ke kanan
   })
 
   // =======================================

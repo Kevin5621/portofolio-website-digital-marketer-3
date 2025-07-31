@@ -7,6 +7,7 @@ interface ScrollMarqueeConfig {
   speed?: number
   ease?: string
   direction?: 'horizontal' | 'vertical'
+  defaultDirection?: 'left' | 'right' | 'up' | 'down'
 }
 
 /**
@@ -29,7 +30,8 @@ export const useScrollResponsiveMarquee = <T extends HTMLElement = HTMLElement>(
   const {
     speed = 1.0, // Increased default speed for better performance
     ease = 'none',
-    direction = 'horizontal'
+    direction = 'horizontal',
+    defaultDirection = 'left' // Default direction for idle animation
   } = config
 
   useEffect(() => {
@@ -255,9 +257,21 @@ export const useScrollResponsiveMarquee = <T extends HTMLElement = HTMLElement>(
           ? gsap.getProperty(element, 'x') as number
           : gsap.getProperty(element, 'y') as number
         
+        // Determine movement direction based on defaultDirection
+        let moveDirection = -1 // Default: left (negative)
+        if (isHorizontal) {
+          if (defaultDirection === 'right') {
+            moveDirection = 1
+          }
+        } else {
+          if (defaultDirection === 'down') {
+            moveDirection = 1
+          }
+        }
+        
         const targetPosition = isHorizontal 
-          ? { x: currentPos - singleTextDimension }
-          : { y: currentPos - singleTextDimension }
+          ? { x: currentPos + (singleTextDimension * moveDirection) }
+          : { y: currentPos + (singleTextDimension * moveDirection) }
         
         animationRef.current = gsap.timeline({ repeat: -1 })
           .to(element, {
@@ -273,13 +287,21 @@ export const useScrollResponsiveMarquee = <T extends HTMLElement = HTMLElement>(
               // Calculate position within clone range
               const totalRange = singleTextDimension * cloneCount
               const minPos = -totalRange + singleTextDimension
+              const maxPos = 0
               
-              if (newCurrentPos < minPos) {
-                const resetPos = isHorizontal 
-                  ? { x: newCurrentPos + singleTextDimension }
-                  : { y: newCurrentPos + singleTextDimension }
-                gsap.set(element, resetPos)
+              let newPos = newCurrentPos
+              if (moveDirection < 0 && newCurrentPos < minPos) {
+                // Reset to rightmost position when moving left
+                newPos = newCurrentPos + singleTextDimension
+              } else if (moveDirection > 0 && newCurrentPos > maxPos) {
+                // Reset to leftmost position when moving right
+                newPos = newCurrentPos - singleTextDimension
               }
+              
+              const resetPos = isHorizontal 
+                ? { x: newPos }
+                : { y: newPos }
+              gsap.set(element, resetPos)
             }
           })
       }
@@ -389,7 +411,7 @@ export const useScrollResponsiveMarquee = <T extends HTMLElement = HTMLElement>(
         console.error('Error during cleanup:', error)
       }
     }
-  }, [speed, ease, direction])
+  }, [speed, ease, direction, defaultDirection])
 
   return elementRef
 }
