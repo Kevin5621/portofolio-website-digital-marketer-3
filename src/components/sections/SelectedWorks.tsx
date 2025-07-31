@@ -3,19 +3,42 @@
 import Image from 'next/image'
 import { MaskButton } from '../ui/mask-button'
 
-const ProjectSection = ({ 
-  id, 
-  image, 
-  title, 
-  year, 
-  category 
-}: { 
+// Data projects yang bisa diambil dari API atau props
+const projects = [
+  {
+    id: 'project-1',
+    image: '/landing/1.png',
+    title: 'Rumah Bahasa Asing',
+    year: '2023 - 2024',
+    category: 'Social Media Marketing Manager'
+  },
+  {
+    id: 'project-2', 
+    image: '/landing/2.png',
+    title: 'Digital Campaign',
+    year: '2023 - 2024',
+    category: 'Digital Marketing'
+  },
+  {
+    id: 'project-3',
+    image: '/landing/3.png', 
+    title: 'Brand Strategy',
+    year: '2023 - 2024',
+    category: 'Brand Strategy'
+  }
+]
+
+interface Project {
   id: string
   image: string
   title: string
   year: string
-  category: string 
-}) => {
+  category: string
+}
+
+const ProjectSection = ({ project }: { project: Project }) => {
+  const { id, image, title, year, category } = project
+  
   return (
     <section 
       id={id}
@@ -38,7 +61,7 @@ const ProjectSection = ({
         
         {/* Year positioned at top left */}
         <div className="absolute top-8 left-8 z-10">
-          <p className="text-white text-lg font-normal">
+          <p className="text-content-inverse text-lg font-normal">
             {year}
           </p>
         </div>
@@ -46,13 +69,13 @@ const ProjectSection = ({
         {/* Main title positioned in center-left */}
         <div className="absolute inset-0 flex items-center z-10">
           <div className="ml-8 space-y-6">
-            <h1 className="text-white text-[3rem] md:text-[4rem] lg:text-[5rem] xl:text-[6rem] font-bold leading-none tracking-tight">
+            <h1 className="text-content-inverse text-[3rem] md:text-[4rem] lg:text-[5rem] xl:text-[6rem] font-bold leading-none tracking-tight">
               {title}
             </h1>
             
             {/* Category and button positioned below title */}
             <div className="space-y-4">
-              <p className="text-white text-xl font-normal">
+              <p className="text-content-inverse text-xl font-normal">
                 {category}
               </p>
               <MaskButton 
@@ -115,29 +138,9 @@ export const SelectedWorks = () => {
       </section>
 
       {/* Project Gallery Sections */}
-      <ProjectSection
-        id="project-1"
-        image="/landing/1.png"
-        title="Rumah Bahasa Asing"
-        year="2023 - 2024"
-        category="Social Media Marketing Manager"
-      />
-      
-      <ProjectSection
-        id="project-2"
-        image="/landing/2.png"
-        title="Digital Campaign"
-        year="2023 - 2024"
-        category="Digital Marketing"
-      />
-      
-      <ProjectSection
-        id="project-3"
-        image="/landing/3.png"
-        title="Brand Strategy"
-        year="2023 - 2024"
-        category="Brand Strategy"
-      />
+      {projects.map((project) => (
+        <ProjectSection key={project.id} project={project} />
+      ))}
     </>
   )
 } 
