@@ -889,6 +889,145 @@ body {
   }
 }
 
+/* CSS Mask Animation - MASK3 Effect */
+@keyframes maskReveal {
+  from {
+    -webkit-mask-position: 0 0;
+    mask-position: 0 0;
+  }
+  to {
+    -webkit-mask-position: 100% 0;
+    mask-position: 100% 0;
+  }
+}
+
+@keyframes maskHide {
+  from {
+    -webkit-mask-position: 100% 0;
+    mask-position: 100% 0;
+  }
+  to {
+    -webkit-mask-position: 0 0;
+    mask-position: 0 0;
+  }
+}
+
+/* Contact Button Mask Effect */
+.contact-button-mask {
+  position: relative;
+  overflow: hidden;
+  /* Start with dark background */
+  background-color: hsl(var(--color-content-primary));
+  color: hsl(var(--color-content-inverse));
+  transition: color 0.3s ease;
+}
+
+.contact-button-mask::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* Light background for mask reveal */
+  background: hsl(var(--color-surface-background));
+  -webkit-mask: url('https://raw.githubusercontent.com/pizza3/asset/master/natureSmaller.png');
+  mask: url('https://raw.githubusercontent.com/pizza3/asset/master/natureSmaller.png');
+  -webkit-mask-size: 7100% 100%;
+  mask-size: 7100% 100%;
+  /* Start with mask hidden (position at end) */
+  -webkit-mask-position: 100% 0;
+  mask-position: 100% 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 1;
+  transition: -webkit-mask-position 0.7s steps(70), mask-position 0.7s steps(70);
+}
+
+.contact-button-mask:hover::before {
+  /* Hover: reveal light background by moving mask to start */
+  -webkit-mask-position: 0 0;
+  mask-position: 0 0;
+}
+
+.contact-button-mask:hover {
+  /* Change text to dark when light background shows for proper contrast */
+  color: hsl(var(--color-content-primary));
+}
+
+.contact-button-mask:hover * {
+  /* Ensure all child elements also change to dark text */
+  color: hsl(var(--color-content-primary)) !important;
+}
+
+/* Enhanced contact button mask with better text visibility */
+.contact-button-mask-enhanced {
+  position: relative;
+  overflow: hidden;
+  background-color: hsl(var(--color-content-primary));
+  color: hsl(var(--color-content-inverse));
+  transition: all 0.3s ease;
+}
+
+.contact-button-mask-enhanced::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: hsl(var(--color-surface-background));
+  -webkit-mask: url('https://raw.githubusercontent.com/pizza3/asset/master/natureSmaller.png');
+  mask: url('https://raw.githubusercontent.com/pizza3/asset/master/natureSmaller.png');
+  -webkit-mask-size: 7100% 100%;
+  mask-size: 7100% 100%;
+  -webkit-mask-position: 100% 0;
+  mask-position: 100% 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 1;
+  transition: -webkit-mask-position 0.7s steps(70), mask-position 0.7s steps(70);
+}
+
+.contact-button-mask-enhanced:hover::before {
+  -webkit-mask-position: 0 0;
+  mask-position: 0 0;
+}
+
+.contact-button-mask-enhanced:hover {
+  color: hsl(var(--color-content-primary));
+}
+
+/* Simplified and more specific text color rules */
+.contact-button-mask-enhanced:hover h3,
+.contact-button-mask-enhanced:hover .magnetic-text,
+.contact-button-mask-enhanced:hover .text-white {
+  color: hsl(var(--color-content-primary)) !important;
+  transition: color 0.3s ease;
+}
+
+.contact-button-mask-enhanced .magnetic-text {
+  position: relative;
+  z-index: 10;
+  transition: color 0.3s ease;
+  font-weight: 500;
+}
+
+/* Specific contact text styling */
+.contact-text {
+  color: white;
+  transition: color 0.3s ease;
+}
+
+.contact-button-mask-enhanced:hover .contact-text {
+  color: hsl(var(--color-content-primary)) !important;
+}
+
+/* Debug styles untuk development - uncomment jika perlu debugging */
+/* .contact-button-mask-enhanced:hover {
+  outline: 2px solid rgba(0, 0, 0, 0.1);
+} */
+
 /* Utility classes untuk enhanced animations */
 .text-morph-to-burger {
   animation: textMorphToBurger 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
