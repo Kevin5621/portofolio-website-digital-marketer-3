@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { Menu, X } from 'lucide-react'
 import { scrollToElement } from '@/lib/animations/lenis'
 import { cn } from '@/lib/utils'
+import { Magnetic } from '@/components/ui/magnetic'
 
 const navigation = [
   { name: 'Home', href: '#home' },
@@ -101,10 +102,10 @@ export const Header = () => {
     setIsMenuEntering(true) // Mulai dengan animasi masuk
     setIsMenuSliding(false) // Reset sliding state
     
-    // Setelah sedikit delay, hilangkan state entering untuk animasi smooth
+    // Setelah animasi masuk selesai, hilangkan state entering
     setTimeout(() => {
       setIsMenuEntering(false)
-    }, 50) // 50ms delay agar animasi terdeteksi
+    }, 1000) // 1000ms sesuai durasi animasi
   }
 
   const handleCloseMenu = () => {
@@ -260,44 +261,58 @@ export const Header = () => {
             tabIndex={-1}
           />
           
-          {/* Close Button - Moved outside sidebar untuk memastikan bisa diklik */}
+          {/* Close Button dengan Magnetic Effect 2 Layer */}
           <div className={cn(
             "fixed top-6 right-6 z-[60] transition-all duration-700 ease-out",
             (isMenuEntering || isMenuSliding) ? "opacity-0 scale-0" : "opacity-100 scale-100"
           )}>
-            <button
-              onClick={handleCloseMenu}
-              className="w-16 h-16 rounded-full bg-foreground-light hover:bg-foreground-light/90 transition-colors duration-200 flex items-center justify-center cursor-pointer"
-              aria-label="Close menu"
-            >
-              <X className="h-8 w-8 text-background-dark" />
-            </button>
+            {/* Layer 1: Card Magnetic Effect (zona lebih besar) */}
+            <Magnetic strength={0.15} range={100} onlyOnHover={true}>
+              {/* Layer 2: Icon Magnetic Effect (lebih sensitif) */}
+              <Magnetic strength={0.4} range={60} onlyOnHover={true} textStrength={0.6}>
+                <button
+                  onClick={handleCloseMenu}
+                  className="w-16 h-16 rounded-full bg-foreground-light hover:bg-foreground-light/90 transition-colors duration-200 flex items-center justify-center cursor-pointer"
+                  aria-label="Close menu"
+                >
+                  <X className="h-8 w-8 text-background-dark magnetic-text" />
+                </button>
+              </Magnetic>
+            </Magnetic>
           </div>
           
-          {/* Sidebar - Smooth slide animation masuk dan keluar dengan gaya yang sama */}
+          {/* Sidebar - Smooth slide animation seperti IntroSlideUp */}
           <div 
             className={cn(
               "fixed top-0 right-0 h-full w-1/3 bg-background-dark z-50 shadow-2xl",
               "transition-all duration-1000 ease-out",
-              // Kondisi animasi: entering atau sliding = slide out, normal = slide in
-              (isMenuEntering || isMenuSliding) 
+              // Animasi slide seperti IntroSlideUp: 
+              // - Masuk: slide dari kanan ke kiri dengan rounded corner
+              // - Keluar: slide ke kanan dengan rounded corner yang membesar
+              isMenuEntering 
                 ? "translate-x-full rounded-l-[1500px]" 
+                : isMenuSliding
+                ? "translate-x-full rounded-l-[1500px]"
                 : "translate-x-0 rounded-none"
             )}
           >
 
-            {/* Navigation Content dengan staggered smooth animation */}
+            {/* Navigation Content dengan staggered smooth animation seperti IntroSlideUp */}
             <div className={cn(
-              "pt-20 px-8 pl-12 transition-all duration-800 ease-out",
-              (isMenuEntering || isMenuSliding) 
+              "pt-20 px-8 pl-12 transition-all duration-1000 ease-out",
+              isMenuEntering 
                 ? "opacity-0 translate-x-16" 
+                : isMenuSliding
+                ? "opacity-0 translate-x-16"
                 : "opacity-100 translate-x-0"
             )}>
               {/* Navigation Header */}
               <div className={cn(
-                "mb-8 transition-all duration-600 ease-out delay-100",
-                (isMenuEntering || isMenuSliding) 
+                "mb-8 transition-all duration-1000 ease-out delay-200",
+                isMenuEntering 
                   ? "opacity-0 translate-x-8" 
+                  : isMenuSliding
+                  ? "opacity-0 translate-x-8"
                   : "opacity-100 translate-x-0"
               )}>
                 <h2 className="text-sm font-medium text-foreground-light mb-2">Navigation</h2>
@@ -315,15 +330,19 @@ export const Header = () => {
                       handleSmoothScroll(item.href)
                     }}
                     className={cn(
-                      "block text-6xl font-bold text-foreground-light hover:text-foreground-light/80 transition-all duration-700 ease-out leading-tight",
-                      (isMenuEntering || isMenuSliding) 
+                      "block text-6xl font-bold text-foreground-light hover:text-foreground-light/80 transition-all duration-1000 ease-out leading-tight",
+                      isMenuEntering 
                         ? "opacity-0 translate-x-12" 
+                        : isMenuSliding
+                        ? "opacity-0 translate-x-12"
                         : "opacity-100 translate-x-0"
                     )}
                     style={{
-                      transitionDelay: (isMenuEntering || isMenuSliding) 
-                        ? `${index * 50}ms` 
-                        : `${200 + index * 100}ms`
+                      transitionDelay: isMenuEntering 
+                        ? `${index * 100}ms` 
+                        : isMenuSliding
+                        ? `${index * 50}ms`
+                        : `${300 + index * 150}ms`
                     }}
                   >
                     {item.name}
@@ -331,11 +350,13 @@ export const Header = () => {
                 ))}
               </nav>
 
-              {/* Social Links dengan smooth animation */}
+              {/* Social Links dengan smooth animation seperti IntroSlideUp */}
               <div className={cn(
-                "pt-8 border-t border-foreground-light/30 transition-all duration-600 ease-out delay-500",
-                (isMenuEntering || isMenuSliding) 
+                "pt-8 border-t border-foreground-light/30 transition-all duration-1000 ease-out delay-600",
+                isMenuEntering 
                   ? "opacity-0 translate-x-8" 
+                  : isMenuSliding
+                  ? "opacity-0 translate-x-8"
                   : "opacity-100 translate-x-0"
               )}>
                 <h3 className="text-sm font-medium text-foreground-light mb-4">Socials</h3>
@@ -346,15 +367,19 @@ export const Header = () => {
                       key={social.name}
                       onClick={() => handleSocialClick(social.href)}
                       className={cn(
-                        "text-2xl text-foreground-light hover:text-foreground-light/80 transition-all duration-500 ease-out",
-                        (isMenuEntering || isMenuSliding) 
+                        "text-2xl text-foreground-light hover:text-foreground-light/80 transition-all duration-1000 ease-out",
+                        isMenuEntering 
                           ? "opacity-0 translate-y-4" 
+                          : isMenuSliding
+                          ? "opacity-0 translate-y-4"
                           : "opacity-100 translate-y-0"
                       )}
                       style={{
-                        transitionDelay: (isMenuEntering || isMenuSliding) 
-                          ? `${index * 50}ms` 
-                          : `${600 + index * 100}ms`
+                        transitionDelay: isMenuEntering 
+                          ? `${index * 100}ms` 
+                          : isMenuSliding
+                          ? `${index * 50}ms`
+                          : `${700 + index * 150}ms`
                       }}
                     >
                       {social.name}
@@ -363,11 +388,13 @@ export const Header = () => {
                 </div>
               </div>
 
-              {/* Logo/Brand dengan smooth animation */}
+              {/* Logo/Brand dengan smooth animation seperti IntroSlideUp */}
               <div className={cn(
-                "absolute bottom-8 left-8 transition-all duration-500 ease-out delay-700",
-                (isMenuEntering || isMenuSliding) 
+                "absolute bottom-8 left-8 transition-all duration-1000 ease-out delay-800",
+                isMenuEntering 
                   ? "opacity-0 translate-y-4" 
+                  : isMenuSliding
+                  ? "opacity-0 translate-y-4"
                   : "opacity-100 translate-y-0"
               )}>
                 <div className="text-xs text-foreground-light">
