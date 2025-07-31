@@ -45,24 +45,25 @@
 }
 
 /* Light Version (Reversed) - Background hitam, text hitam → Background putih pada hover, text putih */
-.mask-button-light {
+button.mask-button-light {
   position: relative;
   overflow: hidden;
-  background-color: hsl(var(--color-content-primary));
-  color: hsl(var(--color-content-primary));
+  background-color: #000000 !important;
+  color: #000000 !important;
   will-change: transform, color;
   transition: color 0.3s ease, transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   transform-origin: center center;
+  border: 2px solid #000000 !important;
 }
 
-.mask-button-light::before {
+button.mask-button-light::before {
   content: '';
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: hsl(var(--color-surface-background));
+  background: #ffffff;
   -webkit-mask: url('https://raw.githubusercontent.com/pizza3/asset/master/natureSmaller.png');
   mask: url('https://raw.githubusercontent.com/pizza3/asset/master/natureSmaller.png');
   -webkit-mask-size: 7100% 100%;
@@ -77,13 +78,13 @@
   will-change: -webkit-mask-position, mask-position;
 }
 
-.mask-button-light:hover::before {
+button.mask-button-light:hover::before {
   -webkit-animation: maskRevealAnimation 0.7s steps(70) forwards;
   animation: maskRevealAnimation 0.7s steps(70) forwards;
 }
 
-.mask-button-light:hover {
-  color: hsl(var(--color-content-inverse));
+button.mask-button-light:hover {
+  color: #ffffff !important;
 }
 
 /* Text styling */

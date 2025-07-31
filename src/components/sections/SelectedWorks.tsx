@@ -55,9 +55,17 @@ const ProjectSection = ({
               <p className="text-white text-xl font-normal">
                 {category}
               </p>
-              <button className="bg-white text-black px-8 py-4 rounded-full text-lg font-medium hover:bg-gray-100 transition-colors">
+              <MaskButton 
+                variant="light"
+                size="custom"
+                customSize="px-8 py-4 text-lg"
+                onClick={() => {
+                  // Navigate to specific project
+                  console.log(`Viewing project: ${title}`)
+                }}
+              >
                 View project
-              </button>
+              </MaskButton>
             </div>
           </div>
         </div>
