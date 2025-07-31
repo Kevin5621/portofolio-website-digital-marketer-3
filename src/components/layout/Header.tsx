@@ -292,7 +292,7 @@ export const Header = () => {
             </Magnetic>
           </div>
           
-          {/* Sidebar - Smooth slide animation yang lebih responsif */}
+          {/* Sidebar - Layout persis dengan gambar */}
           <div 
             className={cn(
               "fixed top-0 right-0 h-full w-1/3 bg-background-dark z-50 shadow-2xl",
@@ -308,7 +308,7 @@ export const Header = () => {
             )}
           >
 
-            {/* Navigation Content dengan staggered animation yang lebih responsif */}
+            {/* Navigation Content dengan layout persis gambar */}
             <div className={cn(
               "pt-24 px-8 pl-12 transition-all duration-800 ease-out",
               isMenuEntering 
@@ -325,13 +325,13 @@ export const Header = () => {
                   : "opacity-100 translate-x-0"
               )}>
                 <h2 className="text-sm font-medium text-gray-400 mb-2">Navigation</h2>
-                <div className="w-8 h-px bg-gray-400"></div>
+                <div className="w-full h-px bg-gray-400"></div>
               </div>
 
               {/* Navigation Links dengan staggered animation dan magnetic effect */}
-              <nav className="mb-16">
+              <nav className="mb-20">
                 {navigation.map((item, index) => (
-                  <div key={item.name} className="mb-12">
+                  <div key={item.name} className="mb-16">
                     <Magnetic 
                       strength={0.4} 
                       range={150} 
@@ -345,12 +345,12 @@ export const Header = () => {
                           e.preventDefault()
                           handleSmoothScroll(item.href)
                         }}
-                        className={cn(
-                          "block text-6xl font-bold text-foreground-light hover:text-foreground-light/80 transition-all duration-300 ease-out leading-tight",
-                          isMenuSliding
-                            ? "opacity-0 translate-x-12"
-                            : "opacity-100 translate-x-0"
-                        )}
+                                              className={cn(
+                        "block text-5xl font-bold text-foreground-light hover:text-foreground-light/80 transition-all duration-300 ease-out leading-tight",
+                        isMenuSliding
+                          ? "opacity-0 translate-x-12"
+                          : "opacity-100 translate-x-0"
+                      )}
                         style={{
                           transitionDelay: isMenuSliding
                             ? `${index * 25}ms`
@@ -364,15 +364,15 @@ export const Header = () => {
                 ))}
               </nav>
 
-              {/* Social Links dengan animation yang lebih responsif */}
+              {/* Social Links dengan layout persis gambar */}
               <div className={cn(
-                "pt-8 border-t border-gray-400 transition-all duration-800 ease-out delay-300",
+                "pt-12 transition-all duration-800 ease-out delay-300",
                 isMenuSliding
                   ? "opacity-0 translate-x-8"
                   : "opacity-100 translate-x-0"
               )}>
                 <h3 className="text-sm font-medium text-gray-400 mb-4">Socials</h3>
-                <div className="w-8 h-px bg-gray-400 mb-4"></div>
+                <div className="w-full h-px bg-gray-400 mb-4"></div>
                 <div className="flex space-x-8">
                   {socials.map((social, index) => (
                     <Magnetic 
@@ -386,7 +386,7 @@ export const Header = () => {
                       <button
                         onClick={() => handleSocialClick(social.href)}
                         className={cn(
-                          "text-2xl text-foreground-light hover:text-foreground-light/80 transition-all duration-800 ease-out",
+                          "text-lg text-foreground-light hover:text-foreground-light/80 transition-all duration-800 ease-out",
                           isMenuSliding
                             ? "opacity-0 translate-y-4"
                             : "opacity-100 translate-y-0"
