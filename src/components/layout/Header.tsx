@@ -81,13 +81,19 @@ export const Header = () => {
   const handleSmoothScroll = (href: string) => {
     if (href.startsWith('#')) {
       scrollToElement(href, { offset: -100 })
-      setIsMobileMenuOpen(false)
+      // Tutup menu dengan animasi yang sama seperti handleCloseMenu
+      if (isMobileMenuOpen) {
+        handleCloseMenu()
+      }
     }
   }
 
   const handleSocialClick = (href: string) => {
     window.open(href, '_blank')
-    setIsMobileMenuOpen(false)
+    // Tutup menu dengan animasi yang sama seperti handleCloseMenu
+    if (isMobileMenuOpen) {
+      handleCloseMenu()
+    }
   }
 
   const handleOpenMenu = () => {
@@ -254,6 +260,20 @@ export const Header = () => {
             tabIndex={-1}
           />
           
+          {/* Close Button - Moved outside sidebar untuk memastikan bisa diklik */}
+          <div className={cn(
+            "fixed top-6 right-6 z-[60] transition-all duration-700 ease-out",
+            (isMenuEntering || isMenuSliding) ? "opacity-0 scale-0" : "opacity-100 scale-100"
+          )}>
+            <button
+              onClick={handleCloseMenu}
+              className="w-16 h-16 rounded-full bg-foreground-light hover:bg-foreground-light/90 transition-colors duration-200 flex items-center justify-center cursor-pointer"
+              aria-label="Close menu"
+            >
+              <X className="h-8 w-8 text-background-dark" />
+            </button>
+          </div>
+          
           {/* Sidebar - Smooth slide animation masuk dan keluar dengan gaya yang sama */}
           <div 
             className={cn(
@@ -265,19 +285,6 @@ export const Header = () => {
                 : "translate-x-0 rounded-none"
             )}
           >
-            {/* Close Button dengan smooth animation */}
-            <div className={cn(
-              "absolute top-6 right-6 transition-all duration-700 ease-out",
-              (isMenuEntering || isMenuSliding) ? "opacity-0 scale-0" : "opacity-100 scale-100"
-            )}>
-              <button
-                onClick={handleCloseMenu}
-                className="w-16 h-16 bg-foreground-light rounded-full flex items-center justify-center hover:bg-foreground-light/90 transition-colors duration-200"
-                aria-label="Close menu"
-              >
-                <X className="h-8 w-8 text-background-dark" />
-              </button>
-            </div>
 
             {/* Navigation Content dengan staggered smooth animation */}
             <div className={cn(
