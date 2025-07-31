@@ -23,26 +23,38 @@ export const LiquidButton = ({
 }: LiquidButtonProps) => {
   const [isHovered, setIsHovered] = useState(false)
 
-  // Variant-based color configurations using semantic colors
+  const handleMouseEnter = () => {
+    if (!disabled) {
+      setIsHovered(true)
+    }
+  }
+
+  const handleMouseLeave = () => {
+    if (!disabled) {
+      setIsHovered(false)
+    }
+  }
+
+  // Hanya 2 warna: hitam dan putih
   const variants = {
     primary: {
-      base: 'bg-content-primary text-content-inverse',
-      liquid: 'bg-content-inverse', // White liquid from semantic colors
+      base: 'bg-content-primary text-content-inverse', // Hitam background, putih text
+      liquid: 'bg-content-inverse', // Putih liquid
       text: {
-        initial: 'text-content-inverse', // White text initially 
-        hover: 'text-content-primary'   // Dark text when liquid fills
+        initial: 'text-content-inverse', // Putih text awal
+        hover: 'text-content-primary'   // Hitam text saat hover
       }
     },
     secondary: {
-      base: 'bg-surface-secondary text-content-primary border border-border-primary',
-      liquid: 'bg-content-primary',
+      base: 'bg-content-primary text-content-inverse',
+      liquid: 'bg-content-inverse',
       text: {
-        initial: 'text-content-primary',
-        hover: 'text-content-inverse'
+        initial: 'text-content-inverse',
+        hover: 'text-content-primary'
       }
     },
     accent: {
-      base: 'bg-accent-500 text-content-inverse',
+      base: 'bg-content-primary text-content-inverse',
       liquid: 'bg-content-inverse',
       text: {
         initial: 'text-content-inverse',
@@ -51,7 +63,6 @@ export const LiquidButton = ({
     }
   }
 
-  // Size configurations
   const sizes = {
     sm: 'px-6 py-2 text-sm',
     md: 'px-12 py-4 text-lg md:text-xl',
@@ -62,155 +73,68 @@ export const LiquidButton = ({
   const currentSize = sizes[size]
 
   return (
-    <button
-      className={cn(
-        'relative overflow-hidden font-medium rounded-full transition-all duration-300 ease-out',
-        'focus:outline-none focus:ring-2 focus:ring-content-primary focus:ring-offset-2',
-        'disabled:opacity-50 disabled:cursor-not-allowed',
-        currentVariant.base,
-        currentSize,
-        className
-      )}
-      onMouseEnter={() => !disabled && setIsHovered(true)}
-      onMouseLeave={() => !disabled && setIsHovered(false)}
-      onClick={onClick}
-      disabled={disabled}
-      {...props}
-    >
-      {/* Single liquid wave that fills the button */}
+    <div className="relative inline-block">
+      {/* Liquid wave dengan pattern wave SVG - sekarang di atas button */}
       <div
         className={cn(
-          'absolute inset-0 transition-all duration-700 ease-out',
-          currentVariant.liquid,
-          isHovered ? 'translate-y-0' : 'translate-y-full'
+          'absolute left-0 right-0 z-30 h-6 transition-all duration-700 ease-out pointer-events-none',
+          isHovered ? 'bottom-full' : 'bottom-[-1.5rem]'
         )}
         style={{
-          clipPath: isHovered 
-            ? 'polygon(0 0, 100% 0, 100% 100%, 0 100%)' // Completely fills button when hovered
-            : 'polygon(0 80%, 10% 85%, 20% 80%, 30% 85%, 40% 80%, 50% 85%, 60% 80%, 70% 85%, 80% 80%, 90% 85%, 100% 80%, 100% 100%, 0 100%)' // Wave pattern at bottom when not hovered
+          background: `url("data:image/svg+xml,%3Csvg width='100' height='24' viewBox='0 0 100 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 12 Q25 0 50 12 T100 12 V24 H0 Z' fill='%23F2F1EF'/%3E%3C/svg%3E") repeat-x`,
+          backgroundSize: '100px 24px',
+          backgroundPosition: 'bottom',
+          animation: isHovered ? 'waveMove 2s linear infinite' : 'none'
         }}
       />
 
-      {/* Animated wave layer for liquid surface effect */}
-      <div
-        className={cn(
-          'absolute inset-0 transition-all duration-700 ease-out delay-100',
-          currentVariant.liquid,
-          'opacity-60 liquid-wave',
-          isHovered ? 'translate-y-0' : 'translate-y-full'
-        )}
-        style={{
-          clipPath: isHovered 
-            ? 'polygon(0 5%, 15% 0%, 30% 5%, 45% 0%, 60% 5%, 75% 0%, 90% 5%, 100% 0%, 100% 100%, 0 100%)' // Top wave when filled
-            : 'polygon(0 85%, 15% 80%, 30% 85%, 45% 80%, 60% 85%, 75% 80%, 90% 85%, 100% 80%, 100% 100%, 0 100%)' // Wave pattern when not hovered
-        }}
-      />
-
-      {/* Additional wave layer for more depth */}
-      <div
-        className={cn(
-          'absolute inset-0 transition-all duration-800 ease-out delay-200',
-          currentVariant.liquid,
-          'opacity-40 liquid-wave-secondary',
-          isHovered ? 'translate-y-0' : 'translate-y-full'
-        )}
-        style={{
-          clipPath: isHovered 
-            ? 'polygon(0 8%, 20% 3%, 40% 8%, 60% 3%, 80% 8%, 100% 3%, 100% 100%, 0 100%)' // Secondary wave when filled
-            : 'polygon(0 88%, 20% 83%, 40% 88%, 60% 83%, 80% 88%, 100% 83%, 100% 100%, 0 100%)' // Secondary wave pattern when not hovered
-        }}
-      />
-
-      {/* Button content with dynamic text color */}
-      <span 
-        className={cn(
-          'relative z-10 transition-colors duration-300',
-          isHovered ? currentVariant.text.hover : currentVariant.text.initial
-        )}
-      >
-        {children}
-      </span>
-
-      {/* Liquid wave CSS animations */}
-      <style jsx>{`
-        /* Primary wave animation for liquid effect */
-        .liquid-wave {
-          animation: liquidWave 3s ease-in-out infinite;
-        }
-
-        /* Secondary wave animation with offset timing */
-        .liquid-wave-secondary {
-          animation: liquidWaveSecondary 2.5s ease-in-out infinite reverse;
-        }
-
-        @keyframes liquidWave {
-          0%, 100% {
-            clip-path: polygon(
-              0 5%, 15% 0%, 30% 5%, 45% 0%, 60% 5%, 75% 0%, 90% 5%, 100% 0%, 
-              100% 100%, 0 100%
-            );
+      {/* CSS untuk animasi wave movement */}
+      <style>{`
+        @keyframes waveMove {
+          0% {
+            background-position-x: 0;
           }
-          25% {
-            clip-path: polygon(
-              0 0%, 15% 5%, 30% 0%, 45% 5%, 60% 0%, 75% 5%, 90% 0%, 100% 5%, 
-              100% 100%, 0 100%
-            );
-          }
-          50% {
-            clip-path: polygon(
-              0 3%, 15% 8%, 30% 3%, 45% 8%, 60% 3%, 75% 8%, 90% 3%, 100% 8%, 
-              100% 100%, 0 100%
-            );
-          }
-          75% {
-            clip-path: polygon(
-              0 8%, 15% 3%, 30% 8%, 45% 3%, 60% 8%, 75% 3%, 90% 8%, 100% 3%, 
-              100% 100%, 0 100%
-            );
-          }
-        }
-
-        @keyframes liquidWaveSecondary {
-          0%, 100% {
-            clip-path: polygon(
-              0 8%, 20% 3%, 40% 8%, 60% 3%, 80% 8%, 100% 3%, 
-              100% 100%, 0 100%
-            );
-          }
-          33% {
-            clip-path: polygon(
-              0 3%, 20% 8%, 40% 3%, 60% 8%, 80% 3%, 100% 8%, 
-              100% 100%, 0 100%
-            );
-          }
-          66% {
-            clip-path: polygon(
-              0 6%, 20% 1%, 40% 6%, 60% 1%, 80% 6%, 100% 1%, 
-              100% 100%, 0 100%
-            );
-          }
-        }
-
-        /* Wave surface shimmer effect */
-        .liquid-surface {
-          background: linear-gradient(
-            90deg,
-            transparent 0%,
-            rgba(255, 255, 255, 0.1) 50%,
-            transparent 100%
-          );
-          animation: liquidShimmer 2s ease-in-out infinite;
-        }
-
-        @keyframes liquidShimmer {
-          0%, 100% {
-            transform: translateX(-100%);
-          }
-          50% {
-            transform: translateX(100%);
+          100% {
+            background-position-x: 100px;
           }
         }
       `}</style>
-    </button>
+
+      <button
+        className={cn(
+          'relative overflow-hidden font-medium rounded-full',
+          'focus:outline-none focus:ring-2 focus:ring-content-primary focus:ring-offset-2 focus:ring-offset-surface-background',
+          'disabled:opacity-50 disabled:cursor-not-allowed',
+          'border-0',
+          currentVariant.base,
+          currentSize,
+          className
+        )}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        onClick={onClick}
+        disabled={disabled}
+        {...props}
+      >
+        {/* Background solid - tidak rounded untuk efek liquid realistis */}
+        <div
+          className={cn(
+            'absolute inset-0 transition-transform duration-700 ease-out',
+            currentVariant.liquid,
+            isHovered ? 'translate-y-0' : 'translate-y-full'
+          )}
+        />
+
+        {/* Button content */}
+        <span 
+          className={cn(
+            'relative z-10 transition-colors duration-300',
+            isHovered ? currentVariant.text.hover : currentVariant.text.initial
+          )}
+        >
+          {children}
+        </span>
+      </button>
+    </div>
   )
-}
+} 
