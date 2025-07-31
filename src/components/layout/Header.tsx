@@ -37,14 +37,15 @@ export const Header = () => {
     if (typeof window !== 'undefined') {
       const options = {
         root: null,
-        rootMargin: '-20% 0px -20% 0px',
-        threshold: 0.5,
+        rootMargin: '-10% 0px -10% 0px', // Reduced margin untuk deteksi lebih sensitif
+        threshold: 0.3, // Reduced threshold untuk deteksi lebih awal
       }
 
       const observerCallback = (entries: IntersectionObserverEntry[]) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             const sectionId = entry.target.id
+            console.log('Section detected:', sectionId) // Debug log
             setActiveSection(sectionId)
           }
         })
@@ -52,9 +53,36 @@ export const Header = () => {
 
       const observer = new IntersectionObserver(observerCallback, options)
 
+      // Scroll-based fallback untuk deteksi section
+      const handleScroll = () => {
+        const scrollY = window.scrollY
+        const sections = document.querySelectorAll('section[id]')
+        
+        sections.forEach(section => {
+          const rect = section.getBoundingClientRect()
+          const sectionTop = scrollY + rect.top
+          const sectionHeight = rect.height
+          const windowHeight = window.innerHeight
+          
+          // Check if we're in the section (dengan margin untuk transisi smooth)
+          if (scrollY >= sectionTop - windowHeight * 0.3 && 
+              scrollY < sectionTop + sectionHeight - windowHeight * 0.3) {
+            const sectionId = section.id
+            if (sectionId !== activeSection) {
+              console.log('Scroll detected section:', sectionId)
+              setActiveSection(sectionId)
+            }
+          }
+        })
+      }
+
       // Observe semua section
       const sections = document.querySelectorAll('section[id]')
+      console.log('Found sections:', Array.from(sections).map(s => s.id)) // Debug log
       sections.forEach(section => observer.observe(section))
+
+      // Add scroll listener sebagai backup
+      window.addEventListener('scroll', handleScroll, { passive: true })
 
       // Fallback: Pastikan section pertama terdeteksi di awal
       setTimeout(() => {
@@ -66,6 +94,7 @@ export const Header = () => {
 
       return () => {
         sections.forEach(section => observer.unobserve(section))
+        window.removeEventListener('scroll', handleScroll)
       }
     }
   }, [activeSection])
@@ -150,23 +179,54 @@ export const Header = () => {
   const { isDark } = getSectionTheme(activeSection)
 
   // Logika untuk menampilkan menu berdasarkan section aktif
-  // Menu text hanya muncul di section pertama dari setiap halaman, di section lain transform menjadi burger
-  const isFirstSection = activeSection === 'home' || activeSection === 'hello' || activeSection === ''
+  // Menu text hanya muncul di home section, di section lain transform menjadi burger
+  const isHomeSection = activeSection === 'home' || activeSection === 'hello' || activeSection === ''
   const isProjectSection = activeSection === 'project-1' || activeSection === 'project-2' || activeSection === 'project-3'
-  const showTextMenu = isFirstSection && !isMobileMenuOpen && !isWorkPage && !isProjectSection && isClient
-  const showBurgerMenu = (!isFirstSection) || isMobileMenuOpen || isWorkPage || isProjectSection
+  const isAboutSection = activeSection === 'about' || activeSection === 'about-section'
+  const showTextMenu = isHomeSection && !isMobileMenuOpen && !isWorkPage && !isProjectSection && !isAboutSection && isClient
+  const showBurgerMenu = (!isHomeSection) || isMobileMenuOpen || isWorkPage || isProjectSection || isAboutSection
+
+  // Debug logs
+  useEffect(() => {
+    console.log('Active section:', activeSection)
+    console.log('isHomeSection:', isHomeSection)
+    console.log('isAboutSection:', isAboutSection)
+    console.log('showTextMenu:', showTextMenu)
+    console.log('showBurgerMenu:', showBurgerMenu)
+  }, [activeSection, isHomeSection, isAboutSection, showTextMenu, showBurgerMenu])
 
   // Helper functions untuk styling berdasarkan section
+  const getCopyrightTextClass = () => {
+    if (isProjectSection) return "text-white"
+    if (isAboutSection) return "text-foreground"
+    if (isDark) return "text-foreground-light"
+    return "text-foreground"
+  }
+
   const getBurgerBgClass = () => {
     if (isProjectSection) return "bg-white hover:bg-gray-100"
+    if (isAboutSection) return "bg-foreground hover:bg-foreground/90" // About section menggunakan light background
     if (isDark) return "bg-foreground-light hover:bg-foreground-light/90"
     return "bg-foreground hover:bg-foreground/90"
   }
 
   const getBurgerTextClass = () => {
     if (isProjectSection) return "text-black"
+    if (isAboutSection) return "text-background" // About section menggunakan dark text
     if (isDark) return "text-background-dark"
     return "text-background"
+  }
+
+  const getSidebarTransformClass = () => {
+    if (isMenuEntering) return "translate-x-full rounded-l-[1500px]"
+    if (isMenuSliding) return "translate-x-full rounded-l-[1500px]"
+    return "translate-x-0 rounded-none"
+  }
+
+  const getContentTransformClass = () => {
+    if (isMenuEntering) return "opacity-0 translate-x-16"
+    if (isMenuSliding) return "opacity-0 translate-x-16"
+    return "opacity-100 translate-x-0"
   }
 
   // Jika belum di client, render dengan default state
@@ -210,7 +270,7 @@ export const Header = () => {
             {/* Copyright - Adaptif berdasarkan section aktif */}
             <div className={cn(
               "text-2xl transition-colors duration-300",
-              isProjectSection ? "text-white" : isDark ? "text-foreground-light" : "text-foreground"
+              getCopyrightTextClass()
             )}>
               © Adhara Eka Sakti
             </div>
@@ -365,21 +425,13 @@ export const Header = () => {
             className={cn(
               "fixed top-0 right-0 h-full w-1/3 bg-background-dark z-50 shadow-2xl",
               "transition-all duration-800 ease-out",
-              isMenuEntering 
-                ? "translate-x-full rounded-l-[1500px]" 
-                : isMenuSliding
-                ? "translate-x-full rounded-l-[1500px]"
-                : "translate-x-0 rounded-none"
+              getSidebarTransformClass()
             )}
           >
             {/* Navigation Content */}
             <div className={cn(
               "pt-24 px-8 pl-12 transition-all duration-800 ease-out",
-              isMenuEntering 
-                ? "opacity-0 translate-x-16" 
-                : isMenuSliding
-                ? "opacity-0 translate-x-16"
-                : "opacity-100 translate-x-0"
+              getContentTransformClass()
             )}>
               {/* Navigation Header */}
               <div className={cn(
