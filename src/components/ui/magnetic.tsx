@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useRef, useEffect, ReactNode, useState } from 'react'
+import React, { useRef, useEffect, ReactNode } from 'react'
 import { cn } from '@/lib/utils'
 
 interface MagneticProps {
@@ -29,7 +29,6 @@ export const Magnetic = ({
   textStrength
 }: MagneticProps) => {
   const magneticRef = useRef<HTMLDivElement>(null)
-  const [isHovered, setIsHovered] = useState(false)
   const currentTransform = useRef({ x: 0, y: 0 })
   const targetTransform = useRef({ x: 0, y: 0 })
   const animationId = useRef<number | undefined>(undefined)
@@ -79,11 +78,15 @@ export const Magnetic = ({
       )
 
       element.style.transform = `translate(${currentTransform.current.x}px, ${currentTransform.current.y}px)`
+      element.style.transition = 'none' // Disable CSS transition during animation
       
       // Lanjutkan animasi jika masih ada pergerakan
       if (Math.abs(currentTransform.current.x - targetTransform.current.x) > 0.01 || 
           Math.abs(currentTransform.current.y - targetTransform.current.y) > 0.01) {
         animationId.current = requestAnimationFrame(updateTransform)
+      } else {
+        // Re-enable CSS transition when animation is complete
+        element.style.transition = 'transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)'
       }
     }
 
@@ -124,19 +127,29 @@ export const Magnetic = ({
     }
 
     const handleMouseEnter = () => {
-      setIsHovered(true)
+      // Reset any existing animation
+      if (animationId.current) {
+        cancelAnimationFrame(animationId.current)
+        animationId.current = undefined
+      }
+      // Clear any existing transform
+      element.style.transform = 'translate(0px, 0px)'
+      element.style.transition = 'none'
     }
 
     const handleMouseLeave = () => {
-      setIsHovered(false)
-      
       // Reset to original position smoothly
       targetTransform.current.x = 0
       targetTransform.current.y = 0
       resetTextMagnetic()
       
-      if (!animationId.current) {
-        animationId.current = requestAnimationFrame(updateTransform)
+      // Force reset transform immediately
+      element.style.transform = 'translate(0px, 0px)'
+      element.style.transition = 'transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+      
+      if (animationId.current) {
+        cancelAnimationFrame(animationId.current)
+        animationId.current = undefined
       }
     }
 
@@ -168,7 +181,6 @@ export const Magnetic = ({
       ref={magneticRef}
       className={cn(
         "transform-gpu will-change-transform inline-block",
-        !isHovered && "transition-transform duration-500 ease-out",
         className
       )}
       style={{
