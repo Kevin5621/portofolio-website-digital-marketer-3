@@ -1,11 +1,8 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { MaskButton } from "@/components/ui/mask-button";
 import { ContactSection } from "@/components/sections/ContactSection";
 
-interface WorkItem {
+interface ArchiveItem {
   id: string;
   client: string;
   location: string;
@@ -14,107 +11,62 @@ interface WorkItem {
   category: string;
 }
 
-const workData: WorkItem[] = [
+const archiveData: ArchiveItem[] = [
   {
     id: "1",
-    client: "Ortist Spesialist",
+    client: "Kronju",
     location: "Semarang, Indonesia",
-    role: "Social Media Marketing Manager",
+    role: "Graphic Designer",
     year: "2023",
-    category: "Social Media Marketing Manager"
+    category: "Graphic Design"
   },
   {
     id: "2",
-    client: "Rumah Bahasa Asing",
-    location: "Semarang, Indonesia", 
-    role: "Social Media Marketing Manager",
+    client: "Shinji Film",
+    location: "Alam Sutera, Indonesia",
+    role: "Storyboard Artist",
     year: "2023",
-    category: "Social Media Marketing Manager"
-  },
-  {
-    id: "3",
-    client: "Binjasilmen Samapta",
-    location: "Banjarregara, Indonesia",
-    role: "Content Creator",
-    year: "2023-2024",
     category: "Content Creator"
   },
   {
+    id: "3",
+    client: "Toyota Runners Club",
+    location: "Karawang, Indonesia",
+    role: "Graphic Designer",
+    year: "2023",
+    category: "Graphic Design"
+  },
+  {
     id: "4",
-    client: "Aerospace",
-    location: "Alam Sutera, Indonesia",
+    client: "Opak Sehot",
+    location: "Banjarregara, Indonesia",
     role: "Graphic Designer",
     year: "2024",
     category: "Graphic Design"
   },
   {
     id: "5",
-    client: "GENZUMMIT™",
+    client: "MIS Final Exam",
     location: "Gading Serpong, Indonesia",
     role: "Content Creator",
     year: "2025",
-    category: "Content Creator"
-  },
-  {
-    id: "6",
-    client: "PPM HIMMA 2025",
-    location: "Gading Serpong, Indonesia",
-    role: "Content Creator",
-    year: "2025",
-    category: "Content Creator"
-  },
-  {
-    id: "7",
-    client: "A5X Studio",
-    location: "Gading Serpong, Indonesia",
-    role: "Video Editing Agency",
-    year: "2023-Now",
     category: "Content Creator"
   }
 ];
 
-const categories = [
-  "All",
-  "Social Media Marketing Manager", 
-  "Content Creator",
-  "Graphic Design"
-];
-
-export default function WorkPage() {
-  const [activeFilter, setActiveFilter] = useState("All");
-  const router = useRouter();
-
-  const filteredWork = activeFilter === "All" 
-    ? workData 
-    : workData.filter(item => item.category === activeFilter);
-
+export default function ArchivePage() {
   return (
     <>
       <div className="min-h-screen bg-surface-background pt-32 pb-16">
         <div className="max-w-7xl mx-auto px-6">
-          {/* Work Title - Centered */}
+          {/* Archive Title - Centered */}
           <div className="text-center mb-12">
             <h1 className="text-[8rem] md:text-[12rem] lg:text-[16rem] xl:text-[20rem] font-bold leading-none text-content-primary tracking-tight">
-              Work
+              Archive
             </h1>
           </div>
 
-          {/* Filter Buttons - Centered */}
-          <div className="flex flex-wrap justify-center gap-3 mb-16">
-            {categories.map((category) => (
-              <MaskButton
-                key={category}
-                onClick={() => setActiveFilter(category)}
-                size="sm"
-                variant={activeFilter === category ? "dark" : "light"}
-                className="text-sm font-medium whitespace-nowrap"
-              >
-                {category}
-              </MaskButton>
-            ))}
-          </div>
-
-          {/* Work Table */}
+          {/* Archive Table */}
           <div className="max-w-full overflow-hidden">
             {/* Table Header */}
             <div className="grid grid-cols-4 gap-8 py-6 border-b border-border-primary text-sm font-medium text-content-secondary uppercase tracking-wider">
@@ -126,7 +78,7 @@ export default function WorkPage() {
 
             {/* Table Body */}
             <div className="space-y-0">
-              {filteredWork.map((item) => (
+              {archiveData.map((item) => (
                 <div
                   key={item.id}
                   className="grid grid-cols-4 gap-8 py-8 border-b border-border-secondary hover:bg-surface-secondary transition-colors duration-200 group cursor-pointer"
@@ -148,17 +100,6 @@ export default function WorkPage() {
                 </div>
               ))}
             </div>
-          </div>
-
-          {/* Archive Button - Centered */}
-          <div className="flex justify-center mt-20">
-            <MaskButton 
-              size="md" 
-              variant="dark"
-              onClick={() => router.push('/archive')}
-            >
-              Archive
-            </MaskButton>
           </div>
         </div>
       </div>
