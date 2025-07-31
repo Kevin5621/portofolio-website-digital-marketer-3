@@ -31,8 +31,8 @@ export const SelectedWorks = () => {
             <MaskButton 
               size="md"
               onClick={() => {
-                // Handle view all projects action
-                console.log('View all projects clicked')
+                // Navigate to work page
+                window.location.href = '/work'
               }}
             >
               view all projects
