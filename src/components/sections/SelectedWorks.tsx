@@ -1,7 +1,15 @@
 'use client'
 
 import Image from 'next/image'
+import { useEffect, useRef } from 'react'
 import { MaskButton } from '../ui/mask-button'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+// Register ScrollTrigger plugin
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger)
+}
 
 // Data projects yang bisa diambil dari API atau props
 const projects = [
@@ -38,16 +46,63 @@ interface Project {
 
 const ProjectSection = ({ project }: { project: Project }) => {
   const { id, image, title, year, category } = project
+  const sectionRef = useRef<HTMLElement>(null)
+  const imageRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (!sectionRef.current || !imageRef.current) return
+
+    // Same parallax intensity for all projects
+    const parallaxIntensity = 20
+    const scaleStart = 1.15
+    const scaleEnd = 1.05
+
+    // Create single combined parallax and scale effect
+    const parallaxTrigger = ScrollTrigger.create({
+      trigger: sectionRef.current,
+      start: 'top bottom',
+      end: 'bottom top',
+      scrub: 1,
+      animation: gsap.fromTo(imageRef.current, 
+        { 
+          yPercent: -parallaxIntensity,
+          scale: scaleStart,
+          transformOrigin: 'center center'
+        },
+        { 
+          yPercent: parallaxIntensity,
+          scale: scaleEnd,
+          transformOrigin: 'center center',
+          ease: 'none'
+        }
+      ),
+    })
+
+    // Cleanup function
+    return () => {
+      if (parallaxTrigger) {
+        parallaxTrigger.kill()
+      }
+    }
+  }, [id])
   
   return (
     <section 
+      ref={sectionRef}
       id={id}
       className="relative w-full h-screen overflow-hidden"
       data-theme="dark"
     >
       <div className="relative w-full h-full">
-        {/* Background Image dengan overlay gelap */}
-        <div className="absolute inset-0">
+        {/* Background Image dengan parallax effect */}
+        <div 
+          ref={imageRef}
+          className="absolute inset-0 will-change-transform"
+          style={{
+            height: '125%',
+            top: '-12.5%'
+          }}
+        >
           <Image
             src={image}
             alt={title}
