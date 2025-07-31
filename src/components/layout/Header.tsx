@@ -118,6 +118,11 @@ export const Header = () => {
       return { isDark: true }
     }
     
+    // Project sections - Background dengan gambar (light theme untuk burger)
+    if (sectionId === 'project-1' || sectionId === 'project-2' || sectionId === 'project-3') {
+      return { isDark: false }
+    }
+    
     // AboutSection - Background putih
     if (sectionId === 'about' || sectionId === 'about-section') {
       return { isDark: false }
@@ -147,8 +152,22 @@ export const Header = () => {
   // Logika untuk menampilkan menu berdasarkan section aktif
   // Menu text hanya muncul di section pertama dari setiap halaman, di section lain transform menjadi burger
   const isFirstSection = activeSection === 'home' || activeSection === 'hello' || activeSection === ''
-  const showTextMenu = isFirstSection && !isMobileMenuOpen && !isWorkPage && isClient
-  const showBurgerMenu = (!isFirstSection) || isMobileMenuOpen || isWorkPage
+  const isProjectSection = activeSection === 'project-1' || activeSection === 'project-2' || activeSection === 'project-3'
+  const showTextMenu = isFirstSection && !isMobileMenuOpen && !isWorkPage && !isProjectSection && isClient
+  const showBurgerMenu = (!isFirstSection) || isMobileMenuOpen || isWorkPage || isProjectSection
+
+  // Helper functions untuk styling berdasarkan section
+  const getBurgerBgClass = () => {
+    if (isProjectSection) return "bg-white hover:bg-gray-100"
+    if (isDark) return "bg-foreground-light hover:bg-foreground-light/90"
+    return "bg-foreground hover:bg-foreground/90"
+  }
+
+  const getBurgerTextClass = () => {
+    if (isProjectSection) return "text-black"
+    if (isDark) return "text-background-dark"
+    return "text-background"
+  }
 
   // Jika belum di client, render dengan default state
   if (!isClient) {
@@ -191,7 +210,7 @@ export const Header = () => {
             {/* Copyright - Adaptif berdasarkan section aktif */}
             <div className={cn(
               "text-2xl transition-colors duration-300",
-              isDark ? "text-foreground-light" : "text-foreground"
+              isProjectSection ? "text-white" : isDark ? "text-foreground-light" : "text-foreground"
             )}>
               © Adhara Eka Sakti
             </div>
@@ -260,16 +279,13 @@ export const Header = () => {
                   className={cn(
                     "w-20 h-20 rounded-full flex items-center justify-center transition-all duration-300",
                     "transform hover:scale-105 active:scale-95 shadow-xl hover:shadow-2xl",
-                    // Background dan text berdasarkan section
-                    isDark
-                      ? "bg-foreground-light hover:bg-foreground-light/90"
-                      : "bg-foreground hover:bg-foreground/90"
+                    getBurgerBgClass()
                   )}
                   aria-label="Open menu"
                 >
                   <Menu className={cn(
                     "h-10 w-10 transition-all duration-300",
-                    isDark ? "text-background-dark" : "text-background"
+                    getBurgerTextClass()
                   )} />
                 </button>
               </div>
@@ -282,15 +298,13 @@ export const Header = () => {
                 className={cn(
                   "w-16 h-16 rounded-full flex items-center justify-center transition-all duration-300",
                   "transform hover:scale-105 active:scale-95",
-                  isDark
-                    ? "bg-foreground-light hover:bg-foreground-light/90" 
-                    : "bg-foreground hover:bg-foreground/90"
+                  getBurgerBgClass()
                 )}
                 aria-label="Open menu"
               >
                 <Menu className={cn(
                   "h-8 w-8 transition-all duration-300",
-                  isDark ? "text-background-dark" : "text-background"
+                  getBurgerTextClass()
                 )} />
               </button>
             </div>
