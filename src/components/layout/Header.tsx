@@ -10,6 +10,7 @@ const navigation = [
   { name: 'Home', href: '#home' },
   { name: 'Work', href: '#work' },
   { name: 'About', href: '#about' },
+  { name: 'CV', href: '#cv' },
   { name: 'Contact', href: '#contact' },
 ]
 
@@ -21,17 +22,8 @@ const socials = [
 export const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('home') // Default ke home section
-
-  // Helper function untuk menentukan posisi Y akhir setiap menu item
-  const getEndYPosition = (index: number): string => {
-    switch (index) {
-      case 0: return '-16px'
-      case 1: return '-8px'
-      case 2: return '8px'
-      case 3: return '16px'
-      default: return '0px'
-    }
-  }
+  const [isMenuSliding, setIsMenuSliding] = useState(false)
+  const [isMenuEntering, setIsMenuEntering] = useState(false)
 
   // Intersection Observer untuk mendeteksi section aktif
   useLayoutEffect(() => {
@@ -98,6 +90,28 @@ export const Header = () => {
     setIsMobileMenuOpen(false)
   }
 
+  const handleOpenMenu = () => {
+    setIsMobileMenuOpen(true)
+    setIsMenuEntering(true) // Mulai dengan animasi masuk
+    setIsMenuSliding(false) // Reset sliding state
+    
+    // Setelah sedikit delay, hilangkan state entering untuk animasi smooth
+    setTimeout(() => {
+      setIsMenuEntering(false)
+    }, 50) // 50ms delay agar animasi terdeteksi
+  }
+
+  const handleCloseMenu = () => {
+    setIsMenuSliding(true) // Mulai animasi slide keluar
+    
+    // Tunggu animasi selesai baru close menu
+    setTimeout(() => {
+      setIsMobileMenuOpen(false)
+      setIsMenuSliding(false)
+      setIsMenuEntering(false)
+    }, 1000) // 1000ms sesuai durasi animasi
+  }
+
   // Logika untuk menentukan tema header berdasarkan section aktif
   const isDarkSection = activeSection === 'home' // HeroSection adalah dark
   const isLightSection = ['about', 'work', 'contact'].includes(activeSection)
@@ -123,10 +137,10 @@ export const Header = () => {
 
             {/* Navigation Container - Selalu ada untuk animasi seamless */}
             <div className="hidden md:block relative">
-              {/* Menu Text - Setiap item bergerak ke posisi burger button */}
+              {/* Menu Text - Setiap item bergerak lurus ke kanan */}
               <div 
                 className={cn(
-                  "flex items-baseline space-x-12 transition-all duration-1000 ease-convergence",
+                  "flex items-baseline space-x-12 transition-all duration-1000 ease-out",
                   !showTextMenu && "pointer-events-none"
                 )}
               >
@@ -139,19 +153,12 @@ export const Header = () => {
                       handleSmoothScroll(item.href)
                     }}
                     className={cn(
-                      "text-2xl text-foreground-light hover:text-foreground-light/80 transition-all duration-1000 ease-morph",
+                      "text-2xl text-foreground-light hover:text-foreground-light/80 transition-all duration-1000 ease-out",
                       "transform hover:scale-105 hover:-translate-y-0.5",
-                      // Setiap item bergerak ke posisi burger dengan path berbeda
+                      // Bergerak lurus ke kanan tanpa flip
                       showTextMenu 
-                        ? "opacity-100 translate-x-0 translate-y-0 scale-100 rotate-0 skew-x-0" 
-                        : cn(
-                          "opacity-0 scale-0 skew-x-12",
-                          // Path yang berbeda untuk setiap menu item menuju ke burger
-                          index === 0 && "translate-x-96 -translate-y-4 rotate-45",
-                          index === 1 && "translate-x-96 -translate-y-2 rotate-90", 
-                          index === 2 && "translate-x-96 translate-y-2 rotate-135",
-                          index === 3 && "translate-x-96 translate-y-4 rotate-180"
-                        )
+                        ? "opacity-100 translate-x-0 scale-100" 
+                        : "opacity-0 translate-x-96 scale-0"
                     )}
                     style={{
                       // Staggered animation untuk efek berurutan
@@ -159,11 +166,6 @@ export const Header = () => {
                         ? `${index * 100}ms` 
                         : `${(navigation.length - index - 1) * 150}ms`,
                       transitionDuration: showTextMenu ? '800ms' : '1200ms',
-                      // Custom CSS variables untuk path animation
-                      '--start-x': '0px',
-                      '--end-x': '384px', // translate-x-96 = 384px
-                      '--start-y': '0px',
-                      '--end-y': getEndYPosition(index)
                     } as React.CSSProperties}
                   >
                     {item.name}
@@ -171,13 +173,13 @@ export const Header = () => {
                 ))}
               </div>
 
-              {/* Burger Button - Muncul dari konvergensi semua teks */}
+              {/* Burger Button - Expanding dari tengah */}
               <div 
                 className={cn(
-                  "absolute top-1/2 right-0 transform -translate-y-1/2 transition-all duration-1000 ease-spring",
+                  "absolute top-1/2 right-0 transform -translate-y-1/2 transition-all duration-1000 ease-out",
                   showBurgerMenu 
-                    ? "opacity-100 scale-100 translate-x-0 rotate-0" 
-                    : "opacity-0 scale-0 -translate-x-96 -rotate-180 pointer-events-none"
+                    ? "opacity-100 scale-100 translate-x-0" 
+                    : "opacity-0 scale-0 translate-x-0 pointer-events-none"
                 )}
                 style={{
                   // Burger muncul setelah semua teks bergerak
@@ -186,75 +188,43 @@ export const Header = () => {
                 }}
               >
                 <button
-                  onClick={() => setIsMobileMenuOpen(true)}
+                  onClick={handleOpenMenu}
                   className={cn(
-                    "w-20 h-20 rounded-full flex items-center justify-center transition-all duration-500 ease-bounce-in",
-                    "transform hover:scale-110 active:scale-95",
-                    "relative overflow-hidden group",
-                    // Adaptasi warna berdasarkan section aktif
+                    "w-20 h-20 rounded-full flex items-center justify-center transition-all duration-300",
+                    "transform hover:scale-105 active:scale-95",
+                    // Background lingkaran tanpa efek kelip-kelip
                     isDarkSection 
                       ? "bg-foreground-light hover:bg-foreground-light/90 shadow-lg hover:shadow-xl" 
                       : "bg-foreground hover:bg-foreground/90 shadow-xl hover:shadow-2xl"
                   )}
                   aria-label="Open menu"
                 >
-                  {/* Background morphing effect */}
-                  <div className={cn(
-                    "absolute inset-0 rounded-full transition-all duration-500 opacity-0 group-hover:opacity-20",
-                    "bg-gradient-radial",
+                  {/* Menu Icon tanpa efek kelip-kelip */}
+                  <Menu className={cn(
+                    "h-10 w-10 transition-all duration-300",
                     isDarkSection 
-                      ? "from-background-dark/50 to-transparent"
-                      : "from-background/50 to-transparent"
+                      ? "text-background-dark" 
+                      : "text-background"
                   )} />
-
-                  {/* Burger Icon dengan magnetic effect */}
-                  <div className="relative">
-                    <Menu className={cn(
-                      "h-10 w-10 transition-all duration-500 ease-magnetic",
-                      "group-hover:rotate-180 group-hover:scale-110 group-active:scale-90",
-                      "filter group-hover:drop-shadow-lg",
-                      isDarkSection 
-                        ? "text-background-dark" 
-                        : "text-background"
-                    )} />
-                    
-                    {/* Convergence effect - partikel dari teks yang berkumpul */}
-                    <div className={cn(
-                      "absolute inset-0 rounded-full transition-all duration-700 opacity-0 group-active:opacity-40",
-                      "animate-pulse group-active:animate-ping",
-                      isDarkSection 
-                        ? "bg-background-dark" 
-                        : "bg-background"
-                    )} />
-                  </div>
                 </button>
               </div>
             </div>
 
-            {/* Mobile Burger Button - Selalu terlihat di mobile */}
+            {/* Mobile Burger Button - Lingkaran tanpa efek kelip-kelip */}
             <div className="md:hidden">
               <button
-                onClick={() => setIsMobileMenuOpen(true)}
+                onClick={handleOpenMenu}
                 className={cn(
                   "w-16 h-16 rounded-full flex items-center justify-center transition-all duration-300",
-                  "transform hover:scale-110 active:scale-95 group relative overflow-hidden",
+                  "transform hover:scale-105 active:scale-95",
                   isDarkSection 
                     ? "bg-foreground-light hover:bg-foreground-light/90" 
                     : "bg-foreground hover:bg-foreground/90"
                 )}
                 aria-label="Open menu"
               >
-                {/* Mobile background pulse effect */}
-                <div className={cn(
-                  "absolute inset-0 rounded-full transition-all duration-300 opacity-0 group-hover:opacity-20",
-                  isDarkSection 
-                    ? "bg-background-dark" 
-                    : "bg-background"
-                )} />
-
                 <Menu className={cn(
-                  "h-8 w-8 transition-all duration-300 relative z-10",
-                  "group-hover:rotate-45 group-active:scale-90",
+                  "h-8 w-8 transition-all duration-300",
                   isDarkSection 
                     ? "text-background-dark" 
                     : "text-background"
@@ -265,39 +235,71 @@ export const Header = () => {
         </nav>
       </header>
 
-      {/* Mobile Menu Sidebar */}
+      {/* Mobile Menu Sidebar - Smooth slide animation seperti IntroSlideUp */}
       {isMobileMenuOpen && (
         <>
-          {/* Backdrop */}
+          {/* Backdrop dengan fade animation yang konsisten */}
           <button
-            className="fixed inset-0 z-40 bg-black/20 cursor-default"
-            onClick={() => setIsMobileMenuOpen(false)}
+            className={cn(
+              "fixed inset-0 z-40 bg-black/20 cursor-default transition-all duration-1000 ease-out",
+              (isMenuEntering || isMenuSliding) ? "opacity-0" : "opacity-100"
+            )}
+            onClick={handleCloseMenu}
             onKeyDown={(e) => {
               if (e.key === 'Escape') {
-                setIsMobileMenuOpen(false)
+                handleCloseMenu()
               }
             }}
             aria-label="Close menu"
             tabIndex={-1}
           />
           
-          {/* Sidebar */}
-          <div className="fixed top-0 right-0 h-full w-1/3 max-w-md bg-background-dark z-50 shadow-2xl">
-            {/* Close Button */}
-            <div className="absolute top-6 right-6">
+          {/* Sidebar - Smooth slide animation masuk dan keluar dengan gaya yang sama */}
+          <div 
+            className={cn(
+              "fixed top-0 right-0 h-full w-1/3 bg-background-dark z-50 shadow-2xl",
+              "transition-all duration-1000 ease-out",
+              // Kondisi animasi: entering atau sliding = slide out, normal = slide in
+              (isMenuEntering || isMenuSliding) 
+                ? "translate-x-full rounded-l-[1500px]" 
+                : "translate-x-0 rounded-none"
+            )}
+          >
+            {/* Close Button dengan smooth animation */}
+            <div className={cn(
+              "absolute top-6 right-6 transition-all duration-700 ease-out",
+              (isMenuEntering || isMenuSliding) ? "opacity-0 scale-0" : "opacity-100 scale-100"
+            )}>
               <button
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="w-10 h-10 bg-foreground-light rounded-full flex items-center justify-center hover:bg-foreground-light/90 transition-colors duration-200"
+                onClick={handleCloseMenu}
+                className="w-16 h-16 bg-foreground-light rounded-full flex items-center justify-center hover:bg-foreground-light/90 transition-colors duration-200"
                 aria-label="Close menu"
               >
-                <X className="h-5 w-5 text-background-dark" />
+                <X className="h-8 w-8 text-background-dark" />
               </button>
             </div>
 
-            {/* Navigation Links */}
-            <div className="pt-24 px-8">
-              <nav className="space-y-6">
-                {navigation.map((item) => (
+            {/* Navigation Content dengan staggered smooth animation */}
+            <div className={cn(
+              "pt-20 px-8 pl-12 transition-all duration-800 ease-out",
+              (isMenuEntering || isMenuSliding) 
+                ? "opacity-0 translate-x-16" 
+                : "opacity-100 translate-x-0"
+            )}>
+              {/* Navigation Header */}
+              <div className={cn(
+                "mb-8 transition-all duration-600 ease-out delay-100",
+                (isMenuEntering || isMenuSliding) 
+                  ? "opacity-0 translate-x-8" 
+                  : "opacity-100 translate-x-0"
+              )}>
+                <h2 className="text-sm font-medium text-foreground-light mb-2">Navigation</h2>
+                <div className="w-8 h-px bg-foreground-light/50"></div>
+              </div>
+
+              {/* Navigation Links dengan staggered smooth animation */}
+              <nav className="space-y-8 mb-12">
+                {navigation.map((item, index) => (
                   <Link
                     key={item.name}
                     href={item.href}
@@ -305,22 +307,48 @@ export const Header = () => {
                       e.preventDefault()
                       handleSmoothScroll(item.href)
                     }}
-                    className="block text-lg font-medium text-foreground-light hover:text-foreground-light/80 transition-colors duration-200"
+                    className={cn(
+                      "block text-6xl font-bold text-foreground-light hover:text-foreground-light/80 transition-all duration-700 ease-out leading-tight",
+                      (isMenuEntering || isMenuSliding) 
+                        ? "opacity-0 translate-x-12" 
+                        : "opacity-100 translate-x-0"
+                    )}
+                    style={{
+                      transitionDelay: (isMenuEntering || isMenuSliding) 
+                        ? `${index * 50}ms` 
+                        : `${200 + index * 100}ms`
+                    }}
                   >
                     {item.name}
                   </Link>
                 ))}
               </nav>
 
-              {/* Social Links */}
-              <div className="mt-12 pt-8 border-t border-border">
-                <h3 className="text-sm font-medium text-foreground-light mb-4">Follow</h3>
-                <div className="space-y-4">
-                  {socials.map((social) => (
+              {/* Social Links dengan smooth animation */}
+              <div className={cn(
+                "pt-8 border-t border-foreground-light/30 transition-all duration-600 ease-out delay-500",
+                (isMenuEntering || isMenuSliding) 
+                  ? "opacity-0 translate-x-8" 
+                  : "opacity-100 translate-x-0"
+              )}>
+                <h3 className="text-sm font-medium text-foreground-light mb-4">Socials</h3>
+                <div className="w-8 h-px bg-foreground-light/50 mb-4"></div>
+                <div className="flex space-x-8">
+                  {socials.map((social, index) => (
                     <button
                       key={social.name}
                       onClick={() => handleSocialClick(social.href)}
-                      className="block text-base text-foreground-light hover:text-foreground-light/80 transition-colors duration-200"
+                      className={cn(
+                        "text-2xl text-foreground-light hover:text-foreground-light/80 transition-all duration-500 ease-out",
+                        (isMenuEntering || isMenuSliding) 
+                          ? "opacity-0 translate-y-4" 
+                          : "opacity-100 translate-y-0"
+                      )}
+                      style={{
+                        transitionDelay: (isMenuEntering || isMenuSliding) 
+                          ? `${index * 50}ms` 
+                          : `${600 + index * 100}ms`
+                      }}
                     >
                       {social.name}
                     </button>
@@ -328,9 +356,14 @@ export const Header = () => {
                 </div>
               </div>
 
-              {/* Logo/Brand */}
-              <div className="absolute bottom-8 left-8">
-                <div className="text-sm text-foreground-light">
+              {/* Logo/Brand dengan smooth animation */}
+              <div className={cn(
+                "absolute bottom-8 left-8 transition-all duration-500 ease-out delay-700",
+                (isMenuEntering || isMenuSliding) 
+                  ? "opacity-0 translate-y-4" 
+                  : "opacity-100 translate-y-0"
+              )}>
+                <div className="text-xs text-foreground-light">
                   © Adhara Eka Sakti
                 </div>
               </div>
