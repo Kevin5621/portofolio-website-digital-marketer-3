@@ -961,12 +961,22 @@ body {
 }
 
 /* Enhanced contact button mask with better text visibility */
+/* Enhanced contact button mask dengan implementasi yang benar mengikuti referensi mask3 */
 .contact-button-mask-enhanced {
   position: relative;
   overflow: hidden;
-  background-color: hsl(var(--color-content-primary));
+  background-color: hsl(var(--color-surface-background));
   color: hsl(var(--color-content-inverse));
-  transition: all 0.3s ease;
+  /* Pastikan border-radius tetap terjaga */
+  border-radius: 50%;
+  /* Allow magnetic transform but ensure mask animation works */
+  will-change: transform;
+  /* Gabungan transition untuk color, transform, dan magnetic effect */
+  transition: color 0.3s ease, transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  /* Ensure circle shape is maintained */
+  aspect-ratio: 1 / 1;
+  /* Magnetic transform origin */
+  transform-origin: center center;
 }
 
 .contact-button-mask-enhanced::before {
@@ -976,26 +986,79 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background: hsl(var(--color-surface-background));
+  background: hsl(var(--color-content-primary));
   -webkit-mask: url('https://raw.githubusercontent.com/pizza3/asset/master/natureSmaller.png');
   mask: url('https://raw.githubusercontent.com/pizza3/asset/master/natureSmaller.png');
   -webkit-mask-size: 7100% 100%;
   mask-size: 7100% 100%;
-  -webkit-mask-position: 100% 0;
-  mask-position: 100% 0;
-  border-radius: inherit;
+  /* Pastikan border-radius mengikuti parent */
+  border-radius: 50%;
   pointer-events: none;
   z-index: 1;
-  transition: -webkit-mask-position 0.7s steps(70), mask-position 0.7s steps(70);
+  /* Initial state - mask di posisi 0 (revealed) seperti referensi */
+  -webkit-mask-position: 0 0;
+  mask-position: 0 0;
+  /* Animasi default saat load - hide mask (ani2) */
+  -webkit-animation: maskHideAnimation 0.7s steps(70) forwards;
+  animation: maskHideAnimation 0.7s steps(70) forwards;
+  /* Prevent interference with magnetic transform */
+  will-change: -webkit-mask-position, mask-position;
 }
 
 .contact-button-mask-enhanced:hover::before {
-  -webkit-mask-position: 0 0;
-  mask-position: 0 0;
+  /* Animasi saat hover - reveal mask (ani) */
+  -webkit-animation: maskRevealAnimation 0.7s steps(70) forwards;
+  animation: maskRevealAnimation 0.7s steps(70) forwards;
 }
 
 .contact-button-mask-enhanced:hover {
   color: hsl(var(--color-content-primary));
+}
+
+/* PRODUCTION: Semantic colors - Black and White theme colors */
+
+/* Initial State - Target: White semantic color */
+.contact-button-mask-enhanced .contact-text {
+  color: hsl(var(--color-content-inverse)) !important; /* White semantic color for initial state */
+  transition: color 0.3s ease, transform 0.3s ease;
+  will-change: color, transform;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  position: relative;
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* Hover State - Target: Black semantic color */
+.contact-button-mask-enhanced:hover .contact-text {
+  color: hsl(var(--color-content-primary)) !important; /* Black semantic color for hover state */
+}
+
+/* Most specific rule for h3 with contact-text class */
+.contact-button-mask-enhanced h3.contact-text {
+  color: hsl(var(--color-content-inverse)) !important; /* White semantic color for initial state */
+}
+
+.contact-button-mask-enhanced:hover h3.contact-text {
+  color: hsl(var(--color-content-primary)) !important; /* Black semantic color for hover state */
+}
+
+/* Extra specific rules untuk memastikan override */
+.contact-button-mask-enhanced button .contact-text {
+  color: hsl(var(--color-content-inverse)) !important; /* White semantic color for initial state */
+}
+
+.contact-button-mask-enhanced:hover button .contact-text {
+  color: hsl(var(--color-content-primary)) !important; /* Black semantic color for hover state */
+}
+
+/* Override any Tailwind text color classes */
+.contact-button-mask-enhanced .text-3xl.contact-text {
+  color: hsl(var(--color-content-inverse)) !important; /* White semantic color for initial state */
+}
+
+.contact-button-mask-enhanced:hover .text-3xl.contact-text {
+  color: hsl(var(--color-content-primary)) !important; /* Black semantic color for hover state */
 }
 
 /* Simplified and more specific text color rules */
@@ -1013,20 +1076,50 @@ body {
   font-weight: 500;
 }
 
-/* Specific contact text styling */
-.contact-text {
-  color: white;
-  transition: color 0.3s ease;
+/* Keyframes untuk mask animation sesuai referensi mask3 */
+@-webkit-keyframes maskRevealAnimation {
+  from {
+    -webkit-mask-position: 0 0;
+    mask-position: 0 0;
+  }
+  to {
+    -webkit-mask-position: 100% 0;
+    mask-position: 100% 0;
+  }
 }
 
-.contact-button-mask-enhanced:hover .contact-text {
-  color: hsl(var(--color-content-primary)) !important;
+@keyframes maskRevealAnimation {
+  from {
+    -webkit-mask-position: 0 0;
+    mask-position: 0 0;
+  }
+  to {
+    -webkit-mask-position: 100% 0;
+    mask-position: 100% 0;
+  }
 }
 
-/* Debug styles untuk development - uncomment jika perlu debugging */
-/* .contact-button-mask-enhanced:hover {
-  outline: 2px solid rgba(0, 0, 0, 0.1);
-} */
+@-webkit-keyframes maskHideAnimation {
+  from {
+    -webkit-mask-position: 100% 0;
+    mask-position: 100% 0;
+  }
+  to {
+    -webkit-mask-position: 0 0;
+    mask-position: 0 0;
+  }
+}
+
+@keyframes maskHideAnimation {
+  from {
+    -webkit-mask-position: 100% 0;
+    mask-position: 100% 0;
+  }
+  to {
+    -webkit-mask-position: 0 0;
+    mask-position: 0 0;
+  }
+}
 
 /* Utility classes untuk enhanced animations */
 .text-morph-to-burger {

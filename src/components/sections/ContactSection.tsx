@@ -14,18 +14,30 @@ export const ContactSection = () => {
           
           {/* Left Column - Circle & Title */}
           <div className="flex flex-col space-y-16">
-            {/* Large Black Circle with Magnetic Effect */}
+            {/* Large Black Circle with Magnetic Effect - 2 Layer seperti di Header */}
             <div className="w-80 h-80 relative flex items-center justify-center">
-              <Magnetic strength={0.15} textStrength={0.25} range={140} onlyOnHover={true}>
-                <div className="w-80 h-80 bg-content-primary rounded-full flex items-center justify-center cursor-pointer group transition-all duration-300 hover:shadow-2xl contact-button-mask-enhanced">
-                  <div className="text-center relative z-20">
-                    <h3 
-                      className="text-3xl font-medium text-white group-hover:scale-105 transition-transform duration-300 magnetic-text contact-text"
-                    >
-                      Get in touch
-                    </h3>
-                  </div>
-                </div>
+              {/* Layer 1: Card Magnetic Effect (zona lebih besar) */}
+              <Magnetic strength={0.06} range={140} onlyOnHover={true}>
+                {/* Layer 2: Button Magnetic Effect (lebih sensitif) */}
+                <Magnetic strength={0.12} range={80} onlyOnHover={true}>
+                  <button 
+                    className="w-80 h-80 rounded-full flex items-center justify-center cursor-pointer group contact-button-mask-enhanced transition-all duration-300 hover:shadow-2xl"
+                    onClick={() => {
+                      // Scroll to contact form or trigger contact action
+                      const contactInfo = document.querySelector('#contact .text-right')
+                      contactInfo?.scrollIntoView({ behavior: 'smooth' })
+                    }}
+                    aria-label="Get in touch - scroll to contact information"
+                  >
+                    <div className="text-center relative z-20">
+                      <h3 
+                        className="text-3xl font-medium contact-text group-hover:scale-105 transition-transform duration-300"
+                      >
+                        Get in touch
+                      </h3>
+                    </div>
+                  </button>
+                </Magnetic>
               </Magnetic>
             </div>
             

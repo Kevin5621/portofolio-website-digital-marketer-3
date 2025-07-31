@@ -105,7 +105,7 @@ export const Header = () => {
     // Setelah animasi masuk selesai, hilangkan state entering
     setTimeout(() => {
       setIsMenuEntering(false)
-    }, 1000) // 1000ms sesuai durasi animasi
+    }, 100) // lebih responsive dan jangan diubah
   }
 
   const handleCloseMenu = () => {
@@ -116,7 +116,7 @@ export const Header = () => {
       setIsMobileMenuOpen(false)
       setIsMenuSliding(false)
       setIsMenuEntering(false)
-    }, 1000) // 1000ms sesuai durasi animasi
+    }, 600)
   }
 
   // Logika untuk menentukan tema header berdasarkan section aktif
@@ -281,12 +281,12 @@ export const Header = () => {
             </Magnetic>
           </div>
           
-          {/* Sidebar - Smooth slide animation seperti IntroSlideUp */}
+          {/* Sidebar - Smooth slide animation yang lebih responsif */}
           <div 
             className={cn(
               "fixed top-0 right-0 h-full w-1/3 bg-background-dark z-50 shadow-2xl",
-              "transition-all duration-1000 ease-out",
-              // Animasi slide seperti IntroSlideUp: 
+              "transition-all duration-800 ease-out",
+              // Animasi slide yang lebih cepat dan responsif: 
               // - Masuk: slide dari kanan ke kiri dengan rounded corner
               // - Keluar: slide ke kanan dengan rounded corner yang membesar
               isMenuEntering 
@@ -297,9 +297,9 @@ export const Header = () => {
             )}
           >
 
-            {/* Navigation Content dengan staggered smooth animation seperti IntroSlideUp */}
+            {/* Navigation Content dengan staggered animation yang lebih responsif */}
             <div className={cn(
-              "pt-20 px-8 pl-12 transition-all duration-1000 ease-out",
+              "pt-20 px-8 pl-12 transition-all duration-800 ease-out",
               isMenuEntering 
                 ? "opacity-0 translate-x-16" 
                 : isMenuSliding
@@ -308,7 +308,7 @@ export const Header = () => {
             )}>
               {/* Navigation Header */}
               <div className={cn(
-                "mb-8 transition-all duration-1000 ease-out delay-200",
+                "mb-8 transition-all duration-800 ease-out",
                 isMenuEntering 
                   ? "opacity-0 translate-x-8" 
                   : isMenuSliding
@@ -330,7 +330,7 @@ export const Header = () => {
                       handleSmoothScroll(item.href)
                     }}
                     className={cn(
-                      "block text-6xl font-bold text-foreground-light hover:text-foreground-light/80 transition-all duration-1000 ease-out leading-tight",
+                      "block text-6xl font-bold text-foreground-light hover:text-foreground-light/80 transition-all duration-800 ease-out leading-tight",
                       isMenuEntering 
                         ? "opacity-0 translate-x-12" 
                         : isMenuSliding
@@ -339,10 +339,10 @@ export const Header = () => {
                     )}
                     style={{
                       transitionDelay: isMenuEntering 
-                        ? `${index * 100}ms` 
+                        ? `${index * 50}ms` 
                         : isMenuSliding
-                        ? `${index * 50}ms`
-                        : `${300 + index * 150}ms`
+                        ? `${index * 25}ms`
+                        : `${150 + index * 75}ms`
                     }}
                   >
                     {item.name}
@@ -350,9 +350,9 @@ export const Header = () => {
                 ))}
               </nav>
 
-              {/* Social Links dengan smooth animation seperti IntroSlideUp */}
+              {/* Social Links dengan animation yang lebih responsif */}
               <div className={cn(
-                "pt-8 border-t border-foreground-light/30 transition-all duration-1000 ease-out delay-600",
+                "pt-8 border-t border-foreground-light/30 transition-all duration-800 ease-out delay-300",
                 isMenuEntering 
                   ? "opacity-0 translate-x-8" 
                   : isMenuSliding
@@ -367,7 +367,7 @@ export const Header = () => {
                       key={social.name}
                       onClick={() => handleSocialClick(social.href)}
                       className={cn(
-                        "text-2xl text-foreground-light hover:text-foreground-light/80 transition-all duration-1000 ease-out",
+                        "text-2xl text-foreground-light hover:text-foreground-light/80 transition-all duration-800 ease-out",
                         isMenuEntering 
                           ? "opacity-0 translate-y-4" 
                           : isMenuSliding
@@ -376,10 +376,10 @@ export const Header = () => {
                       )}
                       style={{
                         transitionDelay: isMenuEntering 
-                          ? `${index * 100}ms` 
+                          ? `${index * 50}ms` 
                           : isMenuSliding
-                          ? `${index * 50}ms`
-                          : `${700 + index * 150}ms`
+                          ? `${index * 25}ms`
+                          : `${350 + index * 75}ms`
                       }}
                     >
                       {social.name}
@@ -388,9 +388,9 @@ export const Header = () => {
                 </div>
               </div>
 
-              {/* Logo/Brand dengan smooth animation seperti IntroSlideUp */}
+              {/* Logo/Brand dengan animation yang lebih responsif */}
               <div className={cn(
-                "absolute bottom-8 left-8 transition-all duration-1000 ease-out delay-800",
+                "absolute bottom-8 left-8 transition-all duration-800 ease-out delay-400",
                 isMenuEntering 
                   ? "opacity-0 translate-y-4" 
                   : isMenuSliding
