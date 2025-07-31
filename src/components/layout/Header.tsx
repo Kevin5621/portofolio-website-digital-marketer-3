@@ -22,6 +22,17 @@ export const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('home') // Default ke home section
 
+  // Helper function untuk menentukan posisi Y akhir setiap menu item
+  const getEndYPosition = (index: number): string => {
+    switch (index) {
+      case 0: return '-16px'
+      case 1: return '-8px'
+      case 2: return '8px'
+      case 3: return '16px'
+      default: return '0px'
+    }
+  }
+
   // Intersection Observer untuk mendeteksi section aktif
   useLayoutEffect(() => {
     if (typeof window !== 'undefined') {
@@ -110,48 +121,146 @@ export const Header = () => {
               © Adhara Eka Sakti
             </div>
 
-            {/* Desktop Navigation - Menu Text (hanya di Hero Section) */}
-            {showTextMenu && (
-              <div className="hidden md:block">
-                <div className="flex items-baseline space-x-12">
-                  {navigation.map((item) => (
-                    <Link
-                      key={item.name}
-                      href={item.href}
-                      onClick={(e) => {
-                        e.preventDefault()
-                        handleSmoothScroll(item.href)
-                      }}
-                      className="text-2xl text-foreground-light hover:text-foreground-light/80 transition-colors duration-200"
-                    >
-                      {item.name}
-                    </Link>
-                  ))}
-                </div>
+            {/* Navigation Container - Selalu ada untuk animasi seamless */}
+            <div className="hidden md:block relative">
+              {/* Menu Text - Setiap item bergerak ke posisi burger button */}
+              <div 
+                className={cn(
+                  "flex items-baseline space-x-12 transition-all duration-1000 ease-convergence",
+                  !showTextMenu && "pointer-events-none"
+                )}
+              >
+                {navigation.map((item, index) => (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    onClick={(e) => {
+                      e.preventDefault()
+                      handleSmoothScroll(item.href)
+                    }}
+                    className={cn(
+                      "text-2xl text-foreground-light hover:text-foreground-light/80 transition-all duration-1000 ease-morph",
+                      "transform hover:scale-105 hover:-translate-y-0.5",
+                      // Setiap item bergerak ke posisi burger dengan path berbeda
+                      showTextMenu 
+                        ? "opacity-100 translate-x-0 translate-y-0 scale-100 rotate-0 skew-x-0" 
+                        : cn(
+                          "opacity-0 scale-0 skew-x-12",
+                          // Path yang berbeda untuk setiap menu item menuju ke burger
+                          index === 0 && "translate-x-96 -translate-y-4 rotate-45",
+                          index === 1 && "translate-x-96 -translate-y-2 rotate-90", 
+                          index === 2 && "translate-x-96 translate-y-2 rotate-135",
+                          index === 3 && "translate-x-96 translate-y-4 rotate-180"
+                        )
+                    )}
+                    style={{
+                      // Staggered animation untuk efek berurutan
+                      transitionDelay: showTextMenu 
+                        ? `${index * 100}ms` 
+                        : `${(navigation.length - index - 1) * 150}ms`,
+                      transitionDuration: showTextMenu ? '800ms' : '1200ms',
+                      // Custom CSS variables untuk path animation
+                      '--start-x': '0px',
+                      '--end-x': '384px', // translate-x-96 = 384px
+                      '--start-y': '0px',
+                      '--end-y': getEndYPosition(index)
+                    } as React.CSSProperties}
+                  >
+                    {item.name}
+                  </Link>
+                ))}
               </div>
-            )}
 
-            {/* Burger Menu Button - Adaptif berdasarkan section aktif */}
-            {showBurgerMenu && (
+              {/* Burger Button - Muncul dari konvergensi semua teks */}
+              <div 
+                className={cn(
+                  "absolute top-1/2 right-0 transform -translate-y-1/2 transition-all duration-1000 ease-spring",
+                  showBurgerMenu 
+                    ? "opacity-100 scale-100 translate-x-0 rotate-0" 
+                    : "opacity-0 scale-0 -translate-x-96 -rotate-180 pointer-events-none"
+                )}
+                style={{
+                  // Burger muncul setelah semua teks bergerak
+                  transitionDelay: showBurgerMenu ? '600ms' : '0ms',
+                  transitionDuration: showBurgerMenu ? '800ms' : '400ms'
+                }}
+              >
+                <button
+                  onClick={() => setIsMobileMenuOpen(true)}
+                  className={cn(
+                    "w-20 h-20 rounded-full flex items-center justify-center transition-all duration-500 ease-bounce-in",
+                    "transform hover:scale-110 active:scale-95",
+                    "relative overflow-hidden group",
+                    // Adaptasi warna berdasarkan section aktif
+                    isDarkSection 
+                      ? "bg-foreground-light hover:bg-foreground-light/90 shadow-lg hover:shadow-xl" 
+                      : "bg-foreground hover:bg-foreground/90 shadow-xl hover:shadow-2xl"
+                  )}
+                  aria-label="Open menu"
+                >
+                  {/* Background morphing effect */}
+                  <div className={cn(
+                    "absolute inset-0 rounded-full transition-all duration-500 opacity-0 group-hover:opacity-20",
+                    "bg-gradient-radial",
+                    isDarkSection 
+                      ? "from-background-dark/50 to-transparent"
+                      : "from-background/50 to-transparent"
+                  )} />
+
+                  {/* Burger Icon dengan magnetic effect */}
+                  <div className="relative">
+                    <Menu className={cn(
+                      "h-10 w-10 transition-all duration-500 ease-magnetic",
+                      "group-hover:rotate-180 group-hover:scale-110 group-active:scale-90",
+                      "filter group-hover:drop-shadow-lg",
+                      isDarkSection 
+                        ? "text-background-dark" 
+                        : "text-background"
+                    )} />
+                    
+                    {/* Convergence effect - partikel dari teks yang berkumpul */}
+                    <div className={cn(
+                      "absolute inset-0 rounded-full transition-all duration-700 opacity-0 group-active:opacity-40",
+                      "animate-pulse group-active:animate-ping",
+                      isDarkSection 
+                        ? "bg-background-dark" 
+                        : "bg-background"
+                    )} />
+                  </div>
+                </button>
+              </div>
+            </div>
+
+            {/* Mobile Burger Button - Selalu terlihat di mobile */}
+            <div className="md:hidden">
               <button
                 onClick={() => setIsMobileMenuOpen(true)}
                 className={cn(
-                  "w-20 h-20 rounded-full flex items-center justify-center transition-all duration-300",
-                  // Adaptasi warna berdasarkan section aktif
+                  "w-16 h-16 rounded-full flex items-center justify-center transition-all duration-300",
+                  "transform hover:scale-110 active:scale-95 group relative overflow-hidden",
                   isDarkSection 
-                    ? "bg-foreground-light hover:bg-foreground-light/90" // Light button on dark section
-                    : "bg-foreground hover:bg-foreground/90" // Dark button on light section
+                    ? "bg-foreground-light hover:bg-foreground-light/90" 
+                    : "bg-foreground hover:bg-foreground/90"
                 )}
                 aria-label="Open menu"
               >
-                <Menu className={cn(
-                  "h-10 w-10 transition-colors duration-300",
+                {/* Mobile background pulse effect */}
+                <div className={cn(
+                  "absolute inset-0 rounded-full transition-all duration-300 opacity-0 group-hover:opacity-20",
                   isDarkSection 
-                    ? "text-background-dark" // Dark icon on light button
-                    : "text-background" // Light icon on dark button
+                    ? "bg-background-dark" 
+                    : "bg-background"
+                )} />
+
+                <Menu className={cn(
+                  "h-8 w-8 transition-all duration-300 relative z-10",
+                  "group-hover:rotate-45 group-active:scale-90",
+                  isDarkSection 
+                    ? "text-background-dark" 
+                    : "text-background"
                 )} />
               </button>
-            )}
+            </div>
           </div>
         </nav>
       </header>
@@ -160,9 +269,16 @@ export const Header = () => {
       {isMobileMenuOpen && (
         <>
           {/* Backdrop */}
-          <div
-            className="fixed inset-0 z-40 bg-black/20"
+          <button
+            className="fixed inset-0 z-40 bg-black/20 cursor-default"
             onClick={() => setIsMobileMenuOpen(false)}
+            onKeyDown={(e) => {
+              if (e.key === 'Escape') {
+                setIsMobileMenuOpen(false)
+              }
+            }}
+            aria-label="Close menu"
+            tabIndex={-1}
           />
           
           {/* Sidebar */}

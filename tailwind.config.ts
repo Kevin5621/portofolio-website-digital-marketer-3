@@ -371,6 +371,11 @@ export default {
       transitionTimingFunction: {
         "bounce-in": "cubic-bezier(0.68, -0.55, 0.265, 1.55)",
         "ease-in-out-back": "cubic-bezier(0.68, -0.6, 0.32, 1.6)",
+        "magnetic": "cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+        "convergence": "cubic-bezier(0.4, 0, 0.2, 1)",
+        "morph": "cubic-bezier(0.175, 0.885, 0.32, 1.275)",
+        "spring": "cubic-bezier(0.175, 0.885, 0.32, 1.275)",
+        "smooth-out": "cubic-bezier(0.4, 0, 0.2, 1)",
       },
 
       transitionDuration: {
