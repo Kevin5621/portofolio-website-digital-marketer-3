@@ -263,19 +263,30 @@ export const Header = () => {
           
           {/* Close Button dengan Magnetic Effect 2 Layer */}
           <div className={cn(
-            "fixed top-6 right-6 z-[60] transition-all duration-700 ease-out",
+            "fixed top-8 right-8 z-[60] transition-all duration-700 ease-out",
             (isMenuEntering || isMenuSliding) ? "opacity-0 scale-0" : "opacity-100 scale-100"
           )}>
             {/* Layer 1: Card Magnetic Effect (zona lebih besar) */}
-            <Magnetic strength={0.15} range={100} onlyOnHover={true}>
+            <Magnetic 
+              strength={0.2} 
+              range={100} 
+              onlyOnHover={true}
+              className="inline-block"
+            >
               {/* Layer 2: Icon Magnetic Effect (lebih sensitif) */}
-              <Magnetic strength={0.4} range={60} onlyOnHover={true} textStrength={0.6}>
+              <Magnetic 
+                strength={0.6} 
+                range={60} 
+                onlyOnHover={true} 
+                textStrength={0.8}
+                className="inline-block"
+              >
                 <button
                   onClick={handleCloseMenu}
-                  className="w-16 h-16 rounded-full bg-foreground-light hover:bg-foreground-light/90 transition-colors duration-200 flex items-center justify-center cursor-pointer"
+                  className="w-20 h-20 rounded-full bg-gray-200 hover:bg-gray-300 transition-all duration-200 flex items-center justify-center cursor-pointer"
                   aria-label="Close menu"
                 >
-                  <X className="h-8 w-8 text-background-dark magnetic-text" />
+                  <X className="h-10 w-10 text-gray-600 magnetic-text" />
                 </button>
               </Magnetic>
             </Magnetic>
@@ -299,7 +310,7 @@ export const Header = () => {
 
             {/* Navigation Content dengan staggered animation yang lebih responsif */}
             <div className={cn(
-              "pt-20 px-8 pl-12 transition-all duration-800 ease-out",
+              "pt-24 px-8 pl-12 transition-all duration-800 ease-out",
               isMenuEntering 
                 ? "opacity-0 translate-x-16" 
                 : isMenuSliding
@@ -309,81 +320,86 @@ export const Header = () => {
               {/* Navigation Header */}
               <div className={cn(
                 "mb-8 transition-all duration-800 ease-out",
-                isMenuEntering 
-                  ? "opacity-0 translate-x-8" 
-                  : isMenuSliding
+                isMenuSliding
                   ? "opacity-0 translate-x-8"
                   : "opacity-100 translate-x-0"
               )}>
-                <h2 className="text-sm font-medium text-foreground-light mb-2">Navigation</h2>
-                <div className="w-8 h-px bg-foreground-light/50"></div>
+                <h2 className="text-sm font-medium text-gray-400 mb-2">Navigation</h2>
+                <div className="w-8 h-px bg-gray-400"></div>
               </div>
 
-              {/* Navigation Links dengan staggered smooth animation */}
-              <nav className="space-y-8 mb-12">
+              {/* Navigation Links dengan staggered animation dan magnetic effect */}
+              <nav className="mb-16">
                 {navigation.map((item, index) => (
-                  <Link
-                    key={item.name}
-                    href={item.href}
-                    onClick={(e) => {
-                      e.preventDefault()
-                      handleSmoothScroll(item.href)
-                    }}
-                    className={cn(
-                      "block text-6xl font-bold text-foreground-light hover:text-foreground-light/80 transition-all duration-800 ease-out leading-tight",
-                      isMenuEntering 
-                        ? "opacity-0 translate-x-12" 
-                        : isMenuSliding
-                        ? "opacity-0 translate-x-12"
-                        : "opacity-100 translate-x-0"
-                    )}
-                    style={{
-                      transitionDelay: isMenuEntering 
-                        ? `${index * 50}ms` 
-                        : isMenuSliding
-                        ? `${index * 25}ms`
-                        : `${150 + index * 75}ms`
-                    }}
-                  >
-                    {item.name}
-                  </Link>
+                  <div key={item.name} className="mb-12">
+                    <Magnetic 
+                      strength={0.4} 
+                      range={150} 
+                      onlyOnHover={true} 
+                      textStrength={0.6}
+                      className="inline-block"
+                    >
+                      <Link
+                        href={item.href}
+                        onClick={(e) => {
+                          e.preventDefault()
+                          handleSmoothScroll(item.href)
+                        }}
+                        className={cn(
+                          "block text-6xl font-bold text-foreground-light hover:text-foreground-light/80 transition-all duration-300 ease-out leading-tight",
+                          isMenuSliding
+                            ? "opacity-0 translate-x-12"
+                            : "opacity-100 translate-x-0"
+                        )}
+                        style={{
+                          transitionDelay: isMenuSliding
+                            ? `${index * 25}ms`
+                            : `${150 + index * 75}ms`
+                        }}
+                      >
+                        <span className="magnetic-text">{item.name}</span>
+                      </Link>
+                    </Magnetic>
+                  </div>
                 ))}
               </nav>
 
               {/* Social Links dengan animation yang lebih responsif */}
               <div className={cn(
-                "pt-8 border-t border-foreground-light/30 transition-all duration-800 ease-out delay-300",
-                isMenuEntering 
-                  ? "opacity-0 translate-x-8" 
-                  : isMenuSliding
+                "pt-8 border-t border-gray-400 transition-all duration-800 ease-out delay-300",
+                isMenuSliding
                   ? "opacity-0 translate-x-8"
                   : "opacity-100 translate-x-0"
               )}>
-                <h3 className="text-sm font-medium text-foreground-light mb-4">Socials</h3>
-                <div className="w-8 h-px bg-foreground-light/50 mb-4"></div>
+                <h3 className="text-sm font-medium text-gray-400 mb-4">Socials</h3>
+                <div className="w-8 h-px bg-gray-400 mb-4"></div>
                 <div className="flex space-x-8">
                   {socials.map((social, index) => (
-                    <button
+                    <Magnetic 
                       key={social.name}
-                      onClick={() => handleSocialClick(social.href)}
-                      className={cn(
-                        "text-2xl text-foreground-light hover:text-foreground-light/80 transition-all duration-800 ease-out",
-                        isMenuEntering 
-                          ? "opacity-0 translate-y-4" 
-                          : isMenuSliding
-                          ? "opacity-0 translate-y-4"
-                          : "opacity-100 translate-y-0"
-                      )}
-                      style={{
-                        transitionDelay: isMenuEntering 
-                          ? `${index * 50}ms` 
-                          : isMenuSliding
-                          ? `${index * 25}ms`
-                          : `${350 + index * 75}ms`
-                      }}
+                      strength={0.25} 
+                      range={60} 
+                      onlyOnHover={true}
+                      textStrength={0.4}
+                      className="inline-block"
                     >
-                      {social.name}
-                    </button>
+                      <button
+                        onClick={() => handleSocialClick(social.href)}
+                        className={cn(
+                          "text-2xl text-foreground-light hover:text-foreground-light/80 transition-all duration-800 ease-out",
+                          isMenuSliding
+                            ? "opacity-0 translate-y-4"
+                            : "opacity-100 translate-y-0"
+                        )}
+                        style={{
+                          transitionDelay: isMenuSliding
+                            ? `${index * 25}ms`
+                            : `${350 + index * 75}ms`
+                        }}
+                      >
+                        <span className="magnetic-text">{social.name}</span>
+                      </button>
+                    </Magnetic>
                   ))}
                 </div>
               </div>
@@ -391,15 +407,10 @@ export const Header = () => {
               {/* Logo/Brand dengan animation yang lebih responsif */}
               <div className={cn(
                 "absolute bottom-8 left-8 transition-all duration-800 ease-out delay-400",
-                isMenuEntering 
-                  ? "opacity-0 translate-y-4" 
-                  : isMenuSliding
+                isMenuSliding
                   ? "opacity-0 translate-y-4"
                   : "opacity-100 translate-y-0"
               )}>
-                <div className="text-xs text-foreground-light">
-                  © Adhara Eka Sakti
-                </div>
               </div>
             </div>
           </div>
