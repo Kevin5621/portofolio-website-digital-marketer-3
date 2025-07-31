@@ -1,0 +1,214 @@
+/* ====================================================================
+   DESIGN SYSTEM FOUNDATION
+   Professional CSS Architecture - Base Scales Only
+   ==================================================================== */
+
+:root {
+  /* =======================================
+     SIZING & SPACING SCALES
+     ======================================= */
+  
+  /* === SPACING SCALE (Based on 4px grid) === */
+  --spacing-0: 0;
+  --spacing-1: 0.25rem;     /* 4px */
+  --spacing-2: 0.5rem;      /* 8px */
+  --spacing-3: 0.75rem;     /* 12px */
+  --spacing-4: 1rem;        /* 16px */
+  --spacing-5: 1.25rem;     /* 20px */
+  --spacing-6: 1.5rem;      /* 24px */
+  --spacing-7: 1.75rem;     /* 28px */
+  --spacing-8: 2rem;        /* 32px */
+  --spacing-9: 2.25rem;     /* 36px */
+  --spacing-10: 2.5rem;     /* 40px */
+  --spacing-11: 2.75rem;    /* 44px */
+  --spacing-12: 3rem;       /* 48px */
+  --spacing-14: 3.5rem;     /* 56px */
+  --spacing-16: 4rem;       /* 64px */
+  --spacing-20: 5rem;       /* 80px */
+  --spacing-24: 6rem;       /* 96px */
+  --spacing-28: 7rem;       /* 112px */
+  --spacing-32: 8rem;       /* 128px */
+  --spacing-36: 9rem;       /* 144px */
+  --spacing-40: 10rem;      /* 160px */
+  --spacing-44: 11rem;      /* 176px */
+  --spacing-48: 12rem;      /* 192px */
+  --spacing-52: 13rem;      /* 208px */
+  --spacing-56: 14rem;      /* 224px */
+  --spacing-60: 15rem;      /* 240px */
+  --spacing-64: 16rem;      /* 256px */
+  --spacing-72: 18rem;      /* 288px */
+  --spacing-80: 20rem;      /* 320px */
+  --spacing-96: 24rem;      /* 384px */
+
+  /* === TYPOGRAPHY SCALE === */
+  --font-size-xs: 0.75rem;      /* 12px */
+  --font-size-sm: 0.875rem;     /* 14px */
+  --font-size-base: 1rem;       /* 16px */
+  --font-size-lg: 1.125rem;     /* 18px */
+  --font-size-xl: 1.25rem;      /* 20px */
+  --font-size-2xl: 1.5rem;      /* 24px */
+  --font-size-3xl: 1.875rem;    /* 30px */
+  --font-size-4xl: 2.25rem;     /* 36px */
+  --font-size-5xl: 3rem;        /* 48px */
+  --font-size-6xl: 3.75rem;     /* 60px */
+  --font-size-7xl: 4.5rem;      /* 72px */
+  --font-size-8xl: 6rem;        /* 96px */
+  --font-size-9xl: 8rem;        /* 128px */
+
+  /* === LINE HEIGHT SCALE === */
+  --line-height-none: 1;
+  --line-height-tight: 1.25;
+  --line-height-snug: 1.375;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.625;
+  --line-height-loose: 2;
+
+  /* === FONT WEIGHT SCALE === */
+  --font-weight-thin: 100;
+  --font-weight-extralight: 200;
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+  --font-weight-black: 900;
+
+  /* =======================================
+     SEMANTIC COLOR SYSTEM
+     ======================================= */
+
+  /* === BRAND COLORS === */
+  --color-brand-50: 220 100% 97%;
+  --color-brand-100: 220 95% 93%;
+  --color-brand-200: 221 87% 86%;
+  --color-brand-300: 222 78% 77%;
+  --color-brand-400: 223 69% 67%;
+  --color-brand-500: 224 60% 57%;
+  --color-brand-600: 225 57% 47%;
+  --color-brand-700: 226 54% 37%;
+  --color-brand-800: 227 51% 27%;
+  --color-brand-900: 228 48% 17%;
+  --color-brand-950: 229 45% 12%;
+  --color-brand-primary: var(--color-brand-500);
+  --color-brand-secondary: 274 60% 57%;
+
+  /* === SURFACE COLORS === */
+  --color-surface-default: 40 5% 95%;
+  --color-surface-background: 40 5% 95%;
+  --color-surface-card: 40 5% 95%;
+  --color-surface-secondary: 210 20% 98%;
+  --color-surface-tertiary: 210 15% 95%;
+  --color-surface-inverse: 210 15% 10%;
+  
+  /* === SEMANTIC COLOR SYSTEM - MONOCHROME === */
+  --color-primary: 40 5% 95%;               /* Light monochrome #F2F1EF */
+  --color-primary-foreground: 0 0% 15.7%;   /* Dark text on light */
+  --color-secondary: 0 0% 15.7%;            /* Dark monochrome #282828 */
+  --color-secondary-foreground: 40 5% 95%;  /* Light text on dark */
+  --color-accent: 40 5% 95%;                /* Light accent */
+  --color-accent-foreground: 0 0% 15.7%;    /* Dark text on accent */
+  --color-destructive: 0 84% 60%;           /* Red for errors */
+  --color-destructive-foreground: 40 5% 95%; /* Light text on destructive */
+  --color-muted: 220 8% 46%;                /* Muted gray */
+  --color-muted-foreground: 220 6% 36%;     /* Muted text */
+  --color-card: 40 5% 95%;                  /* Light card background */
+  --color-card-foreground: 0 0% 15.7%;      /* Dark text on cards */
+  --color-border: 220 8% 46%;               /* Border color */
+  --color-input: 40 5% 95%;                 /* Input background */
+  --color-ring: 0 0% 15.7%;                 /* Focus ring color */
+  
+  /* === BACKGROUND & TEXT COLORS - MONOCHROME === */
+  --color-background: 40 5% 95%;            /* Light background #F2F1EF */
+  --color-foreground: 0 0% 15.7%;           /* Dark text #282828 */
+  --color-background-dark: 0 0% 15.7%;      /* Dark background #282828 */
+  --color-foreground-light: 40 5% 95%;      /* Light text #F2F1EF */
+
+  /* === CONTENT COLORS - MONOCHROME === */
+  --color-content-default: 0 0% 15.7%;
+  --color-content-primary: 0 0% 15.7%;
+  --color-content-secondary: 220 8% 34%;
+  --color-content-tertiary: 220 6% 46%;
+  --color-content-inverse: 40 5% 95%;
+  --color-content-disabled: 220 8% 46%;
+  --color-content-link: 0 0% 15.7%;
+
+  /* === BORDER COLORS - MONOCHROME === */
+  --color-border-default: 220 8% 46%;
+  --color-border-primary: 220 8% 46%;
+  --color-border-secondary: 220 6% 36%;
+
+  /* === INPUT COLORS - MONOCHROME === */
+  --color-input-default: 40 5% 95%;
+  --color-input-border: 220 8% 46%;
+  --color-input-placeholder: 220 6% 46%;
+
+  /* === INTERACTIVE COLORS - MONOCHROME === */
+  --color-interactive-primary: 220 15% 8%;
+  --color-interactive-secondary: 40 5% 95%;
+  --color-interactive-hover: 220 8% 34%;
+  --color-interactive-active: 220 6% 36%;
+  --color-interactive-disabled: 220 8% 46%;
+
+  /* === STATE COLORS === */
+  --color-state-success: 146 59% 44%;
+  --color-state-warning: 38 92% 50%;
+  --color-state-error: 0 84% 60%;
+  --color-state-info: 198 100% 46%;
+
+  /* =======================================
+     RADIUS & SHADOWS SCALES
+     ======================================= */
+  
+  /* === BORDER RADIUS SCALE === */
+  --radius-none: 0;
+  --radius-xs: 0.125rem;        /* 2px */
+  --radius-sm: 0.25rem;         /* 4px */
+  --radius-base: 0.375rem;      /* 6px */
+  --radius-md: 0.5rem;          /* 8px */
+  --radius-lg: 0.75rem;         /* 12px */
+  --radius-xl: 1rem;            /* 16px */
+  --radius-2xl: 1.5rem;         /* 24px */
+  --radius-3xl: 2rem;           /* 32px */
+  --radius-full: 9999px;
+
+  /* === SHADOW SCALE === */
+  --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+  --shadow-base: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  --shadow-2xl: 0 35px 60px -12px rgba(0, 0, 0, 0.35);
+  --shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.05);
+
+  /* =======================================
+     Z-INDEX SCALE
+     ======================================= */
+  
+  --z-index-hide: -1;
+  --z-index-auto: auto;
+  --z-index-base: 0;
+  --z-index-docked: 10;
+  --z-index-dropdown: 1000;
+  --z-index-sticky: 1020;
+  --z-index-banner: 1030;
+  --z-index-overlay: 1040;
+  --z-index-modal: 1050;
+  --z-index-popover: 1060;
+  --z-index-skiplink: 1070;
+  --z-index-toast: 1080;
+  --z-index-tooltip: 1090;
+  --z-index-max: 2147483647;
+
+  /* =======================================
+     ZOOM COMPENSATION SYSTEM
+     ======================================= */
+  
+  /* Zoom compensation factor (set by JavaScript) */
+  --zoom-compensation-factor: 1;
+  --zoom-level: 1;
+  
+  /* Base font size for zoom compensation calculations */
+  --base-font-size: 16px;
+}

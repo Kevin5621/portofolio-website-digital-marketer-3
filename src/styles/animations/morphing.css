@@ -1,0 +1,161 @@
+/* =======================================
+   KEYFRAME ANIMATIONS
+   ======================================= */
+
+/* Enhanced morphing animation untuk transformasi yang lebih organic */
+@keyframes textMorphToBurger {
+  0% {
+    opacity: 1;
+    transform: translateX(0) translateY(0) scale(1) skewX(0deg) rotate(0deg);
+    letter-spacing: 0;
+    filter: blur(0px);
+  }
+  15% {
+    opacity: 0.95;
+    transform: translateX(15px) translateY(-1px) scale(0.98) skewX(2deg) rotate(2deg);
+    letter-spacing: 0.5px;
+    filter: blur(0.1px);
+  }
+  30% {
+    opacity: 0.85;
+    transform: translateX(35px) translateY(-2px) scale(0.92) skewX(5deg) rotate(8deg);
+    letter-spacing: 1.5px;
+    filter: blur(0.3px);
+  }
+  50% {
+    opacity: 0.65;
+    transform: translateX(60px) translateY(-1px) scale(0.8) skewX(8deg) rotate(20deg);
+    letter-spacing: 3px;
+    filter: blur(0.6px);
+  }
+  70% {
+    opacity: 0.35;
+    transform: translateX(85px) translateY(1px) scale(0.6) skewX(12deg) rotate(45deg);
+    letter-spacing: 6px;
+    filter: blur(1px);
+  }
+  85% {
+    opacity: 0.15;
+    transform: translateX(95px) translateY(0) scale(0.3) skewX(18deg) rotate(70deg);
+    letter-spacing: 10px;
+    filter: blur(1.5px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(100px) translateY(0) scale(0.1) skewX(25deg) rotate(90deg);
+    letter-spacing: 15px;
+    filter: blur(2px);
+  }
+}
+
+@keyframes textMorphFromBurger {
+  0% {
+    opacity: 0;
+    transform: translateX(100px) translateY(0) scale(0.1) skewX(25deg) rotate(90deg);
+    letter-spacing: 15px;
+    filter: blur(2px);
+  }
+  15% {
+    opacity: 0.15;
+    transform: translateX(95px) translateY(0) scale(0.3) skewX(18deg) rotate(70deg);
+    letter-spacing: 10px;
+    filter: blur(1.5px);
+  }
+  30% {
+    opacity: 0.35;
+    transform: translateX(85px) translateY(1px) scale(0.6) skewX(12deg) rotate(45deg);
+    letter-spacing: 6px;
+    filter: blur(1px);
+  }
+  50% {
+    opacity: 0.65;
+    transform: translateX(60px) translateY(-1px) scale(0.8) skewX(8deg) rotate(20deg);
+    letter-spacing: 3px;
+    filter: blur(0.6px);
+  }
+  70% {
+    opacity: 0.85;
+    transform: translateX(35px) translateY(-2px) scale(0.92) skewX(5deg) rotate(8deg);
+    letter-spacing: 1.5px;
+    filter: blur(0.3px);
+  }
+  85% {
+    opacity: 0.95;
+    transform: translateX(15px) translateY(-1px) scale(0.98) skewX(2deg) rotate(2deg);
+    letter-spacing: 0.5px;
+    filter: blur(0.1px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) translateY(0) scale(1) skewX(0deg) rotate(0deg);
+    letter-spacing: 0;
+    filter: blur(0px);
+  }
+}
+
+/* Enhanced burger morphing animation */
+@keyframes burgerMorphFromText {
+  0% {
+    opacity: 0;
+    transform: translateX(-100px) translateY(0) scale(0.1) rotate(-180deg) skewX(-25deg);
+    filter: blur(2px);
+  }
+  20% {
+    opacity: 0.2;
+    transform: translateX(-80px) translateY(-3px) scale(0.3) rotate(-135deg) skewX(-18deg);
+    filter: blur(1.5px);
+  }
+  40% {
+    opacity: 0.5;
+    transform: translateX(-60px) translateY(-8px) scale(0.5) rotate(-90deg) skewX(-12deg);
+    filter: blur(1px);
+  }
+  60% {
+    opacity: 0.75;
+    transform: translateX(-30px) translateY(-5px) scale(0.75) rotate(-45deg) skewX(-8deg);
+    filter: blur(0.5px);
+  }
+  80% {
+    opacity: 0.9;
+    transform: translateX(-10px) translateY(-2px) scale(0.9) rotate(-15deg) skewX(-3deg);
+    filter: blur(0.2px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) translateY(0) scale(1) rotate(0deg) skewX(0deg);
+    filter: blur(0px);
+  }
+}
+
+@keyframes burgerMorphToText {
+  0% {
+    opacity: 1;
+    transform: translateX(0) translateY(0) scale(1) rotate(0deg) skewX(0deg);
+    filter: blur(0px);
+  }
+  20% {
+    opacity: 0.9;
+    transform: translateX(-10px) translateY(-2px) scale(0.9) rotate(-15deg) skewX(-3deg);
+    filter: blur(0.2px);
+  }
+  40% {
+    opacity: 0.75;
+    transform: translateX(-30px) translateY(-5px) scale(0.75) rotate(-45deg) skewX(-8deg);
+    filter: blur(0.5px);
+  }
+  60% {
+    opacity: 0.5;
+    transform: translateX(-60px) translateY(-8px) scale(0.5) rotate(-90deg) skewX(-12deg);
+    filter: blur(1px);
+  }
+  80% {
+    opacity: 0.2;
+    transform: translateX(-80px) translateY(-3px) scale(0.3) rotate(-135deg) skewX(-18deg);
+    filter: blur(1.5px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-100px) translateY(0) scale(0.1) rotate(-180deg) skewX(-25deg);
+    filter: blur(2px);
+  }
+}

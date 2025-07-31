@@ -1,0 +1,48 @@
+/* =======================================
+   BASE TYPOGRAPHY STYLES
+   ======================================= */
+
+body {
+  font-family: var(--font-poppins), system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-normal);
+  font-weight: var(--font-weight-normal);
+  background-color: hsl(var(--color-background));
+  color: hsl(var(--color-foreground));
+  transition: background-color 0.2s ease, color 0.2s ease;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+html {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  transition: font-size 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Prevent double scrollbars during zoom compensation */
+html.zoom-compensating {
+  overflow-x: hidden;
+}
+
+/* =======================================
+   SCROLLBAR HIDDEN - ALL BROWSERS
+   ======================================= */
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for all elements */
+* {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+*::-webkit-scrollbar {
+  display: none;  /* Chrome, Safari and Opera */
+}

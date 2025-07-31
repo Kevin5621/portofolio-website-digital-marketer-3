@@ -1,0 +1,52 @@
+/* =======================================
+   DARK MODE OVERRIDES - MONOCHROME
+   ======================================= */
+
+[data-theme="dark"],
+.dark {
+  /* Override semantic colors for dark mode - monochrome */
+  --color-background: 0 0% 15.7%;
+  --color-foreground: 40 5% 95%;
+  --color-background-dark: 0 0% 15.7%;
+  --color-foreground-light: 40 5% 95%;
+  
+  --color-card: 220 12% 16%;
+  --color-card-foreground: 40 5% 95%;
+  --color-border: 220 10% 24%;
+  --color-input: 220 12% 16%;
+  --color-muted: 220 8% 46%;
+  --color-muted-foreground: 220 6% 36%;
+
+  /* Override content colors for dark mode */
+  --color-content-default: 40 5% 95%;
+  --color-content-primary: 40 5% 95%;
+  --color-content-secondary: 220 8% 64%;
+  --color-content-tertiary: 220 6% 46%;
+  --color-content-inverse: 40 5% 95%;
+  --color-content-disabled: 220 8% 46%;
+  --color-content-link: 40 5% 95%;
+
+  /* Adjust shadows for dark mode */
+  --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.15);
+  --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 2px -1px rgba(0, 0, 0, 0.2);
+  --shadow-base: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -2px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 6px -4px rgba(0, 0, 0, 0.2);
+  --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 8px 10px -6px rgba(0, 0, 0, 0.2);
+  --shadow-xl: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
+  --shadow-2xl: 0 35px 60px -12px rgba(0, 0, 0, 0.45);
+  --shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.15);
+}
+
+/* =======================================
+   HERO SECTION SPECIFIC STYLES
+   ======================================= */
+
+/* Ensure light text in HeroSection */
+section[data-theme="dark"] h1,
+section[data-theme="dark"] .text-content-inverse {
+  color: rgb(242,241,239) !important;
+}
+
+section[data-theme="dark"] .text-white {
+  color: rgb(242,241,239) !important;
+}

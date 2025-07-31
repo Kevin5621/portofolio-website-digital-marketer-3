@@ -1,0 +1,116 @@
+/* =======================================
+   UTILITIES LAYER
+   ======================================= */
+
+@layer utilities {
+  /* Semantic Color Utilities */
+  .bg-background { background-color: hsl(var(--color-background)); }
+  .bg-foreground { background-color: hsl(var(--color-foreground)); }
+  .bg-background-dark { background-color: hsl(var(--color-background-dark)); }
+  .bg-foreground-light { background-color: hsl(var(--color-foreground-light)); }
+  .bg-primary { background-color: hsl(var(--color-primary)); }
+  .bg-secondary { background-color: hsl(var(--color-secondary)); }
+  .bg-accent { background-color: hsl(var(--color-accent)); }
+  .bg-destructive { background-color: hsl(var(--color-destructive)); }
+  .bg-muted { background-color: hsl(var(--color-muted)); }
+  .bg-card { background-color: hsl(var(--color-card)); }
+  .bg-border { background-color: hsl(var(--color-border)); }
+  .bg-input { background-color: hsl(var(--color-input)); }
+
+  .text-background { color: hsl(var(--color-background)); }
+  .text-foreground { color: hsl(var(--color-foreground)); }
+  .text-background-dark { color: hsl(var(--color-background-dark)); }
+  .text-foreground-light { color: hsl(var(--color-foreground-light)); }
+  .text-primary { color: hsl(var(--color-primary)); }
+  .text-secondary { color: hsl(var(--color-secondary)); }
+  .text-accent { color: hsl(var(--color-accent)); }
+  .text-destructive { color: hsl(var(--color-destructive)); }
+  .text-muted { color: hsl(var(--color-muted)); }
+  .text-muted-foreground { color: hsl(var(--color-muted-foreground)); }
+  .text-card { color: hsl(var(--color-card)); }
+  .text-card-foreground { color: hsl(var(--color-card-foreground)); }
+  .text-border { color: hsl(var(--color-border)); }
+  .text-input { color: hsl(var(--color-input)); }
+
+  /* Content color utilities */
+  .text-content-default { color: hsl(var(--color-content-default)); }
+  .text-content-primary { color: hsl(var(--color-content-primary)); }
+  .text-content-secondary { color: hsl(var(--color-content-secondary)); }
+  .text-content-tertiary { color: hsl(var(--color-content-tertiary)); }
+  .text-content-inverse { color: hsl(var(--color-content-inverse)) !important; }
+  .text-content-disabled { color: hsl(var(--color-content-disabled)); }
+  .text-content-link { color: hsl(var(--color-content-link)); }
+
+  /* Background content utilities */
+  .bg-content-default { background-color: hsl(var(--color-content-default)); }
+  .bg-content-primary { background-color: hsl(var(--color-content-primary)); }
+  .bg-content-secondary { background-color: hsl(var(--color-content-secondary)); }
+  .bg-content-tertiary { background-color: hsl(var(--color-content-tertiary)); }
+  .bg-content-inverse { background-color: hsl(var(--color-content-inverse)); }
+  .bg-content-disabled { background-color: hsl(var(--color-content-disabled)); }
+  .bg-content-link { background-color: hsl(var(--color-content-link)); }
+
+  /* Surface background utilities */
+  .bg-surface-background { background-color: hsl(var(--color-surface-background)); }
+  .bg-surface-default { background-color: hsl(var(--color-surface-default)); }
+  .bg-surface-card { background-color: hsl(var(--color-surface-card)); }
+  .bg-surface-secondary { background-color: hsl(var(--color-surface-secondary)); }
+  .bg-surface-tertiary { background-color: hsl(var(--color-surface-tertiary)); }
+  .bg-surface-inverse { background-color: hsl(var(--color-surface-inverse)); }
+
+  .border-background { border-color: hsl(var(--color-background)); }
+  .border-foreground { border-color: hsl(var(--color-foreground)); }
+  .border-primary { border-color: hsl(var(--color-primary)); }
+  .border-secondary { border-color: hsl(var(--color-secondary)); }
+  .border-accent { border-color: hsl(var(--color-accent)); }
+  .border-destructive { border-color: hsl(var(--color-destructive)); }
+  .border-muted { border-color: hsl(var(--color-muted)); }
+  .border-card { border-color: hsl(var(--color-card)); }
+  .border-border { border-color: hsl(var(--color-border)); }
+  .border-input { border-color: hsl(var(--color-input)); }
+
+  /* Focus visible styles */
+  .focus-visible\:outline-brand:focus-visible {
+    outline: 2px solid hsl(var(--color-primary));
+    outline-offset: 2px;
+  }
+
+  /* Text balance utility */
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Typography Scale Utilities */
+  .text-display-sm { font-size: var(--font-size-2xl); line-height: var(--line-height-tight); font-weight: var(--font-weight-bold); }
+  .text-display-md { font-size: var(--font-size-3xl); line-height: var(--line-height-tight); font-weight: var(--font-weight-bold); }
+  .text-display-lg { font-size: var(--font-size-4xl); line-height: var(--line-height-tight); font-weight: var(--font-weight-bold); }
+  
+  .text-heading-sm { font-size: var(--font-size-lg); line-height: var(--line-height-snug); font-weight: var(--font-weight-semibold); }
+  .text-heading-md { font-size: var(--font-size-xl); line-height: var(--line-height-snug); font-weight: var(--font-weight-semibold); }
+  .text-heading-lg { font-size: var(--font-size-2xl); line-height: var(--line-height-snug); font-weight: var(--font-weight-semibold); }
+  
+  .text-body-sm { font-size: var(--font-size-sm); line-height: var(--line-height-normal); }
+  .text-body-md { font-size: var(--font-size-base); line-height: var(--line-height-normal); }
+  .text-body-lg { font-size: var(--font-size-lg); line-height: var(--line-height-normal); }
+
+  /* Responsive grid auto-fit */
+  .grid-auto-fit {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+
+  .grid-auto-fill {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+
+  /* Zoom compensation utilities */
+  .zoom-stable {
+    /* Elements with this class will maintain consistent size regardless of browser zoom */
+    font-size: calc(var(--font-size-base) * var(--zoom-compensation-factor));
+  }
+
+  .zoom-compensated {
+    /* Apply zoom compensation to transform scale */
+    transform: scale(var(--zoom-compensation-factor));
+    transform-origin: top left;
+  }
+}

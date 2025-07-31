@@ -1,0 +1,72 @@
+/* =======================================
+   CONTACT BUTTON TEXT STYLES
+   ======================================= */
+
+/* PRODUCTION: Semantic colors - Black and White theme colors */
+
+/* Initial State - Target: White semantic color */
+.contact-button-mask-enhanced .contact-text {
+  color: hsl(var(--color-content-inverse)) !important; /* White semantic color for initial state */
+  transition: color 0.3s ease, transform 0.3s ease;
+  will-change: color, transform;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  position: relative;
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* Hover State - Target: Black semantic color */
+.contact-button-mask-enhanced:hover .contact-text {
+  color: hsl(var(--color-content-primary)) !important; /* Black semantic color for hover state */
+}
+
+/* Most specific rule for h3 with contact-text class */
+.contact-button-mask-enhanced h3.contact-text {
+  color: hsl(var(--color-content-inverse)) !important; /* White semantic color for initial state */
+}
+
+.contact-button-mask-enhanced:hover h3.contact-text {
+  color: hsl(var(--color-content-primary)) !important; /* Black semantic color for hover state */
+}
+
+/* Extra specific rules untuk memastikan override */
+.contact-button-mask-enhanced button .contact-text {
+  color: hsl(var(--color-content-inverse)) !important; /* White semantic color for initial state */
+}
+
+.contact-button-mask-enhanced:hover button .contact-text {
+  color: hsl(var(--color-content-primary)) !important; /* Black semantic color for hover state */
+}
+
+/* Override any Tailwind text color classes */
+.contact-button-mask-enhanced .text-3xl.contact-text {
+  color: hsl(var(--color-content-inverse)) !important; /* White semantic color for initial state */
+}
+
+.contact-button-mask-enhanced:hover .text-3xl.contact-text {
+  color: hsl(var(--color-content-primary)) !important; /* Black semantic color for hover state */
+}
+
+/* Simplified and more specific text color rules */
+.contact-button-mask-enhanced:hover h3,
+.contact-button-mask-enhanced:hover .magnetic-text,
+.contact-button-mask-enhanced:hover .text-white {
+  color: hsl(var(--color-content-primary)) !important;
+  transition: color 0.3s ease;
+}
+
+.contact-button-mask-enhanced .magnetic-text {
+  position: relative;
+  z-index: 10;
+  transition: color 0.3s ease, transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  font-weight: 500;
+  will-change: transform, color;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+/* Enhanced magnetic responsiveness for contact text */
+.contact-button-mask-enhanced:hover .magnetic-text {
+  transition: color 0.3s ease, transform 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}

@@ -1,0 +1,130 @@
+/* =======================================
+   ZOOM COMPENSATION SPECIFIC STYLES
+   ======================================= */
+
+/* Debug indicator for zoom compensation */
+html.zoom-compensating::before {
+  /* Development indicator - remove in production */
+  content: "Zoom: " attr(data-zoom-level) " | Compensation: " attr(data-compensation-factor);
+  position: fixed;
+  top: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.8);
+  color: rgb(242,241,239);
+  padding: 4px 8px;
+  font-size: 12px;
+  font-family: monospace;
+  z-index: var(--z-index-max);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+/* Show debug indicator only in development */
+html.zoom-compensating[data-debug="true"]::before {
+  opacity: 1;
+}
+
+/* Special handling for fixed elements during zoom compensation */
+.zoom-fixed {
+  /* For elements that need to remain fixed during zoom */
+  position: fixed;
+  transform: scale(var(--zoom-compensation-factor));
+  transform-origin: top left;
+}
+
+/* Special handling for absolutely positioned elements */
+.zoom-absolute {
+  /* For absolutely positioned elements that need zoom compensation */
+  transform: scale(var(--zoom-compensation-factor));
+  transform-origin: top left;
+}
+
+/* Additional utility classes for zoom compensation */
+.zoom-stable {
+  /* Font size compensation only */
+  font-size: calc(1rem * var(--zoom-compensation-factor)) !important;
+}
+
+.zoom-scale {
+  /* Transform scale compensation */
+  transform: scale(var(--zoom-compensation-factor));
+  transform-origin: top left;
+}
+
+.zoom-padding {
+  /* Padding compensation */
+  padding: calc(1rem * var(--zoom-compensation-factor));
+}
+
+.zoom-margin {
+  /* Margin compensation */
+  margin: calc(1rem * var(--zoom-compensation-factor));
+}
+
+.zoom-border {
+  /* Border width compensation */
+  border-width: calc(1px * var(--zoom-compensation-factor));
+}
+
+/* Responsive zoom compensation classes */
+.zoom-text-sm {
+  font-size: calc(0.875rem * var(--zoom-compensation-factor));
+}
+
+.zoom-text-base {
+  font-size: calc(1rem * var(--zoom-compensation-factor));
+}
+
+.zoom-text-lg {
+  font-size: calc(1.125rem * var(--zoom-compensation-factor));
+}
+
+.zoom-text-xl {
+  font-size: calc(1.25rem * var(--zoom-compensation-factor));
+}
+
+.zoom-text-2xl {
+  font-size: calc(1.5rem * var(--zoom-compensation-factor));
+}
+
+.zoom-text-3xl {
+  font-size: calc(1.875rem * var(--zoom-compensation-factor));
+}
+
+.zoom-text-4xl {
+  font-size: calc(2.25rem * var(--zoom-compensation-factor));
+}
+
+/* Button compensation */
+.zoom-btn {
+  font-size: calc(1rem * var(--zoom-compensation-factor));
+  padding: calc(0.5rem * var(--zoom-compensation-factor)) calc(1rem * var(--zoom-compensation-factor));
+  border-radius: calc(0.375rem * var(--zoom-compensation-factor));
+}
+
+/* Card compensation */
+.zoom-card {
+  padding: calc(1.5rem * var(--zoom-compensation-factor));
+  border-radius: calc(0.5rem * var(--zoom-compensation-factor));
+  border-width: calc(1px * var(--zoom-compensation-factor));
+}
+
+/* Icon compensation */
+.zoom-icon {
+  width: calc(1.5rem * var(--zoom-compensation-factor));
+  height: calc(1.5rem * var(--zoom-compensation-factor));
+}
+
+/* Grid and flex compensation */
+.zoom-gap {
+  gap: calc(1rem * var(--zoom-compensation-factor));
+}
+
+.zoom-gap-sm {
+  gap: calc(0.5rem * var(--zoom-compensation-factor));
+}
+
+.zoom-gap-lg {
+  gap: calc(1.5rem * var(--zoom-compensation-factor));
+}
