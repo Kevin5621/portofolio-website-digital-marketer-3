@@ -22,9 +22,15 @@ const socials = [
 
 export const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const [activeSection, setActiveSection] = useState('home') // Default ke home section
+  const [activeSection, setActiveSection] = useState('')
   const [isMenuSliding, setIsMenuSliding] = useState(false)
   const [isMenuEntering, setIsMenuEntering] = useState(false)
+  const [isClient, setIsClient] = useState(false)
+
+  // Set client flag untuk menghindari hydration mismatch
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
 
   // Intersection Observer untuk mendeteksi section aktif
   useLayoutEffect(() => {
@@ -39,9 +45,6 @@ export const Header = () => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             const sectionId = entry.target.id
-            console.log('Section detected:', sectionId)
-            console.log('Section is intersecting:', entry.isIntersecting)
-            console.log('Section rect:', entry.boundingClientRect)
             setActiveSection(sectionId)
           }
         })
@@ -51,46 +54,21 @@ export const Header = () => {
 
       // Observe semua section
       const sections = document.querySelectorAll('section[id]')
-      console.log('Found sections:', Array.from(sections).map(s => s.id))
       sections.forEach(section => observer.observe(section))
 
-      // Fallback: Pastikan section 'home' terdeteksi di awal
+      // Fallback: Pastikan section pertama terdeteksi di awal
       setTimeout(() => {
-        const homeSection = document.getElementById('home')
-        if (homeSection && activeSection !== 'home') {
-          console.log('Fallback: Setting active section to home')
-          setActiveSection('home')
+        const firstSection = sections[0]
+        if (firstSection && !activeSection) {
+          setActiveSection(firstSection.id)
         }
       }, 100)
 
-      // Backup: Scroll event listener untuk mendeteksi section
-      const handleScroll = () => {
-        const scrollPosition = window.scrollY + window.innerHeight / 2
-        
-        const sections = document.querySelectorAll('section[id]')
-        let currentSection = 'home'
-        
-        sections.forEach(section => {
-          const rect = section.getBoundingClientRect()
-          const sectionTop = rect.top + window.scrollY
-          const sectionBottom = sectionTop + rect.height
-          
-          if (scrollPosition >= sectionTop && scrollPosition <= sectionBottom) {
-            currentSection = section.id
-          }
-        })
-        
-        setActiveSection(currentSection)
-      }
-
-      window.addEventListener('scroll', handleScroll, { passive: true })
-
       return () => {
         sections.forEach(section => observer.unobserve(section))
-        window.removeEventListener('scroll', handleScroll)
       }
     }
-  }, [])
+  }, [activeSection])
 
   const handleSmoothScroll = (href: string) => {
     if (href.startsWith('#')) {
@@ -130,6 +108,11 @@ export const Header = () => {
 
   // Sistem adaptif berdasarkan section aktif
   const getSectionTheme = (sectionId: string) => {
+    // Jika di server-side, return default
+    if (typeof window === 'undefined') {
+      return { isDark: false }
+    }
+
     // HeroSection (home) - Background hitam
     if (sectionId === 'home') {
       return { isDark: true }
@@ -163,24 +146,42 @@ export const Header = () => {
 
   // Logika untuk menampilkan menu berdasarkan section aktif
   // Menu text hanya muncul di section pertama dari setiap halaman, di section lain transform menjadi burger
-  // Fallback: jika tidak ada section yang terdeteksi, default ke menu text
   const isFirstSection = activeSection === 'home' || activeSection === 'hello' || activeSection === ''
-  const showTextMenu = isFirstSection && !isMobileMenuOpen && !isWorkPage
+  const showTextMenu = isFirstSection && !isMobileMenuOpen && !isWorkPage && isClient
   const showBurgerMenu = (!isFirstSection) || isMobileMenuOpen || isWorkPage
 
-  // Debug: Log section aktif dan state menu
-  useEffect(() => {
-    console.log('=== HEADER DEBUG ===')
-    console.log('Active Section:', activeSection)
-    console.log('Active Section Type:', typeof activeSection)
-    console.log('Active Section === "home":', activeSection === 'home')
-    console.log('Show Text Menu:', showTextMenu)
-    console.log('Show Burger Menu:', showBurgerMenu)
-    console.log('Is Dark:', isDark)
-    console.log('Is Mobile Menu Open:', isMobileMenuOpen)
-    console.log('Is Work Page:', isWorkPage)
-    console.log('====================')
-  }, [activeSection, showTextMenu, showBurgerMenu, isDark, isMobileMenuOpen, isWorkPage])
+  // Jika belum di client, render dengan default state
+  if (!isClient) {
+    return (
+      <header className="fixed top-0 left-0 right-0 z-50 bg-transparent">
+        <nav className="w-full px-8 py-12">
+          <div className="flex items-center justify-between">
+            <div className="text-2xl text-foreground">
+              © Adhara Eka Sakti
+            </div>
+            <div className="hidden md:block relative">
+              <div className="flex items-baseline space-x-12">
+                {navigation.map((item) => (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    className="text-2xl text-foreground hover:text-foreground/80"
+                  >
+                    {item.name}
+                  </Link>
+                ))}
+              </div>
+            </div>
+            <div className="md:hidden">
+              <button className="w-16 h-16 rounded-full bg-foreground flex items-center justify-center">
+                <Menu className="h-8 w-8 text-background" />
+              </button>
+            </div>
+          </div>
+        </nav>
+      </header>
+    )
+  }
 
   return (
     <>
@@ -223,7 +224,7 @@ export const Header = () => {
                       isDark 
                         ? "text-foreground-light hover:text-foreground-light/80" 
                         : "text-foreground hover:text-foreground/80",
-                      // Animasi slide - Menu text hanya muncul di home section
+                      // Animasi slide - Menu text hanya muncul di section pertama
                       showTextMenu 
                         ? "opacity-100 translate-x-0 scale-100" 
                         : "opacity-0 translate-x-96 scale-0"
