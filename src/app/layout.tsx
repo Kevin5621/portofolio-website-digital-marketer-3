@@ -3,6 +3,7 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 import { ZoomCompensationProvider } from "@/components/layout/ZoomCompensationProvider";
 import { SmoothScrollProvider } from "@/components/layout/SmoothScrollProvider";
+import { IntroSlideUp } from "@/components/layout/IntroSlideUp";
 import { Header } from "@/components/layout/Header";
 
 const poppins = Poppins({
@@ -27,6 +28,7 @@ export default function RootLayout({
       <body
         className={`${poppins.variable} antialiased font-poppins`}
       >
+        <IntroSlideUp />
         <ZoomCompensationProvider defaultEnabled={true} smoothTransition={true}>
           <SmoothScrollProvider>
             <Header />

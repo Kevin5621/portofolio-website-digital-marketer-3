@@ -283,6 +283,14 @@ body {
   .bg-content-disabled { background-color: hsl(var(--color-content-disabled)); }
   .bg-content-link { background-color: hsl(var(--color-content-link)); }
 
+  /* Surface background utilities */
+  .bg-surface-background { background-color: hsl(var(--color-surface-background)); }
+  .bg-surface-default { background-color: hsl(var(--color-surface-default)); }
+  .bg-surface-card { background-color: hsl(var(--color-surface-card)); }
+  .bg-surface-secondary { background-color: hsl(var(--color-surface-secondary)); }
+  .bg-surface-tertiary { background-color: hsl(var(--color-surface-tertiary)); }
+  .bg-surface-inverse { background-color: hsl(var(--color-surface-inverse)); }
+
   .border-background { border-color: hsl(var(--color-background)); }
   .border-foreground { border-color: hsl(var(--color-foreground)); }
   .border-primary { border-color: hsl(var(--color-primary)); }
