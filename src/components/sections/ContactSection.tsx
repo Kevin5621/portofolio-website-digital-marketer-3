@@ -1,5 +1,7 @@
 'use client'
 
+import { Magnetic } from '@/components/ui/magnetic'
+
 export const ContactSection = () => {
   return (
     <section 
@@ -12,11 +14,17 @@ export const ContactSection = () => {
           
           {/* Left Column - Circle & Title */}
           <div className="flex flex-col space-y-16">
-            {/* Large Black Circle */}
-            <div className="w-80 h-80 bg-content-primary rounded-full flex items-center justify-center">
-              <div className="text-center">
-                <h3 className="text-3xl font-medium text-content-inverse">Get in touch</h3>
-              </div>
+            {/* Large Black Circle with Magnetic Effect */}
+            <div className="w-80 h-80 relative flex items-center justify-center">
+              <Magnetic strength={0.4} textStrength={0.8} range={160} onlyOnHover={true}>
+                <div className="w-80 h-80 bg-content-primary rounded-full flex items-center justify-center cursor-pointer group transition-all duration-300 hover:shadow-2xl">
+                  <div className="text-center">
+                    <h3 className="text-3xl font-medium text-content-inverse group-hover:scale-105 transition-transform duration-300 magnetic-text">
+                      Get in touch
+                    </h3>
+                  </div>
+                </div>
+              </Magnetic>
             </div>
             
             {/* Contact Title - Made larger and takes more space */}
