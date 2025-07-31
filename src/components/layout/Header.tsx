@@ -30,15 +30,18 @@ export const Header = () => {
   useLayoutEffect(() => {
     if (typeof window !== 'undefined') {
       const options = {
-        root: null, // viewport
-        rootMargin: '-20% 0px -20% 0px', // Section dianggap aktif jika 60% terlihat
-        threshold: 0.5, // 50% section harus terlihat
+        root: null,
+        rootMargin: '-20% 0px -20% 0px',
+        threshold: 0.5,
       }
 
       const observerCallback = (entries: IntersectionObserverEntry[]) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             const sectionId = entry.target.id
+            console.log('Section detected:', sectionId)
+            console.log('Section is intersecting:', entry.isIntersecting)
+            console.log('Section rect:', entry.boundingClientRect)
             setActiveSection(sectionId)
           }
         })
@@ -48,7 +51,17 @@ export const Header = () => {
 
       // Observe semua section
       const sections = document.querySelectorAll('section[id]')
+      console.log('Found sections:', Array.from(sections).map(s => s.id))
       sections.forEach(section => observer.observe(section))
+
+      // Fallback: Pastikan section 'home' terdeteksi di awal
+      setTimeout(() => {
+        const homeSection = document.getElementById('home')
+        if (homeSection && activeSection !== 'home') {
+          console.log('Fallback: Setting active section to home')
+          setActiveSection('home')
+        }
+      }, 100)
 
       // Backup: Scroll event listener untuk mendeteksi section
       const handleScroll = () => {
@@ -82,7 +95,6 @@ export const Header = () => {
   const handleSmoothScroll = (href: string) => {
     if (href.startsWith('#')) {
       scrollToElement(href, { offset: -100 })
-      // Tutup menu dengan animasi yang sama seperti handleCloseMenu
       if (isMobileMenuOpen) {
         handleCloseMenu()
       }
@@ -91,7 +103,6 @@ export const Header = () => {
 
   const handleSocialClick = (href: string) => {
     window.open(href, '_blank')
-    // Tutup menu dengan animasi yang sama seperti handleCloseMenu
     if (isMobileMenuOpen) {
       handleCloseMenu()
     }
@@ -99,19 +110,17 @@ export const Header = () => {
 
   const handleOpenMenu = () => {
     setIsMobileMenuOpen(true)
-    setIsMenuEntering(true) // Mulai dengan animasi masuk
-    setIsMenuSliding(false) // Reset sliding state
+    setIsMenuEntering(true)
+    setIsMenuSliding(false)
     
-    // Setelah animasi masuk selesai, hilangkan state entering
     setTimeout(() => {
       setIsMenuEntering(false)
-    }, 100) // lebih responsive dan jangan diubah
+    }, 100)
   }
 
   const handleCloseMenu = () => {
-    setIsMenuSliding(true) // Mulai animasi slide keluar
+    setIsMenuSliding(true)
     
-    // Tunggu animasi selesai baru close menu
     setTimeout(() => {
       setIsMobileMenuOpen(false)
       setIsMenuSliding(false)
@@ -119,24 +128,59 @@ export const Header = () => {
     }, 600)
   }
 
-  // Logika untuk menentukan tema header berdasarkan section aktif
-  const isDarkSection = activeSection === 'home' // HeroSection adalah dark
-  const isLightSection = ['about', 'work', 'contact'].includes(activeSection)
+  // Sistem adaptif berdasarkan section aktif
+  const getSectionTheme = (sectionId: string) => {
+    // HeroSection (home) - Background hitam
+    if (sectionId === 'home') {
+      return { isDark: true }
+    }
+    
+    // AboutSection - Background putih
+    if (sectionId === 'about' || sectionId === 'about-section') {
+      return { isDark: false }
+    }
+    
+    // About page sections berdasarkan background class
+    const section = document.getElementById(sectionId)
+    if (section) {
+      const hasDarkBg = section.classList.contains('bg-surface-inverse') || 
+                        section.classList.contains('bg-background-dark')
+      
+      return { isDark: hasDarkBg }
+    }
+    
+    // Default untuk section yang tidak terdeteksi
+    return { isDark: false }
+  }
+
   const [isWorkPage, setIsWorkPage] = useState(false)
 
   useEffect(() => {
     setIsWorkPage(window.location.pathname === '/work')
   }, [])
 
-  // Logika untuk menampilkan menu text atau burger
-  // Versi 1: Menu text putih (dark section)
-  const showTextMenuWhite = isDarkSection && !isMobileMenuOpen && !isWorkPage
-  // Versi 2: Burger menu hitam (light section)
-  const showBurgerMenu = (isLightSection || isMobileMenuOpen) && !isWorkPage
-  // Versi 3: Menu text hitam (work page)
-  const showTextMenuBlack = isWorkPage && !isMobileMenuOpen
-  // Versi 4: Burger menu putih (work page mobile)
-  const showBurgerMenuWhite = isWorkPage && isMobileMenuOpen
+  const { isDark } = getSectionTheme(activeSection)
+
+  // Logika untuk menampilkan menu berdasarkan section aktif
+  // Menu text hanya muncul di section pertama dari setiap halaman, di section lain transform menjadi burger
+  // Fallback: jika tidak ada section yang terdeteksi, default ke menu text
+  const isFirstSection = activeSection === 'home' || activeSection === 'hello' || activeSection === ''
+  const showTextMenu = isFirstSection && !isMobileMenuOpen && !isWorkPage
+  const showBurgerMenu = (!isFirstSection) || isMobileMenuOpen || isWorkPage
+
+  // Debug: Log section aktif dan state menu
+  useEffect(() => {
+    console.log('=== HEADER DEBUG ===')
+    console.log('Active Section:', activeSection)
+    console.log('Active Section Type:', typeof activeSection)
+    console.log('Active Section === "home":', activeSection === 'home')
+    console.log('Show Text Menu:', showTextMenu)
+    console.log('Show Burger Menu:', showBurgerMenu)
+    console.log('Is Dark:', isDark)
+    console.log('Is Mobile Menu Open:', isMobileMenuOpen)
+    console.log('Is Work Page:', isWorkPage)
+    console.log('====================')
+  }, [activeSection, showTextMenu, showBurgerMenu, isDark, isMobileMenuOpen, isWorkPage])
 
   return (
     <>
@@ -146,18 +190,18 @@ export const Header = () => {
             {/* Copyright - Adaptif berdasarkan section aktif */}
             <div className={cn(
               "text-2xl transition-colors duration-300",
-              (isDarkSection && !isWorkPage) ? "text-foreground-light" : "text-foreground"
+              isDark ? "text-foreground-light" : "text-foreground"
             )}>
               © Adhara Eka Sakti
             </div>
 
-            {/* Navigation Container - Selalu ada untuk animasi seamless */}
+            {/* Navigation Container */}
             <div className="hidden md:block relative">
-              {/* Menu Text Putih - Versi 1 (dark section) */}
+              {/* Menu Text - Adaptif berdasarkan section aktif */}
               <div 
                 className={cn(
                   "flex items-baseline space-x-12 transition-all duration-1000 ease-out",
-                  !showTextMenuWhite && "pointer-events-none"
+                  !showTextMenu && "pointer-events-none"
                 )}
               >
                 {navigation.map((item, index) => (
@@ -173,19 +217,22 @@ export const Header = () => {
                       }
                     }}
                     className={cn(
-                      "text-2xl text-foreground-light hover:text-foreground-light/80 transition-all duration-1000 ease-out",
+                      "text-2xl transition-all duration-1000 ease-out",
                       "transform hover:scale-105 hover:-translate-y-0.5",
-                      // Bergerak lurus ke kanan tanpa flip
-                      showTextMenuWhite 
+                      // Warna text berdasarkan section
+                      isDark 
+                        ? "text-foreground-light hover:text-foreground-light/80" 
+                        : "text-foreground hover:text-foreground/80",
+                      // Animasi slide - Menu text hanya muncul di home section
+                      showTextMenu 
                         ? "opacity-100 translate-x-0 scale-100" 
                         : "opacity-0 translate-x-96 scale-0"
                     )}
                     style={{
-                      // Staggered animation untuk efek berurutan
-                      transitionDelay: showTextMenuWhite 
+                      transitionDelay: showTextMenu 
                         ? `${index * 100}ms` 
                         : `${(navigation.length - index - 1) * 150}ms`,
-                      transitionDuration: showTextMenuWhite ? '800ms' : '1200ms',
+                      transitionDuration: showTextMenu ? '800ms' : '1200ms',
                     } as React.CSSProperties}
                   >
                     {item.name}
@@ -193,47 +240,7 @@ export const Header = () => {
                 ))}
               </div>
 
-              {/* Menu Text Hitam - Versi 3 (work page) */}
-              <div 
-                className={cn(
-                  "flex items-baseline space-x-12 transition-all duration-1000 ease-out",
-                  !showTextMenuBlack && "pointer-events-none"
-                )}
-              >
-                {navigation.map((item, index) => (
-                  <Link
-                    key={item.name}
-                    href={item.href}
-                    onClick={(e) => {
-                      e.preventDefault()
-                      if (item.href.startsWith('/')) {
-                        window.location.href = item.href
-                      } else {
-                        handleSmoothScroll(item.href)
-                      }
-                    }}
-                    className={cn(
-                      "text-2xl text-foreground hover:text-foreground/80 transition-all duration-1000 ease-out",
-                      "transform hover:scale-105 hover:-translate-y-0.5",
-                      // Bergerak lurus ke kanan tanpa flip
-                      showTextMenuBlack 
-                        ? "opacity-100 translate-x-0 scale-100" 
-                        : "opacity-0 translate-x-96 scale-0"
-                    )}
-                    style={{
-                      // Staggered animation untuk efek berurutan
-                      transitionDelay: showTextMenuBlack 
-                        ? `${index * 100}ms` 
-                        : `${(navigation.length - index - 1) * 150}ms`,
-                      transitionDuration: showTextMenuBlack ? '800ms' : '1200ms',
-                    } as React.CSSProperties}
-                  >
-                    {item.name}
-                  </Link>
-                ))}
-              </div>
-
-              {/* Burger Button Hitam - Versi 2 (light section) */}
+              {/* Burger Button - Adaptif berdasarkan section aktif */}
               <div 
                 className={cn(
                   "absolute top-1/2 right-0 transform -translate-y-1/2 transition-all duration-1000 ease-out",
@@ -242,8 +249,8 @@ export const Header = () => {
                     : "opacity-0 scale-0 translate-x-0 pointer-events-none"
                 )}
                 style={{
-                  // Burger muncul setelah semua teks bergerak
-                  transitionDelay: showBurgerMenu ? '600ms' : '0ms',
+                  // Burger muncul setelah menu text hilang
+                  transitionDelay: showBurgerMenu ? '400ms' : '0ms',
                   transitionDuration: showBurgerMenu ? '800ms' : '400ms'
                 }}
               >
@@ -251,55 +258,30 @@ export const Header = () => {
                   onClick={handleOpenMenu}
                   className={cn(
                     "w-20 h-20 rounded-full flex items-center justify-center transition-all duration-300",
-                    "transform hover:scale-105 active:scale-95",
-                    // Background lingkaran hitam
-                    "bg-foreground hover:bg-foreground/90 shadow-xl hover:shadow-2xl"
+                    "transform hover:scale-105 active:scale-95 shadow-xl hover:shadow-2xl",
+                    // Background dan text berdasarkan section
+                    isDark
+                      ? "bg-foreground-light hover:bg-foreground-light/90"
+                      : "bg-foreground hover:bg-foreground/90"
                   )}
                   aria-label="Open menu"
                 >
-                  {/* Menu Icon hitam */}
-                  <Menu className="h-10 w-10 transition-all duration-300 text-background" />
-                </button>
-              </div>
-
-              {/* Burger Button Putih - Versi 4 (work page) */}
-              <div 
-                className={cn(
-                  "absolute top-1/2 right-0 transform -translate-y-1/2 transition-all duration-1000 ease-out",
-                  showBurgerMenuWhite 
-                    ? "opacity-100 scale-100 translate-x-0" 
-                    : "opacity-0 scale-0 translate-x-0 pointer-events-none"
-                )}
-                style={{
-                  // Burger muncul setelah semua teks bergerak
-                  transitionDelay: showBurgerMenuWhite ? '600ms' : '0ms',
-                  transitionDuration: showBurgerMenuWhite ? '800ms' : '400ms'
-                }}
-              >
-                <button
-                  onClick={handleOpenMenu}
-                  className={cn(
-                    "w-20 h-20 rounded-full flex items-center justify-center transition-all duration-300",
-                    "transform hover:scale-105 active:scale-95",
-                    // Background lingkaran putih
-                    "bg-foreground-light hover:bg-foreground-light/90 shadow-lg hover:shadow-xl"
-                  )}
-                  aria-label="Open menu"
-                >
-                  {/* Menu Icon putih */}
-                  <Menu className="h-10 w-10 transition-all duration-300 text-background-dark" />
+                  <Menu className={cn(
+                    "h-10 w-10 transition-all duration-300",
+                    isDark ? "text-background-dark" : "text-background"
+                  )} />
                 </button>
               </div>
             </div>
 
-            {/* Mobile Burger Button - Adaptif berdasarkan halaman */}
+            {/* Mobile Burger Button - Adaptif berdasarkan section aktif */}
             <div className="md:hidden">
               <button
                 onClick={handleOpenMenu}
                 className={cn(
                   "w-16 h-16 rounded-full flex items-center justify-center transition-all duration-300",
                   "transform hover:scale-105 active:scale-95",
-                  isDarkSection || isWorkPage
+                  isDark
                     ? "bg-foreground-light hover:bg-foreground-light/90" 
                     : "bg-foreground hover:bg-foreground/90"
                 )}
@@ -307,9 +289,7 @@ export const Header = () => {
               >
                 <Menu className={cn(
                   "h-8 w-8 transition-all duration-300",
-                  isDarkSection || isWorkPage
-                    ? "text-background-dark" 
-                    : "text-background"
+                  isDark ? "text-background-dark" : "text-background"
                 )} />
               </button>
             </div>
@@ -317,10 +297,10 @@ export const Header = () => {
         </nav>
       </header>
 
-      {/* Mobile Menu Sidebar - Smooth slide animation seperti IntroSlideUp */}
+      {/* Mobile Menu Sidebar */}
       {isMobileMenuOpen && (
         <>
-          {/* Backdrop dengan fade animation yang konsisten */}
+          {/* Backdrop */}
           <button
             className={cn(
               "fixed inset-0 z-40 bg-black/20 cursor-default transition-all duration-1000 ease-out",
@@ -336,19 +316,17 @@ export const Header = () => {
             tabIndex={-1}
           />
           
-          {/* Close Button dengan Magnetic Effect 2 Layer */}
+          {/* Close Button dengan Magnetic Effect */}
           <div className={cn(
             "fixed top-8 right-8 z-[60] transition-all duration-700 ease-out",
             (isMenuEntering || isMenuSliding) ? "opacity-0 scale-0" : "opacity-100 scale-100"
           )}>
-            {/* Layer 1: Card Magnetic Effect (zona lebih besar) */}
             <Magnetic 
               strength={0.2} 
               range={100} 
               onlyOnHover={true}
               className="inline-block"
             >
-              {/* Layer 2: Icon Magnetic Effect (lebih sensitif) */}
               <Magnetic 
                 strength={0.6} 
                 range={60} 
@@ -367,14 +345,11 @@ export const Header = () => {
             </Magnetic>
           </div>
           
-          {/* Sidebar - Layout persis dengan gambar */}
+          {/* Sidebar */}
           <div 
             className={cn(
               "fixed top-0 right-0 h-full w-1/3 bg-background-dark z-50 shadow-2xl",
               "transition-all duration-800 ease-out",
-              // Animasi slide yang lebih cepat dan responsif: 
-              // - Masuk: slide dari kanan ke kiri dengan rounded corner
-              // - Keluar: slide ke kanan dengan rounded corner yang membesar
               isMenuEntering 
                 ? "translate-x-full rounded-l-[1500px]" 
                 : isMenuSliding
@@ -382,8 +357,7 @@ export const Header = () => {
                 : "translate-x-0 rounded-none"
             )}
           >
-
-            {/* Navigation Content dengan layout persis gambar */}
+            {/* Navigation Content */}
             <div className={cn(
               "pt-24 px-8 pl-12 transition-all duration-800 ease-out",
               isMenuEntering 
@@ -403,7 +377,7 @@ export const Header = () => {
                 <div className="w-full h-px bg-gray-400"></div>
               </div>
 
-              {/* Navigation Links dengan staggered animation dan magnetic effect */}
+              {/* Navigation Links */}
               <nav className="mb-20">
                 {navigation.map((item, index) => (
                   <div key={item.name} className="mb-16">
@@ -416,20 +390,20 @@ export const Header = () => {
                     >
                       <Link
                         href={item.href}
-                                              onClick={(e) => {
-                        e.preventDefault()
-                        if (item.href.startsWith('/')) {
-                          window.location.href = item.href
-                        } else {
-                          handleSmoothScroll(item.href)
-                        }
-                      }}
-                                              className={cn(
-                        "block text-5xl font-bold text-foreground-light hover:text-foreground-light/80 transition-all duration-300 ease-out leading-tight",
-                        isMenuSliding
-                          ? "opacity-0 translate-x-12"
-                          : "opacity-100 translate-x-0"
-                      )}
+                        onClick={(e) => {
+                          e.preventDefault()
+                          if (item.href.startsWith('/')) {
+                            window.location.href = item.href
+                          } else {
+                            handleSmoothScroll(item.href)
+                          }
+                        }}
+                        className={cn(
+                          "block text-5xl font-bold text-foreground-light hover:text-foreground-light/80 transition-all duration-300 ease-out leading-tight",
+                          isMenuSliding
+                            ? "opacity-0 translate-x-12"
+                            : "opacity-100 translate-x-0"
+                        )}
                         style={{
                           transitionDelay: isMenuSliding
                             ? `${index * 25}ms`
@@ -443,7 +417,7 @@ export const Header = () => {
                 ))}
               </nav>
 
-              {/* Social Links dengan layout persis gambar */}
+              {/* Social Links */}
               <div className={cn(
                 "pt-12 transition-all duration-800 ease-out delay-300",
                 isMenuSliding
@@ -481,15 +455,6 @@ export const Header = () => {
                     </Magnetic>
                   ))}
                 </div>
-              </div>
-
-              {/* Logo/Brand dengan animation yang lebih responsif */}
-              <div className={cn(
-                "absolute bottom-8 left-8 transition-all duration-800 ease-out delay-400",
-                isMenuSliding
-                  ? "opacity-0 translate-y-4"
-                  : "opacity-100 translate-y-0"
-              )}>
               </div>
             </div>
           </div>

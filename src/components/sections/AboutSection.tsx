@@ -5,7 +5,7 @@ import Image from 'next/image'
 export const AboutSection = () => {
   return (
     <section 
-      id="about" 
+      id="about-section" 
       className="min-h-[200vh] bg-background relative overflow-hidden"
       data-theme="light"
     >
