@@ -31,7 +31,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
       setLoading(false)
       
       if (!user) {
-        router.push('/login')
+        router.push('/')
       }
     }
 
@@ -40,7 +40,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       (event, session) => {
         if (event === 'SIGNED_OUT' || !session) {
-          router.push('/login')
+          router.push('/')
         } else {
           setUser(session.user)
         }

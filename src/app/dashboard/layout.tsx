@@ -42,7 +42,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
       setLoading(false)
       
       if (!user) {
-        router.push('/auth/login')
+        router.push('/')
       }
     }
 
@@ -52,7 +52,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (event: string, session: any) => {
         if (event === 'SIGNED_OUT' || !session) {
-          router.push('/auth/login')
+          router.push('/')
         } else {
           setUser(session.user)
         }
