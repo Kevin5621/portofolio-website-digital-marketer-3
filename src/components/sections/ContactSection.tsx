@@ -14,12 +14,12 @@ export const ContactSection = () => {
           
           {/* Left Column - Circle & Title */}
           <div className="flex flex-col space-y-16">
-            {/* Large Black Circle with Magnetic Effect - 2 Layer seperti di Header */}
+            {/* Large Black Circle with Magnetic Effect - 2 Layer dengan sensitivitas tinggi */}
             <div className="w-80 h-80 relative flex items-center justify-center">
-              {/* Layer 1: Card Magnetic Effect (zona lebih besar) */}
-              <Magnetic strength={0.06} range={140} onlyOnHover={true}>
-                {/* Layer 2: Button Magnetic Effect (lebih sensitif) */}
-                <Magnetic strength={0.12} range={80} onlyOnHover={true}>
+              {/* Layer 1: Outer Magnetic Effect (zona deteksi awal yang lebih besar) */}
+              <Magnetic strength={0.04} range={200} onlyOnHover={true}>
+                {/* Layer 2: Inner Magnetic Effect (lebih sensitif dan responsif) */}
+                <Magnetic strength={0.15} range={140} onlyOnHover={true} textStrength={0.8}>
                   <button 
                     className="w-80 h-80 rounded-full flex items-center justify-center cursor-pointer group contact-button-mask-enhanced transition-all duration-300 hover:shadow-2xl"
                     onClick={() => {
@@ -31,7 +31,7 @@ export const ContactSection = () => {
                   >
                     <div className="text-center relative z-20">
                       <h3 
-                        className="text-3xl font-medium contact-text group-hover:scale-105 transition-transform duration-300"
+                        className="text-3xl font-medium contact-text magnetic-text group-hover:scale-105 transition-transform duration-300"
                       >
                         Get in touch
                       </h3>

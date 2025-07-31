@@ -969,14 +969,17 @@ body {
   color: hsl(var(--color-content-inverse));
   /* Pastikan border-radius tetap terjaga */
   border-radius: 50%;
-  /* Allow magnetic transform but ensure mask animation works */
-  will-change: transform;
-  /* Gabungan transition untuk color, transform, dan magnetic effect */
-  transition: color 0.3s ease, transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  /* Enhanced magnetic transform properties */
+  will-change: transform, color;
+  /* Faster transition untuk magnetic effect yang lebih responsif */
+  transition: color 0.3s ease, transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   /* Ensure circle shape is maintained */
   aspect-ratio: 1 / 1;
   /* Magnetic transform origin */
   transform-origin: center center;
+  /* Extend interactive area slightly beyond visual boundary for better magnetic detection */
+  margin: -10px;
+  padding: 10px;
 }
 
 .contact-button-mask-enhanced::before {
@@ -1072,8 +1075,37 @@ body {
 .contact-button-mask-enhanced .magnetic-text {
   position: relative;
   z-index: 10;
-  transition: color 0.3s ease;
+  transition: color 0.3s ease, transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   font-weight: 500;
+  will-change: transform, color;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+/* Enhanced magnetic responsiveness for contact text */
+.contact-button-mask-enhanced:hover .magnetic-text {
+  transition: color 0.3s ease, transform 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Enhanced magnetic detection area for better responsiveness */
+.contact-button-mask-enhanced::after {
+  content: '';
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  right: -20px;
+  bottom: -20px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Improved button interaction area */
+.contact-button-mask-enhanced button {
+  /* Expand clickable area slightly */
+  margin: -5px;
+  padding: 5px;
+  border-radius: 50%;
 }
 
 /* Keyframes untuk mask animation sesuai referensi mask3 */
