@@ -1,6 +1,7 @@
 "use client";
 
 import { ContactSection } from "@/components/sections/ContactSection";
+import { BrandLogosMarquee } from "@/components/sections/BrandLogosMarquee";
 
 export default function AboutPage() {
   return (
@@ -40,14 +41,9 @@ export default function AboutPage() {
             Some of the brands I&apos;ve had the pleasure of working with
           </p>
           
-          {/* Brand logos placeholder section */}
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 py-16">
-            {/* Brand logo placeholders */}
-            {Array.from({ length: 8 }, (_, index) => `logo-placeholder-${index + 1}`).map((id) => (
-              <div key={id} className="aspect-square bg-surface-secondary rounded-lg flex items-center justify-center">
-                <span className="text-content-tertiary text-sm">{id.replace('logo-placeholder-', 'Logo ')}</span>
-              </div>
-            ))}
+          {/* Brand logos marquee section */}
+          <div className="py-16">
+            <BrandLogosMarquee />
           </div>
         </div>
       </section>
