@@ -117,11 +117,11 @@ export default function WorkPage() {
           {/* Work Table */}
           <div className="max-w-full overflow-hidden">
             {/* Table Header */}
-            <div className="grid grid-cols-4 gap-8 py-6 border-b border-border-primary text-sm font-medium text-content-secondary uppercase tracking-wider">
-              <div className="text-left">CLIENT</div>
-              <div className="text-left">LOCATION</div>
-              <div className="text-left">ROLE</div>
-              <div className="text-right">YEAR</div>
+            <div className="grid grid-cols-12 gap-8 py-6 border-b border-border-primary text-sm font-medium text-content-secondary uppercase tracking-wider">
+              <div className="col-span-3 text-left">CLIENT</div>
+              <div className="col-span-3 text-left">LOCATION</div>
+              <div className="col-span-4 text-left">ROLE</div>
+              <div className="col-span-2 text-right">YEAR</div>
             </div>
 
             {/* Table Body */}
@@ -129,20 +129,20 @@ export default function WorkPage() {
               {filteredWork.map((item) => (
                 <div
                   key={item.id}
-                  className="grid grid-cols-4 gap-8 py-8 border-b border-border-secondary hover:bg-surface-secondary transition-colors duration-200 group cursor-pointer"
+                  className="grid grid-cols-12 gap-8 py-8 border-b border-border-secondary hover:bg-surface-secondary transition-colors duration-200 group cursor-pointer"
                 >
-                  <div className="text-left">
+                  <div className="col-span-3 text-left">
                     <h3 className="text-xl font-semibold text-content-primary group-hover:text-interactive-primary transition-colors duration-200">
                       {item.client}
                     </h3>
                   </div>
-                  <div className="text-left">
+                  <div className="col-span-3 text-left">
                     <p className="text-lg text-content-secondary">{item.location}</p>
                   </div>
-                  <div className="text-left">
+                  <div className="col-span-4 text-left">
                     <p className="text-lg text-content-secondary">{item.role}</p>
                   </div>
-                  <div className="text-right">
+                  <div className="col-span-2 text-right">
                     <p className="text-lg font-medium text-content-secondary">{item.year}</p>
                   </div>
                 </div>
