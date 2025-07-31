@@ -29,7 +29,7 @@ export const MaskButton = ({
 
   const variants = {
     dark: 'mask-button-dark',
-    light: 'mask-button-light'
+    light: 'mask-button-light border-2 border-content-primary'
   }
 
   const currentSize = sizes[size]
