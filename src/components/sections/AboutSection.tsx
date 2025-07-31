@@ -14,15 +14,17 @@ export const AboutSection = () => {
         
         {/* Photo Container - Spans 2 viewports on desktop, full width on mobile */}
         <div className="absolute left-0 top-0 w-full md:w-1/3 h-full z-10">
-          <div className="relative w-full h-full">
-            <Image 
-              src="/landing/about-man.png" 
-              alt="About - Digital Designer"
-              width={1920}
-              height={2160}
-              className="w-full h-full object-cover object-center"
-              priority
-            />
+          <div className="relative w-full h-full p-4 md:p-8 flex items-center justify-center">
+            <div className="w-11/12 h-11/12 relative">
+              <Image 
+                src="/landing/about-man.png" 
+                alt="About - Digital Designer"
+                width={1920}
+                height={2160}
+                className="w-full h-full object-cover object-center"
+                priority
+              />
+            </div>
           </div>
         </div>
 
