@@ -121,12 +121,7 @@ export const WorkDetailHero = ({ workDetail }: WorkDetailHeroProps) => {
           </div>
         </div>
 
-        {/* Description */}
-        <div className="mt-16 max-w-4xl mx-auto text-center">
-          <p className="text-lg md:text-xl text-content-secondary leading-relaxed">
-            {workDetail.description}
-          </p>
-        </div>
+
       </div>
     </section>
   );
