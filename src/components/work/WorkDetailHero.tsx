@@ -83,7 +83,7 @@ export const WorkDetailHero = ({ workDetail }: WorkDetailHeroProps) => {
             }}
           >
             <Image
-              src={`/work/${workDetail.id === "1" ? "ortist" : workDetail.client.toLowerCase().replace(/\s+/g, "-")}/hero.png`}
+              src={`/work/${workDetail.id === "ortist-specialist" ? "ortist" : workDetail.id}/hero.png`}
               alt={`${workDetail.client} hero image`}
               fill
               className="object-cover"
@@ -113,7 +113,7 @@ export const WorkDetailHero = ({ workDetail }: WorkDetailHeroProps) => {
             }}
           >
             <Image
-              src={`/work/${workDetail.id === "1" ? "ortist" : workDetail.client.toLowerCase().replace(/\s+/g, "-")}/logo.png`}
+              src={`/work/${workDetail.id === "ortist-specialist" ? "ortist" : workDetail.id}/logo.png`}
               alt={`${workDetail.client} logo`}
               fill
               className="object-contain"
