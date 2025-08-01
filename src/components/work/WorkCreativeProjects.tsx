@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+
 interface WorkCreativeProjectsProps {
   projects: {
     title: string;
@@ -10,32 +12,23 @@ interface WorkCreativeProjectsProps {
 
 export const WorkCreativeProjects = ({ projects }: WorkCreativeProjectsProps) => {
   return (
-    <section className="py-24 px-6 bg-surface-secondary">
-      <div className="max-w-6xl mx-auto">
+    <section className="py-24 bg-surface-secondary">
+      <div className="max-w-[95vw] mx-auto px-6">
         <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-content-primary mb-16 text-center">
           My Creative Projects
         </h2>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          {projects.map((project) => (
-            <div key={project.title} className="group">
-              {/* Project Image */}
-              <div className="aspect-video bg-neutral-200 rounded-xl overflow-hidden mb-6 group-hover:scale-105 transition-transform duration-300">
-                <div className="w-full h-full bg-gradient-to-br from-neutral-100 to-neutral-300 flex items-center justify-center">
-                  <span className="text-neutral-600 text-lg font-medium">
-                    Project Image
-                  </span>
-                </div>
-              </div>
-              
-              {/* Project Details */}
-              <div>
-                <h3 className="text-xl md:text-2xl font-semibold text-content-primary mb-4">
-                  {project.title}
-                </h3>
-                <p className="text-lg text-content-secondary leading-relaxed">
-                  {project.description}
-                </p>
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          {projects.map((project, index) => (
+            <div key={project.image} className="group">
+              <div className="aspect-square bg-surface-background rounded-lg overflow-hidden group-hover:scale-105 transition-transform duration-300">
+                <Image
+                  src={project.image}
+                  alt={`Creative project ${index + 1}`}
+                  width={300}
+                  height={300}
+                  className="w-full h-full object-cover"
+                />
               </div>
             </div>
           ))}

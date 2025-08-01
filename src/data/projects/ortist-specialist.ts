@@ -97,12 +97,42 @@ export const ortistSpecialistData: WorkDetail = {
     {
       title: "Brand Identity Refresh",
       description: "Redesigned social media templates and visual guidelines to create a more modern, trustworthy appearance for the clinic.",
-      image: "/work/ortist/brand-identity.png"
+      image: "/work/ortist/foto1.png"
     },
     {
       title: "Educational Infographic Series", 
       description: "Created a series of infographics explaining common orthopedic conditions in simple, patient-friendly language.",
-      image: "/work/ortist/infographic-series.png"
+      image: "/work/ortist/foto2.png"
+    },
+    {
+      title: "Patient Journey Content",
+      description: "Documentary-style content showcasing real patient experiences and transformations.",
+      image: "/work/ortist/foto3.png"
+    },
+    {
+      title: "Social Media Campaign Design",
+      description: "Visual campaign materials for dental health awareness targeting young adults.",
+      image: "/work/ortist/foto4.png"
+    },
+    {
+      title: "Interactive Educational Posts",
+      description: "Engaging carousel posts explaining dental procedures and oral health tips.",
+      image: "/work/ortist/foto5.png"
+    },
+    {
+      title: "Orthodontic Process Documentation",
+      description: "Step-by-step visual content showing the orthodontic treatment journey.",
+      image: "/work/ortist/foto6.png"
+    },
+    {
+      title: "Community Engagement Content",
+      description: "Behind-the-scenes content building trust and connection with the audience.",
+      image: "/work/ortist/foto7.png"
+    },
+    {
+      title: "Treatment Result Showcase",
+      description: "Professional photography showcasing successful treatment outcomes.",
+      image: "/work/ortist/foto8.png"
     }
   ],
   nextProject: {
