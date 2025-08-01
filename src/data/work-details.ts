@@ -76,3 +76,17 @@ export const getWorkDetail = (id: string): WorkDetail | null => {
 export const getAllWorkIds = (): string[] => {
   return Object.keys(workDetailsData);
 };
+
+export const getNextProject = (currentId: string): { id: string; title: string } | null => {
+  const workIds = getAllWorkIds();
+  const currentIndex = workIds.indexOf(currentId);
+  
+  if (currentIndex === -1) return null;
+  
+  // Get next project, or loop back to first if at the end
+  const nextIndex = (currentIndex + 1) % workIds.length;
+  const nextId = workIds[nextIndex];
+  const nextWork = workDetailsData[nextId];
+  
+  return nextWork ? { id: nextId, title: nextWork.client } : null;
+};

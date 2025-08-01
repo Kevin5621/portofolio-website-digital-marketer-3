@@ -32,6 +32,28 @@ export const useCurrentLenis = () => {
 }
 
 /**
+ * Hook to force instant scroll to top
+ */
+export const useInstantScrollToTop = () => {
+  return useCallback(() => {
+    const lenis = getLenis()
+    
+    // Aggressive scroll reset
+    if (lenis) {
+      lenis.stop()
+      lenis.scrollTo(0, { immediate: true })
+      setTimeout(() => lenis.start(), 10)
+    }
+    
+    // Also force native scroll
+    window.scrollTo(0, 0)
+    document.documentElement.scrollTop = 0
+    document.body.scrollTop = 0
+    document.body.scrollIntoView({ behavior: 'instant', block: 'start' })
+  }, [])
+}
+
+/**
  * Hook for scroll-triggered callbacks
  */
 export const useScrollCallback = (
