@@ -136,7 +136,7 @@ export const ortistSpecialistData: WorkDetail = {
     }
   ],
   nextProject: {
-    id: "2",
+    id: "rumah-bahasa-asing",
     title: "Rumah Bahasa Asing"
   }
 };

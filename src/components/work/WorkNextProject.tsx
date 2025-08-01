@@ -1,7 +1,9 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { MaskButton } from "@/components/ui/mask-button";
 
 interface WorkNextProjectProps {
   nextProject: {
@@ -60,34 +62,80 @@ export const WorkNextProject = ({ nextProject }: WorkNextProjectProps) => {
     setTimeout(forceInstantScrollToTop, 1000);
   };
 
+  // Get hero image path based on project ID
+  const getHeroImagePath = (projectId: string) => {
+    if (projectId === "ortist-specialist") {
+      return "/work/ortist/hero.png";
+    }
+    return `/work/${projectId}/hero.png`;
+  };
+
   return (
-    <section className="py-24 px-6 bg-surface-background">
-      <div className="max-w-4xl mx-auto text-center">
-        <h2 className="text-2xl md:text-3xl font-semibold text-content-primary mb-8">
-          Next case
-        </h2>
-        
-        <Link 
-          href={`/work/${nextProject.id}`}
-          className="group inline-block"
-          onClick={handleNextProjectClick}
-        >
-          <h3 className="text-4xl md:text-6xl lg:text-7xl font-bold text-content-primary leading-tight group-hover:text-brand-600 transition-colors duration-300">
-            {nextProject.title}
-          </h3>
+    <section className="py-24 bg-content-primary relative overflow-hidden">
+      <div className="max-w-[95vw] mx-auto px-6">
+        <div className="text-center relative">
+          <h2 className="text-2xl md:text-3xl font-medium text-white mb-8">
+            Next case
+          </h2>
           
-          <div className="mt-8 flex items-center justify-center gap-2 text-brand-600 group-hover:gap-4 transition-all duration-300">
-            <span className="text-lg font-medium">View case</span>
-            <svg 
-              className="w-6 h-6 transform group-hover:translate-x-1 transition-transform duration-300" 
-              fill="none" 
-              stroke="currentColor" 
-              viewBox="0 0 24 24"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
+          <Link 
+            href={`/work/${nextProject.id}`}
+            className="group inline-block relative"
+            onClick={handleNextProjectClick}
+          >
+            <h3 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight group-hover:opacity-80 transition-opacity duration-300 mb-12 relative z-30">
+              {nextProject.title}
+            </h3>
+            
+            {/* Hero Image */}
+            <div className="relative w-full max-w-md mx-auto mb-12 z-20">
+              <div className="aspect-video bg-surface-secondary rounded-lg overflow-hidden group-hover:scale-105 transition-transform duration-300">
+                <Image
+                  src={getHeroImagePath(nextProject.id)}
+                  alt={`${nextProject.title} hero image`}
+                  width={400}
+                  height={225}
+                  className="w-full h-full object-cover"
+                />
+                {/* Overlay untuk memotong foto */}
+                <div className="absolute inset-0 bg-content-primary opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
+              </div>
+            </div>
+
+            <div className="flex items-center justify-center relative z-30 mb-8">
+              <MaskButton 
+                variant="light" 
+                size="custom" 
+                customSize="px-8 py-3 text-base"
+                onClick={() => {}}
+              >
+                All work
+              </MaskButton>
+            </div>
+          </Link>
+
+          {/* Horizontal line yang memotong foto - tebal dan sebagian */}
+          <div className="absolute left-1/2 top-1/2 w-[80%] h-[3px] bg-white transform -translate-x-1/2 -translate-y-1/4 z-30 pointer-events-none rounded-full"></div>
+          
+          {/* Overlay background untuk menutupi setengah bagian foto dari tengah ke bawah */}
+          <div className="absolute left-0 top-1/2 w-full h-[50%] bg-content-primary z-25 pointer-events-none"></div>
+
+          {/* Bottom Section with VERSION and SOCIALS - consistent with container width */}
+          <div className="flex items-center justify-between text-white text-sm mt-16 relative z-30">
+            <div className="text-left">
+              <div className="text-white/60 mb-1">VERSION</div>
+              <div>2025 © Edition</div>
+            </div>
+            
+            <div className="text-right">
+              <div className="text-white/60 mb-1">SOCIALS</div>
+              <div className="flex gap-4">
+                <span>Instagram</span>
+                <span>Linkedin</span>
+              </div>
+            </div>
           </div>
-        </Link>
+        </div>
       </div>
     </section>
   );
