@@ -6,7 +6,7 @@ export const ContactSection = () => {
   return (
     <section 
       id="contact" 
-      className="min-h-screen bg-surface-background relative"
+      className="min-h-screen bg-surface-background relative z-[998]"
       data-theme="light"
     >
       <div className="container mx-auto px-8 py-24 min-h-screen flex items-center">

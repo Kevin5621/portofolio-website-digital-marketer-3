@@ -42,22 +42,37 @@ export const Header = () => {
       }
 
       const observerCallback = (entries: IntersectionObserverEntry[]) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const sectionId = entry.target.id
-            setActiveSection(sectionId)
-          }
-        })
+        // Filter entries yang intersecting dan urutkan berdasarkan z-index
+        const intersectingEntries = entries.filter(entry => entry.isIntersecting)
+        
+        if (intersectingEntries.length > 0) {
+          // Urutkan berdasarkan z-index (yang tertinggi di atas)
+          const sortedEntries = intersectingEntries.sort((a, b) => {
+            const aElement = a.target as HTMLElement
+            const bElement = b.target as HTMLElement
+            
+            const aZIndex = parseInt(window.getComputedStyle(aElement).zIndex) || 0
+            const bZIndex = parseInt(window.getComputedStyle(bElement).zIndex) || 0
+            
+            return bZIndex - aZIndex // Descending order
+          })
+          
+          // Ambil section dengan z-index tertinggi
+          const highestZIndexSection = sortedEntries[0]
+          const sectionId = highestZIndexSection.target.id
+          setActiveSection(sectionId)
+        }
       }
 
       const observer = new IntersectionObserver(observerCallback, options)
 
-      // Scroll-based fallback untuk deteksi section
+      // Scroll-based fallback untuk deteksi section dengan z-index tertinggi
       const handleScroll = () => {
         if (typeof window === 'undefined' || typeof document === 'undefined') return
         
         const scrollY = window.scrollY
         const sections = document.querySelectorAll('section[id]')
+        const intersectingSections: Array<{element: Element, zIndex: number}> = []
         
         sections.forEach(section => {
           const rect = section.getBoundingClientRect()
@@ -68,12 +83,20 @@ export const Header = () => {
           // Check if we're in the section (dengan margin untuk transisi smooth)
           if (scrollY >= sectionTop - windowHeight * 0.3 && 
               scrollY < sectionTop + sectionHeight - windowHeight * 0.3) {
-            const sectionId = section.id
-            if (sectionId !== activeSection) {
-              setActiveSection(sectionId)
-            }
+            const sectionElement = section as HTMLElement
+            const zIndex = parseInt(window.getComputedStyle(sectionElement).zIndex) || 0
+            intersectingSections.push({ element: section, zIndex })
           }
         })
+        
+        // Ambil section dengan z-index tertinggi
+        if (intersectingSections.length > 0) {
+          const highestZIndexSection = intersectingSections.sort((a, b) => b.zIndex - a.zIndex)[0]
+          const sectionId = highestZIndexSection.element.id
+          if (sectionId !== activeSection) {
+            setActiveSection(sectionId)
+          }
+        }
       }
 
       // Observe semua section
@@ -141,10 +164,15 @@ export const Header = () => {
     }, 600)
   }
 
-  // Sistem adaptif berdasarkan section aktif
+  // Sistem adaptif berdasarkan section aktif dengan z-index tertinggi
   const getSectionTheme = (sectionId: string) => {
     // Jika di server-side, return default
     if (typeof window === 'undefined') {
+      return { isDark: false }
+    }
+
+    // Contact section - Background putih (z-index tertinggi)
+    if (sectionId === 'contact') {
       return { isDark: false }
     }
 
@@ -163,6 +191,20 @@ export const Header = () => {
       return { isDark: false }
     }
     
+    // About section transitions dengan background hitam (surface-inverse)
+    if (sectionId === 'also' || sectionId === 'content-creator' || 
+        sectionId === 'brands' || sectionId === 'about-section-2' ||
+        sectionId === 'about-section-3' || sectionId === 'about-section-4' ||
+        sectionId === 'about-section-5' || sectionId === 'finally' ||
+        sectionId === 'flexible-approach') {
+      return { isDark: true }
+    }
+    
+    // About section transitions dengan background putih (surface-background)
+    if (sectionId === 'oh-also' || sectionId === 'graphic-designer') {
+      return { isDark: false }
+    }
+    
     // About page sections berdasarkan background class
     const section = document.getElementById(sectionId)
     if (section) {
@@ -177,9 +219,11 @@ export const Header = () => {
   }
 
   const [isWorkPage, setIsWorkPage] = useState(false)
+  const [isContactPage, setIsContactPage] = useState(false)
 
   useEffect(() => {
     setIsWorkPage(window.location.pathname === '/work')
+    setIsContactPage(window.location.pathname === '/contact')
   }, [])
 
   const { isDark } = getSectionTheme(activeSection)
@@ -189,28 +233,62 @@ export const Header = () => {
   const isHomeSection = activeSection === 'home' || activeSection === 'hello' || activeSection === ''
   const isProjectSection = activeSection === 'project-1' || activeSection === 'project-2' || activeSection === 'project-3'
   const isAboutSection = activeSection === 'about' || activeSection === 'about-section'
-  const showTextMenu = isHomeSection && !isMobileMenuOpen && !isWorkPage && !isProjectSection && !isAboutSection && isClient
-  const showBurgerMenu = (!isHomeSection) || isMobileMenuOpen || isWorkPage || isProjectSection || isAboutSection
+  const isContactSection = activeSection === 'contact'
+  const isAboutTransitionSection = activeSection === 'also' || activeSection === 'content-creator' || 
+                                   activeSection === 'brands' || activeSection === 'about-section-2' ||
+                                   activeSection === 'about-section-3' || activeSection === 'about-section-4' ||
+                                   activeSection === 'about-section-5' || activeSection === 'finally' ||
+                                   activeSection === 'flexible-approach' || activeSection === 'oh-also' ||
+                                   activeSection === 'graphic-designer'
+  const showTextMenu = isHomeSection && !isMobileMenuOpen && !isWorkPage && !isContactPage && !isProjectSection && !isAboutSection && !isContactSection && !isAboutTransitionSection && isClient
+  const showBurgerMenu = (!isHomeSection) || isMobileMenuOpen || isWorkPage || isContactPage || isProjectSection || isAboutSection || isContactSection || isAboutTransitionSection
 
   // Helper functions untuk styling berdasarkan section
   const getCopyrightTextClass = () => {
     if (isProjectSection) return "text-white"
-    if (isAboutSection) return "text-foreground"
-    if (isDark) return "text-foreground-light"
+    if (isAboutSection || isContactSection || isContactPage) return "text-foreground"
+    // About transition sections dengan background hitam
+    if (activeSection === 'also' || activeSection === 'content-creator' || 
+        activeSection === 'brands' || activeSection === 'finally' ||
+        activeSection === 'flexible-approach' || isDark) {
+      return "text-foreground-light"
+    }
+    // About transition sections dengan background putih
+    if (activeSection === 'oh-also' || activeSection === 'graphic-designer') {
+      return "text-foreground"
+    }
     return "text-foreground"
   }
 
   const getBurgerBgClass = () => {
     if (isProjectSection) return "bg-white hover:bg-gray-100"
-    if (isAboutSection) return "bg-foreground hover:bg-foreground/90" // About section menggunakan light background
-    if (isDark) return "bg-foreground-light hover:bg-foreground-light/90"
+    if (isAboutSection || isContactSection || isContactPage) return "bg-foreground hover:bg-foreground/90" // About dan Contact section menggunakan light background
+    // About transition sections dengan background hitam
+    if (activeSection === 'also' || activeSection === 'content-creator' || 
+        activeSection === 'brands' || activeSection === 'finally' ||
+        activeSection === 'flexible-approach' || isDark) {
+      return "bg-foreground-light hover:bg-foreground-light/90" // About transition sections menggunakan dark background
+    }
+    // About transition sections dengan background putih
+    if (activeSection === 'oh-also' || activeSection === 'graphic-designer') {
+      return "bg-foreground hover:bg-foreground/90"
+    }
     return "bg-foreground hover:bg-foreground/90"
   }
 
   const getBurgerTextClass = () => {
     if (isProjectSection) return "text-black"
-    if (isAboutSection) return "text-background" // About section menggunakan dark text
-    if (isDark) return "text-background-dark"
+    if (isAboutSection || isContactSection || isContactPage) return "text-background" // About dan Contact section menggunakan dark text
+    // About transition sections dengan background hitam
+    if (activeSection === 'also' || activeSection === 'content-creator' || 
+        activeSection === 'brands' || activeSection === 'finally' ||
+        activeSection === 'flexible-approach' || isDark) {
+      return "text-background-dark" // About transition sections menggunakan light text
+    }
+    // About transition sections dengan background putih
+    if (activeSection === 'oh-also' || activeSection === 'graphic-designer') {
+      return "text-background"
+    }
     return "text-background"
   }
 
@@ -229,7 +307,7 @@ export const Header = () => {
   // Jika belum di client, render dengan default state
   if (!isClient) {
     return (
-      <header className="fixed top-0 left-0 right-0 z-50 bg-transparent">
+      <header className="fixed top-0 left-0 right-0 z-[999] bg-transparent">
         <nav className="w-full px-8 py-12">
           <div className="flex items-center justify-between">
             <div className="text-2xl text-foreground">
@@ -261,7 +339,7 @@ export const Header = () => {
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-50 bg-transparent">
+      <header className="fixed top-0 left-0 right-0 z-[999] bg-transparent">
         <nav className="w-full px-8 py-12">
           <div className="flex items-center justify-between">
             {/* Copyright - Adaptif berdasarkan section aktif */}
@@ -390,7 +468,7 @@ export const Header = () => {
           
           {/* Close Button dengan Magnetic Effect */}
           <div className={cn(
-            "fixed top-8 right-8 z-[60] transition-all duration-700 ease-out",
+            "fixed top-8 right-8 z-[1001] transition-all duration-700 ease-out",
             (isMenuEntering || isMenuSliding) ? "opacity-0 scale-0" : "opacity-100 scale-100"
           )}>
             <Magnetic 
@@ -420,7 +498,7 @@ export const Header = () => {
           {/* Sidebar */}
           <div 
             className={cn(
-              "fixed top-0 right-0 h-full w-1/3 bg-background-dark z-50 shadow-2xl",
+              "fixed top-0 right-0 h-full w-1/3 bg-background-dark z-[1000] shadow-2xl",
               "transition-all duration-800 ease-out",
               getSidebarTransformClass()
             )}
