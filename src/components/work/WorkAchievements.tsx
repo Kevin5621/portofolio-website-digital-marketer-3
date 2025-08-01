@@ -33,7 +33,7 @@ export const WorkAchievements = ({ achievements }: WorkAchievementsProps) => {
         {/* Two Panel Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
           {achievements.metrics.map((platform) => (
-            <div key={platform.platform} className="bg-surface-card p-8 rounded-xl border border-border-primary">
+            <div key={platform.platform} className="bg-white p-8 rounded-xl border border-border-primary shadow-sm">
               {/* Platform Header */}
               <div className="text-center mb-6">
                 <div className="flex items-center justify-center gap-3 mb-4">
@@ -80,10 +80,10 @@ export const WorkAchievements = ({ achievements }: WorkAchievementsProps) => {
                 {platform.metrics.map((metric, index) => (
                   <div key={index} className="text-center">
                     <div className="text-3xl md:text-4xl font-bold text-green-600 mb-1">
-                      {metric.value}
+                      <span className="text-green-600">+</span> {metric.value.replace('+ ', '')}
                     </div>
                     <div className="text-lg text-green-600 mb-2">
-                      ^ {metric.percentage}
+                      <span className="text-green-600">^</span> {metric.percentage}
                     </div>
                     <div className="text-content-secondary font-medium">
                       {metric.label}
