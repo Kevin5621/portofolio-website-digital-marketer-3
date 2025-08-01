@@ -55,6 +55,11 @@ export const ThreeDMarquee = ({
 
   // OPTIMASI: Intersection Observer untuk lazy loading
   useEffect(() => {
+    // Pastikan kode hanya dijalankan di client
+    if (typeof window === 'undefined' || typeof IntersectionObserver === 'undefined') {
+      return;
+    }
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -128,7 +133,7 @@ export const ThreeDMarquee = ({
                     >
                       <GridLineHorizontal className="-top-3" offset="30px" />
                       {isPlaceholder ? (
-                        <PlaceholderCard />
+                        <PlaceholderCard key={`placeholder-${colIndex}-${imageIndex}`} placeholderKey={`placeholder-${colIndex}-${imageIndex}`} />
                       ) : (
                         <>
                           {!isLoaded && (
@@ -157,7 +162,7 @@ export const ThreeDMarquee = ({
 };
 
 // Komponen placeholder untuk space kosong
-const PlaceholderCard = () => {
+const PlaceholderCard = ({ placeholderKey }: { placeholderKey?: string }) => {
   // Array konten placeholder yang berbeda
   const placeholderContents = [
     {
@@ -187,8 +192,21 @@ const PlaceholderCard = () => {
     }
   ];
 
-  // Pilih konten secara random
-  const randomContent = placeholderContents[Math.floor(Math.random() * placeholderContents.length)];
+  // State untuk konten placeholder yang konsisten
+  const [selectedContent, setSelectedContent] = useState(placeholderContents[0]);
+
+  // Pilih konten secara konsisten berdasarkan key
+  useEffect(() => {
+    if (placeholderKey) {
+      // Gunakan key untuk menghasilkan index yang konsisten
+      const hash = placeholderKey.split('').reduce((a: number, b: string) => {
+        a = ((a << 5) - a) + b.charCodeAt(0);
+        return a & a;
+      }, 0);
+      const index = Math.abs(hash) % placeholderContents.length;
+      setSelectedContent(placeholderContents[index]);
+    }
+  }, [placeholderKey]);
 
   return (
     <motion.div
@@ -218,13 +236,13 @@ const PlaceholderCard = () => {
       {/* Content */}
       <div className="text-center text-gray-300 relative z-10">
         <div className="text-4xl mb-3 opacity-80">
-          {randomContent.icon}
+          {selectedContent.icon}
         </div>
         <h3 className="text-sm font-semibold mb-1 text-white">
-          {randomContent.title}
+          {selectedContent.title}
         </h3>
         <p className="text-xs opacity-75 text-gray-400">
-          {randomContent.subtitle}
+          {selectedContent.subtitle}
         </p>
       </div>
 
