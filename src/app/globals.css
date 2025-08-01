@@ -14,7 +14,6 @@
 @import "../styles/utilities/colors.css";
 @import "../styles/utilities/zoom-compensation.css";
 @import "../styles/utilities/animations.css";
-@import "../styles/utilities/stacking.css";
 
 /* Animations */
 @import "../styles/animations/morphing.css";
