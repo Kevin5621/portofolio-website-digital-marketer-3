@@ -3,6 +3,7 @@
 import { ContactSection } from "@/components/sections/ContactSection";
 import { BrandLogosMarquee } from "@/components/sections/BrandLogosMarquee";
 import ThreeDMarqueeDemo from "@/components/ui/3d-marquee-demo";
+import DraggableCardDemo from "@/components/ui/draggable-card-demo-2";
 
 export default function AboutPage() {
   return (
@@ -125,15 +126,8 @@ export default function AboutPage() {
       </section>
 
       {/* Design showcase placeholder section */}
-      <section id="design-showcase" className="min-h-screen bg-surface-background flex items-center justify-center px-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-6xl">
-          {/* Design showcase placeholders */}
-          {Array.from({ length: 6 }, (_, index) => `design-placeholder-${index + 1}`).map((id) => (
-            <div key={id} className="aspect-[4/5] bg-surface-secondary rounded-lg flex items-center justify-center">
-              <span className="text-content-tertiary">{id.replace('design-placeholder-', 'Design ')}</span>
-            </div>
-          ))}
-        </div>
+      <section id="design-showcase" className="min-h-screen bg-surface-background flex items-center justify-center px-6 overflow-visible">
+        <DraggableCardDemo />
       </section>
 
       {/* Viewport 19: Finally - Big text, black bg, white text */}
