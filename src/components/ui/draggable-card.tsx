@@ -116,7 +116,9 @@ export const DraggableCardBody = ({
       drag
       dragConstraints={constraints}
       onDragStart={() => {
-        document.body.style.cursor = "grabbing";
+        if (typeof document !== 'undefined') {
+          document.body.style.cursor = "grabbing";
+        }
         // Update constraints on drag start to ensure accurate boundaries
         if (typeof window !== "undefined" && cardRef.current) {
           const cardRect = cardRef.current.getBoundingClientRect();
@@ -132,7 +134,9 @@ export const DraggableCardBody = ({
         }
       }}
       onDragEnd={(event, info) => {
-        document.body.style.cursor = "default";
+        if (typeof document !== 'undefined') {
+          document.body.style.cursor = "default";
+        }
 
         controls.start({
           rotateX: 0,

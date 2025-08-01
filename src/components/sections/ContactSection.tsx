@@ -24,8 +24,10 @@ export const ContactSection = () => {
                     className="w-80 h-80 rounded-full flex items-center justify-center cursor-pointer group contact-button-mask-enhanced transition-all duration-300 hover:shadow-2xl"
                     onClick={() => {
                       // Scroll to contact form or trigger contact action
-                      const contactInfo = document.querySelector('#contact .text-right')
-                      contactInfo?.scrollIntoView({ behavior: 'smooth' })
+                      if (typeof document !== 'undefined') {
+                        const contactInfo = document.querySelector('#contact .text-right')
+                        contactInfo?.scrollIntoView({ behavior: 'smooth' })
+                      }
                     }}
                     aria-label="Get in touch - scroll to contact information"
                   >

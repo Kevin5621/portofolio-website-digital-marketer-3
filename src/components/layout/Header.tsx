@@ -55,6 +55,8 @@ export const Header = () => {
 
       // Scroll-based fallback untuk deteksi section
       const handleScroll = () => {
+        if (typeof window === 'undefined' || typeof document === 'undefined') return
+        
         const scrollY = window.scrollY
         const sections = document.querySelectorAll('section[id]')
         
@@ -77,23 +79,30 @@ export const Header = () => {
       }
 
       // Observe semua section
-      const sections = document.querySelectorAll('section[id]')
-      console.log('Found sections:', Array.from(sections).map(s => s.id)) // Debug log
-      sections.forEach(section => observer.observe(section))
+      let sections: NodeListOf<Element> | null = null
+      if (typeof document !== 'undefined') {
+        sections = document.querySelectorAll('section[id]')
+        console.log('Found sections:', Array.from(sections).map(s => s.id)) // Debug log
+        sections.forEach(section => observer.observe(section))
+      }
 
       // Add scroll listener sebagai backup
       window.addEventListener('scroll', handleScroll, { passive: true })
 
       // Fallback: Pastikan section pertama terdeteksi di awal
       setTimeout(() => {
-        const firstSection = sections[0]
-        if (firstSection && !activeSection) {
-          setActiveSection(firstSection.id)
+        if (sections && sections[0]) {
+          const firstSection = sections[0]
+          if (firstSection && !activeSection) {
+            setActiveSection(firstSection.id)
+          }
         }
       }, 100)
 
       return () => {
-        sections.forEach(section => observer.unobserve(section))
+        if (sections) {
+          sections.forEach(section => observer.unobserve(section))
+        }
         window.removeEventListener('scroll', handleScroll)
       }
     }
