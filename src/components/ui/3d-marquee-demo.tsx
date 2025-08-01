@@ -7,7 +7,7 @@ export default function ThreeDMarqueeDemo() {
     "/about/video/Kalimat-kalimat sehari-hari dalam bahasa Korea 2.mp4",
     "/about/video/Rumah Bahasa Asing - Lawan Kata Bahasa Korea 1.mp4",
     "/about/video/Export Vertical.mp4",
-    "/about/video/Binjasimen Samapta - Testimoni.mp4",
+    "/about/video/Binjasiimen Samapta - Testimoni.mp4",
     "/about/video/Export Vertical (3).mp4",
     "/about/video/Kalimat-kalimat sehari-hari dalam bahasa Korea 1.mp4",
     "/about/video/Rumah Bahasa Asing - Lawan Kata Bahasa Korea 2.mp4",

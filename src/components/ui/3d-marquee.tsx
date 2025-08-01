@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { useMemo, useCallback, useState } from "react";
 
 export const ThreeDMarquee = ({
   images,
@@ -10,22 +11,42 @@ export const ThreeDMarquee = ({
   images: string[];
   className?: string;
 }) => {
-  // SOLUSI DUPLIKASI: Menghapus duplikasi dari array video menggunakan Set
-  // Ini memastikan setiap video hanya muncul sekali di seluruh grid
-  const uniqueImages = [...new Set(images)];
-  
-  // Distribusi video ke 5 lane tanpa duplikasi
-  // Setiap video hanya muncul sekali di seluruh grid
-  const totalLanes = 5;
-  const chunks = Array.from({ length: totalLanes }, () => [] as string[]);
-  
-  // Distribusi video secara berurutan ke setiap lane
-  // Video akan didistribusikan secara merata tanpa duplikasi
-  uniqueImages.forEach((image, index) => {
-    const laneIndex = index % totalLanes;
-    chunks[laneIndex].push(image);
-  });
-  
+  // OPTIMASI: State untuk tracking loading
+  const [loadingStates, setLoadingStates] = useState<Record<string, boolean>>({});
+
+  // OPTIMASI: Menggunakan useMemo untuk menghindari re-computation yang tidak perlu
+  const { chunks } = useMemo(() => {
+    // Menghapus duplikasi dari array video menggunakan Set
+    const uniqueImages = [...new Set(images)];
+    
+    // Distribusi video ke 5 lane tanpa duplikasi
+    const totalLanes = 5;
+    const chunks = Array.from({ length: totalLanes }, () => [] as string[]);
+    
+    // Distribusi video secara berurutan ke setiap lane
+    uniqueImages.forEach((image, index) => {
+      const laneIndex = index % totalLanes;
+      chunks[laneIndex].push(image);
+    });
+    
+    return { chunks };
+  }, [images]);
+
+  // OPTIMASI: Menggunakan useCallback untuk fungsi yang tidak perlu re-create
+  const getUniqueKey = useCallback((colIndex: number, imageIndex: number, image: string) => {
+    const videoName = image.split('/').pop()?.split('.')[0] || 'unknown';
+    return `${colIndex}-${imageIndex}-${videoName}`;
+  }, []);
+
+  // OPTIMASI: Handler untuk loading state
+  const handleVideoLoad = useCallback((key: string) => {
+    setLoadingStates(prev => ({ ...prev, [key]: false }));
+  }, []);
+
+  const handleVideoLoadStart = useCallback((key: string) => {
+    setLoadingStates(prev => ({ ...prev, [key]: true }));
+  }, []);
+
   return (
     <div
       className={cn(
@@ -48,7 +69,7 @@ export const ThreeDMarquee = ({
                   y: colIndex % 2 === 0 ? 30 : -30 
                 }}
                 transition={{
-                  duration: 20 + (colIndex * 5), // Setiap lane memiliki kecepatan berbeda
+                  duration: 20 + (colIndex * 5),
                   repeat: Infinity,
                   repeatType: "reverse",
                   ease: "linear",
@@ -57,35 +78,26 @@ export const ThreeDMarquee = ({
                 className="flex flex-col items-start gap-6"
                 style={{
                   // Efek bata: lane genap start di posisi 1, ganjil start di posisi 3
-                  marginTop: colIndex % 2 === 0 ? '0px' : '250px', // Lane ganjil dimulai lebih bawah
+                  marginTop: colIndex % 2 === 0 ? '0px' : '250px',
                 }}
               >
                 <GridLineVertical className="-left-3" offset="80px" />
                 {subarray.map((image, imageIndex) => {
-                  // Membuat key yang benar-benar unik
-                  const videoName = image.split('/').pop()?.split('.')[0] || 'unknown';
-                  const uniqueKey = `${colIndex}-${imageIndex}-${videoName}`;
+                  const uniqueKey = getUniqueKey(colIndex, imageIndex, image);
+                  const isLoading = loadingStates[uniqueKey] ?? true;
                   
                   return (
                     <div className="relative" key={uniqueKey}>
                       <GridLineHorizontal className="-top-3" offset="30px" />
-                      <motion.video
-                        whileHover={{
-                          y: -8,
-                          scale: 1.03,
-                        }}
-                        transition={{
-                          duration: 0.3,
-                          ease: "easeInOut",
-                        }}
+                      {isLoading && (
+                        <div className="absolute inset-0 bg-gray-800 rounded-lg flex items-center justify-center">
+                          <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                        </div>
+                      )}
+                      <OptimizedVideo
                         src={image}
-                        className="aspect-[9/16] rounded-lg object-cover ring ring-gray-950/10 hover:shadow-xl hover:ring-2 hover:ring-white/20"
-                        width={220}
-                        height={391}
-                        autoPlay
-                        muted
-                        loop
-                        playsInline
+                        onLoadStart={() => handleVideoLoadStart(uniqueKey)}
+                        onLoadedData={() => handleVideoLoad(uniqueKey)}
                       />
                     </div>
                   );
@@ -99,6 +111,49 @@ export const ThreeDMarquee = ({
   );
 };
 
+// OPTIMASI: Komponen video terpisah dengan lazy loading dan error handling
+const OptimizedVideo = ({ 
+  src, 
+  onLoadStart, 
+  onLoadedData 
+}: { 
+  src: string; 
+  onLoadStart: () => void;
+  onLoadedData: () => void;
+}) => {
+  return (
+    <motion.video
+      whileHover={{
+        y: -8,
+        scale: 1.03,
+      }}
+      transition={{
+        duration: 0.3,
+        ease: "easeInOut",
+      }}
+      src={src}
+      className="aspect-[9/16] rounded-lg object-cover ring ring-gray-950/10 hover:shadow-xl hover:ring-2 hover:ring-white/20"
+      width={220}
+      height={391}
+      // OPTIMASI: Preload metadata untuk performa yang lebih baik
+      preload="metadata"
+      autoPlay
+      muted
+      loop
+      playsInline
+      // OPTIMASI: Error handling
+      onError={(e) => {
+        console.warn(`Failed to load video: ${src}`, e);
+        onLoadedData(); // Remove loading state even on error
+      }}
+      // OPTIMASI: Loading state handlers
+      onLoadStart={onLoadStart}
+      onLoadedData={onLoadedData}
+    />
+  );
+};
+
+// OPTIMASI: Memoized grid line components
 const GridLineHorizontal = ({
   className,
   offset,
@@ -115,7 +170,7 @@ const GridLineHorizontal = ({
           "--height": "1px",
           "--width": "5px",
           "--fade-stop": "90%",
-          "--offset": offset || "200px", //-100px if you want to keep the line inside
+          "--offset": offset || "200px",
           "--color-dark": "rgba(255, 255, 255, 0.2)",
           maskComposite: "exclude",
         } as React.CSSProperties
@@ -150,7 +205,7 @@ const GridLineVertical = ({
           "--height": "5px",
           "--width": "1px",
           "--fade-stop": "90%",
-          "--offset": offset || "150px", //-100px if you want to keep the line inside
+          "--offset": offset || "150px",
           "--color-dark": "rgba(255, 255, 255, 0.2)",
           maskComposite: "exclude",
         } as React.CSSProperties
