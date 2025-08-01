@@ -195,15 +195,6 @@ export const Header = () => {
   const showTextMenu = isHomeSection && !isMobileMenuOpen && !isWorkPage && !isProjectSection && !isAboutSection && isClient
   const showBurgerMenu = (!isHomeSection) || isMobileMenuOpen || isWorkPage || isProjectSection || isAboutSection
 
-  // Debug logs
-  useEffect(() => {
-    console.log('Active section:', activeSection)
-    console.log('isHomeSection:', isHomeSection)
-    console.log('isAboutSection:', isAboutSection)
-    console.log('showTextMenu:', showTextMenu)
-    console.log('showBurgerMenu:', showBurgerMenu)
-  }, [activeSection, isHomeSection, isAboutSection, showTextMenu, showBurgerMenu])
-
   // Helper functions untuk styling berdasarkan section
   const getCopyrightTextClass = () => {
     if (isProjectSection) return "text-white"
