@@ -13,14 +13,16 @@ export function AboutSection5End() {
       </section>
 
       {/* Viewport 28: Feel free to contact me - Small text, white bg, black text */}
-      <section id="contact-me" className="relative min-h-screen bg-surface-background flex items-center justify-center px-6 z-30">
+      <section id="contact-me" className="sticky top-0 min-h-screen bg-surface-background flex items-center justify-center px-6 z-30">
         <p className="text-lg md:text-xl lg:text-2xl text-content-primary text-center max-w-4xl">
           Feel free to contact me!
         </p>
       </section>
 
-      {/* Contact Section */}
-      <ContactSection />
+      {/* Contact Section - Sticky Layer */}
+      <div className="relative z-[998]">
+        <ContactSection />
+      </div>
     </>
   );
 } 
