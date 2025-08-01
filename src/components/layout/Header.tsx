@@ -45,7 +45,6 @@ export const Header = () => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             const sectionId = entry.target.id
-            console.log('Section detected:', sectionId) // Debug log
             setActiveSection(sectionId)
           }
         })
@@ -71,7 +70,6 @@ export const Header = () => {
               scrollY < sectionTop + sectionHeight - windowHeight * 0.3) {
             const sectionId = section.id
             if (sectionId !== activeSection) {
-              console.log('Scroll detected section:', sectionId)
               setActiveSection(sectionId)
             }
           }
@@ -82,7 +80,6 @@ export const Header = () => {
       let sections: NodeListOf<Element> | null = null
       if (typeof document !== 'undefined') {
         sections = document.querySelectorAll('section[id]')
-        console.log('Found sections:', Array.from(sections).map(s => s.id)) // Debug log
         sections.forEach(section => observer.observe(section))
       }
 

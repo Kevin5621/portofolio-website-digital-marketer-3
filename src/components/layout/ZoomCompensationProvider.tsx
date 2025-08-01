@@ -42,7 +42,6 @@ export const ZoomCompensationProvider: React.FC<ZoomCompensationProviderProps> =
   maxZoom = 3.0,
   debounceDelay = 100,
   smoothTransition = true,
-  debug = false,
 }) => {
   const [isEnabled, setIsEnabled] = useState(defaultEnabled)
 
@@ -58,15 +57,6 @@ export const ZoomCompensationProvider: React.FC<ZoomCompensationProviderProps> =
     maxZoom,
     debounceDelay,
     smoothTransition,
-    onZoomChange: debug 
-      ? (zoom, compensation) => {
-          console.log('[ZoomCompensation]', {
-            zoomLevel: zoom,
-            compensationFactor: compensation,
-            timestamp: new Date().toISOString(),
-          })
-        }
-      : undefined,
   })
 
   // Add global CSS class to indicate when zoom compensation is active
