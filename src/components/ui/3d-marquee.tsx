@@ -30,12 +30,21 @@ export const ThreeDMarquee = ({
       chunks[laneIndex].push(image);
     });
     
+    // Tambahkan placeholder untuk mengisi space kosong
+    const maxLength = Math.max(...chunks.map(chunk => chunk.length));
+    chunks.forEach((chunk, index) => {
+      const neededPlaceholders = maxLength - chunk.length;
+      for (let i = 0; i < neededPlaceholders; i++) {
+        chunks[index].push('placeholder');
+      }
+    });
+    
     return { chunks };
   }, [images]);
 
   // OPTIMASI: Menggunakan useCallback untuk fungsi yang tidak perlu re-create
   const getUniqueKey = useCallback((colIndex: number, imageIndex: number, image: string) => {
-    const videoName = image.split('/').pop()?.split('.')[0] || 'unknown';
+    const videoName = image.split('/').pop()?.split('.')[0] || 'placeholder';
     return `${colIndex}-${imageIndex}-${videoName}`;
   }, []);
 
@@ -51,7 +60,7 @@ export const ThreeDMarquee = ({
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             const videoSrc = entry.target.getAttribute('data-video-src');
-            if (videoSrc) {
+            if (videoSrc && videoSrc !== 'placeholder') {
               setVisibleVideos(prev => new Set([...prev, videoSrc]));
             }
           }
@@ -89,7 +98,7 @@ export const ThreeDMarquee = ({
             {chunks.map((subarray, colIndex) => (
               <motion.div
                 animate={{ 
-                  y: colIndex % 2 === 0 ? 30 : -30 
+                  y: colIndex % 2 === 0 ? 100 : -100 
                 }}
                 transition={{
                   duration: 20 + (colIndex * 5),
@@ -109,24 +118,31 @@ export const ThreeDMarquee = ({
                   const uniqueKey = getUniqueKey(colIndex, imageIndex, image);
                   const isLoaded = loadedVideos.has(image);
                   const isVisible = visibleVideos.has(image);
+                  const isPlaceholder = image === 'placeholder';
                   
                   return (
                     <div 
                       className="relative" 
                       key={uniqueKey}
-                      data-video-src={image}
+                      data-video-src={isPlaceholder ? undefined : image}
                     >
                       <GridLineHorizontal className="-top-3" offset="30px" />
-                      {!isLoaded && (
-                        <div className="absolute inset-0 bg-gray-800 rounded-lg flex items-center justify-center">
-                          <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                        </div>
-                      )}
-                      {isVisible && (
-                        <OptimizedVideo
-                          src={image}
-                          onLoadedData={() => handleVideoLoaded(image)}
-                        />
+                      {isPlaceholder ? (
+                        <PlaceholderCard />
+                      ) : (
+                        <>
+                          {!isLoaded && (
+                            <div className="absolute inset-0 bg-gray-800 rounded-lg flex items-center justify-center">
+                              <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                            </div>
+                          )}
+                          {isVisible && (
+                            <OptimizedVideo
+                              src={image}
+                              onLoadedData={() => handleVideoLoaded(image)}
+                            />
+                          )}
+                        </>
                       )}
                     </div>
                   );
@@ -137,6 +153,84 @@ export const ThreeDMarquee = ({
         </div>
       </div>
     </div>
+  );
+};
+
+// Komponen placeholder untuk space kosong
+const PlaceholderCard = () => {
+  // Array konten placeholder yang berbeda
+  const placeholderContents = [
+    {
+      icon: "🎬",
+      title: "Video Coming Soon",
+      subtitle: "New content in progress"
+    },
+    {
+      icon: "✨",
+      title: "Creative Process",
+      subtitle: "Working on something amazing"
+    },
+    {
+      icon: "🚀",
+      title: "Next Project",
+      subtitle: "Stay tuned for updates"
+    },
+    {
+      icon: "💡",
+      title: "Innovation",
+      subtitle: "Breaking new ground"
+    },
+    {
+      icon: "🌟",
+      title: "Excellence",
+      subtitle: "Quality takes time"
+    }
+  ];
+
+  // Pilih konten secara random
+  const randomContent = placeholderContents[Math.floor(Math.random() * placeholderContents.length)];
+
+  return (
+    <motion.div
+      whileHover={{
+        y: -8,
+        scale: 1.03,
+      }}
+      transition={{
+        duration: 0.3,
+        ease: "easeInOut",
+      }}
+      className="aspect-[9/16] rounded-lg bg-gradient-to-br from-gray-700 via-gray-800 to-gray-900 ring ring-gray-950/10 hover:shadow-xl hover:ring-2 hover:ring-white/20 flex items-center justify-center relative overflow-hidden"
+      style={{
+        width: 220,
+        height: 391,
+        // Force hardware acceleration
+        transform: 'translateZ(0)',
+        backfaceVisibility: 'hidden',
+      }}
+    >
+      {/* Background pattern */}
+      <div className="absolute inset-0 opacity-10">
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-purple-500/20"></div>
+        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.1)_1px,transparent_1px)] bg-[length:20px_20px]"></div>
+      </div>
+
+      {/* Content */}
+      <div className="text-center text-gray-300 relative z-10">
+        <div className="text-4xl mb-3 opacity-80">
+          {randomContent.icon}
+        </div>
+        <h3 className="text-sm font-semibold mb-1 text-white">
+          {randomContent.title}
+        </h3>
+        <p className="text-xs opacity-75 text-gray-400">
+          {randomContent.subtitle}
+        </p>
+      </div>
+
+      {/* Animated border */}
+      <div className="absolute inset-0 rounded-lg border border-gray-600/30 animate-pulse"></div>
+    </motion.div>
   );
 };
 
