@@ -8,11 +8,11 @@ import { cn } from '@/lib/utils'
 import { Magnetic } from '@/components/ui/magnetic'
 
 const navigation = [
-  { name: 'Home', href: '#home' },
+  { name: 'Home', href: '/' },
   { name: 'Work', href: '/work' },
-  { name: 'About', href: '#about' },
+  { name: 'About', href: '/about' },
   { name: 'CV', href: '#cv' },
-  { name: 'Contact', href: '#contact' },
+  { name: 'Contact', href: '/contact' },
 ]
 
 const socials = [

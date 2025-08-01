@@ -1,6 +1,8 @@
 'use client'
 
 import Image from 'next/image'
+import Link from 'next/link'
+import { MaskButton } from '@/components/ui/mask-button'
 
 export const AboutSection = () => {
   return (
@@ -41,14 +43,18 @@ export const AboutSection = () => {
           </div>
         </div>
 
-        {/* ABOUT ME - Positioned between viewport 1 and 2 texts */}
-        <div className="absolute left-0 md:left-1/3 w-full md:w-2/3 flex items-center justify-start z-30 md:flex" style={{top: '100vh'}}>
-          <div className="px-8 md:px-12 lg:px-16">
-            <div className="bg-content-primary text-content-inverse rounded-full px-12 py-6 shadow-lg">
-              <span className="text-xl lg:text-2xl xl:text-3xl font-medium">
+        {/* ABOUT ME - Positioned in section 1 (viewport 1) */}
+        <div className="absolute left-0 md:left-1/3 w-full md:w-2/3 flex items-end justify-start z-30" style={{top: 'calc(100vh - 120px)'}}>
+          <div className="px-8 md:px-12 lg:px-16 pb-16 md:pb-20">
+            <Link href="/about">
+              <MaskButton 
+                size="custom" 
+                variant="dark" 
+                customSize="px-12 py-6 text-xl lg:text-2xl xl:text-3xl"
+              >
                 About me
-              </span>
-            </div>
+              </MaskButton>
+            </Link>
           </div>
         </div>
 
