@@ -50,12 +50,12 @@ export const binjasimmenSamaptaData: WorkDetail = {
     {
       title: "Program Documentation",
       description: "Created comprehensive visual documentation of youth development programs, showcasing activities and participant growth.",
-      images: ["/public/about/photo/1.png", "/public/about/photo/2.png", "/public/about/photo/3.png"]
+      images: ["/work/binjasilmen-samapta/strategy-1.png", "/work/binjasilmen-samapta/strategy-2.png", "/work/binjasilmen-samapta/strategy-3.png"]
     },
     {
       title: "Success Stories Campaign",
       description: "Developed a series highlighting participant achievements and personal growth through the programs.",
-      images: ["/public/about/photo/4.png", "/public/about/photo/5.png", "/public/about/photo/6.png"]
+      images: ["/work/binjasilmen-samapta/strategy-4.png", "/work/binjasilmen-samapta/strategy-5.png", "/work/binjasilmen-samapta/strategy-6.png"]
     }
   ],
   bestContent: {
@@ -66,18 +66,18 @@ export const binjasimmenSamaptaData: WorkDetail = {
       engagement: "15.8%",
       reach: "67.5K"
     },
-    image: "/public/about/photo/7.png"
+    image: "/work/binjasilmen-samapta/best-content.png"
   },
   creativeProjects: [
     {
       title: "Community Impact Documentary",
       description: "Produced a short documentary showcasing the positive impact of Binjasilmen Samapta on local youth development.",
-      image: "/public/about/photo/8.png"
+      image: "/work/binjasilmen-samapta/documentary.png"
     },
     {
       title: "Youth Leadership Campaign",
       description: "Created a visual campaign promoting leadership qualities and values essential for youth development.",
-      image: "/public/about/photo/9.png"
+      image: "/work/binjasilmen-samapta/leadership-campaign.png"
     }
   ],
   nextProject: {

@@ -50,12 +50,12 @@ export const rumahBahasaAsingData: WorkDetail = {
     {
       title: "Korean Daily Phrases Series",
       description: "Created engaging videos teaching practical Korean phrases for everyday situations, making language learning accessible and fun.",
-      images: ["/public/about/photo/1.png", "/public/about/photo/2.png", "/public/about/photo/3.png"]
+      images: ["/work/rumah-bahasa-asing/strategy-1.png", "/work/rumah-bahasa-asing/strategy-2.png", "/work/rumah-bahasa-asing/strategy-3.png"]
     },
     {
       title: "Cultural Integration Content",
       description: "Developed content that combines Korean language learning with cultural insights, including K-pop references and Korean customs.",
-      images: ["/public/about/photo/4.png", "/public/about/photo/5.png", "/public/about/photo/6.png"]
+      images: ["/work/rumah-bahasa-asing/strategy-4.png", "/work/rumah-bahasa-asing/strategy-5.png", "/work/rumah-bahasa-asing/strategy-6.png"]
     }
   ],
   bestContent: {
@@ -66,18 +66,18 @@ export const rumahBahasaAsingData: WorkDetail = {
       engagement: "12.7%",
       reach: "3.2M"
     },
-    image: "/public/about/photo/7.png"
+    image: "/work/rumah-bahasa-asing/best-content.png"
   },
   creativeProjects: [
     {
       title: "Korean Language Learning App UI",
       description: "Designed user interface concepts for a mobile learning application to complement the online courses.",
-      image: "/public/about/photo/8.png"
+      image: "/work/rumah-bahasa-asing/app-ui.png"
     },
     {
       title: "Student Success Campaign",
       description: "Created a campaign showcasing students who successfully learned Korean through RBA, inspiring new enrollments.",
-      image: "/public/about/photo/9.png"
+      image: "/work/rumah-bahasa-asing/success-campaign.png"
     }
   ],
   nextProject: {

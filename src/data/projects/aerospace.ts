@@ -50,12 +50,12 @@ export const aerospaceData: WorkDetail = {
     {
       title: "Interactive Learning Modules",
       description: "Designed interactive educational modules that break down complex aerospace concepts into digestible visual components.",
-      images: ["/public/about/photo/1.png", "/public/about/photo/2.png", "/public/about/photo/3.png"]
+      images: ["/work/aerospace/strategy-1.png", "/work/aerospace/strategy-2.png", "/work/aerospace/strategy-3.png"]
     },
     {
       title: "STEM Visualization Series",
       description: "Created a comprehensive visual series explaining space exploration, rocket science, and aerospace engineering principles.",
-      images: ["/public/about/photo/4.png", "/public/about/photo/5.png", "/public/about/photo/6.png"]
+      images: ["/work/aerospace/strategy-4.png", "/work/aerospace/strategy-5.png", "/work/aerospace/strategy-6.png"]
     }
   ],
   bestContent: {
@@ -66,18 +66,18 @@ export const aerospaceData: WorkDetail = {
       engagement: "22.4%",
       reach: "41.3K"
     },
-    image: "/public/about/photo/7.png"
+    image: "/work/aerospace/best-content.png"
   },
   creativeProjects: [
     {
       title: "Space Exploration Learning App",
       description: "Designed the complete user interface for a mobile application teaching space exploration concepts to middle school students.",
-      image: "/public/about/photo/8.png"
+      image: "/work/aerospace/learning-app.png"
     },
     {
       title: "Aerospace Career Guide",
       description: "Created a comprehensive visual guide showcasing various career paths in the aerospace industry for students.",
-      image: "/public/about/photo/9.png"
+      image: "/work/aerospace/career-guide.png"
     }
   ]
 };

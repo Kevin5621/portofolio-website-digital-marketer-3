@@ -50,12 +50,12 @@ export const ortistSpecialistData: WorkDetail = {
     {
       title: "Educational Content Strategy",
       description: "Created informative posts about orthopedic conditions, treatment options, and prevention tips to establish the clinic as a trusted authority in the field.",
-      images: ["/public/about/photo/1.png", "/public/about/photo/2.png", "/public/about/photo/3.png"]
+      images: ["/work/ortist/strategy-1.png", "/work/ortist/strategy-2.png", "/work/ortist/strategy-3.png"]
     },
     {
       title: "Patient Success Stories",
       description: "Developed a series showcasing patient recovery journeys and testimonials to build trust and demonstrate treatment effectiveness.",
-      images: ["/public/about/photo/4.png", "/public/about/photo/5.png", "/public/about/photo/6.png"]
+      images: ["/work/ortist/strategy-4.png", "/work/ortist/strategy-5.png", "/work/ortist/strategy-6.png"]
     }
   ],
   bestContent: {
@@ -66,18 +66,18 @@ export const ortistSpecialistData: WorkDetail = {
       engagement: "8.3%",
       reach: "18.2K"
     },
-    image: "/public/about/photo/7.png"
+    image: "/work/ortist/best-content.png"
   },
   creativeProjects: [
     {
       title: "Brand Identity Refresh",
       description: "Redesigned social media templates and visual guidelines to create a more modern, trustworthy appearance for the clinic.",
-      image: "/public/about/photo/8.png"
+      image: "/work/ortist/brand-identity.png"
     },
     {
       title: "Educational Infographic Series", 
       description: "Created a series of infographics explaining common orthopedic conditions in simple, patient-friendly language.",
-      image: "/public/about/photo/9.png"
+      image: "/work/ortist/infographic-series.png"
     }
   ],
   nextProject: {
