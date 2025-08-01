@@ -7,27 +7,24 @@ export const ortistSpecialistData: WorkDetail = {
   role: "Social Media Marketing Manager",
   year: "2023",
   category: "Social Media Marketing Manager",
-  description: "Ortist Spesialist is a medical specialist clinic focused on orthopedic treatments. As their Social Media Marketing Manager, I developed and executed comprehensive digital marketing strategies to increase brand awareness and patient engagement.",
+  description: "Ortist Spesialist is a orthodontic clinic providing personalized, cutting-edge treatments for all ages across Semarang.",
   objectives: [
-    "Develop a TikTok and Instagram content strategy for Ortist",
-    "Increase brand awareness through engaging visual content",
-    "Drive patient inquiries and appointments through social media",
-    "Create educational content about orthopedic health",
-    "Build trust and credibility in the medical field"
+    "I managed Ortist Specialist's Instagram and TikTok to make sure people knew about their dental services.",
+    "I created fun and educational posts to teach people, especially younger ones aged 16-25, about dental health.",
+    "Engage with the community, respond to inquiries, and build a positive brand image.",
+    "Monitor performance metrics (engagement, CTR) and optimize strategies for better results."
   ],
   challenges: [
-    "Medical content requires careful fact-checking and compliance",
-    "Building trust in healthcare through social media",
-    "Creating engaging content while maintaining professionalism",
-    "Competing with established medical practices in the area",
-    "Balancing educational and promotional content"
+    "Creating engaging content that resonates with young people and raises awareness about the importance of dental health, especially in relation to misaligned teeth."
   ],
   solutions: [
-    "Developed content calendar with educational posts about orthopedic health",
-    "Created patient testimonial videos highlighting successful treatments",
-    "Designed infographics explaining common orthopedic conditions",
-    "Implemented consistent branding across all social platforms",
-    "Collaborated with medical staff to ensure content accuracy"
+    "Analyzed youth market preferences (ages 16-25) to make the content.",
+    "Developed marketing strategy for organic awareness and engagement.",
+    "Scheduled posts on Instagram and TikTok for consistency.",
+    "Created content, including educational and transformation videos.",
+    "Managed content across both platforms, ensuring relevance.",
+    "Engaged with the audience by responding to DMs and comments.",
+    "Compiled monthly performance reports and adjusted strategies."
   ],
   achievements: {
     title: "Achievements & Result Summary",
