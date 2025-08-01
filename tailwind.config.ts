@@ -87,8 +87,8 @@ export default {
 
     /* === FONT FAMILY === */
     fontFamily: {
-      'poppins': ['var(--font-poppins)', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'],
-      'sans': ['var(--font-poppins)', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'],
+      inter: ['var(--font-inter)', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'],
+      sans: ['var(--font-inter)', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'],
     },
 
     /* === BORDER RADIUS SCALE === */
