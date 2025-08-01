@@ -4,74 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { MaskButton } from "@/components/ui/mask-button";
 import { ContactSection } from "@/components/sections/ContactSection";
-
-interface WorkItem {
-  id: string;
-  client: string;
-  location: string;
-  role: string;
-  year: string;
-  category: string;
-}
-
-const workData: WorkItem[] = [
-  {
-    id: "1",
-    client: "Ortist Spesialist",
-    location: "Semarang, Indonesia",
-    role: "Social Media Marketing Manager",
-    year: "2023",
-    category: "Social Media Marketing Manager"
-  },
-  {
-    id: "2",
-    client: "Rumah Bahasa Asing",
-    location: "Semarang, Indonesia", 
-    role: "Social Media Marketing Manager",
-    year: "2023",
-    category: "Social Media Marketing Manager"
-  },
-  {
-    id: "3",
-    client: "Binjasilmen Samapta",
-    location: "Banjarregara, Indonesia",
-    role: "Content Creator",
-    year: "2023-2024",
-    category: "Content Creator"
-  },
-  {
-    id: "4",
-    client: "Aerospace",
-    location: "Alam Sutera, Indonesia",
-    role: "Graphic Designer",
-    year: "2024",
-    category: "Graphic Design"
-  },
-  {
-    id: "5",
-    client: "GENZUMMIT™",
-    location: "Gading Serpong, Indonesia",
-    role: "Content Creator",
-    year: "2025",
-    category: "Content Creator"
-  },
-  {
-    id: "6",
-    client: "PPM HIMMA 2025",
-    location: "Gading Serpong, Indonesia",
-    role: "Content Creator",
-    year: "2025",
-    category: "Content Creator"
-  },
-  {
-    id: "7",
-    client: "A5X Studio",
-    location: "Gading Serpong, Indonesia",
-    role: "Video Editing Agency",
-    year: "2023-Now",
-    category: "Content Creator"
-  }
-];
+import { getAllWorkItems } from "@/data/work";
 
 const categories = [
   "All",
@@ -83,7 +16,9 @@ const categories = [
 export default function WorkPage() {
   const [activeFilter, setActiveFilter] = useState("All");
   const router = useRouter();
-
+  
+  const workData = getAllWorkItems();
+  
   const filteredWork = activeFilter === "All" 
     ? workData 
     : workData.filter(item => item.category === activeFilter);
@@ -127,9 +62,9 @@ export default function WorkPage() {
             {/* Table Body */}
             <div className="space-y-0">
               {filteredWork.map((item) => (
-                <div
+                <button
                   key={item.id}
-                  className="grid grid-cols-12 gap-8 py-8 border-b border-border-secondary hover:bg-surface-secondary transition-colors duration-200 group cursor-pointer"
+                  className="grid grid-cols-12 gap-8 py-8 border-b border-border-secondary hover:bg-surface-secondary transition-colors duration-200 group cursor-pointer w-full text-left"
                   onClick={() => router.push(`/work/${item.id}`)}
                 >
                   <div className="col-span-3 text-left">
@@ -146,7 +81,7 @@ export default function WorkPage() {
                   <div className="col-span-2 text-right">
                     <p className="text-lg font-medium text-content-secondary">{item.year}</p>
                   </div>
-                </div>
+                </button>
               ))}
             </div>
           </div>

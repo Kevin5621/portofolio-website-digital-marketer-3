@@ -1,7 +1,7 @@
 import { WorkDetail } from "../work-details";
 
 export const binjasimmenSamaptaData: WorkDetail = {
-  id: "3",
+  id: "binjasilmen-samapta",
   client: "Binjasilmen Samapta",
   location: "Banjarregara, Indonesia",
   role: "Content Creator",

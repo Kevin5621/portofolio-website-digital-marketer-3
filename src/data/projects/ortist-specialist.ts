@@ -1,7 +1,7 @@
 import { WorkDetail } from "../work-details";
 
 export const ortistSpecialistData: WorkDetail = {
-  id: "1",
+  id: "ortist-specialist",
   client: "Ortist Spesialist",
   location: "Semarang, Indonesia",
   role: "Social Media Marketing Manager",

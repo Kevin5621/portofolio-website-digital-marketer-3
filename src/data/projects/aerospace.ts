@@ -1,7 +1,7 @@
 import { WorkDetail } from "../work-details";
 
 export const aerospaceData: WorkDetail = {
-  id: "4",
+  id: "aerospace",
   client: "Aerospace",
   location: "Alam Sutera, Indonesia",
   role: "Graphic Designer",

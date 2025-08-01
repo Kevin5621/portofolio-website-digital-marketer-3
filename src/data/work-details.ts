@@ -2,7 +2,10 @@ import {
   ortistSpecialistData,
   rumahBahasaAsingData, 
   binjasimmenSamaptaData,
-  aerospaceData
+  aerospaceData,
+  genzummitData,
+  ppmHimmaData,
+  a5xStudioData
 } from "./projects";
 
 export interface WorkDetail {
@@ -57,13 +60,13 @@ export interface WorkDetail {
 
 // Modular project data collection
 export const workDetailsData: Record<string, WorkDetail> = {
-  "1": ortistSpecialistData,
-  "2": rumahBahasaAsingData,
-  "3": binjasimmenSamaptaData,
-  "4": aerospaceData,
-  // Add new projects here as they are created:
-  // "5": newProjectData,
-  // "6": anotherProjectData,
+  "ortist-specialist": ortistSpecialistData,
+  "rumah-bahasa-asing": rumahBahasaAsingData,
+  "binjasilmen-samapta": binjasimmenSamaptaData,
+  "aerospace": aerospaceData,
+  "genzummit": genzummitData,
+  "ppm-himma-2025": ppmHimmaData,
+  "a5x-studio": a5xStudioData,
 };
 
 export const getWorkDetail = (id: string): WorkDetail | null => {
