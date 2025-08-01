@@ -2,6 +2,7 @@
 
 import { ContactSection } from "@/components/sections/ContactSection";
 import { BrandLogosMarquee } from "@/components/sections/BrandLogosMarquee";
+import ThreeDMarqueeDemo from "@/components/ui/3d-marquee-demo";
 
 export default function AboutPage() {
   return (
@@ -85,10 +86,7 @@ export default function AboutPage() {
 
       {/* Video content placeholder section */}
       <section id="video-content" className="min-h-screen bg-surface-inverse flex items-center justify-center px-6">
-        <div className="w-full max-w-4xl aspect-video bg-neutral-800 rounded-lg flex items-center justify-center">
-          {/* Video content placeholder */}
-          <span className="text-content-inverse text-lg">Video Content Coming Soon</span>
-        </div>
+        <ThreeDMarqueeDemo />
       </section>
 
       {/* Viewport 13: Oh, also - Big text, white bg, black text */}
