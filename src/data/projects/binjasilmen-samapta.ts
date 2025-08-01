@@ -73,12 +73,18 @@ export const binjasimmenSamaptaData: WorkDetail = {
   bestContent: {
     title: "Best Organic Content",
     description: "A testimonial video featuring program graduates sharing their transformation stories became our most impactful content piece.",
-    stats: {
-      views: "45.2K",
-      engagement: "15.8%",
-      reach: "67.5K"
-    },
-    image: "/work/binjasilmen-samapta/best-content.png"
+    videos: [
+      {
+        image: "/work/binjasilmen-samapta/best-content.png",
+        stats: {
+          views: "45.2K",
+          engagement: "15.8K",
+          reach: "8.5K",
+          comments: "2.1K",
+          saves: "6.7K"
+        }
+      }
+    ]
   },
   creativeProjects: [
     {

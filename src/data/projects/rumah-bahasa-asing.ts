@@ -73,12 +73,18 @@ export const rumahBahasaAsingData: WorkDetail = {
   bestContent: {
     title: "Best Organic Content",
     description: "Our Korean daily phrases series became incredibly popular, with this particular video about common greetings reaching massive engagement.",
-    stats: {
-      views: "2.1M",
-      engagement: "12.7%",
-      reach: "3.2M"
-    },
-    image: "/work/rumah-bahasa-asing/best-content.png"
+    videos: [
+      {
+        image: "/work/rumah-bahasa-asing/best-content.png",
+        stats: {
+          views: "2.1M",
+          engagement: "150K",
+          reach: "85K",
+          comments: "12K",
+          saves: "45K"
+        }
+      }
+    ]
   },
   creativeProjects: [
     {

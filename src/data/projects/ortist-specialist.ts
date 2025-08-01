@@ -57,25 +57,41 @@ export const ortistSpecialistData: WorkDetail = {
   },
   contentStrategies: [
     {
-      title: "Educational Content Strategy",
-      description: "Created informative posts about orthopedic conditions, treatment options, and prevention tips to establish the clinic as a trusted authority in the field.",
-      images: ["/work/ortist/strategy-1.png", "/work/ortist/strategy-2.png", "/work/ortist/strategy-3.png"]
+      title: "Content Strategies",
+      description: "I created a mix of educational and fun content about dental health. I made videos to educate and engage young people, showed the process of getting braces for credibility, and shared before-and-after content to encourage people to get treatment.",
+      images: ["/work/ortist/foto10.png", "/work/ortist/foto9.png", "/work/ortist/foto9.png"]
     },
     {
-      title: "Patient Success Stories",
-      description: "Developed a series showcasing patient recovery journeys and testimonials to build trust and demonstrate treatment effectiveness.",
-      images: ["/work/ortist/strategy-4.png", "/work/ortist/strategy-5.png", "/work/ortist/strategy-6.png"]
+      title: "Content Strategies",
+      description: "I changed the layout of the TikTok feed to make it more consistent and cleaner, so the content looks nicer and is easier to enjoy.",
+      images: ["/work/ortist/before.png", "/work/ortist/after.png"]
     }
   ],
   bestContent: {
     title: "Best Organic Content",
-    description: "This post about common knee problems and prevention tips became our most engaging content, resonating with our target audience of active adults.",
-    stats: {
-      views: "12.5K",
-      engagement: "8.3%",
-      reach: "18.2K"
-    },
-    image: "/work/ortist/best-content.png"
+    description: "The best content that was really successful was a funny reel video that encouraged people to visit Ortist Specialist. Another viral video was an educational video sharing tips on maintaining braces.",
+    videos: [
+      {
+        image: "/work/ortist/foto11.png",
+        stats: {
+          views: "1.8M",
+          engagement: "258K",
+          reach: "33K",
+          comments: "5K",
+          saves: "34K"
+        }
+      },
+      {
+        image: "/work/ortist/foto12.png",
+        stats: {
+          views: "769K",
+          engagement: "92K",
+          reach: "8K",
+          comments: "3K",
+          saves: "9K"
+        }
+      }
+    ]
   },
   creativeProjects: [
     {

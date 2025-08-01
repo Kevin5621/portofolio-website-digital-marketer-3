@@ -65,12 +65,18 @@ export const ppmHimmaData: WorkDetail = {
   bestContent: {
     title: "Leadership Through Islamic Values",
     description: "Comprehensive video series explaining how Islamic principles apply to modern leadership",
-    stats: {
-      views: "8K+",
-      engagement: "12%",
-      reach: "6K+"
-    },
-    image: "/about/photo/5.png"
+    videos: [
+      {
+        image: "/about/photo/5.png",
+        stats: {
+          views: "8K+",
+          engagement: "2.5K",
+          reach: "1.8K",
+          comments: "150",
+          saves: "800"
+        }
+      }
+    ]
   },
   creativeProjects: [
     {

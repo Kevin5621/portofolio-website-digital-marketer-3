@@ -72,12 +72,18 @@ export const aerospaceData: WorkDetail = {
   bestContent: {
     title: "Best Educational Content",
     description: "An interactive infographic explaining rocket propulsion principles became the most popular learning resource among students.",
-    stats: {
-      views: "28.7K",
-      engagement: "22.4%",
-      reach: "41.3K"
-    },
-    image: "/work/aerospace/best-content.png"
+    videos: [
+      {
+        image: "/work/aerospace/best-content.png",
+        stats: {
+          views: "28.7K",
+          engagement: "15.2K",
+          reach: "8.5K",
+          comments: "2.1K",
+          saves: "5.3K"
+        }
+      }
+    ]
   },
   creativeProjects: [
     {

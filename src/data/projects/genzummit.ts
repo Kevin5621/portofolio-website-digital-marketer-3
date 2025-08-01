@@ -65,12 +65,18 @@ export const genzummitData: WorkDetail = {
   bestContent: {
     title: "Event Teaser Campaign",
     description: "Dynamic video series showcasing what Gen Z can expect from GENZUMMIT™",
-    stats: {
-      views: "25K+",
-      engagement: "15%",
-      reach: "12K+"
-    },
-    image: "/about/photo/5.png"
+    videos: [
+      {
+        image: "/about/photo/5.png",
+        stats: {
+          views: "25K+",
+          engagement: "15%",
+          reach: "12K+",
+          comments: "2K",
+          saves: "5K"
+        }
+      }
+    ]
   },
   creativeProjects: [
     {

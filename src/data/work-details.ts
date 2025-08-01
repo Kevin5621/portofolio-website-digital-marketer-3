@@ -40,12 +40,16 @@ export interface WorkDetail {
   bestContent: {
     title: string;
     description: string;
-    stats: {
-      views: string;
-      engagement: string;
-      reach: string;
-    };
-    image: string;
+    videos: {
+      image: string;
+      stats: {
+        views: string;
+        engagement: string;
+        reach: string;
+        comments: string;
+        saves: string;
+      };
+    }[];
   };
   creativeProjects: {
     title: string;

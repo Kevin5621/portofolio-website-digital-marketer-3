@@ -8,7 +8,6 @@ import { WorkDetailHero } from "@/components/work/WorkDetailHero";
 import { WorkJobDescription } from "@/components/work/WorkJobDescription";
 import { WorkAchievements } from "@/components/work/WorkAchievements";
 import { WorkContentStrategies } from "@/components/work/WorkContentStrategies";
-import { WorkBestContent } from "@/components/work/WorkBestContent";
 import { WorkCreativeProjects } from "@/components/work/WorkCreativeProjects";
 import { WorkNextProject } from "@/components/work/WorkNextProject";
 
@@ -63,8 +62,10 @@ export default function WorkDetailPage() {
       <WorkDetailHero workDetail={workDetail} />
       <WorkJobDescription workDetail={workDetail} />
       <WorkAchievements achievements={workDetail.achievements} />
-      <WorkContentStrategies strategies={workDetail.contentStrategies} />
-      <WorkBestContent bestContent={workDetail.bestContent} />
+      <WorkContentStrategies 
+        strategies={workDetail.contentStrategies} 
+        bestContent={workDetail.bestContent} 
+      />
       <WorkCreativeProjects projects={workDetail.creativeProjects} />
       {nextProject && <WorkNextProject nextProject={nextProject} />}
     </main>

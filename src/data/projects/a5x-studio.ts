@@ -65,12 +65,18 @@ export const a5xStudioData: WorkDetail = {
   bestContent: {
     title: "Corporate Brand Film",
     description: "High-end brand video production showcasing company values and culture",
-    stats: {
-      views: "100K+",
-      engagement: "18%",
-      reach: "75K+"
-    },
-    image: "/about/photo/5.png"
+    videos: [
+      {
+        image: "/about/photo/5.png",
+        stats: {
+          views: "100K+",
+          engagement: "18%",
+          reach: "75K+",
+          comments: "2K",
+          saves: "5K"
+        }
+      }
+    ]
   },
   creativeProjects: [
     {
