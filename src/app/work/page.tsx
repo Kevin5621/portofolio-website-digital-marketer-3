@@ -130,6 +130,7 @@ export default function WorkPage() {
                 <div
                   key={item.id}
                   className="grid grid-cols-12 gap-8 py-8 border-b border-border-secondary hover:bg-surface-secondary transition-colors duration-200 group cursor-pointer"
+                  onClick={() => router.push(`/work/${item.id}`)}
                 >
                   <div className="col-span-3 text-left">
                     <h3 className="text-xl font-semibold text-content-primary group-hover:text-interactive-primary transition-colors duration-200">
