@@ -28,18 +28,30 @@ export const ortistSpecialistData: WorkDetail = {
   ],
   achievements: {
     title: "Achievements & Result Summary",
+    subtitle: "All achievements are compared to the performance of the previous period prior to my involvement. (May - Agustus 2023)",
     metrics: [
       {
         platform: "Instagram",
-        before: "850",
-        after: "2,197",
-        growth: "+158%"
+        contentCreated: "Created 120+ content, which resulted in",
+        metrics: [
+          { label: "Reach", value: "+ 386,677", percentage: "9,220%" },
+          { label: "Profile Visit", value: "+ 33,919", percentage: "1,267%" },
+          { label: "Click Link", value: "+ 632", percentage: "436%" },
+          { label: "Followers", value: "+ 5,050", percentage: "47%" },
+          { label: "Interaction", value: "+ 144,273", percentage: "20,356%" }
+        ]
       },
       {
-        platform: "TikTok", 
-        before: "120",
-        after: "873",
-        growth: "+627%"
+        platform: "TikTok",
+        contentCreated: "Created 120+ content, which resulted in",
+        metrics: [
+          { label: "Views", value: "+ 6,597,000", percentage: "13,725%" },
+          { label: "Profile Visit", value: "+ 199,541", percentage: "21,319%" },
+          { label: "Followers", value: "+ 21,000", percentage: "2,650%" },
+          { label: "Like", value: "+ 721,089", percentage: "114,594%" },
+          { label: "Comment", value: "+ 55,743", percentage: "73,424%" },
+          { label: "Share", value: "+ 44,178", percentage: "66,987%" }
+        ]
       }
     ]
   },

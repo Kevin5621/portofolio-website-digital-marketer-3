@@ -3,8 +3,7 @@
 import { useParams, notFound } from "next/navigation";
 import { getWorkDetail } from "@/data/work-details";
 import { WorkDetailHero } from "@/components/work/WorkDetailHero";
-import { WorkObjectives } from "@/components/work/WorkObjectives";
-import { WorkChallenges } from "@/components/work/WorkChallenges";
+import { WorkJobDescription } from "@/components/work/WorkJobDescription";
 import { WorkAchievements } from "@/components/work/WorkAchievements";
 import { WorkContentStrategies } from "@/components/work/WorkContentStrategies";
 import { WorkBestContent } from "@/components/work/WorkBestContent";
@@ -25,8 +24,7 @@ export default function WorkDetailPage() {
   return (
     <main className="min-h-screen bg-surface-background">
       <WorkDetailHero workDetail={workDetail} />
-      <WorkObjectives objectives={workDetail.objectives} />
-      <WorkChallenges challenges={workDetail.challenges} solutions={workDetail.solutions} />
+      <WorkJobDescription workDetail={workDetail} />
       <WorkAchievements achievements={workDetail.achievements} />
       <WorkContentStrategies strategies={workDetail.contentStrategies} />
       <WorkBestContent bestContent={workDetail.bestContent} />

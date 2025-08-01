@@ -31,18 +31,30 @@ export const binjasimmenSamaptaData: WorkDetail = {
   ],
   achievements: {
     title: "Achievements & Result Summary",
+    subtitle: "All achievements are compared to the performance of the previous period prior to my involvement. (May - Agustus 2023)",
     metrics: [
       {
         platform: "Instagram",
-        before: "300",
-        after: "3,675",
-        growth: "+1,125%"
+        contentCreated: "Created 120+ content, which resulted in",
+        metrics: [
+          { label: "Reach", value: "+ 150,000", percentage: "1,125%" },
+          { label: "Profile Visit", value: "+ 25,000", percentage: "1,267%" },
+          { label: "Click Link", value: "+ 500", percentage: "436%" },
+          { label: "Followers", value: "+ 3,375", percentage: "1,125%" },
+          { label: "Interaction", value: "+ 50,000", percentage: "20,356%" }
+        ]
       },
       {
         platform: "YouTube",
-        before: "50",
-        after: "1,850", 
-        growth: "+3,600%"
+        contentCreated: "Created 120+ content, which resulted in",
+        metrics: [
+          { label: "Views", value: "+ 500,000", percentage: "3,600%" },
+          { label: "Profile Visit", value: "+ 50,000", percentage: "21,319%" },
+          { label: "Followers", value: "+ 1,800", percentage: "3,600%" },
+          { label: "Like", value: "+ 100,000", percentage: "114,594%" },
+          { label: "Comment", value: "+ 15,000", percentage: "73,424%" },
+          { label: "Share", value: "+ 10,000", percentage: "66,987%" }
+        ]
       }
     ]
   },

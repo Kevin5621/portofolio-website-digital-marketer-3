@@ -31,18 +31,30 @@ export const rumahBahasaAsingData: WorkDetail = {
   ],
   achievements: {
     title: "Achievements & Result Summary",
+    subtitle: "All achievements are compared to the performance of the previous period prior to my involvement. (May - Agustus 2023)",
     metrics: [
       {
         platform: "Instagram",
-        before: "1,200",
-        after: "32,197",
-        growth: "+2,583%"
+        contentCreated: "Created 120+ content, which resulted in",
+        metrics: [
+          { label: "Reach", value: "+ 2,500,000", percentage: "2,583%" },
+          { label: "Profile Visit", value: "+ 150,000", percentage: "1,267%" },
+          { label: "Click Link", value: "+ 2,500", percentage: "436%" },
+          { label: "Followers", value: "+ 30,997", percentage: "2,583%" },
+          { label: "Interaction", value: "+ 500,000", percentage: "20,356%" }
+        ]
       },
       {
         platform: "TikTok",
-        before: "500", 
-        after: "373,000",
-        growth: "+74,500%"
+        contentCreated: "Created 120+ content, which resulted in",
+        metrics: [
+          { label: "Views", value: "+ 15,000,000", percentage: "13,725%" },
+          { label: "Profile Visit", value: "+ 500,000", percentage: "21,319%" },
+          { label: "Followers", value: "+ 372,500", percentage: "74,500%" },
+          { label: "Like", value: "+ 1,500,000", percentage: "114,594%" },
+          { label: "Comment", value: "+ 200,000", percentage: "73,424%" },
+          { label: "Share", value: "+ 150,000", percentage: "66,987%" }
+        ]
       }
     ]
   },

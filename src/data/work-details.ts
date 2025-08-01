@@ -18,11 +18,15 @@ export interface WorkDetail {
   solutions: string[];
   achievements: {
     title: string;
+    subtitle: string;
     metrics: {
       platform: string;
-      before: string;
-      after: string;
-      growth: string;
+      contentCreated: string;
+      metrics: {
+        label: string;
+        value: string;
+        percentage: string;
+      }[];
     }[];
   };
   contentStrategies: {

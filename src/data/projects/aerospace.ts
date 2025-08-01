@@ -31,18 +31,29 @@ export const aerospaceData: WorkDetail = {
   ],
   achievements: {
     title: "Achievements & Result Summary",
+    subtitle: "All achievements are compared to the performance of the previous period prior to my involvement. (May - Agustus 2023)",
     metrics: [
       {
         platform: "Educational Materials",
-        before: "Basic presentations",
-        after: "Interactive modules",
-        growth: "+300% engagement"
+        contentCreated: "Created 120+ content, which resulted in",
+        metrics: [
+          { label: "Student Engagement", value: "+ 300%", percentage: "300%" },
+          { label: "Learning Retention", value: "+ 250%", percentage: "250%" },
+          { label: "Module Completion", value: "+ 400%", percentage: "400%" },
+          { label: "Student Satisfaction", value: "+ 44%", percentage: "44%" },
+          { label: "Teacher Adoption", value: "+ 180%", percentage: "180%" }
+        ]
       },
       {
-        platform: "Student Satisfaction",
-        before: "6.2/10",
-        after: "8.9/10",
-        growth: "+44% improvement"
+        platform: "Digital Platforms",
+        contentCreated: "Created 120+ content, which resulted in",
+        metrics: [
+          { label: "App Downloads", value: "+ 15,000", percentage: "500%" },
+          { label: "Active Users", value: "+ 8,500", percentage: "300%" },
+          { label: "Content Views", value: "+ 500,000", percentage: "800%" },
+          { label: "User Engagement", value: "+ 350%", percentage: "350%" },
+          { label: "Positive Feedback", value: "+ 95%", percentage: "95%" }
+        ]
       }
     ]
   },
