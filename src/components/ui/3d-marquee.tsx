@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
-import { useMemo, useCallback, useState } from "react";
+import { useMemo, useCallback, useState, useEffect } from "react";
 
 export const ThreeDMarquee = ({
   images,
@@ -11,8 +11,9 @@ export const ThreeDMarquee = ({
   images: string[];
   className?: string;
 }) => {
-  // OPTIMASI: State untuk tracking loading
-  const [loadingStates, setLoadingStates] = useState<Record<string, boolean>>({});
+  // State untuk tracking loading video
+  const [loadedVideos, setLoadedVideos] = useState<Set<string>>(new Set());
+  const [visibleVideos, setVisibleVideos] = useState<Set<string>>(new Set());
 
   // OPTIMASI: Menggunakan useMemo untuk menghindari re-computation yang tidak perlu
   const { chunks } = useMemo(() => {
@@ -38,13 +39,35 @@ export const ThreeDMarquee = ({
     return `${colIndex}-${imageIndex}-${videoName}`;
   }, []);
 
-  // OPTIMASI: Handler untuk loading state
-  const handleVideoLoad = useCallback((key: string) => {
-    setLoadingStates(prev => ({ ...prev, [key]: false }));
+  // Handler untuk video loaded
+  const handleVideoLoaded = useCallback((src: string) => {
+    setLoadedVideos(prev => new Set([...prev, src]));
   }, []);
 
-  const handleVideoLoadStart = useCallback((key: string) => {
-    setLoadingStates(prev => ({ ...prev, [key]: true }));
+  // OPTIMASI: Intersection Observer untuk lazy loading
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const videoSrc = entry.target.getAttribute('data-video-src');
+            if (videoSrc) {
+              setVisibleVideos(prev => new Set([...prev, videoSrc]));
+            }
+          }
+        });
+      },
+      {
+        rootMargin: '50px', // Start loading 50px before video comes into view
+        threshold: 0.1
+      }
+    );
+
+    // Observe all video containers
+    const videoContainers = document.querySelectorAll('[data-video-src]');
+    videoContainers.forEach(container => observer.observe(container));
+
+    return () => observer.disconnect();
   }, []);
 
   return (
@@ -84,21 +107,27 @@ export const ThreeDMarquee = ({
                 <GridLineVertical className="-left-3" offset="80px" />
                 {subarray.map((image, imageIndex) => {
                   const uniqueKey = getUniqueKey(colIndex, imageIndex, image);
-                  const isLoading = loadingStates[uniqueKey] ?? true;
+                  const isLoaded = loadedVideos.has(image);
+                  const isVisible = visibleVideos.has(image);
                   
                   return (
-                    <div className="relative" key={uniqueKey}>
+                    <div 
+                      className="relative" 
+                      key={uniqueKey}
+                      data-video-src={image}
+                    >
                       <GridLineHorizontal className="-top-3" offset="30px" />
-                      {isLoading && (
+                      {!isLoaded && (
                         <div className="absolute inset-0 bg-gray-800 rounded-lg flex items-center justify-center">
                           <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
                         </div>
                       )}
-                      <OptimizedVideo
-                        src={image}
-                        onLoadStart={() => handleVideoLoadStart(uniqueKey)}
-                        onLoadedData={() => handleVideoLoad(uniqueKey)}
-                      />
+                      {isVisible && (
+                        <OptimizedVideo
+                          src={image}
+                          onLoadedData={() => handleVideoLoaded(image)}
+                        />
+                      )}
                     </div>
                   );
                 })}
@@ -111,14 +140,12 @@ export const ThreeDMarquee = ({
   );
 };
 
-// OPTIMASI: Komponen video terpisah dengan lazy loading dan error handling
+// OPTIMASI: Komponen video dengan loading state dan compression
 const OptimizedVideo = ({ 
   src, 
-  onLoadStart, 
   onLoadedData 
 }: { 
   src: string; 
-  onLoadStart: () => void;
   onLoadedData: () => void;
 }) => {
   return (
@@ -135,20 +162,24 @@ const OptimizedVideo = ({
       className="aspect-[9/16] rounded-lg object-cover ring ring-gray-950/10 hover:shadow-xl hover:ring-2 hover:ring-white/20"
       width={220}
       height={391}
-      // OPTIMASI: Preload metadata untuk performa yang lebih baik
+      // OPTIMASI: Preload metadata saja untuk kecepatan
       preload="metadata"
+      // OPTIMASI: Video settings untuk performa
       autoPlay
       muted
       loop
       playsInline
-      // OPTIMASI: Error handling
-      onError={(e) => {
-        console.warn(`Failed to load video: ${src}`, e);
+      // OPTIMASI: Compression settings
+      style={{
+        // Force hardware acceleration
+        transform: 'translateZ(0)',
+        backfaceVisibility: 'hidden',
+      }}
+      onLoadedData={onLoadedData}
+      onError={() => {
+        console.warn(`Failed to load video: ${src}`);
         onLoadedData(); // Remove loading state even on error
       }}
-      // OPTIMASI: Loading state handlers
-      onLoadStart={onLoadStart}
-      onLoadedData={onLoadedData}
     />
   );
 };
