@@ -11,7 +11,6 @@ import { WorkContentStrategies } from "@/components/work/WorkContentStrategies";
 import { WorkBestContent } from "@/components/work/WorkBestContent";
 import { WorkCreativeProjects } from "@/components/work/WorkCreativeProjects";
 import { WorkNextProject } from "@/components/work/WorkNextProject";
-import { ContactSection } from "@/components/sections/ContactSection";
 
 export default function WorkDetailPage() {
   const params = useParams();
@@ -68,7 +67,6 @@ export default function WorkDetailPage() {
       <WorkBestContent bestContent={workDetail.bestContent} />
       <WorkCreativeProjects projects={workDetail.creativeProjects} />
       {nextProject && <WorkNextProject nextProject={nextProject} />}
-      <ContactSection />
     </main>
   );
 }
