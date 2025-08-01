@@ -1,6 +1,8 @@
 "use client";
 
-export function AboutSection5() {
+import { ContactSection } from "@/components/sections/ContactSection";
+
+export function AboutSection5End() {
   return (
     <>
       {/* Viewport 27: Are you interested in collaborating - Big text, white bg, black text */}
@@ -16,6 +18,9 @@ export function AboutSection5() {
           Feel free to contact me!
         </p>
       </section>
+
+      {/* Contact Section */}
+      <ContactSection />
     </>
   );
 } 
