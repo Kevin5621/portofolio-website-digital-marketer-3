@@ -38,6 +38,7 @@ export const ThreeDMarquee = ({
           <div
             style={{
               transform: "rotateX(55deg) rotateY(0deg) rotateZ(-45deg)",
+              transformStyle: "preserve-3d",
             }}
             className="grid grid-cols-5 gap-6 transform-3d"
           >
@@ -54,6 +55,10 @@ export const ThreeDMarquee = ({
                 }}
                 key={`lane-${colIndex}-${subarray.length}`}
                 className="flex flex-col items-start gap-6"
+                style={{
+                  // Efek bata: lane genap start di posisi 1, ganjil start di posisi 3
+                  marginTop: colIndex % 2 === 0 ? '0px' : '250px', // Lane ganjil dimulai lebih bawah
+                }}
               >
                 <GridLineVertical className="-left-3" offset="80px" />
                 {subarray.map((image, imageIndex) => {
