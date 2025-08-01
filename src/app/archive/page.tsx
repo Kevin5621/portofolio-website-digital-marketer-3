@@ -1,60 +1,12 @@
 "use client";
 
+import Link from "next/link";
 import { ContactSection } from "@/components/sections/ContactSection";
-
-interface ArchiveItem {
-  id: string;
-  client: string;
-  location: string;
-  role: string;
-  year: string;
-  category: string;
-}
-
-const archiveData: ArchiveItem[] = [
-  {
-    id: "1",
-    client: "Kronju",
-    location: "Semarang, Indonesia",
-    role: "Graphic Designer",
-    year: "2023",
-    category: "Graphic Design"
-  },
-  {
-    id: "2",
-    client: "Shinji Film",
-    location: "Alam Sutera, Indonesia",
-    role: "Storyboard Artist",
-    year: "2023",
-    category: "Content Creator"
-  },
-  {
-    id: "3",
-    client: "Toyota Runners Club",
-    location: "Karawang, Indonesia",
-    role: "Graphic Designer",
-    year: "2023",
-    category: "Graphic Design"
-  },
-  {
-    id: "4",
-    client: "Opak Sehot",
-    location: "Banjarregara, Indonesia",
-    role: "Graphic Designer",
-    year: "2024",
-    category: "Graphic Design"
-  },
-  {
-    id: "5",
-    client: "MIS Final Exam",
-    location: "Gading Serpong, Indonesia",
-    role: "Content Creator",
-    year: "2025",
-    category: "Content Creator"
-  }
-];
+import { getAllArchiveItems } from "@/data/archive";
 
 export default function ArchivePage() {
+  const archiveData = getAllArchiveItems();
+
   return (
     <>
       <div className="min-h-screen bg-surface-background pt-32 pb-16">
@@ -79,8 +31,9 @@ export default function ArchivePage() {
             {/* Table Body */}
             <div className="space-y-0">
               {archiveData.map((item) => (
-                <div
+                <Link
                   key={item.id}
+                  href={`/archive/${item.id}`}
                   className="grid grid-cols-4 gap-8 py-8 border-b border-border-secondary hover:bg-surface-secondary transition-colors duration-200 group cursor-pointer"
                 >
                   <div className="text-left">
@@ -97,7 +50,7 @@ export default function ArchivePage() {
                   <div className="text-right">
                     <p className="text-lg font-medium text-content-secondary">{item.year}</p>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
           </div>
