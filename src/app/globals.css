@@ -14,11 +14,13 @@
 @import "../styles/utilities/colors.css";
 @import "../styles/utilities/zoom-compensation.css";
 @import "../styles/utilities/animations.css";
+@import "../styles/utilities/stacking.css";
 
 /* Animations */
 @import "../styles/animations/morphing.css";
 @import "../styles/animations/effects.css";
 @import "../styles/animations/mask.css";
+@import "../styles/animations/text-slide-up.css";
 
 /* Components */
 @import "../styles/components/contact-button.css";

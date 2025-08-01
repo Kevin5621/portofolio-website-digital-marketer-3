@@ -1,0 +1,304 @@
+/* ====================================================================
+   TEXT SLIDE UP ANIMATION
+   Modular CSS Component for Text Slide Up Animation
+   ==================================================================== */
+
+/* =======================================
+   BASE STYLES
+   ======================================= */
+
+.text-slide-up-container {
+  /* Container untuk text slide up */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  width: max-content;
+}
+
+.text-slide-up-line {
+  /* Container untuk setiap baris text */
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+.text-slide-up-line p {
+  /* Text element yang akan di-animate */
+  width: max-content;
+  white-space: nowrap;
+  margin: 0;
+  padding: 0;
+  line-height: 117%;
+  color: hsl(var(--color-content-primary));
+  font-family: var(--font-poppins, 'Poppins', sans-serif);
+  font-weight: var(--font-weight-normal);
+  transform: translateY(100px);
+  opacity: 0;
+}
+
+/* =======================================
+   ANIMATION KEYFRAMES
+   ======================================= */
+
+@keyframes text-slide-up {
+  0% {
+    transform: translateY(100px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* =======================================
+   ANIMATION CLASSES
+   ======================================= */
+
+.text-slide-up {
+  animation: text-slide-up 0.85s cubic-bezier(0.65, 0, 0.35, 1) both;
+}
+
+/* =======================================
+   DELAY UTILITIES
+   ======================================= */
+
+.text-slide-up-delay-1 {
+  animation-delay: 0.025s;
+}
+
+.text-slide-up-delay-2 {
+  animation-delay: 0.05s;
+}
+
+.text-slide-up-delay-3 {
+  animation-delay: 0.075s;
+}
+
+.text-slide-up-delay-4 {
+  animation-delay: 0.1s;
+}
+
+.text-slide-up-delay-5 {
+  animation-delay: 0.125s;
+}
+
+/* =======================================
+   COLOR VARIANTS
+   ======================================= */
+
+/* Primary text color */
+.text-slide-up-line p.text-primary {
+  color: hsl(var(--color-content-primary));
+}
+
+/* Secondary text color */
+.text-slide-up-line p.text-secondary {
+  color: hsl(var(--color-content-secondary));
+}
+
+/* Accent text color */
+.text-slide-up-line p.text-accent {
+  color: hsl(var(--color-content-link));
+}
+
+/* Muted text color */
+.text-slide-up-line p.text-muted {
+  color: hsl(var(--color-content-tertiary));
+}
+
+/* Inverse text color */
+.text-slide-up-line p.text-inverse {
+  color: hsl(var(--color-content-inverse));
+}
+
+/* Success text color */
+.text-slide-up-line p.text-success {
+  color: hsl(var(--color-state-success));
+}
+
+/* Warning text color */
+.text-slide-up-line p.text-warning {
+  color: hsl(var(--color-state-warning));
+}
+
+/* Error text color */
+.text-slide-up-line p.text-error {
+  color: hsl(var(--color-state-error));
+}
+
+/* Info text color */
+.text-slide-up-line p.text-info {
+  color: hsl(var(--color-state-info));
+}
+
+/* =======================================
+   SIZE VARIANTS
+   ======================================= */
+
+.text-slide-up-xs .text-slide-up-line p {
+  font-size: var(--font-size-xs);
+}
+
+.text-slide-up-sm .text-slide-up-line p {
+  font-size: var(--font-size-sm);
+}
+
+.text-slide-up-base .text-slide-up-line p {
+  font-size: var(--font-size-base);
+}
+
+.text-slide-up-lg .text-slide-up-line p {
+  font-size: var(--font-size-lg);
+}
+
+.text-slide-up-xl .text-slide-up-line p {
+  font-size: var(--font-size-xl);
+}
+
+.text-slide-up-2xl .text-slide-up-line p {
+  font-size: var(--font-size-2xl);
+}
+
+.text-slide-up-3xl .text-slide-up-line p {
+  font-size: var(--font-size-3xl);
+}
+
+.text-slide-up-4xl .text-slide-up-line p {
+  font-size: var(--font-size-4xl);
+}
+
+.text-slide-up-5xl .text-slide-up-line p {
+  font-size: var(--font-size-5xl);
+}
+
+.text-slide-up-6xl .text-slide-up-line p {
+  font-size: var(--font-size-6xl);
+}
+
+.text-slide-up-7xl .text-slide-up-line p {
+  font-size: var(--font-size-7xl);
+}
+
+.text-slide-up-8xl .text-slide-up-line p {
+  font-size: var(--font-size-8xl);
+}
+
+.text-slide-up-9xl .text-slide-up-line p {
+  font-size: var(--font-size-9xl);
+}
+
+/* =======================================
+   WEIGHT VARIANTS
+   ======================================= */
+
+.text-slide-up-thin .text-slide-up-line p {
+  font-weight: var(--font-weight-thin);
+}
+
+.text-slide-up-extralight .text-slide-up-line p {
+  font-weight: var(--font-weight-extralight);
+}
+
+.text-slide-up-light .text-slide-up-line p {
+  font-weight: var(--font-weight-light);
+}
+
+.text-slide-up-normal .text-slide-up-line p {
+  font-weight: var(--font-weight-normal);
+}
+
+.text-slide-up-medium .text-slide-up-line p {
+  font-weight: var(--font-weight-medium);
+}
+
+.text-slide-up-semibold .text-slide-up-line p {
+  font-weight: var(--font-weight-semibold);
+}
+
+.text-slide-up-bold .text-slide-up-line p {
+  font-weight: var(--font-weight-bold);
+}
+
+.text-slide-up-extrabold .text-slide-up-line p {
+  font-weight: var(--font-weight-extrabold);
+}
+
+.text-slide-up-black .text-slide-up-line p {
+  font-weight: var(--font-weight-black);
+}
+
+/* =======================================
+   RESPONSIVE VARIANTS
+   ======================================= */
+
+@media (max-width: 768px) {
+  .text-slide-up-responsive .text-slide-up-line p {
+    font-size: var(--font-size-lg);
+  }
+}
+
+@media (max-width: 480px) {
+  .text-slide-up-responsive .text-slide-up-line p {
+    font-size: var(--font-size-base);
+  }
+}
+
+/* =======================================
+   UTILITY CLASSES
+   ======================================= */
+
+.text-slide-up-heading {
+  /* Heading style dengan margin dan spacing yang sesuai */
+  margin: var(--spacing-20) 0 0 var(--spacing-20);
+  font-size: var(--font-size-8xl);
+  width: max-content;
+  display: flex;
+  flex-direction: column;
+}
+
+.text-slide-up-heading .text-slide-up-line {
+  overflow: hidden;
+}
+
+.text-slide-up-heading .text-slide-up-line p {
+  width: max-content;
+  white-space: nowrap;
+  margin: 0;
+  line-height: 117%;
+}
+
+/* =======================================
+   SELECTION STYLES
+   ======================================= */
+
+.text-slide-up-line p::selection {
+  background: rgba(170, 170, 170, 0.3);
+  color: hsl(var(--color-content-primary));
+}
+
+/* =======================================
+   ZOOM COMPENSATION SUPPORT
+   ======================================= */
+
+.text-slide-up-zoom-stable .text-slide-up-line p {
+  font-size: calc(var(--font-size-base) * var(--zoom-compensation-factor));
+}
+
+/* =======================================
+   PERFORMANCE OPTIMIZATIONS
+   ======================================= */
+
+.text-slide-up-line {
+  /* Optimasi untuk performa animasi */
+  will-change: transform;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+.text-slide-up-line p {
+  /* Optimasi untuk performa animasi */
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+} 
