@@ -60,58 +60,62 @@ export const WorkJobDescription = ({ workDetail }: WorkJobDescriptionProps) => {
         </div>
 
         {/* Objectives Section - 2 Column Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-16">
-          {/* Objectives Title - Large */}
-          <div>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-content-primary leading-tight">
-              Objectives
-            </h2>
+        {workDetail.objectives.length > 0 && (
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-16">
+            {/* Objectives Title - Large */}
+            <div>
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-content-primary leading-tight">
+                Objectives
+              </h2>
+            </div>
+            
+            {/* Objectives Content */}
+            <div>
+              {workDetail.objectives.length > 1 ? (
+                <ul className="space-y-4">
+                  {workDetail.objectives.map((objective) => (
+                    <li key={objective} className="text-content-secondary leading-relaxed">
+                      • {formatText(objective, workDetail.objectives.length)}
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="text-content-secondary leading-relaxed">
+                  {formatText(workDetail.objectives[0], workDetail.objectives.length)}
+                </p>
+              )}
+            </div>
           </div>
-          
-          {/* Objectives Content */}
-          <div>
-            {workDetail.objectives.length > 1 ? (
-              <ul className="space-y-4">
-                {workDetail.objectives.map((objective) => (
-                  <li key={objective} className="text-content-secondary leading-relaxed">
-                    • {formatText(objective, workDetail.objectives.length)}
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <p className="text-content-secondary leading-relaxed">
-                {formatText(workDetail.objectives[0], workDetail.objectives.length)}
-              </p>
-            )}
-          </div>
-        </div>
+        )}
 
         {/* Challenges Section - 2 Column Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-16">
-          {/* Challenges Title - Large */}
-          <div>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-content-primary leading-tight">
-              Challenges
-            </h2>
+        {workDetail.challenges.length > 0 && (
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-16">
+            {/* Challenges Title - Large */}
+            <div>
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-content-primary leading-tight">
+                Challenges
+              </h2>
+            </div>
+            
+            {/* Challenges Content */}
+            <div>
+              {workDetail.challenges.length > 1 ? (
+                <ul className="space-y-4">
+                  {workDetail.challenges.map((challenge) => (
+                    <li key={challenge} className="text-content-secondary leading-relaxed">
+                      • {formatText(challenge, workDetail.challenges.length)}
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="text-content-secondary leading-relaxed">
+                  {formatText(workDetail.challenges[0], workDetail.challenges.length)}
+                </p>
+              )}
+            </div>
           </div>
-          
-          {/* Challenges Content */}
-          <div>
-            {workDetail.challenges.length > 1 ? (
-              <ul className="space-y-4">
-                {workDetail.challenges.map((challenge) => (
-                  <li key={challenge} className="text-content-secondary leading-relaxed">
-                    • {formatText(challenge, workDetail.challenges.length)}
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <p className="text-content-secondary leading-relaxed">
-                {formatText(workDetail.challenges[0], workDetail.challenges.length)}
-              </p>
-            )}
-          </div>
-        </div>
+        )}
 
         {/* My Execution & Solutions Section - 2 Column Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">

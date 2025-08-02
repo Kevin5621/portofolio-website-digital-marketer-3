@@ -14,6 +14,8 @@ export const WorkCreativeProjects = ({ projects }: WorkCreativeProjectsProps) =>
   return (
     <section className="py-24 bg-surface-background">
       <div className="max-w-[95vw] mx-auto px-6">
+        <hr className="border-border-primary mb-16" />
+        
         <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-content-primary mb-16 text-center">
           My Creative Projects
         </h2>

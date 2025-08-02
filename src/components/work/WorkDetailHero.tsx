@@ -34,7 +34,7 @@ export const WorkDetailHero = ({ workDetail }: WorkDetailHeroProps) => {
         </div>
 
         {/* Three Column Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16 mb-16">
+        <div className={`grid gap-12 lg:gap-16 mb-16 ${workDetail.credits.length > 0 ? 'grid-cols-1 lg:grid-cols-3' : 'grid-cols-1 lg:grid-cols-2'}`}>
           {/* Column 1: Role/Services */}
           <div>
             <h3 className="text-sm font-medium text-content-tertiary uppercase tracking-wider mb-4 border-b border-border-primary pb-2">
@@ -45,19 +45,21 @@ export const WorkDetailHero = ({ workDetail }: WorkDetailHeroProps) => {
             </p>
           </div>
 
-          {/* Column 2: Credits */}
-          <div>
-            <h3 className="text-sm font-medium text-content-tertiary uppercase tracking-wider mb-4 border-b border-border-primary pb-2">
-              CREDITS
-            </h3>
-            <div className="space-y-2">
-              {workDetail.credits.map((credit) => (
-                <p key={credit} className="text-lg text-content-secondary">
-                  {credit}
-                </p>
-              ))}
+          {/* Column 2: Credits - Only show if credits exist */}
+          {workDetail.credits.length > 0 && (
+            <div>
+              <h3 className="text-sm font-medium text-content-tertiary uppercase tracking-wider mb-4 border-b border-border-primary pb-2">
+                CREDITS
+              </h3>
+              <div className="space-y-2">
+                {workDetail.credits.map((credit) => (
+                  <p key={credit} className="text-lg text-content-secondary">
+                    {credit}
+                  </p>
+                ))}
+              </div>
             </div>
-          </div>
+          )}
 
           {/* Column 3: Location & Year */}
           <div>
