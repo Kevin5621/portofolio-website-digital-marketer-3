@@ -38,13 +38,27 @@ export const MaskButton = ({
   const currentSize = sizes[size]
   const currentVariant = variants[variant]
 
+  // Fallback styling yang robust untuk kedua variant
+  const fallbackStyles = variant === 'dark' 
+    ? 'bg-[#f2f1ef] text-[#f2f1ef] hover:bg-[#282828] hover:text-[#f2f1ef]' 
+    : 'bg-black text-black border-2 border-black hover:bg-white hover:text-black'
+
+  // Focus ring yang sesuai dengan variant
+  const focusRingStyles = variant === 'dark'
+    ? 'focus:ring-[#282828] focus:ring-offset-[#f2f1ef]'
+    : 'focus:ring-white focus:ring-offset-black'
+
   return (
     <button
       className={cn(
         'relative overflow-hidden font-medium rounded-full',
-        'focus:outline-none focus:ring-2 focus:ring-content-primary focus:ring-offset-2 focus:ring-offset-surface-background',
+        'focus:outline-none focus:ring-2 focus:ring-offset-2',
         'disabled:opacity-50 disabled:cursor-not-allowed',
         'transition-all duration-300 hover:shadow-lg',
+        // Fallback styling yang robust untuk semua browser
+        fallbackStyles,
+        // Focus ring yang sesuai dengan variant
+        focusRingStyles,
         currentSize,
         currentVariant,
         className
