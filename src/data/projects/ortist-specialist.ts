@@ -8,11 +8,18 @@ export const ortistSpecialistData: WorkDetail = {
   year: "2023",
   category: "Social Media Marketing Manager",
   description: "Ortist Spesialist is a orthodontic clinic providing personalized, cutting-edge treatments for all ages across Semarang.",
-  objectives: [
-    "I managed Ortist Specialist's Instagram and TikTok to make sure people knew about their dental services.",
+  credits: [
+    "Mentor: Dr. Ortist",   
+    "PIC: Clinic Management Team"
+  ],
+  jobDescription: [
+    "I managed Ortist Specialist’s Instagram and TikTok to make sure people knew about their dental services.",
     "I created fun and educational posts to teach people, especially younger ones aged 16-25, about dental health.",
     "Engage with the community, respond to inquiries, and build a positive brand image.",
     "Monitor performance metrics (engagement, CTR) and optimize strategies for better results."
+  ],
+  objectives: [
+    "Drive awareness and engagement among the youth market (ages 16-25) for Ortist's specialized orthodontic services, positioning the clinic as the go-to choice for straightening misaligned teeth."
   ],
   challenges: [
     "Creating engaging content that resonates with young people and raises awareness about the importance of dental health, especially in relation to misaligned teeth."

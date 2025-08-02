@@ -7,6 +7,19 @@ interface WorkJobDescriptionProps {
 }
 
 export const WorkJobDescription = ({ workDetail }: WorkJobDescriptionProps) => {
+  // Function to add period only if array has more than 1 item
+  const formatText = (text: string, arrayLength: number) => {
+    // If array has only 1 item, remove any trailing period
+    if (arrayLength === 1) {
+      return text.endsWith('.') ? text.slice(0, -1) : text;
+    }
+    // If array has more than 1 item, ensure it ends with a period
+    if (arrayLength > 1 && !text.endsWith('.')) {
+      return text + '.';
+    }
+    return text;
+  };
+
   return (
     <section className="py-24 bg-surface-background">
       <div className="max-w-[95vw] mx-auto px-6">
@@ -28,15 +41,21 @@ export const WorkJobDescription = ({ workDetail }: WorkJobDescriptionProps) => {
             </h2>
           </div>
           
-          {/* Job Description Bullet Points */}
+          {/* Job Description Content */}
           <div>
-            <ul className="space-y-4">
-              {workDetail.objectives.map((objective, index) => (
-                <li key={index} className="text-content-secondary leading-relaxed">
-                  • {objective}
-                </li>
-              ))}
-            </ul>
+            {workDetail.jobDescription.length > 1 ? (
+              <ul className="space-y-4">
+                {workDetail.jobDescription.map((job) => (
+                  <li key={job} className="text-content-secondary leading-relaxed">
+                    • {formatText(job, workDetail.jobDescription.length)}
+                  </li> 
+                ))}
+              </ul>
+            ) : (
+              <p className="text-content-secondary leading-relaxed">
+                {formatText(workDetail.jobDescription[0], workDetail.jobDescription.length)}
+              </p>
+            )}
           </div>
         </div>
 
@@ -51,9 +70,19 @@ export const WorkJobDescription = ({ workDetail }: WorkJobDescriptionProps) => {
           
           {/* Objectives Content */}
           <div>
-            <p className="text-content-secondary leading-relaxed">
-              Drive awareness and engagement among the youth market (ages 16-25) for {workDetail.client}&apos;s specialized orthodontic services, positioning the clinic as the go-to choice for straightening misaligned teeth.
-            </p>
+            {workDetail.objectives.length > 1 ? (
+              <ul className="space-y-4">
+                {workDetail.objectives.map((objective) => (
+                  <li key={objective} className="text-content-secondary leading-relaxed">
+                    • {formatText(objective, workDetail.objectives.length)}
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p className="text-content-secondary leading-relaxed">
+                {formatText(workDetail.objectives[0], workDetail.objectives.length)}
+              </p>
+            )}
           </div>
         </div>
 
@@ -68,9 +97,19 @@ export const WorkJobDescription = ({ workDetail }: WorkJobDescriptionProps) => {
           
           {/* Challenges Content */}
           <div>
-            <p className="text-content-secondary leading-relaxed">
-              {workDetail.challenges[0]}
-            </p>
+            {workDetail.challenges.length > 1 ? (
+              <ul className="space-y-4">
+                {workDetail.challenges.map((challenge) => (
+                  <li key={challenge} className="text-content-secondary leading-relaxed">
+                    • {formatText(challenge, workDetail.challenges.length)}
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p className="text-content-secondary leading-relaxed">
+                {formatText(workDetail.challenges[0], workDetail.challenges.length)}
+              </p>
+            )}
           </div>
         </div>
 
@@ -85,13 +124,19 @@ export const WorkJobDescription = ({ workDetail }: WorkJobDescriptionProps) => {
           
           {/* My Execution & Solutions Content */}
           <div>
-            <ul className="space-y-4">
-              {workDetail.solutions.map((solution, index) => (
-                <li key={index} className="text-content-secondary leading-relaxed">
-                  • {solution}
-                </li>
-              ))}
-            </ul>
+            {workDetail.solutions.length > 1 ? (
+              <ul className="space-y-4">
+                {workDetail.solutions.map((solution) => (
+                  <li key={solution} className="text-content-secondary leading-relaxed">
+                    • {formatText(solution, workDetail.solutions.length)}
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p className="text-content-secondary leading-relaxed">
+                {formatText(workDetail.solutions[0], workDetail.solutions.length)}
+              </p>
+            )}
           </div>
         </div>
       </div>

@@ -10,6 +10,7 @@ import { WorkAchievements } from "@/components/work/WorkAchievements";
 import { WorkContentStrategies } from "@/components/work/WorkContentStrategies";
 import { WorkCreativeProjects } from "@/components/work/WorkCreativeProjects";
 import { WorkNextProject } from "@/components/work/WorkNextProject";
+import { WorkSpecialText } from "@/components/work/WorkSpecialText";
 
 export default function WorkDetailPage() {
   const params = useParams();
@@ -61,11 +62,18 @@ export default function WorkDetailPage() {
     <main className="min-h-screen bg-surface-background">
       <WorkDetailHero workDetail={workDetail} />
       <WorkJobDescription workDetail={workDetail} />
-      <WorkAchievements achievements={workDetail.achievements} />
-      <WorkContentStrategies 
-        strategies={workDetail.contentStrategies} 
-        bestContent={workDetail.bestContent} 
-      />
+      {workDetail.achievements && <WorkAchievements achievements={workDetail.achievements} />}
+      
+      {/* Special handling for Aerospace project */}
+      {workDetail.specialText ? (
+        <WorkSpecialText text={workDetail.specialText} />
+      ) : workDetail.contentStrategies && workDetail.bestContent ? (
+        <WorkContentStrategies 
+          strategies={workDetail.contentStrategies} 
+          bestContent={workDetail.bestContent} 
+        />
+      ) : null}
+      
       <WorkCreativeProjects projects={workDetail.creativeProjects} />
       {nextProject && <WorkNextProject nextProject={nextProject} />}
     </main>

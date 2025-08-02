@@ -26,11 +26,11 @@ export const workData: WorkItem[] = [
   },
   {
     id: "binjasiimen-samapta",
-    client: "Binjasilmen Samapta",
+    client: "Binjasiimen Samapta",
     location: "Banjarregara, Indonesia",
-    role: "Content Creator",
+    role: "Social Media Marketing Manager",
     year: "2023-2024",
-    category: "Content Creator"
+    category: "Social Media Marketing Manager"
   },
   {
     id: "aerospace",

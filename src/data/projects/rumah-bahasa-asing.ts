@@ -5,29 +5,30 @@ export const rumahBahasaAsingData: WorkDetail = {
   client: "Rumah Bahasa Asing",
   location: "Semarang, Indonesia",
   role: "Social Media Marketing Manager",
-  year: "2023",
+  year: "2024",
   category: "Social Media Marketing Manager",
-  description: "Rumah Bahasa Asing (RBA) is an online Korean language learning platform adopting Seoul National University's curriculum, offering an interactive and immersive learning experience for Indonesian students.",
+  description: "Rumah Bahasa Asing (RBA) is a online Korean language learning platform adopting Seoul National University's curriculum, offering an interactive and immersive learning experience.",
+  credits: [
+    "Mentor: Adam Nugraha",
+    "PIC: Risma"
+  ],
+  jobDescription: [
+    "Develop a TikTok and Instagram social media strategy for RBA.",
+    "Create visually engaging and educational content about the Korean language.",
+    "Engage with the community, respond to inquiries, and build a positive brand image.",
+    "Monitor performance metrics (engagement, CTR) and optimize strategies for better results."
+  ],
   objectives: [
-    "Develop a TikTok and Instagram content strategy for RBA",
-    "Increase brand awareness and student enrollment",
-    "Create engaging educational content about Korean language",
-    "Build a community of Korean language learners",
-    "Position RBA as the leading Korean language institution"
+    "Drive awareness and drive enrollment for RBA's online Korean language courses among working professionals (ages 25-35) aspiring to enhance their careers or pursue higher education in South Korea."
   ],
   challenges: [
-    "High competition in the language learning market",
-    "Need to create engaging educational content", 
-    "Building trust for online learning platform",
-    "Reaching target audience of Korean culture enthusiasts",
-    "Balancing entertainment with educational value"
+    "The client’s restriction on using music and illustrations due to religious reasons and TikTok’s reliance on music for viral content made it challenging to maintain engagement while adhering to these restrictions."
   ],
   solutions: [
-    "Developed content strategy focusing on Korean culture and daily phrases",
-    "Created viral-worthy educational videos with trendy formats",
-    "Leveraged Korean pop culture trends to increase engagement",
-    "Implemented student success stories and testimonials",
-    "Collaborated with Korean native speakers for authentic content"
+    "Analyzed content trends on TikTok that avoid music and illustrations.",
+    "Developed deepfake characters for educational videos and used Capcut & Canva for design.",
+    "Posted consistently, focusing on educational and engaging content, and used tools like Ubersuggest, TikTok Creative Center, and Google Trends for optimization.",
+    "Tracked performance metrics (engagement, CTR) to adjust content strategies."
   ],
   achievements: {
     title: "Achievements & Result Summary",
@@ -37,23 +38,23 @@ export const rumahBahasaAsingData: WorkDetail = {
         platform: "Instagram",
         contentCreated: "Created 120+ content, which resulted in",
         metrics: [
-          { label: "Reach", value: "+ 2,500,000", percentage: "2,583%" },
-          { label: "Profile Visit", value: "+ 150,000", percentage: "1,267%" },
-          { label: "Click Link", value: "+ 2,500", percentage: "436%" },
-          { label: "Followers", value: "+ 30,997", percentage: "2,583%" },
-          { label: "Interaction", value: "+ 500,000", percentage: "20,356%" }
+          { label: "Reach", value: "+ 32,127", percentage: "1,199%" },
+          { label: "Profile Visit", value: "+ 3,675", percentage: "370%" },
+          { label: "Click Link", value: "+ 382", percentage: "409%" },
+          { label: "Followers", value: "+ 23,062", percentage: "0,74%" },
+          { label: "Interaction", value: "+ 4,562", percentage: "574%" }
         ]
       },
       {
         platform: "TikTok",
         contentCreated: "Created 120+ content, which resulted in",
         metrics: [
-          { label: "Views", value: "+ 15,000,000", percentage: "13,725%" },
-          { label: "Profile Visit", value: "+ 500,000", percentage: "21,319%" },
-          { label: "Followers", value: "+ 372,500", percentage: "74,500%" },
-          { label: "Like", value: "+ 1,500,000", percentage: "114,594%" },
-          { label: "Comment", value: "+ 200,000", percentage: "73,424%" },
-          { label: "Share", value: "+ 150,000", percentage: "66,987%" }
+          { label: "Views", value: "+ 373,000", percentage: "1,863%" },
+          { label: "Profile Visit", value: "+ 10,013", percentage: "278%" },
+          { label: "Followers", value: "+ 14,500", percentage: "45%" },
+          { label: "Like", value: "+ 23,597", percentage: "114,594%" },
+          { label: "Comment", value: "+ 230", percentage: "11,400%" },
+          { label: "Share", value: "+ 902", percentage: "11,175%" }
         ]
       }
     ]
@@ -61,18 +62,18 @@ export const rumahBahasaAsingData: WorkDetail = {
   contentStrategies: [
     {
       title: "Korean Daily Phrases Series",
-      description: "Created engaging videos teaching practical Korean phrases for everyday situations, making language learning accessible and fun.",
+      description: "I created a mix of educational and fun content about Korean laguage. I made videos to educate and engage, makes language based content for credibility, and shared information about Korean culture content to encourage people to learn Korean Language.",
       images: ["/work/rumah-bahasa-asing/strategy-1.png", "/work/rumah-bahasa-asing/strategy-2.png", "/work/rumah-bahasa-asing/strategy-3.png"]
     },
     {
       title: "Cultural Integration Content",
-      description: "Developed content that combines Korean language learning with cultural insights, including K-pop references and Korean customs.",
+      description: "I changed the layout of the TikTok and Instagram feed to make it more consistent and cleaner, so the content looks nicer and is easier to enjoy.",
       images: ["/work/rumah-bahasa-asing/strategy-4.png", "/work/rumah-bahasa-asing/strategy-5.png", "/work/rumah-bahasa-asing/strategy-6.png"]
     }
   ],
   bestContent: {
     title: "Best Organic Content",
-    description: "Our Korean daily phrases series became incredibly popular, with this particular video about common greetings reaching massive engagement.",
+    description: "The best content that was really successful was a language based content that encouraged people to learn Korean language. Another viral video was an Informative content.",
     videos: [
       {
         image: "/work/rumah-bahasa-asing/best-content.png",
@@ -100,6 +101,6 @@ export const rumahBahasaAsingData: WorkDetail = {
   ],
   nextProject: {
     id: "3",
-    title: "Binjasilmen Samapta"
+    title: "Binjasiimen Samapta"
   }
 };

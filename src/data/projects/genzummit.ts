@@ -3,86 +3,43 @@ import { WorkDetail } from "../work-details";
 export const genzummitData: WorkDetail = {
   id: "genzummit",
   client: "GENZUMMIT™",
-  location: "Gading Serpong, Indonesia",
+  location: "Smesco",
   role: "Content Creator",
   year: "2025",
   category: "Content Creator",
-  description: "GENZUMMIT™ is a youth summit event focusing on empowering Generation Z through technology, innovation, and leadership development.",
+  description: "The biggest Gen-Z conference in Indonesia, built to empower young minds for #TheFutureZ and Indonesia Emas 2045. It brings together students, professionals, and entrepreneurs to learn, connect, and grow.",
+  credits: [
+    "PIC: Eloise Vianney",
+    "Partner: Gery Respati"
+  ],
+  jobDescription: [
+    "As a Volunteer Content Creator for the GENZUMMIT event, I was responsible for interviewing participants and quickly editing the videos.",
+    "My job was to make sure the content was ready to post on social media in the middle of a fast-paced event.",
+    "My role required me to balance both creative and technical aspects by delivering high-quality content quickly while staying true to the event's vibe."
+  ],
   objectives: [
-    "Create engaging social media content to promote the GENZUMMIT™ event",
-    "Develop visual content that resonates with Gen Z audience aged 16-25",
-    "Increase event awareness and registration through strategic content marketing",
-    "Build excitement and community engagement around the summit"
+    "My goal was to create content that showed the energy of the GenZummit event and engaged the online audience. I worked to make sure the videos were fun, well-edited, and suited to the fast environment of the event."
   ],
   challenges: [
-    "Creating content that stands out in the competitive youth event market",
-    "Appealing to diverse Gen Z interests and motivations",
-    "Building momentum for a new event brand"
+    "The biggest challenge was working under tight time pressure, as I had only 40 minutes to interview and edit the content. The event was crowded and fast-paced, which made it difficult to capture clear footage in such a busy environment. Additionally, I had to respect the limited time of the interviewees while still making sure I got valuable content."
   ],
   solutions: [
-    "Researched Gen Z content consumption patterns and preferences",
-    "Developed trending content formats (short videos, stories, interactive posts)",
-    "Created speaker highlight content and behind-the-scenes materials",
-    "Implemented user-generated content campaigns",
-    "Collaborated with youth influencers and speakers for content amplification"
+    "To stay on track, I planned ahead and had my questions ready to make sure I could get the important details in a short amount of time.",
+    "I delegate the subtitle effort to my partner so that we can create content that not only looks good but also fits the deadline.",
+    "I communicated with the interviewees to make sure I respected their time while getting the best content possible.",
+    "Despite the busy environment and tight deadlines, I was able to deliver high-quality content on time and ready for social media."
   ],
-  achievements: {
-    title: "Content Performance & Event Success",
-    subtitle: "Driving engagement and registrations for GENZUMMIT™",
-    metrics: [
-      {
-        platform: "Instagram",
-        contentCreated: "45+ posts, 30+ stories",
-        metrics: [
-          { label: "Reach", value: "15K+", percentage: "300%" },
-          { label: "Engagement", value: "8.5%", percentage: "150%" },
-          { label: "Story Views", value: "5K+", percentage: "200%" }
-        ]
-      },
-      {
-        platform: "TikTok", 
-        contentCreated: "25+ videos",
-        metrics: [
-          { label: "Views", value: "50K+", percentage: "400%" },
-          { label: "Engagement", value: "12%", percentage: "250%" },
-          { label: "Shares", value: "1.2K+", percentage: "300%" }
-        ]
-      }
-    ]
-  },
-  contentStrategies: [
-    {
-      title: "Speaker Spotlight Series",
-      description: "Featured content highlighting keynote speakers and their expertise, building credibility and interest",
-      images: ["/about/photo/1.png", "/about/photo/2.png"]
-    },
-    {
-      title: "Gen Z Empowerment Posts",
-      description: "Motivational and educational content focused on leadership, innovation, and career development",
-      images: ["/about/photo/3.png", "/about/photo/4.png"]
-    }
-  ],
-  bestContent: {
-    title: "Event Teaser Campaign",
-    description: "Dynamic video series showcasing what Gen Z can expect from GENZUMMIT™",
-    videos: [
-      {
-        image: "/about/photo/5.png",
-        stats: {
-          views: "25K+",
-          engagement: "15%",
-          reach: "12K+",
-          comments: "2K",
-          saves: "5K"
-        }
-      }
-    ]
-  },
+
   creativeProjects: [
     {
-      title: "Event Branding Materials",
-      description: "Complete visual identity for GENZUMMIT™ including logos, banners, and promotional materials",
-      image: "/about/photo/6.png"
+      title: "Event Interview Videos",
+      description: "Quickly edited interview content capturing participant insights and event energy for social media",
+      image: "/work/genzummit/interview-videos.png"
+    },
+    {
+      title: "Behind-the-Scenes Content",
+      description: "Real-time content creation showcasing the fast-paced environment and participant engagement",
+      image: "/work/genzummit/behind-scenes.png"
     }
   ]
 };

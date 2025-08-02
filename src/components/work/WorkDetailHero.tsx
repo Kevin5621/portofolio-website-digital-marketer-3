@@ -51,12 +51,11 @@ export const WorkDetailHero = ({ workDetail }: WorkDetailHeroProps) => {
               CREDITS
             </h3>
             <div className="space-y-2">
-              <p className="text-lg text-content-secondary">
-                Mentor: Adam Nugraha
-              </p>
-              <p className="text-lg text-content-secondary">
-                PIC: Anindy and Risma
-              </p>
+              {workDetail.credits.map((credit) => (
+                <p key={credit} className="text-lg text-content-secondary">
+                  {credit}
+                </p>
+              ))}
             </div>
           </div>
 

@@ -11,28 +11,29 @@ export const projectTemplate: WorkDetail = {
   year: "Year",
   category: "Project Category", // Should match one of the categories in work page
   description: "Brief description of the project and your role. Explain what the client does and what you accomplished.",
-  
+  credits: [],
+
   objectives: [
     "First objective - what you aimed to achieve",
     "Second objective - another goal",
     "Third objective - additional target",
     // Add 3-5 objectives
   ],
-  
+
   challenges: [
     "First challenge you faced",
-    "Second challenge or obstacle", 
+    "Second challenge or obstacle",
     "Third challenge or constraint",
     // Add 3-5 challenges
   ],
-  
+
   solutions: [
     "First solution or approach you implemented",
     "Second solution or strategy you used",
     "Third solution or method you applied",
     // Add 3-5 solutions (should match number of challenges)
   ],
-  
+
   achievements: {
     title: "Achievements & Result Summary",
     subtitle: "Key performance indicators and results achieved",
@@ -72,14 +73,14 @@ export const projectTemplate: WorkDetail = {
       // Add 2-4 key metrics
     ]
   },
-  
+
   contentStrategies: [
     {
       title: "Strategy Title",
       description: "Detailed description of the content strategy you implemented and why it was effective.",
       images: [
         "/path/to/strategy-image-1.jpg",
-        "/path/to/strategy-image-2.jpg", 
+        "/path/to/strategy-image-2.jpg",
         "/path/to/strategy-image-3.jpg"
       ]
     },
@@ -94,7 +95,7 @@ export const projectTemplate: WorkDetail = {
     }
     // Add 2-3 content strategies
   ],
-  
+
   bestContent: {
     title: "Best Organic Content", // Or "Best Educational Content", etc.
     description: "Description of your most successful content piece and why it performed well.",
@@ -121,7 +122,7 @@ export const projectTemplate: WorkDetail = {
       }
     ]
   },
-  
+
   creativeProjects: [
     {
       title: "Creative Project Title",
@@ -135,10 +136,12 @@ export const projectTemplate: WorkDetail = {
     }
     // Add 2-3 creative projects
   ],
-  
+
   nextProject: {
     id: "next-project-id", // ID of the next project to link to
     title: "Next Project Title" // Name of the next project
   }
   // Note: Remove nextProject for the last project in the sequence
+  ,
+  jobDescription: []
 };

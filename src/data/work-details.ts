@@ -16,10 +16,13 @@ export interface WorkDetail {
   year: string;
   category: string;
   description: string;
+  credits: string[];
+  jobDescription: string[];
   objectives: string[];
   challenges: string[];
   solutions: string[];
-  achievements: {
+  specialText?: string;
+  achievements?: {
     title: string;
     subtitle: string;
     metrics: {
@@ -32,12 +35,12 @@ export interface WorkDetail {
       }[];
     }[];
   };
-  contentStrategies: {
+  contentStrategies?: {
     title: string;
     description: string;
     images: string[];
   }[];
-  bestContent: {
+  bestContent?: {
     title: string;
     description: string;
     videos: {
