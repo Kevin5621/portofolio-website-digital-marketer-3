@@ -6,6 +6,7 @@ import { Menu, X } from 'lucide-react'
 import { scrollToElement } from '@/lib/animations/lenis'
 import { cn } from '@/lib/utils'
 import { Magnetic } from '@/components/ui/magnetic'
+import { PDFViewer } from '@/components/ui/pdf-viewer'
 
 const navigation = [
   { name: 'Home', href: '/' },
@@ -26,6 +27,7 @@ export const Header = () => {
   const [isMenuSliding, setIsMenuSliding] = useState(false)
   const [isMenuEntering, setIsMenuEntering] = useState(false)
   const [isClient, setIsClient] = useState(false)
+  const [isCVModalOpen, setIsCVModalOpen] = useState(false)
 
   // Set client flag untuk menghindari hydration mismatch
   useEffect(() => {
@@ -134,6 +136,14 @@ export const Header = () => {
       if (isMobileMenuOpen) {
         handleCloseMenu()
       }
+    }
+  }
+
+  const handleCVClick = (e: React.MouseEvent) => {
+    e.preventDefault()
+    setIsCVModalOpen(true)
+    if (isMobileMenuOpen) {
+      handleCloseMenu()
     }
   }
 
@@ -365,7 +375,9 @@ export const Header = () => {
                     href={item.href}
                     onClick={(e) => {
                       e.preventDefault()
-                      if (item.href.startsWith('/')) {
+                      if (item.name === 'CV') {
+                        handleCVClick(e)
+                      } else if (item.href.startsWith('/')) {
                         window.location.href = item.href
                       } else {
                         handleSmoothScroll(item.href)
@@ -534,7 +546,9 @@ export const Header = () => {
                         href={item.href}
                         onClick={(e) => {
                           e.preventDefault()
-                          if (item.href.startsWith('/')) {
+                          if (item.name === 'CV') {
+                            handleCVClick(e)
+                          } else if (item.href.startsWith('/')) {
                             window.location.href = item.href
                           } else {
                             handleSmoothScroll(item.href)
@@ -602,6 +616,14 @@ export const Header = () => {
           </div>
         </>
       )}
+
+      {/* CV PDF Modal */}
+      <PDFViewer
+        isOpen={isCVModalOpen}
+        onClose={() => setIsCVModalOpen(false)}
+        pdfUrl="/pdf/CV.pdf"
+        title="Curriculum Vitae"
+      />
     </>
   )
 }
