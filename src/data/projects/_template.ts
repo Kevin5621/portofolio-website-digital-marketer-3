@@ -35,18 +35,39 @@ export const projectTemplate: WorkDetail = {
   
   achievements: {
     title: "Achievements & Result Summary",
+    subtitle: "Key performance indicators and results achieved",
     metrics: [
       {
         platform: "Platform Name (e.g., Instagram, TikTok, Website)",
-        before: "Before metric (e.g., 1,200 followers)",
-        after: "After metric (e.g., 32,197 followers)", 
-        growth: "Growth percentage (e.g., +2,583%)"
+        contentCreated: "Number of content pieces created",
+        metrics: [
+          {
+            label: "Followers",
+            value: "32,197",
+            percentage: "+2,583%"
+          },
+          {
+            label: "Engagement Rate",
+            value: "12.7%",
+            percentage: "+45%"
+          }
+        ]
       },
       {
         platform: "Second Platform",
-        before: "Before metric",
-        after: "After metric",
-        growth: "Growth percentage"
+        contentCreated: "Number of content pieces created",
+        metrics: [
+          {
+            label: "Reach",
+            value: "3.2M",
+            percentage: "+180%"
+          },
+          {
+            label: "Views",
+            value: "2.1M",
+            percentage: "+220%"
+          }
+        ]
       }
       // Add 2-4 key metrics
     ]
@@ -77,12 +98,28 @@ export const projectTemplate: WorkDetail = {
   bestContent: {
     title: "Best Organic Content", // Or "Best Educational Content", etc.
     description: "Description of your most successful content piece and why it performed well.",
-    stats: {
-      views: "View count (e.g., 2.1M)",
-      engagement: "Engagement rate (e.g., 12.7%)",
-      reach: "Reach count (e.g., 3.2M)"
-    },
-    image: "/path/to/best-content-image.jpg"
+    videos: [
+      {
+        image: "/path/to/best-content-image.jpg",
+        stats: {
+          views: "2.1M",
+          engagement: "12.7%",
+          reach: "3.2M",
+          comments: "1.2K",
+          saves: "5.4K"
+        }
+      },
+      {
+        image: "/path/to/second-best-content-image.jpg",
+        stats: {
+          views: "1.8M",
+          engagement: "15.3%",
+          reach: "2.7M",
+          comments: "980",
+          saves: "4.2K"
+        }
+      }
+    ]
   },
   
   creativeProjects: [
