@@ -1,7 +1,7 @@
 // Export all project data
 export { ortistSpecialistData } from "./ortist-specialist";
 export { rumahBahasaAsingData } from "./rumah-bahasa-asing";
-export { binjasimmenSamaptaData } from "./binjasilmen-samapta";
+export { binjasimmenSamaptaData } from "./binjasiimen-samapta";
 export { aerospaceData } from "./aerospace";
 export { genzummitData } from "./genzummit";
 export { ppmHimmaData } from "./ppm-himma";

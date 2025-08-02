@@ -1,8 +1,8 @@
 import { WorkDetail } from "../work-details";
 
 export const binjasimmenSamaptaData: WorkDetail = {
-  id: "binjasilmen-samapta",
-  client: "Binjasilmen Samapta",
+  id: "binjasiimen-samapta",
+  client: "Binjasiimen Samapta",
   location: "Banjarregara, Indonesia",
   role: "Content Creator",
   year: "2023-2024",
@@ -62,12 +62,12 @@ export const binjasimmenSamaptaData: WorkDetail = {
     {
       title: "Program Documentation",
       description: "Created comprehensive visual documentation of youth development programs, showcasing activities and participant growth.",
-      images: ["/work/binjasilmen-samapta/strategy-1.png", "/work/binjasilmen-samapta/strategy-2.png", "/work/binjasilmen-samapta/strategy-3.png"]
+      images: ["/work/binjasiimen-samapta/strategy-1.png", "/work/binjasiimen-samapta/strategy-2.png", "/work/binjasiimen-samapta/strategy-3.png"]
     },
     {
       title: "Success Stories Campaign",
       description: "Developed a series highlighting participant achievements and personal growth through the programs.",
-      images: ["/work/binjasilmen-samapta/strategy-4.png", "/work/binjasilmen-samapta/strategy-5.png", "/work/binjasilmen-samapta/strategy-6.png"]
+      images: ["/work/binjasiimen-samapta/strategy-4.png", "/work/binjasiimen-samapta/strategy-5.png", "/work/binjasiimen-samapta/strategy-6.png"]
     }
   ],
   bestContent: {
@@ -75,7 +75,7 @@ export const binjasimmenSamaptaData: WorkDetail = {
     description: "A testimonial video featuring program graduates sharing their transformation stories became our most impactful content piece.",
     videos: [
       {
-        image: "/work/binjasilmen-samapta/best-content.png",
+        image: "/work/binjasiimen-samapta/best-content.png",
         stats: {
           views: "45.2K",
           engagement: "15.8K",
@@ -89,13 +89,13 @@ export const binjasimmenSamaptaData: WorkDetail = {
   creativeProjects: [
     {
       title: "Community Impact Documentary",
-      description: "Produced a short documentary showcasing the positive impact of Binjasilmen Samapta on local youth development.",
-      image: "/work/binjasilmen-samapta/documentary.png"
+      description: "Produced a short documentary showcasing the positive impact of Binjasiimen Samapta on local youth development.",
+      image: "/work/binjasiimen-samapta/documentary.png"
     },
     {
       title: "Youth Leadership Campaign",
       description: "Created a visual campaign promoting leadership qualities and values essential for youth development.",
-      image: "/work/binjasilmen-samapta/leadership-campaign.png"
+      image: "/work/binjasiimen-samapta/leadership-campaign.png"
     }
   ],
   nextProject: {

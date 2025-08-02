@@ -14,23 +14,23 @@ if (typeof window !== 'undefined') {
 // Data projects yang bisa diambil dari API atau props
 const projects = [
   {
-    id: 'project-1',
+    id: 'ortist-specialist',
     image: '/landing/1.png',
-    title: 'Rumah Bahasa Asing',
+    title: 'Ortist Specialist',
     year: '2023 - 2024',
     category: 'Social Media Marketing Manager'
   },
   {
-    id: 'project-2', 
+    id: 'rumah-bahasa-asing', 
     image: '/landing/2.png',
-    title: 'Digital Campaign',
+    title: 'Rumah Bahasa Asing',
     year: '2023 - 2024',
     category: 'Digital Marketing'
   },
   {
-    id: 'project-3',
+    id: 'binjasiimen-samapta',
     image: '/landing/3.png', 
-    title: 'Brand Strategy',
+    title: 'Binjasiimen Samapta',
     year: '2023 - 2024',
     category: 'Brand Strategy'
   }
@@ -108,7 +108,7 @@ const ProjectSection = ({ project }: { project: Project }) => {
             alt={title}
             fill
             className="object-cover"
-            priority={id === 'project-1'}
+            priority={id === 'ortist-specialist'}
           />
           {/* Dark overlay untuk memastikan text putih terlihat jelas */}
           <div className="absolute inset-0 bg-black/30"></div>
@@ -138,8 +138,8 @@ const ProjectSection = ({ project }: { project: Project }) => {
                 size="custom"
                 customSize="px-8 py-4 text-lg"
                 onClick={() => {
-                  // Navigate to specific project
-                  console.log(`Viewing project: ${title}`)
+                  // Navigate to specific project using correct route
+                  window.location.href = `/work/${id}`
                 }}
               >
                 View project

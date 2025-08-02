@@ -25,7 +25,7 @@ export const workData: WorkItem[] = [
     category: "Social Media Marketing Manager"
   },
   {
-    id: "binjasilmen-samapta",
+    id: "binjasiimen-samapta",
     client: "Binjasilmen Samapta",
     location: "Banjarregara, Indonesia",
     role: "Content Creator",

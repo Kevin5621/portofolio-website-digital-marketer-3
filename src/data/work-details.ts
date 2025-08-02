@@ -66,7 +66,7 @@ export interface WorkDetail {
 export const workDetailsData: Record<string, WorkDetail> = {
   "ortist-specialist": ortistSpecialistData,
   "rumah-bahasa-asing": rumahBahasaAsingData,
-  "binjasilmen-samapta": binjasimmenSamaptaData,
+  "binjasiimen-samapta": binjasimmenSamaptaData,
   "aerospace": aerospaceData,
   "genzummit": genzummitData,
   "ppm-himma-2025": ppmHimmaData,
