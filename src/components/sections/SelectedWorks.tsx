@@ -14,21 +14,21 @@ if (typeof window !== 'undefined') {
 const projects = [
   {
     id: 'ortist-specialist',
-    image: '/landing/1.png',
+    image: '/landing/1.webp',
     title: 'Ortist Specialist',
     year: '2023 - 2024',
     category: 'Social Media Marketing Manager'
   },
   {
     id: 'rumah-bahasa-asing', 
-    image: '/landing/2.png',
+    image: '/landing/2.webp',
     title: 'Rumah Bahasa Asing',
     year: '2023 - 2024',
     category: 'Digital Marketing'
   },
   {
     id: 'binjasiimen-samapta',
-    image: '/landing/3.png', 
+    image: '/landing/3.webp', 
     title: 'Binjasiimen Samapta',
     year: '2023 - 2024',
     category: 'Brand Strategy'
