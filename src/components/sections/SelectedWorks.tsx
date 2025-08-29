@@ -2,7 +2,6 @@
 
 import Image from 'next/image'
 import { useEffect, useRef } from 'react'
-import { MaskButton } from '../ui/mask-button'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
@@ -133,17 +132,15 @@ const ProjectSection = ({ project }: { project: Project }) => {
               <p className="text-content-inverse text-xl font-normal">
                 {category}
               </p>
-              <MaskButton 
-                variant="light"
-                size="custom"
-                customSize="px-8 py-4 text-lg"
+              <button 
+                className="px-8 py-4 text-lg font-medium rounded-full bg-[#f2f1ef] text-[#282828] hover:bg-[#282828] hover:text-[#f2f1ef] transition-all duration-300 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#282828] focus:ring-offset-2"
                 onClick={() => {
                   // Navigate to specific project using correct route
                   window.location.href = `/work/${id}`
                 }}
               >
                 View project
-              </MaskButton>
+              </button>
             </div>
           </div>
         </div>
@@ -178,15 +175,15 @@ export const SelectedWorks = () => {
             </div>
             
             <div className="pt-8">
-              <MaskButton 
-                size="md"
+              <button 
+                className="px-12 py-4 text-lg font-medium rounded-full bg-[#282828] text-[#f2f1ef] hover:bg-[#f2f1ef] hover:text-[#282828] transition-all duration-300 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#282828] focus:ring-offset-2"
                 onClick={() => {
                   // Navigate to work page
                   window.location.href = '/work'
                 }}
               >
                 view all projects
-              </MaskButton>
+              </button>
             </div>
           </div>
         </div>

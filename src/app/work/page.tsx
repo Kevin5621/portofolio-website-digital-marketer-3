@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { MaskButton } from "@/components/ui/mask-button";
 import { ContactSection } from "@/components/sections/ContactSection";
 import { getAllWorkItems } from "@/data/work";
 
@@ -37,15 +36,17 @@ export default function WorkPage() {
           {/* Filter Buttons - Centered */}
           <div className="flex flex-wrap justify-center gap-3 mb-16">
             {categories.map((category) => (
-              <MaskButton
+              <button
                 key={category}
                 onClick={() => setActiveFilter(category)}
-                size="sm"
-                variant={activeFilter === category ? "dark" : "light"}
-                className="text-sm font-medium whitespace-nowrap"
+                                  className={`px-6 py-2 text-sm font-medium rounded-full transition-all duration-300 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 whitespace-nowrap ${
+                    activeFilter === category 
+                      ? 'bg-[#f2f1ef] text-[#282828] hover:bg-[#282828] hover:text-[#f2f1ef] focus:ring-[#282828] focus:ring-offset-[#f2f1ef]' 
+                      : 'bg-[#282828] text-[#f2f1ef] hover:bg-[#f2f1ef] hover:text-[#282828] focus:ring-[#f2f1ef] focus:ring-offset-[#282828]'
+                  }`}
               >
                 {category}
-              </MaskButton>
+              </button>
             ))}
           </div>
 
@@ -88,13 +89,12 @@ export default function WorkPage() {
 
           {/* Archive Button - Centered */}
           <div className="flex justify-center mt-20">
-            <MaskButton 
-              size="md" 
-              variant="dark"
+            <button 
+              className="px-12 py-4 text-lg font-medium rounded-full bg-[#f2f1ef] text-[#282828] hover:bg-[#282828] hover:text-[#f2f1ef] transition-all duration-300 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#282828] focus:ring-offset-2"
               onClick={() => router.push('/archive')}
             >
               Archive
-            </MaskButton>
+            </button>
           </div>
         </div>
       </div>
