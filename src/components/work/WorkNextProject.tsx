@@ -65,9 +65,9 @@ export const WorkNextProject = ({ nextProject }: WorkNextProjectProps) => {
   // Get hero image path based on project ID
   const getHeroImagePath = (projectId: string) => {
     if (projectId === "ortist-specialist") {
-      return "/work/ortist/hero.png";
+      return "/work/ortist/hero.webp";
     }
-    return `/work/${projectId}/hero.png`;
+    return `/work/${projectId}/hero.webp`;
   };
 
   return (
