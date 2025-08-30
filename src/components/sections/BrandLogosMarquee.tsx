@@ -8,14 +8,14 @@ export const BrandLogosMarquee = () => {
   const animationRef = useRef<gsap.core.Timeline | null>(null)
 
   const logoPaths = [
-    '/logo/1 (2).png',
-    '/logo/2 (2).png',
-    '/logo/3 (2).png',
-    '/logo/4 (2).png',
-    '/logo/5 (1).png',
-    '/logo/6 (1).png',
-    '/logo/7 (1).png',
-    '/logo/8 (1).png'
+    '/logo/1 (2).webp',
+    '/logo/2 (2).webp',
+    '/logo/3 (2).webp',
+    '/logo/4 (2).webp',
+    '/logo/5 (1).webp',
+    '/logo/6 (1).webp',
+    '/logo/7 (1).webp',
+    '/logo/8 (1).webp'
   ]
 
   useEffect(() => {
