@@ -152,9 +152,30 @@ export const HeroSection = () => {
           </h1>
         </div>
 
-        {/* Mobile Skills - TETAP PERTAHANKAN */}
-        <div className="md:hidden absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20">
-          <div className="flex flex-col items-center gap-4 text-content-inverse">
+        {/* Mobile Layout - Completely separate from desktop */}
+        <div className="md:hidden absolute inset-0 flex flex-col items-center justify-center z-20 px-4 sm:px-6">
+          {/* Mobile Header */}
+          <div className="text-center mb-12">
+            <h1 className="font-semibold text-content-inverse leading-none tracking-tight" style={{fontSize: '8.5rem'}}>
+              Adhara Eka
+            </h1>
+          </div>
+
+          {/* Mobile Skills */}
+          <div className="text-center space-y-6 mb-12">
+            <div className="text-content-inverse font-normal" style={{fontSize: '3.5rem'}}>
+              Social Media Marketing
+            </div>
+            <div className="text-content-inverse font-normal" style={{fontSize: '3.5rem'}}>
+              Content Creator
+            </div>
+            <div className="text-content-inverse font-normal" style={{fontSize: '3.5rem'}}>
+              Short-Form Video Editor
+            </div>
+          </div>
+
+          {/* Mobile Location */}
+          <div className="text-center">
             <div className="bg-content-inverse rounded-full px-6 py-4 flex items-center gap-4 shadow-lg">
               <div className="text-right">
                 <div className="text-sm font-medium text-content">Based in</div>
@@ -167,17 +188,6 @@ export const HeroSection = () => {
                   <path d="M2 12h20"/>
                 </svg>
               </div>
-            </div>
-            <div className="text-center space-y-3">
-              <div className="flex items-center justify-center gap-2">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-3 h-3 text-content-inverse">
-                  <path d="M12 5v14"/>
-                  <path d="m19 12-7 7-7-7"/>
-                </svg>
-                <div className="text-base font-medium">Social Media Marketing</div>
-              </div>
-              <div className="text-base font-medium">Content Creator</div>
-              <div className="text-base font-medium">Short-Form Video Editor</div>
             </div>
           </div>
         </div>
