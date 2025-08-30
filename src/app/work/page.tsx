@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useRef } from "react";
+import { motion, useSpring } from 'framer-motion';
 import { useRouter } from "next/navigation";
 import { gsap } from "gsap";
 import { ContactSection } from "@/components/sections/ContactSection";
@@ -18,16 +19,47 @@ const categories = [
 export default function WorkPage() {
   const [activeFilter, setActiveFilter] = useState("All");
   const router = useRouter();
-  
   const workData = getAllWorkItems();
-  
-  const filteredWork = activeFilter === "All" 
-    ? workData 
-    : workData.filter(item => item.category === activeFilter);
+  const filteredWork = activeFilter === "All" ? workData : workData.filter(item => item.category === activeFilter);
+
+  // Hover image reveal state
+  const [hovered, setHovered] = useState<{ src: string; alt: string; opacity: number; direction: 'up' | 'down' }>({ src: '', alt: '', opacity: 0, direction: 'down' });
+  const [cursor, setCursor] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
+  const [prevIdx, setPrevIdx] = useState<number | null>(null);
+  const imageRef = useRef<HTMLImageElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // Framer Motion spring for smooth cursor following
+  const spring = { stiffness: 150, damping: 15, mass: 0.1 };
+  const imagePosX = useSpring(cursor.x, spring);
+  const imagePosY = useSpring(cursor.y, spring);
+
+  // Mouse move handler for floating image
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!containerRef.current) return;
+    const rect = containerRef.current.getBoundingClientRect();
+    setCursor({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+    imagePosX.set(e.clientX - rect.left);
+    imagePosY.set(e.clientY - rect.top);
+  };
+
+  // Pass these handlers to WorkTableRow
+  const handleRowHover = (item: WorkItem, idx: number) => {
+    let direction: 'up' | 'down' = 'down';
+    if (prevIdx !== null) {
+      direction = idx < prevIdx ? 'up' : 'down';
+    }
+    setHovered({ src: `/work/${item.id}/hero.webp`, alt: item.client, opacity: 1, direction });
+    setPrevIdx(idx);
+  };
+  const handleRowLeave = () => {
+    setHovered(prev => ({ ...prev, opacity: 0 }));
+    setPrevIdx(null);
+  };
 
   return (
     <>
-      <div className="min-h-screen bg-surface-background pt-32 pb-16">
+      <div className="min-h-screen bg-surface-background pt-32 pb-16" ref={containerRef} onMouseMove={handleMouseMove}>
         <div className="max-w-7xl mx-auto px-6">
           {/* Work Title - Centered */}
           <div className="text-center mb-12">
@@ -62,9 +94,14 @@ export default function WorkPage() {
 
             {/* Table Body */}
             <div className="space-y-0">
-              {filteredWork.map((item) => (
-                <WorkTableRow key={item.id} item={item} />
-              ))}
+              {filteredWork.map((item, idx) => (
+                  <WorkTableRow 
+                    key={item.id} 
+                    item={item} 
+                    onHover={() => handleRowHover(item, idx)} 
+                    onLeave={handleRowLeave}
+                  />
+                ))}
             </div>
           </div>
 
@@ -79,16 +116,28 @@ export default function WorkPage() {
             </PillButton>
           </div>
         </div>
+        {/* Floating hero image reveal */}
+        {hovered.src && (
+          <motion.img
+            ref={imageRef}
+            src={hovered.src}
+            alt={hovered.alt}
+            initial={{ opacity: 0, y: hovered.direction === 'up' ? -40 : 40 }}
+            animate={{ opacity: hovered.opacity, y: 0 }}
+            transition={{ duration: 0.3, ease: 'easeInOut' }}
+            className="w-[300px] h-[220px] rounded-lg object-cover absolute pointer-events-none z-50 shadow-lg"
+            style={{ left: imagePosX, top: imagePosY, position: 'absolute' }}
+          />
+        )}
       </div>
-      
       {/* Contact Section */}
       <ContactSection />
     </>
   );
 }
 
-// WorkTableRow component with Flowing Menu hover effect
-const WorkTableRow = ({ item }: { item: WorkItem }) => {
+// WorkTableRow component with Flowing Menu hover effect and image reveal
+const WorkTableRow = ({ item, onHover, onLeave }: { item: WorkItem, onHover?: () => void, onLeave?: () => void }) => {
   const router = useRouter();
   const rowRef = useRef<HTMLDivElement>(null);
   const marqueeRef = useRef<HTMLDivElement>(null);
@@ -185,16 +234,13 @@ const WorkTableRow = ({ item }: { item: WorkItem }) => {
   ));
 
   return (
-    <div 
-      className="relative overflow-hidden group"
-      ref={rowRef}
-    >
+    <div className="relative overflow-hidden group" ref={rowRef}>
       {/* Original Table Row - Unchanged */}
       <button
         className="grid grid-cols-12 gap-8 py-8 border-b border-border-secondary hover:bg-surface-secondary transition-colors duration-200 group cursor-pointer w-full text-left relative z-10"
         onClick={handleClick}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
+        onMouseEnter={(e) => { handleMouseEnter(e); if (onHover) onHover(); }}
+        onMouseLeave={(e) => { handleMouseLeave(e); if (onLeave) onLeave(); }}
       >
         <div className="col-span-3 text-left">
           <h3 className="text-xl font-semibold text-content-primary group-hover:text-interactive-primary transition-colors duration-200">
