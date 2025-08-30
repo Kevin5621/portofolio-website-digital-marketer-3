@@ -93,6 +93,7 @@ const WorkTableRow = ({ item }: { item: WorkItem }) => {
   const rowRef = useRef<HTMLDivElement>(null);
   const marqueeRef = useRef<HTMLDivElement>(null);
   const marqueeInnerRef = useRef<HTMLDivElement>(null);
+  const timelineRef = useRef<gsap.core.Timeline | null>(null);
 
   const animationDefaults: gsap.TweenVars = { duration: 0.6, ease: "expo" };
 
@@ -113,9 +114,15 @@ const WorkTableRow = ({ item }: { item: WorkItem }) => {
     return topEdgeDist < bottomEdgeDist ? "top" : "bottom";
   };
 
-  const handleMouseEnter = (ev: React.MouseEvent<HTMLDivElement>) => {
+  const handleMouseEnter = (ev: React.MouseEvent<HTMLButtonElement>) => {
     if (!rowRef.current || !marqueeRef.current || !marqueeInnerRef.current)
       return;
+    
+    // Kill any existing timeline
+    if (timelineRef.current) {
+      timelineRef.current.kill();
+    }
+    
     const rect = rowRef.current.getBoundingClientRect();
     const x = ev.clientX - rect.left;
     const y = ev.clientY - rect.top;
@@ -125,31 +132,41 @@ const WorkTableRow = ({ item }: { item: WorkItem }) => {
     marqueeRef.current.classList.add('active');
 
     const tl = gsap.timeline({ defaults: animationDefaults });
+    timelineRef.current = tl;
 
     tl.set(marqueeRef.current, { y: edge === "top" ? "-101%" : "101%" }, 0)
       .set(marqueeInnerRef.current, { y: edge === "top" ? "101%" : "-101%" }, 0)
       .to([marqueeRef.current, marqueeInnerRef.current], { y: "0%" }, 0);
   };
 
-  const handleMouseLeave = (ev: React.MouseEvent<HTMLDivElement>) => {
+  const handleMouseLeave = (ev: React.MouseEvent<HTMLButtonElement>) => {
     if (!rowRef.current || !marqueeRef.current || !marqueeInnerRef.current)
       return;
+    
+    // Kill any existing timeline
+    if (timelineRef.current) {
+      timelineRef.current.kill();
+    }
+    
     const rect = rowRef.current.getBoundingClientRect();
     const x = ev.clientX - rect.left;
     const y = ev.clientY - rect.top;
     const edge = findClosestEdge(x, y, rect.width, rect.height);
 
     const tl = gsap.timeline({ defaults: animationDefaults });
+    timelineRef.current = tl;
 
     tl.to(marqueeRef.current, { y: edge === "top" ? "-101%" : "101%" }, 0).to(
       marqueeInnerRef.current,
       { y: edge === "top" ? "101%" : "-101%" },
       0
     ).call(() => {
-      // Remove active class after animation
-      if (marqueeRef.current) {
-        marqueeRef.current.classList.remove('active');
-      }
+      // Remove active class after animation with delay
+      setTimeout(() => {
+        if (marqueeRef.current) {
+          marqueeRef.current.classList.remove('active');
+        }
+      }, 100);
     });
   };
 
@@ -171,13 +188,13 @@ const WorkTableRow = ({ item }: { item: WorkItem }) => {
     <div 
       className="relative overflow-hidden group"
       ref={rowRef}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
     >
       {/* Original Table Row - Unchanged */}
       <button
         className="grid grid-cols-12 gap-8 py-8 border-b border-border-secondary hover:bg-surface-secondary transition-colors duration-200 group cursor-pointer w-full text-left relative z-10"
         onClick={handleClick}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
       >
         <div className="col-span-3 text-left">
           <h3 className="text-xl font-semibold text-content-primary group-hover:text-interactive-primary transition-colors duration-200">
