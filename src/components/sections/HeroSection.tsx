@@ -103,7 +103,7 @@ export const HeroSection = () => {
             style={{ willChange: 'transform' }}
           >
             <Image 
-              src="/landing/hero-man.png" 
+              src="/landing/hero-man.webp" 
               alt="Adhara Eka"
               width={1920}
               height={1080}
