@@ -47,6 +47,7 @@ export const IntroSlideUp = ({ onComplete, duration = 1750 }: IntroSlideUpProps)
   const [isSliding, setIsSliding] = useState(false)
   const [currentHelloIndex, setCurrentHelloIndex] = useState(0)
   const [isFirstVisit, setIsFirstVisit] = useState(false)
+  const [previousPathname, setPreviousPathname] = useState('')
   const pathname = usePathname()
 
   const routeTransitionDuration = 300
@@ -95,6 +96,44 @@ export const IntroSlideUp = ({ onComplete, duration = 1750 }: IntroSlideUpProps)
       clearTimeout(slideTimeout)
     }
   }, [duration, onComplete, helloTexts.length, isFirstVisit])
+
+  useEffect(() => {
+    // Check if this is a dynamic route transition
+    const isDynamicRouteTransition = () => {
+      if (!previousPathname) return false
+      
+      // Check if moving between work routes
+      if (previousPathname.startsWith('/work/') && pathname.startsWith('/work/')) {
+        return previousPathname !== pathname
+      }
+      
+      // Check if moving between archive routes  
+      if (previousPathname.startsWith('/archive/') && pathname.startsWith('/archive/')) {
+        return previousPathname !== pathname
+      }
+      
+      return false
+    }
+
+    if (isDynamicRouteTransition()) {
+      // Show intro slide up for dynamic route transitions
+      setIsVisible(true)
+      setIsSliding(false)
+      setCurrentHelloIndex(0)
+      
+      // Auto-hide after transition duration
+      const hideTimeout = setTimeout(() => {
+        setIsSliding(true)
+        setTimeout(() => {
+          setIsVisible(false)
+        }, 2000)
+      }, routeTransitionDuration)
+      
+      return () => clearTimeout(hideTimeout)
+    }
+
+    setPreviousPathname(pathname)
+  }, [pathname, previousPathname, routeTransitionDuration])
 
   if (!isVisible) return null
 
