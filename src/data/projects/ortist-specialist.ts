@@ -66,12 +66,12 @@ export const ortistSpecialistData: WorkDetail = {
     {
       title: "Content Strategies",
       description: "I created a mix of educational and fun content about dental health. I made videos to educate and engage young people, showed the process of getting braces for credibility, and shared before-and-after content to encourage people to get treatment.",
-      images: ["/work/ortist/foto10.png", "/work/ortist/foto9.png", "/work/ortist/foto9.png"]
+      images: ["/work/ortist-specialist/foto10.webp", "/work/ortist-specialist/foto9.webp", "/work/ortist-specialist/foto9.webp"]
     },
     {
       title: "Content Strategies",
       description: "I changed the layout of the TikTok feed to make it more consistent and cleaner, so the content looks nicer and is easier to enjoy.",
-      images: ["/work/ortist/before.png", "/work/ortist/after.png"]
+      images: ["/work/ortist-specialist/before.webp", "/work/ortist-specialist/after.webp"]
     }
   ],
   bestContent: {
@@ -79,7 +79,7 @@ export const ortistSpecialistData: WorkDetail = {
     description: "The best content that was really successful was a funny reel video that encouraged people to visit Ortist Specialist. Another viral video was an educational video sharing tips on maintaining braces.",
     videos: [
       {
-        image: "/work/ortist/foto11.png",
+        image: "/work/ortist-specialist/foto11.webp",
         stats: {
           views: "1.8M",
           engagement: "258K",
@@ -89,7 +89,7 @@ export const ortistSpecialistData: WorkDetail = {
         }
       },
       {
-        image: "/work/ortist/foto12.png",
+        image: "/work/ortist-specialist/foto12.webp",
         stats: {
           views: "769K",
           engagement: "92K",
@@ -104,42 +104,42 @@ export const ortistSpecialistData: WorkDetail = {
     {
       title: "Brand Identity Refresh",
       description: "Redesigned social media templates and visual guidelines to create a more modern, trustworthy appearance for the clinic.",
-      image: "/work/ortist/foto1.png"
+      image: "/work/ortist-specialist/foto1.webp"
     },
     {
       title: "Educational Infographic Series", 
       description: "Created a series of infographics explaining common orthopedic conditions in simple, patient-friendly language.",
-      image: "/work/ortist/foto2.png"
+      image: "/work/ortist-specialist/foto2.webp"
     },
     {
       title: "Patient Journey Content",
       description: "Documentary-style content showcasing real patient experiences and transformations.",
-      image: "/work/ortist/foto3.png"
+      image: "/work/ortist-specialist/foto3.webp"
     },
     {
       title: "Social Media Campaign Design",
       description: "Visual campaign materials for dental health awareness targeting young adults.",
-      image: "/work/ortist/foto4.png"
+      image: "/work/ortist-specialist/foto4.webp"
     },
     {
       title: "Interactive Educational Posts",
       description: "Engaging carousel posts explaining dental procedures and oral health tips.",
-      image: "/work/ortist/foto5.png"
+      image: "/work/ortist-specialist/foto5.webp"
     },
     {
       title: "Orthodontic Process Documentation",
       description: "Step-by-step visual content showing the orthodontic treatment journey.",
-      image: "/work/ortist/foto6.png"
+      image: "/work/ortist-specialist/foto6.webp"
     },
     {
       title: "Community Engagement Content",
       description: "Behind-the-scenes content building trust and connection with the audience.",
-      image: "/work/ortist/foto7.png"
+      image: "/work/ortist-specialist/foto7.webp"
     },
     {
       title: "Treatment Result Showcase",
       description: "Professional photography showcasing successful treatment outcomes.",
-      image: "/work/ortist/foto8.png"
+      image: "/work/ortist-specialist/foto8.webp"
     }
   ],
   nextProject: {
