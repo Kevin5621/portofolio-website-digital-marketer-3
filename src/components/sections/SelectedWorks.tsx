@@ -154,9 +154,10 @@ const ProjectSection = ({ project }: { project: Project }) => {
 export const SelectedWorks = () => {
   return (
     <>
+      {/* Desktop Layout - Only visible on desktop */}
       <section 
         id="work" 
-        className="min-h-screen bg-surface-background relative overflow-hidden flex items-center justify-center"
+        className="hidden md:block min-h-screen bg-surface-background relative overflow-hidden flex items-center justify-center"
         data-theme="light"
       >
         <div className="container mx-auto px-6 md:px-8 py-20 md:py-24">
