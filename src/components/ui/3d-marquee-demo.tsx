@@ -25,6 +25,41 @@ export default function ParallaxVideoGallery() {
           ))}
         </div>
       </div>
+      
+      {/* Simple CSS untuk volume slider */}
+      <style jsx>{`
+        input[type="range"]::-webkit-slider-thumb {
+          appearance: none;
+          height: 16px;
+          width: 16px;
+          border-radius: 50%;
+          background: #ffffff;
+          cursor: pointer;
+          box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+          transition: all 0.2s ease;
+        }
+        
+        input[type="range"]::-webkit-slider-thumb:hover {
+          transform: scale(1.1);
+          background: #f3f4f6;
+        }
+        
+        input[type="range"]::-moz-range-thumb {
+          height: 16px;
+          width: 16px;
+          border-radius: 50%;
+          background: #ffffff;
+          cursor: pointer;
+          box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+          border: none;
+          transition: all 0.2s ease;
+        }
+        
+        input[type="range"]::-moz-range-thumb:hover {
+          transform: scale(1.1);
+          background: #f3f4f6;
+        }
+      `}</style>
     </div>
   );
 }
@@ -36,16 +71,29 @@ interface VideoCardProps {
 
 function VideoCard({ videoSrc, isEven }: VideoCardProps) {
   const [isHovered, setIsHovered] = useState(false);
-  const [isVideoReady, setIsVideoReady] = useState(false);
+  const [volume, setVolume] = useState(0.5);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   const handleMouseEnter = () => {
     setIsHovered(true);
-    if (videoRef.current && isVideoReady) {
+    if (videoRef.current) {
+      // Set volume dan currentTime
+      videoRef.current.volume = volume;
       videoRef.current.currentTime = 0;
-      videoRef.current.play().catch(() => {
-        // Silent fail untuk autoplay restrictions
-      });
+      
+      // Coba play video langsung
+      const playPromise = videoRef.current.play();
+      
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {
+          // Jika gagal play, tunggu video ready lalu play lagi
+          if (videoRef.current) {
+            videoRef.current.addEventListener('canplay', () => {
+              videoRef.current?.play().catch(() => {});
+            }, { once: true });
+          }
+        });
+      }
     }
   };
 
@@ -59,12 +107,21 @@ function VideoCard({ videoSrc, isEven }: VideoCardProps) {
 
   const handleVideoLoad = () => {
     console.log("Video loaded and ready:", videoSrc);
-    setIsVideoReady(true);
+    // Set volume saat video ready
+    if (videoRef.current) {
+      videoRef.current.volume = volume;
+    }
   };
 
   const handleVideoError = () => {
     console.error("Video failed to load:", videoSrc);
-    setIsVideoReady(false);
+  };
+
+  const handleVolumeChange = (newVolume: number) => {
+    setVolume(newVolume);
+    if (videoRef.current) {
+      videoRef.current.volume = newVolume;
+    }
   };
 
   return (
@@ -81,16 +138,44 @@ function VideoCard({ videoSrc, isEven }: VideoCardProps) {
       <video
         ref={videoRef}
         className="w-full h-full object-cover bg-transparent"
-        muted
         loop
         playsInline
-        preload="metadata"
+        preload="auto"
         onLoadedMetadata={handleVideoLoad}
         onError={handleVideoError}
-        onCanPlay={() => setIsVideoReady(true)}
       >
         <source src={videoSrc} type="video/mp4" />
       </video>
+      
+      {/* Simple Modern Volume Control */}
+      {isHovered && (
+        <div className="absolute top-4 right-4 z-20">
+          <div className="bg-black/60 rounded-xl p-4 backdrop-blur-sm">
+            <div className="flex items-center space-x-3">
+              {/* Volume Icon */}
+              <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M9.383 3.076A1 1 0 0110 4v12a1 1 0 01-1.707.707L4.586 13H2a1 1 0 01-1-1V8a1 1 0 011-1h2.586l3.707-3.707a1 1 0 011.09-.217zM14.657 2.929a1 1 0 011.414 0A9.972 9.972 0 0119 10a9.972 9.972 0 01-2.929 7.071 1 1 0 01-1.414-1.414A7.971 7.971 0 0017 10c0-2.21-.894-4.208-2.343-5.657a1 1 0 010-1.414z" clipRule="evenodd" />
+              </svg>
+              
+              {/* Volume Slider */}
+              <input
+                type="range"
+                min="0"
+                max="1"
+                step="0.01"
+                value={volume}
+                onChange={(e) => handleVolumeChange(parseFloat(e.target.value))}
+                className="w-20 h-2 bg-white/20 rounded-full appearance-none cursor-pointer"
+              />
+              
+              {/* Volume Text */}
+              <span className="text-white text-sm font-medium min-w-[2.5rem]">
+                {Math.round(volume * 100)}%
+              </span>
+            </div>
+          </div>
+        </div>
+      )}
       
       {/* Subtle overlay */}
       <div className={`
