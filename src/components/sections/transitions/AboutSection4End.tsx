@@ -5,7 +5,7 @@ export function AboutSection4End() {
     <>
       {/* Viewport 23: Here's a breakdown - Small text, black bg, white text */}
       <section id="breakdown" className="relative min-h-screen bg-surface-inverse flex items-center justify-center px-6 z-30">
-        <p className="text-lg md:text-xl lg:text-2xl text-content-inverse text-center max-w-4xl">
+        <p className="text-lg md:text-xl lg:text-2xl text-content-inverse text-center max-w-4xl" style={{fontSize: '3.5rem'}}>
           Here&apos;s a breakdown of what that includes
         </p>
       </section>
@@ -17,10 +17,10 @@ export function AboutSection4End() {
             {/* Social Media Marketing */}
             <div className="flex flex-col lg:flex-row lg:col-span-3 gap-8 mb-12">
               <div className="lg:w-1/3">
-                <h3 className="text-2xl md:text-3xl font-bold text-content-inverse">Social Media Marketing</h3>
+                <h3 className="text-2xl md:text-3xl font-bold text-content-inverse" style={{fontSize: '3.5rem'}}>Social Media Marketing</h3>
               </div>
               <div className="lg:w-2/3">
-                <div className="text-lg md:text-xl text-content-inverse space-y-2">
+                <div className="text-lg md:text-xl text-content-inverse space-y-2" style={{fontSize: '3.5rem'}}>
                   <p>Social Media Strategy</p>
                   <p>Analytics & Insights</p>
                   <p>Campaign Management</p>
@@ -31,10 +31,10 @@ export function AboutSection4End() {
             {/* Content Creation */}
             <div className="flex flex-col lg:flex-row lg:col-span-3 gap-8 mb-12">
               <div className="lg:w-1/3">
-                <h3 className="text-2xl md:text-3xl font-bold text-content-inverse">Content Creation</h3>
+                <h3 className="text-2xl md:text-3xl font-bold text-content-inverse" style={{fontSize: '3.5rem'}}>Content Creation</h3>
               </div>
               <div className="lg:w-2/3">
-                <div className="text-lg md:text-xl text-content-inverse space-y-2">
+                <div className="text-lg md:text-xl text-content-inverse space-y-2" style={{fontSize: '3.5rem'}}>
                   <p>Graphic Design</p>
                   <p>Copywriting</p>
                   <p>Storytelling</p>
@@ -49,10 +49,10 @@ export function AboutSection4End() {
             {/* Short-form Video Editing */}
             <div className="flex flex-col lg:flex-row lg:col-span-3 gap-8">
               <div className="lg:w-1/3">
-                <h3 className="text-2xl md:text-3xl font-bold text-content-inverse">Short-form Video Editing</h3>
+                <h3 className="text-2xl md:text-3xl font-bold text-content-inverse" style={{fontSize: '3.5rem'}}>Short-form Video Editing</h3>
               </div>
               <div className="lg:w-2/3">
-                <div className="text-lg md:text-xl text-content-inverse space-y-2">
+                <div className="text-lg md:text-xl text-content-inverse space-y-2" style={{fontSize: '3.5rem'}}>
                   <p>Editing</p>
                   <p>Post-production</p>
                   <p>Motion Graphics</p>
