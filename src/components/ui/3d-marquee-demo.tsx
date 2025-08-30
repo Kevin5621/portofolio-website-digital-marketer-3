@@ -1,5 +1,5 @@
 "use client";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 
 export default function ParallaxVideoGallery() {
   const videos = [
@@ -12,10 +12,10 @@ export default function ParallaxVideoGallery() {
   ];
 
   return (
-    <div className="w-full py-16 bg-transparent">
+    <div className="w-full py-32 bg-transparent">
       <div className="container mx-auto px-4">
-        {/* Grid 2 kolom dengan aspect ratio TikTok */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+        {/* Grid 2 kolom dengan aspect ratio TikTok dan spacing yang lebih besar */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 lg:gap-24 xl:gap-32">
           {videos.map((videoSrc, index) => (
             <VideoCard
               key={videoSrc.split('/').pop() || `video-${index}`}
@@ -73,6 +73,7 @@ function VideoCard({ videoSrc, isEven }: VideoCardProps) {
   const [isHovered, setIsHovered] = useState(false);
   const [volume, setVolume] = useState(0.5);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
 
   const handleMouseEnter = () => {
     setIsHovered(true);
@@ -117,6 +118,29 @@ function VideoCard({ videoSrc, isEven }: VideoCardProps) {
     console.error("Video failed to load:", videoSrc);
   };
 
+  // Parallax effect dengan kecepatan scroll yang lambat
+  useEffect(() => {
+    const handleScroll = () => {
+      if (cardRef.current) {
+        const scrolled = window.pageYOffset;
+        const rate = scrolled * 0.05; // Kecepatan yang lebih lambat (0.05)
+        
+        // Different parallax effect for even/odd cards
+        if (isEven) {
+          cardRef.current.style.transform = `translateY(${rate * 0.8}px) scale(1.01)`;
+        } else {
+          cardRef.current.style.transform = `translateY(${-rate * 0.6}px) scale(0.99)`;
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [isEven]);
+
   const handleVolumeChange = (newVolume: number) => {
     setVolume(newVolume);
     if (videoRef.current) {
@@ -126,14 +150,21 @@ function VideoCard({ videoSrc, isEven }: VideoCardProps) {
 
   return (
     <div
+      ref={cardRef}
       className={`
         relative w-full aspect-[9/16] max-w-sm mx-auto
         bg-neutral-800/20 rounded-lg overflow-hidden
-        transition-all duration-300 ease-out cursor-pointer
-        ${isEven ? 'md:mt-0' : 'md:mt-16'}
+        transition-all duration-700 ease-out cursor-pointer
+        shadow-lg hover:shadow-xl
+        ${isEven ? 'md:mt-0' : 'md:mt-24'}
+        transform-gpu will-change-transform
       `}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      style={{
+        transform: 'translateY(0) scale(1)',
+        transition: 'transform 0.7s cubic-bezier(0.4, 0, 0.2, 1)'
+      }}
     >
       <video
         ref={videoRef}
