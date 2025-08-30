@@ -52,6 +52,9 @@ const PillButton: React.FC<PillButtonProps> = ({
         xPercent: -50,
         scale: 0,
         transformOrigin: `50% ${originY}px`,
+        opacity: 1,
+        visibility: "visible",
+        backgroundColor: variant === "dark-to-light" ? "#F3F2F2" : "#282828",
       });
 
       tlRef.current?.kill();
@@ -63,6 +66,8 @@ const PillButton: React.FC<PillButtonProps> = ({
         duration: 0.6,
         ease: "power2.easeOut",
         overwrite: "auto",
+        opacity: 1,
+        visibility: "visible",
       }, 0);
 
       tlRef.current = tl;
@@ -128,8 +133,10 @@ const PillButton: React.FC<PillButtonProps> = ({
         onMouseEnter={handleEnter}
         onMouseLeave={handleLeave}
       >
-        <span className={circleClasses} ref={circleRef} />
-        <span className="relative z-20">{children}</span>
+        <span className={circleClasses} ref={circleRef} aria-hidden="true">
+          {/* Debug content */}
+        </span>
+        <span className="relative z-10">{children}</span>
       </a>
     );
   }
@@ -144,8 +151,10 @@ const PillButton: React.FC<PillButtonProps> = ({
       onMouseEnter={handleEnter}
       onMouseLeave={handleLeave}
     >
-      <span className={circleClasses} ref={circleRef} />
-      <span className="relative z-20">{children}</span>
+      <span className={circleClasses} ref={circleRef} aria-hidden="true">
+        {/* Debug content */}
+      </span>
+      <span className="relative z-10">{children}</span>
     </button>
   );
 };
