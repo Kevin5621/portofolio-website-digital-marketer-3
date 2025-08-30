@@ -1,6 +1,7 @@
 'use client'
 
 import { Magnetic } from '@/components/ui/magnetic'
+import { PillButton } from '@/components/ui/pill-button'
 
 export const ContactSection = () => {
   return (
@@ -20,8 +21,9 @@ export const ContactSection = () => {
               <Magnetic strength={0.04} range={200} onlyOnHover={true}>
                 {/* Layer 2: Inner Magnetic Effect (lebih sensitif dan responsif) */}
                 <Magnetic strength={0.15} range={140} onlyOnHover={true} textStrength={0.8}>
-                  <button 
-                    className="w-80 h-80 rounded-full flex items-center justify-center cursor-pointer group contact-button-mask-enhanced transition-all duration-300 hover:shadow-2xl"
+                  <PillButton 
+                    variant="dark-to-light"
+                    className="w-80 h-80 rounded-full flex items-center justify-center cursor-pointer group transition-all duration-300 hover:shadow-2xl"
                     onClick={() => {
                       // Scroll to contact form or trigger contact action
                       if (typeof document !== 'undefined') {
@@ -33,12 +35,12 @@ export const ContactSection = () => {
                   >
                     <div className="text-center relative z-20">
                       <h3 
-                        className="text-3xl font-medium contact-text magnetic-text group-hover:scale-105 transition-transform duration-300"
+                        className="text-3xl font-medium magnetic-text group-hover:scale-105 transition-transform duration-300"
                       >
                         Get in touch
                       </h3>
                     </div>
-                  </button>
+                  </PillButton>
                 </Magnetic>
               </Magnetic>
             </div>
