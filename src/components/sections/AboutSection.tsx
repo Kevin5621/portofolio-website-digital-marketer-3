@@ -2,6 +2,7 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
+import { PillButton } from '@/components/ui/pill-button'
 
 export const AboutSection = () => {
   return (
@@ -46,11 +47,12 @@ export const AboutSection = () => {
         <div className="absolute left-0 md:left-1/3 w-full md:w-2/3 flex items-end justify-start z-30" style={{top: 'calc(100vh - 120px)'}}>
           <div className="px-8 md:px-12 lg:px-16 pb-16 md:pb-20">
             <Link href="/about">
-              <button 
-                className="px-12 py-6 text-xl lg:text-2xl xl:text-3xl font-medium rounded-full bg-[#282828] text-[#f2f1ef] hover:bg-[#f2f1ef] hover:text-[#282828] transition-all duration-300 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#282828] focus:ring-offset-2"
+              <PillButton 
+                variant="dark-to-light"
+                className="px-12 py-6 text-xl lg:text-2xl xl:text-3xl"
               >
                 About me
-              </button>
+              </PillButton>
             </Link>
           </div>
         </div>

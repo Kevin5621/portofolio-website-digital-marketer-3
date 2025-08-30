@@ -21,6 +21,7 @@
 @import "../styles/animations/text-slide-up.css";
 
 /* Components */
+@import "../styles/components/pill-button.css";
 @import "../styles/components/contact-button.css";
 @import "../styles/components/contact-button-text.css";
 @import "../styles/components/view-projects-button.css";

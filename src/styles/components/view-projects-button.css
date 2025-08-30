@@ -1,115 +1,13 @@
 /* =======================================
-   VIEW ALL PROJECTS BUTTON - MASK STYLE
+   VIEW PROJECTS BUTTON - DEPRECATED
    ======================================= */
 
-/* Mask Animation Keyframes */
-@-webkit-keyframes maskRevealAnimation {
-  from {
-    -webkit-mask-position: 0 0;
-    mask-position: 0 0;
-  }
-  to {
-    -webkit-mask-position: 100% 0;
-    mask-position: 100% 0;
-  }
-}
+/* Note: This file is deprecated. Use PillButton component instead. */
+/* The view projects button now uses the PillButton component with circle hover effect. */
 
-@keyframes maskRevealAnimation {
-  from {
-    -webkit-mask-position: 0 0;
-    mask-position: 0 0;
-  }
-  to {
-    -webkit-mask-position: 100% 0;
-    mask-position: 100% 0;
-  }
-}
-
-@-webkit-keyframes maskHideAnimation {
-  from {
-    -webkit-mask-position: 100% 0;
-    mask-position: 100% 0;
-  }
-  to {
-    -webkit-mask-position: 0 0;
-    mask-position: 0 0;
-  }
-}
-
-@keyframes maskHideAnimation {
-  from {
-    -webkit-mask-position: 100% 0;
-    mask-position: 100% 0;
-  }
-  to {
-    -webkit-mask-position: 0 0;
-    mask-position: 0 0;
-  }
-}
-
-/* Enhanced view projects button mask mengikuti referensi mask3 - sama persis seperti contact button */
-.view-projects-button-enhanced {
-  position: relative;
-  overflow: hidden;
-  background-color: hsl(var(--color-surface-background));
-  color: hsl(var(--color-content-inverse));
-  /* Enhanced magnetic transform properties */
-  will-change: transform, color;
-  /* Faster transition untuk magnetic effect yang lebih responsif */
-  transition: color 0.3s ease, transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  /* Magnetic transform origin */
-  transform-origin: center center;
-}
-
-.view-projects-button-enhanced::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: hsl(var(--color-content-primary));
-  -webkit-mask: url('https://raw.githubusercontent.com/pizza3/asset/master/natureSmaller.png');
-  mask: url('https://raw.githubusercontent.com/pizza3/asset/master/natureSmaller.png');
-  -webkit-mask-size: 7100% 100%;
-  mask-size: 7100% 100%;
-  /* Pastikan border-radius mengikuti parent */
-  border-radius: inherit;
-  pointer-events: none;
-  z-index: 1;
-  /* Initial state - mask di posisi 0 (revealed) seperti referensi */
-  -webkit-mask-position: 0 0;
-  mask-position: 0 0;
-  /* Animasi default saat load - hide mask (ani2) */
-  -webkit-animation: maskHideAnimation 0.7s steps(70) forwards;
-  animation: maskHideAnimation 0.7s steps(70) forwards;
-  /* Prevent interference dengan transform */
-  will-change: -webkit-mask-position, mask-position;
-}
-
-.view-projects-button-enhanced:hover::before {
-  /* Animasi saat hover - reveal mask (ani) */
-  -webkit-animation: maskRevealAnimation 0.7s steps(70) forwards;
-  animation: maskRevealAnimation 0.7s steps(70) forwards;
-}
-
-.view-projects-button-enhanced:hover {
-  color: hsl(var(--color-content-primary));
-}
-
-/* Text styling untuk button view projects */
+/* Legacy styles kept for backward compatibility */
+.view-projects-button-enhanced,
 .view-projects-text {
-  color: hsl(var(--color-content-inverse)) !important; /* White semantic color for initial state */
-  transition: color 0.3s ease;
-  will-change: color;
-  backface-visibility: hidden;
-  transform: translateZ(0);
-  position: relative;
-  z-index: 10;
-  pointer-events: none;
-}
-
-/* Hover State - Target: Black semantic color */
-.view-projects-button-enhanced:hover .view-projects-text {
-  color: hsl(var(--color-content-primary)) !important; /* Black semantic color for hover state */
+  /* These styles are now handled by PillButton component */
+  display: none;
 }

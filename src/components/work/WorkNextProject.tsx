@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { PillButton } from "@/components/ui/pill-button";
 
 interface WorkNextProjectProps {
   nextProject: {
@@ -102,12 +103,13 @@ export const WorkNextProject = ({ nextProject }: WorkNextProjectProps) => {
             </div>
 
             <div className="flex items-center justify-center relative z-30 mb-8">
-              <button 
-                className="px-8 py-3 text-base font-medium rounded-full bg-[#282828] text-[#f2f1ef] hover:bg-[#f2f1ef] hover:text-[#282828] transition-all duration-300 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#282828] focus:ring-offset-2"
+              <PillButton 
+                variant="dark-to-light"
+                className="px-8 py-3 text-base"
                 onClick={() => {}}
               >
                 All work
-              </button>
+              </PillButton>
             </div>
           </Link>
 

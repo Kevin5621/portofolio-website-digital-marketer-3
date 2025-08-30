@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { ArchiveItem } from "@/data/archive";
+import { PillButton } from "@/components/ui/pill-button";
 
 interface ArchiveContentProps {
   readonly archiveItem: ArchiveItem;
@@ -101,14 +102,15 @@ export function ArchiveContent({ archiveItem }: ArchiveContentProps) {
               )}
             </div>
 
-            {/* Archive Button with regular button */}
+            {/* Archive Button with PillButton */}
             <div className="text-center mt-12">
-              <button
-                className="px-8 py-3 text-lg font-medium rounded-full bg-[#f2f1ef] text-[#282828] hover:bg-[#282828] hover:text-[#f2f1ef] transition-all duration-300 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#282828] focus:ring-offset-2"
+              <PillButton
+                variant="light-to-dark"
+                className="px-8 py-3 text-lg"
                 onClick={handleArchiveClick}
               >
                 Archive
-              </button>
+              </PillButton>
             </div>
           </div>
         ))}

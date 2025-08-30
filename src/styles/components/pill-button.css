@@ -1,0 +1,135 @@
+/* =======================================
+   PILL BUTTON COMPONENT - CIRCLE HOVER EFFECT
+   ======================================= */
+
+/* Base Pill Button Styles */
+.pill-button {
+  position: relative;
+  overflow: hidden;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  will-change: transform, color;
+  transition: color 0.3s ease, transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform-origin: center center;
+}
+
+/* Circle Element */
+.pill-button-circle {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  border-radius: 50%;
+  z-index: 1;
+  display: block;
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* Dark to Light Variant */
+.pill-button-dark-to-light {
+  background-color: hsl(var(--color-content-primary));
+  color: hsl(var(--color-content-inverse));
+  border: 2px solid hsl(var(--color-content-primary));
+}
+
+.pill-button-dark-to-light:hover {
+  color: hsl(var(--color-content-primary));
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.pill-button-circle-dark {
+  background: hsl(var(--color-surface-background));
+}
+
+/* Light to Dark Variant */
+.pill-button-light-to-dark {
+  background-color: hsl(var(--color-surface-background));
+  color: hsl(var(--color-content-primary));
+  border: 2px solid hsl(var(--color-surface-background));
+}
+
+.pill-button-light-to-dark:hover {
+  color: hsl(var(--color-content-inverse));
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.pill-button-circle-light {
+  background: hsl(var(--color-content-primary));
+}
+
+/* Focus States */
+.pill-button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px hsl(var(--color-interactive-primary) / 0.3);
+}
+
+/* Disabled State */
+.pill-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+.pill-button:disabled:hover {
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Size Variants */
+.pill-button-sm {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.pill-button-md {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
+.pill-button-lg {
+  padding: 1rem 2rem;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
+.pill-button-xl {
+  padding: 1.25rem 2.5rem;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+
+/* Enhanced hover effect untuk magnetic feel */
+.pill-button:hover {
+  transition: color 0.3s ease, transform 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Active state */
+.pill-button:active {
+  transform: translateY(0) scale(0.98);
+  transition: transform 0.1s ease;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .pill-button {
+    transform: none !important;
+  }
+  
+  .pill-button:hover {
+    transform: none !important;
+  }
+  
+  .pill-button:active {
+    transform: scale(0.98) !important;
+  }
+} 
