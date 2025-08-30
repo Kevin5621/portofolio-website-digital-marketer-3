@@ -63,7 +63,7 @@ const PillButton: React.FC<PillButtonProps> = ({
       tl.to(circle, {
         scale: 1.2,
         xPercent: -50,
-        duration: 0.6,
+        duration: 0.9,
         ease: "power2.easeOut",
         overwrite: "auto",
         opacity: 1,
@@ -88,7 +88,7 @@ const PillButton: React.FC<PillButtonProps> = ({
     if (!tl) return;
     activeTweenRef.current?.kill();
     activeTweenRef.current = tl.tweenTo(tl.duration(), {
-      duration: 0.3,
+      duration: 0.55,
       ease: "power2.easeOut",
       overwrite: "auto",
     });
@@ -99,7 +99,7 @@ const PillButton: React.FC<PillButtonProps> = ({
     if (!tl) return;
     activeTweenRef.current?.kill();
     activeTweenRef.current = tl.tweenTo(0, {
-      duration: 0.2,
+      duration: 0.3,
       ease: "power2.easeOut",
       overwrite: "auto",
     });
