@@ -1,72 +1,102 @@
 "use client";
-import { ThreeDMarquee } from "@/components/ui/3d-marquee";
+import { useRef, useState } from "react";
 
-export default function ThreeDMarqueeDemo() {
-  // Array video dengan multiple format support dan fallback
+export default function ParallaxVideoGallery() {
   const videos = [
-    {
-      webm: "/about/video/webm/Export Vertical (4).webm",
-      mp4: "/about/video/optimized/Export Vertical (4)_optimized.mp4",
-      original: "/about/video/Export Vertical (4).mp4"
-    },
-    {
-      webm: "/about/video/webm/Kalimat-kalimat sehari-hari dalam bahasa Korea 2.webm",
-      mp4: "/about/video/optimized/Kalimat-kalimat sehari-hari dalam bahasa Korea 2_optimized.mp4",
-      original: "/about/video/Kalimat-kalimat sehari-hari dalam bahasa Korea 2.mp4"
-    },
-    {
-      webm: "/about/video/webm/Rumah Bahasa Asing - Lawan Kata Bahasa Korea 1.webm",
-      mp4: "/about/video/optimized/Rumah Bahasa Asing - Lawan Kata Bahasa Korea 1_optimized.mp4",
-      original: "/about/video/Rumah Bahasa Asing - Lawan Kata Bahasa Korea 1.mp4"
-    },
-    {
-      webm: "/about/video/webm/Export Vertical.webm",
-      mp4: "/about/video/optimized/Export Vertical_optimized.mp4",
-      original: "/about/video/Export Vertical.mp4"
-    },
-    {
-      webm: "/about/video/webm/Binjasiimen Samapta - Testimoni.webm",
-      mp4: "/about/video/optimized/Binjasiimen Samapta - Testimoni_optimized.mp4",
-      original: "/about/video/Binjasiimen Samapta - Testimoni.mp4"
-    },
-    {
-      webm: "/about/video/webm/Export Vertical (3).webm",
-      mp4: "/about/video/optimized/Export Vertical (3)_optimized.mp4",
-      original: "/about/video/Export Vertical (3).mp4"
-    },
-    {
-      webm: "/about/video/webm/Kalimat-kalimat sehari-hari dalam bahasa Korea 1.webm",
-      mp4: "/about/video/optimized/Kalimat-kalimat sehari-hari dalam bahasa Korea 1_optimized.mp4",
-      original: "/about/video/Kalimat-kalimat sehari-hari dalam bahasa Korea 1.mp4"
-    },
-    {
-      webm: "/about/video/webm/Rumah Bahasa Asing - Lawan Kata Bahasa Korea 2.webm",
-      mp4: "/about/video/optimized/Rumah Bahasa Asing - Lawan Kata Bahasa Korea 2_optimized.mp4",
-      original: "/about/video/Rumah Bahasa Asing - Lawan Kata Bahasa Korea 2.mp4"
-    },
-    {
-      webm: "/about/video/webm/Aerospace - Edukatif.webm",
-      mp4: "/about/video/optimized/Aerospace - Edukatif_optimized.mp4",
-      original: "/about/video/Aerospace - Edukatif.mp4"
-    },
-    {
-      webm: "/about/video/webm/Export Vertical (2).webm",
-      mp4: "/about/video/optimized/Export Vertical (2)_optimized.mp4",
-      original: "/about/video/Export Vertical (2).mp4"
-    },
-    {
-      webm: "/about/video/webm/Video Testimoni 2.webm",
-      mp4: "/about/video/optimized/Video Testimoni 2_optimized.mp4",
-      original: "/about/video/Video Testimoni 2.mp4"
-    }
+    "/about/video/Export Vertical (4).mp4",
+    "/about/video/Kalimat-kalimat sehari-hari dalam bahasa Korea 2.mp4", 
+    "/about/video/Rumah Bahasa Asing - Lawan Kata Bahasa Korea 1.mp4",
+    "/about/video/Export Vertical.mp4",
+    "/about/video/Binjasiimen Samapta - Testimoni.mp4",
+    "/about/video/Export Vertical (3).mp4"
   ];
-  
-  // Untuk sementara, gunakan original videos sampai optimized versions siap
-  const videoUrls = videos.map(video => video.original);
-  
+
   return (
-    <div className="w-full h-full">
-      <ThreeDMarquee images={videoUrls} />
+    <div className="w-full py-16 bg-transparent">
+      <div className="container mx-auto px-4">
+        {/* Grid 2 kolom dengan aspect ratio TikTok */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+          {videos.map((videoSrc, index) => (
+            <VideoCard
+              key={videoSrc.split('/').pop() || `video-${index}`}
+              videoSrc={videoSrc}
+              isEven={index % 2 === 0}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+interface VideoCardProps {
+  readonly videoSrc: string;
+  readonly isEven: boolean;
+}
+
+function VideoCard({ videoSrc, isEven }: VideoCardProps) {
+  const [isHovered, setIsHovered] = useState(false);
+  const [isVideoReady, setIsVideoReady] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+    if (videoRef.current && isVideoReady) {
+      videoRef.current.currentTime = 0;
+      videoRef.current.play().catch(() => {
+        // Silent fail untuk autoplay restrictions
+      });
+    }
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+    if (videoRef.current) {
+      videoRef.current.pause();
+      videoRef.current.currentTime = 0;
+    }
+  };
+
+  const handleVideoLoad = () => {
+    console.log("Video loaded and ready:", videoSrc);
+    setIsVideoReady(true);
+  };
+
+  const handleVideoError = () => {
+    console.error("Video failed to load:", videoSrc);
+    setIsVideoReady(false);
+  };
+
+  return (
+    <div
+      className={`
+        relative w-full aspect-[9/16] max-w-sm mx-auto
+        bg-neutral-800/20 rounded-lg overflow-hidden
+        transition-all duration-300 ease-out cursor-pointer
+        ${isEven ? 'md:mt-0' : 'md:mt-16'}
+      `}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      <video
+        ref={videoRef}
+        className="w-full h-full object-cover bg-transparent"
+        muted
+        loop
+        playsInline
+        preload="metadata"
+        onLoadedMetadata={handleVideoLoad}
+        onError={handleVideoError}
+        onCanPlay={() => setIsVideoReady(true)}
+      >
+        <source src={videoSrc} type="video/mp4" />
+      </video>
+      
+      {/* Subtle overlay */}
+      <div className={`
+        absolute inset-0 bg-black/0 transition-all duration-300 ease-out
+        ${isHovered ? 'bg-black/10' : 'bg-black/0'}
+      `} />
     </div>
   );
 }

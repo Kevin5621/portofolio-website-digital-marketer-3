@@ -1,6 +1,6 @@
 "use client";
 
-import ThreeDMarqueeDemo from "@/components/ui/3d-marquee-demo";
+import ParallaxVideoGallery from "@/components/ui/3d-marquee-demo";
 
 export function AboutSection2End() {
   return (
@@ -12,9 +12,9 @@ export function AboutSection2End() {
         </p>
       </section>
 
-      {/* Video content placeholder section - sticky for overlay effect */}
-      <section id="video-content" className="sticky top-0 min-h-screen bg-surface-inverse flex items-center justify-center px-6 z-10">
-        <ThreeDMarqueeDemo />
+      {/* Video content section - normal scroll tanpa sticky */}
+      <section id="video-content" className="relative bg-surface-inverse px-6 z-10">
+        <ParallaxVideoGallery />
       </section>
     </>
   );
