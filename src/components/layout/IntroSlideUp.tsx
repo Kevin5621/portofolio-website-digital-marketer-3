@@ -1,18 +1,30 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { usePathname } from 'next/navigation'
 
 interface IntroSlideUpProps {
   onComplete?: () => void
   duration?: number
 }
 
+const routeTexts: Record<string, string> = {
+  '/': 'Home',
+  '/about': 'About',
+  '/contact': 'Contact',
+  '/work': 'Work',
+  '/archive': 'Archive'
+}
+
 export const IntroSlideUp = ({ onComplete, duration = 1750 }: IntroSlideUpProps) => {
   const [isVisible, setIsVisible] = useState(true)
   const [isSliding, setIsSliding] = useState(false)
   const [currentHelloIndex, setCurrentHelloIndex] = useState(0)
+  const [isFirstVisit, setIsFirstVisit] = useState(false)
+  const pathname = usePathname()
 
-  // Hello text in different languages (without country names)
+  const routeTransitionDuration = 300
+
   const helloTexts = [
     'Hello',
     'こんにちは',
@@ -27,30 +39,42 @@ export const IntroSlideUp = ({ onComplete, duration = 1750 }: IntroSlideUpProps)
   ]
 
   useEffect(() => {
-    // Animate through hello texts - 2x faster (150ms instead of 300ms)
-    const helloInterval = setInterval(() => {
-      setCurrentHelloIndex((prev) => (prev + 1) % helloTexts.length)
-    }, 175) // 10 + word
+    const hasVisited = localStorage.getItem('hasVisited')
+    
+    if (!hasVisited) {
+      setIsFirstVisit(true)
+      localStorage.setItem('hasVisited', 'true')
+    }
 
-    // Start slide up animation after duration
+    let helloInterval: NodeJS.Timeout
+
+    if (isFirstVisit) {
+      helloInterval = setInterval(() => {
+        setCurrentHelloIndex((prev) => (prev + 1) % helloTexts.length)
+      }, 175)
+    }
+
     const slideTimeout = setTimeout(() => {
-      clearInterval(helloInterval)
+      if (helloInterval) clearInterval(helloInterval)
       setIsSliding(true)
       
-      // Hide completely after slide animation completes
       setTimeout(() => {
         setIsVisible(false)
         onComplete?.()
-      }, 2000) 
-    }, duration)
+      }, 2000)
+    }, isFirstVisit ? duration : routeTransitionDuration)
 
     return () => {
-      clearInterval(helloInterval)
+      if (helloInterval) clearInterval(helloInterval)
       clearTimeout(slideTimeout)
     }
-  }, [duration, onComplete, helloTexts.length])
+  }, [duration, onComplete, helloTexts.length, isFirstVisit])
 
   if (!isVisible) return null
+
+  const displayText = isFirstVisit 
+    ? helloTexts[currentHelloIndex] 
+    : routeTexts[pathname] || 'Page'
 
   return (
     <div 
@@ -63,18 +87,16 @@ export const IntroSlideUp = ({ onComplete, duration = 1750 }: IntroSlideUpProps)
       `}
       data-theme="light"
     >
-      {/* Main Hello Text */}
       <div className="text-center space-y-6">
         <div className="relative h-24 flex items-center justify-center">
           <h1 
             className="text-6xl md:text-8xl font-bold text-content-primary transition-all duration-300 ease-in-out"
-            key={currentHelloIndex}
+            key={isFirstVisit ? currentHelloIndex : pathname}
           >
-            {helloTexts[currentHelloIndex]}
+            {displayText}
           </h1>
         </div>
         
-        {/* Loading dots */}
         <div className="flex justify-center space-x-2 mt-8">
           {(['dot-1', 'dot-2', 'dot-3'] as const).map((dotId, i) => (
             <div
