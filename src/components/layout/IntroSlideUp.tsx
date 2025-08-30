@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from 'react'
 import { usePathname } from 'next/navigation'
+import { workData } from '@/data/work'
+import { archiveData } from '@/data/archive'
 
 interface IntroSlideUpProps {
   onComplete?: () => void
@@ -14,6 +16,30 @@ const routeTexts: Record<string, string> = {
   '/contact': 'Contact',
   '/work': 'Work',
   '/archive': 'Archive'
+}
+
+const getRouteText = (pathname: string) => {
+  // Handle dynamic routes
+  if (pathname.startsWith('/work/')) {
+    const workId = pathname.split('/work/')[1]
+    if (workId) {
+      const workItem = workData.find((item: { id: string }) => item.id === workId)
+      return workItem ? workItem.client : 'Work Detail'
+    }
+    return 'Work Detail'
+  }
+  
+  if (pathname.startsWith('/archive/')) {
+    const archiveId = pathname.split('/archive/')[1]
+    if (archiveId) {
+      const archiveItem = archiveData.find((item: { id: string }) => item.id === archiveId)
+      return archiveItem ? archiveItem.client : 'Archive Detail'
+    }
+    return 'Archive Detail'
+  }
+  
+  // Return static route text or fallback
+  return routeTexts[pathname] || 'Page'
 }
 
 export const IntroSlideUp = ({ onComplete, duration = 1750 }: IntroSlideUpProps) => {
@@ -74,7 +100,7 @@ export const IntroSlideUp = ({ onComplete, duration = 1750 }: IntroSlideUpProps)
 
   const displayText = isFirstVisit 
     ? helloTexts[currentHelloIndex] 
-    : routeTexts[pathname] || 'Page'
+    : getRouteText(pathname)
 
   return (
     <div 
