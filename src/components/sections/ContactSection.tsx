@@ -2,6 +2,8 @@
 
 import { Magnetic } from '@/components/ui/magnetic'
 import { PillButton } from '@/components/ui/pill-button'
+import { InstagramIcon } from '@/components/ui/instagram-icon'
+import { LinkedInIcon } from '@/components/ui/linkedin-icon'
 
 export const ContactSection = () => {
   return (
@@ -50,19 +52,21 @@ export const ContactSection = () => {
                 href="https://instagram.com/adharaeka" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-content-primary"
+                className="text-content-primary flex items-center gap-3"
                 style={{fontSize: '3.5rem'}}
               >
-                Instagram ↗
+                <InstagramIcon size={56} />
+                Instagram
               </a>
               <a 
                 href="https://linkedin.com/in/adharaeka" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-content-primary"
+                className="text-content-primary flex items-center gap-3"
                 style={{fontSize: '3.5rem'}}
               >
-                Linkedin ↗
+                <LinkedInIcon size={56} />
+                Linkedin
               </a>
             </div>
 
@@ -147,17 +151,19 @@ export const ContactSection = () => {
                   href="https://instagram.com/adharaeka" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="text-content-primary text-lg"
+                  className="text-content-primary text-lg flex items-center gap-2"
                 >
-                  Instagram ↗
+                  <InstagramIcon size={20} />
+                  Instagram
                 </a>
                 <a 
                   href="https://linkedin.com/in/adharaeka" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="text-content-primary text-lg"
+                  className="text-content-primary text-lg flex items-center gap-2"
                 >
-                  Linkedin ↗
+                  <LinkedInIcon size={20} />
+                  Linkedin
                 </a>
               </div>
               {/* Full-width lines with contact info aligned right */}
