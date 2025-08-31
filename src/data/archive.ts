@@ -27,12 +27,11 @@ export const archiveData: ArchiveItem[] = [
         title: "My Creative Projects",
         description: "A collection of creative visual designs including social media content, product packaging concepts, and marketing materials that showcase the brand's personality and appeal to consumers.",
         images: [
-          "/about/photo/1.png",
-          "/about/photo/2.png", 
-          "/about/photo/3.png",
-          "/about/photo/4.png",
-          "/about/photo/5.png",
-          "/about/photo/6.png"
+          "/archive/kronju/1.webp",
+          "/archive/kronju/2.webp", 
+          "/archive/kronju/3.webp",
+          "/archive/kronju/4.webp",
+          "/archive/kronju/5.webp"
         ]
       }
     ]
@@ -50,10 +49,12 @@ export const archiveData: ArchiveItem[] = [
         title: "Storyboard Collection",
         description: "Professional storyboard designs for various film projects, showcasing visual narrative skills and cinematic understanding.",
         images: [
-          "/about/photo/1.png",
-          "/about/photo/2.png",
-          "/about/photo/3.png",
-          "/about/photo/4.png"
+          "/archive/shinji-film/1.webp",
+          "/archive/shinji-film/2.webp",
+          "/archive/shinji-film/3.webp",
+          "/archive/shinji-film/4.webp",
+          "/archive/shinji-film/5.webp",
+          "/archive/shinji-film/6.webp"
         ]
       }
     ]
@@ -71,11 +72,7 @@ export const archiveData: ArchiveItem[] = [
         title: "Event Visual Identity",
         description: "Comprehensive visual design for running events including posters, banners, social media content, and merchandise designs.",
         images: [
-          "/about/photo/1.png",
-          "/about/photo/2.png",
-          "/about/photo/3.png",
-          "/about/photo/4.png",
-          "/about/photo/5.png"
+          "/archive/toyota-runners-club/Export 12.webp"
         ]
       }
     ]
@@ -93,10 +90,7 @@ export const archiveData: ArchiveItem[] = [
         title: "Brand & Packaging Design",
         description: "Complete visual identity including logo design, packaging concepts, and marketing materials for traditional Indonesian snack brand.",
         images: [
-          "/about/photo/1.png",
-          "/about/photo/2.png",
-          "/about/photo/3.png",
-          "/about/photo/4.png"
+          "/archive/opak-sehot/Export 11.webp"
         ]
       }
     ]
@@ -114,50 +108,7 @@ export const archiveData: ArchiveItem[] = [
         title: "Educational Content Design",
         description: "Comprehensive visual materials for academic purposes including infographics, presentation designs, and educational content layouts.",
         images: [
-          "/about/photo/1.png",
-          "/about/photo/2.png",
-          "/about/photo/3.png"
-        ]
-      }
-    ]
-  },
-  {
-    id: "personal-project-1",
-    client: "Personal Project",
-    location: "Jakarta, Indonesia",
-    role: "UI/UX Designer",
-    year: "2024",
-    category: "Digital Design",
-    description: "Personal exploration in user interface and experience design, focusing on modern digital product design principles.",
-    creativeProjects: [
-      {
-        title: "Digital Interface Design",
-        description: "Collection of personal UI/UX design projects showcasing modern design principles and user-centered approach.",
-        images: [
-          "/about/photo/1.png",
-          "/about/photo/2.png",
-          "/about/photo/3.png",
-          "/about/photo/4.png"
-        ]
-      }
-    ]
-  },
-  {
-    id: "freelance-branding",
-    client: "Various Clients",
-    location: "Remote, Indonesia",
-    role: "Brand Designer",
-    year: "2024",
-    category: "Branding",
-    description: "Freelance branding projects for various small to medium businesses, creating cohesive brand identities and visual systems.",
-    creativeProjects: [
-      {
-        title: "Brand Identity Collection",
-        description: "Diverse collection of brand identity projects including logo design, brand guidelines, and marketing materials.",
-        images: [
-          "/about/photo/1.png",
-          "/about/photo/2.png",
-          "/about/photo/3.png"
+          "/archive/mis-final-exam/Export Horizontal.webp"
         ]
       }
     ]
