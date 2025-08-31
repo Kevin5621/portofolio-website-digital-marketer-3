@@ -3,12 +3,12 @@ import { useRef, useState, useEffect } from "react";
 
 export default function ParallaxVideoGallery() {
   const videos = [
-    "/about/video/Export Vertical (4).mp4",
-    "/about/video/Kalimat-kalimat sehari-hari dalam bahasa Korea 2.mp4", 
-    "/about/video/Rumah Bahasa Asing - Lawan Kata Bahasa Korea 1.mp4",
-    "/about/video/Export Vertical.mp4",
-    "/about/video/Binjasiimen Samapta - Testimoni.mp4",
-    "/about/video/Export Vertical (3).mp4"
+    "/about/video/Export Vertical (4).webm",
+    "/about/video/Kalimat-kalimat sehari-hari dalam bahasa Korea 2.webm", 
+    "/about/video/Rumah Bahasa Asing - Lawan Kata Bahasa Korea 1.webm",
+    "/about/video/Export Vertical.webm",
+    "/about/video/Binjasiimen Samapta - Testimoni.webm",
+    "/about/video/Export Vertical (3).webm"
   ];
 
   return (
@@ -175,7 +175,7 @@ function VideoCard({ videoSrc, isEven }: VideoCardProps) {
         onLoadedMetadata={handleVideoLoad}
         onError={handleVideoError}
       >
-        <source src={videoSrc} type="video/mp4" />
+        <source src={videoSrc} type="video/webm" />
       </video>
       
       {/* Simple Modern Volume Control */}
