@@ -25,26 +25,51 @@ export function AboutSection4End() {
         // Hitung posisi header
         const headerRect = header.getBoundingClientRect();
         const headerCenter = headerRect.top + headerRect.height / 2;
-
-        // Loop melalui setiap paragraph untuk cek alignment
-        paragraphs.forEach((p) => {
-          const pRect = p.getBoundingClientRect();
-          const pCenter = pRect.top + pRect.height / 2;
-          
-          // Hitung jarak antara header dan paragraph
-          const distance = Math.abs(headerCenter - pCenter);
-          const threshold = 100; // Toleransi 100px untuk alignment
-          
+        
+        // Cari header mana yang paling aktif (paling dekat dengan tengah viewport)
+        let mostActiveHeader = -1;
+        let minDistance = Infinity;
+        
+        headers.forEach((h, hIndex) => {
+          if (h) {
+            const hRect = h.getBoundingClientRect();
+            const hCenter = hRect.top + hRect.height / 2;
+            const viewportCenter = window.innerHeight / 2;
+            const distance = Math.abs(hCenter - viewportCenter);
+            
+            if (distance < minDistance) {
+              minDistance = distance;
+              mostActiveHeader = hIndex;
+            }
+          }
+        });
+        
+        console.log(`Most active header: ${mostActiveHeader}, Current header: ${headerIndex}`);
+        
+        // Update opacity: hanya header yang paling aktif yang dapat spotlight
+        paragraphs.forEach((p, index) => {
           let opacity;
-          if (distance <= threshold) {
-            // Header sejajar dengan paragraph ini - opacity 100%
-            opacity = 1;
+          if (headerIndex === mostActiveHeader) {
+            // Header ini yang paling aktif - cari paragraph yang sejajar
+            const pRect = p.getBoundingClientRect();
+            const pCenter = pRect.top + pRect.height / 2;
+            const distance = Math.abs(headerCenter - pCenter);
+            
+            if (distance <= 80) {
+              // Paragraph sejajar dengan header aktif = spotlight on
+              opacity = 1;
+              console.log(`Header ${headerIndex} active - Paragraph ${index} SPOTLIGHT ON`);
+            } else {
+              // Paragraph tidak sejajar = spotlight off
+              opacity = 0.2;
+              console.log(`Header ${headerIndex} active - Paragraph ${index} spotlight off`);
+            }
           } else {
-            // Header tidak sejajar - opacity turun
-            opacity = 0.3;
+            // Header tidak aktif = semua paragraph redup
+            opacity = 0.2;
+            console.log(`Header ${headerIndex} inactive - Paragraph ${index} redup`);
           }
           
-          // Update opacity dengan animasi smooth
           p.style.opacity = opacity.toString();
         });
       });
@@ -53,8 +78,20 @@ export function AboutSection4End() {
     // Initial update
     updateOpacityBasedOnAlignment();
 
-    // Update pada scroll
-    window.addEventListener('scroll', updateOpacityBasedOnAlignment, { passive: true });
+    // Throttled scroll handler untuk performa lebih baik
+    let ticking = false;
+    const scrollHandler = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          updateOpacityBasedOnAlignment();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    // Update pada scroll dengan throttling
+    window.addEventListener('scroll', scrollHandler, { passive: true });
     
     // Update pada resize
     window.addEventListener('resize', updateOpacityBasedOnAlignment, { passive: true });
@@ -78,11 +115,11 @@ export function AboutSection4End() {
       <section id="services" className="relative bg-surface-inverse px-6 z-10">
         {/* Container dengan height yang cukup untuk sticky effect */}
         <div className="min-h-[180vh] py-16">
-          <div className="w-full max-w-6xl mx-auto">
-            <div className="space-y-12">
+          <div className="mx-auto px-8">
+            <div className="space-y-16">
               {/* Social Media Marketing */}
-              <div className="flex flex-col lg:flex-row gap-8 min-h-[25vh]">
-                <div className="lg:w-1/3">
+              <div className="flex flex-col lg:flex-row gap-16 min-h-[25vh]">
+                <div className="lg:w-1/4">
                   <h3 
                     ref={(el) => { headerRefs.current[0] = el; }}
                     className="text-2xl md:text-3xl lg:text-4xl font-bold text-content-inverse sticky top-1/2 transform -translate-y-1/2"
@@ -92,7 +129,7 @@ export function AboutSection4End() {
                 </div>
                 <div 
                   ref={(el) => { contentRefs.current[0] = el; }}
-                  className="lg:w-2/3"
+                  className="lg:w-3/4"
                 >
                   <div className="space-y-8">
                     <p className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-content-inverse opacity-30 transition-opacity duration-300 font-bold">
@@ -109,8 +146,8 @@ export function AboutSection4End() {
               </div>
 
               {/* Content Creation */}
-              <div className="flex flex-col lg:flex-row gap-8 min-h-[60vh]">
-                <div className="lg:w-1/3">
+              <div className="flex flex-col lg:flex-row gap-16 min-h-[60vh]">
+                <div className="lg:w-1/4">
                   <h3 
                     ref={(el) => { headerRefs.current[1] = el; }}
                     className="text-2xl md:text-3xl lg:text-4xl font-bold text-content-inverse sticky top-1/2 transform -translate-y-1/2"
@@ -120,7 +157,7 @@ export function AboutSection4End() {
                 </div>
                 <div 
                   ref={(el) => { contentRefs.current[1] = el; }}
-                  className="lg:w-2/3"
+                  className="lg:w-3/4"
                 >
                   <div className="space-y-8">
                     <p className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-content-inverse opacity-30 transition-opacity duration-300 font-bold">
@@ -149,8 +186,8 @@ export function AboutSection4End() {
               </div>
 
               {/* Short-form Video Editing */}
-              <div className="flex flex-col lg:flex-row gap-8 min-h-[60vh]">
-                <div className="lg:w-1/3">
+              <div className="flex flex-col lg:flex-row gap-16 min-h-[60vh]">
+                <div className="lg:w-1/4">
                   <h3 
                     ref={(el) => { headerRefs.current[2] = el; }}
                     className="text-2xl md:text-3xl lg:text-4xl font-bold text-content-inverse sticky top-1/2 transform -translate-y-1/2"
@@ -160,7 +197,7 @@ export function AboutSection4End() {
                 </div>
                 <div 
                   ref={(el) => { contentRefs.current[2] = el; }}
-                  className="lg:w-2/3"
+                  className="lg:w-3/4"
                 >
                   <div className="space-y-8">
                     <p className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-content-inverse opacity-30 transition-opacity duration-300 font-bold">
