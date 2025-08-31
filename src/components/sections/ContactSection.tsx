@@ -55,7 +55,7 @@ export const ContactSection = () => {
                 className="text-content-primary flex items-center gap-3"
                 style={{fontSize: '3.5rem'}}
               >
-                <InstagramIcon size={56} />
+                <InstagramIcon size={32} />
                 Instagram
               </a>
               <a 
@@ -65,7 +65,7 @@ export const ContactSection = () => {
                 className="text-content-primary flex items-center gap-3"
                 style={{fontSize: '3.5rem'}}
               >
-                <LinkedInIcon size={56} />
+                <LinkedInIcon size={32} />
                 Linkedin
               </a>
             </div>
