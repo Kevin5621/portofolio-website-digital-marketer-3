@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { PillButton } from "@/components/ui/pill-button";
 
 export function NotFound() {
   return (
@@ -13,12 +13,13 @@ export function NotFound() {
         <p className="text-lg text-content-secondary mb-8 max-w-md">
           The archive item you&apos;re looking for doesn&apos;t exist or has been moved.
         </p>
-        <Link 
+        <PillButton 
+          variant="dark-to-light"
+          className="px-8 py-3"
           href="/archive"
-          className="inline-flex items-center justify-center px-8 py-3 bg-content-primary text-surface-background font-medium rounded-full hover:bg-content-secondary transition-colors duration-200"
         >
           Back to Archive
-        </Link>
+        </PillButton>
       </div>
     </div>
   );
