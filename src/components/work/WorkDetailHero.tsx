@@ -102,23 +102,32 @@ export const WorkDetailHero = ({ workDetail }: WorkDetailHeroProps) => {
           </div>
         </div>
 
-        {/* Logo - Separate layer with custom positioning */}
+        {/* Logo - Separate layer with responsive positioning */}
         <div className="relative">
           <div 
-            ref={logoParallaxRef}
-            className="absolute w-32 h-32 md:w-40 md:h-40 bg-surface-background rounded-full p-2 shadow-lg will-change-transform"
+            className="absolute w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 lg:w-36 lg:h-36 xl:w-40 xl:h-40 z-overlay"
             style={{
-              top: '-950px',
-              right: '50px',
-              zIndex: 20
+              top: 'calc(-85vh + 2rem)',
+              right: 'clamp(1rem, 3vw, 3rem)'
             }}
           >
-            <Image
-              src={`/work/${workDetail.id}/logo.webp`}
-              alt={`${workDetail.client} logo`}
-              fill
-              className="object-contain"
-            />
+            {/* Parallax wrapper untuk transform yang tidak konfliks dengan positioning */}
+            <div 
+              ref={logoParallaxRef}
+              className="w-full h-full bg-surface-background rounded-full shadow-lg will-change-transform overflow-hidden"
+            >
+              {/* Inner container untuk padding dan proper circular crop */}
+              <div className="w-full h-full p-2">
+                <div className="relative w-full h-full rounded-full overflow-hidden">
+                  <Image
+                    src={`/work/${workDetail.id}/logo.webp`}
+                    alt={`${workDetail.client} logo`}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
