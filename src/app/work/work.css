@@ -45,6 +45,7 @@
   font-size: 4vh;
   line-height: 1.2;
   padding: 1vh 1vw 0;
+  font-family: var(--font-inter), system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
 }
 
 .marquee__img {

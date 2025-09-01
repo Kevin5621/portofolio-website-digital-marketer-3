@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
+import { Poppins, Inter } from "next/font/google";
 import "./globals.css";
 import { ZoomCompensationProvider } from "@/components/layout/ZoomCompensationProvider";
 import { SmoothScrollProvider } from "@/components/layout/SmoothScrollProvider";
@@ -8,6 +8,13 @@ import { Header } from "@/components/layout/Header";
 
 const poppins = Poppins({
   variable: "--font-poppins",
+  subsets: ["latin"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  display: "swap",
+});
+
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
   display: "swap",
@@ -26,7 +33,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${poppins.variable} antialiased font-poppins`}
+        className={`${poppins.variable} ${inter.variable} antialiased font-poppins`}
       >
         <IntroSlideUp />
         <ZoomCompensationProvider defaultEnabled={true} smoothTransition={true}>
