@@ -24,17 +24,16 @@ export const a5xStudioData: WorkDetail = {
     "Proficient in premier video editing tools like Adobe Premiere Pro and CapCut",
     "Mastered advanced techniques like color grading, motion graphics, and audio enhancement"
   ],
-
   creativeProjects: [
     {
       title: "Talking Head Video Portfolio",
       description: "Collection of high-quality talking head videos showcasing various editing styles and techniques",
-      image: "/work/a5x-studio/talking-head-portfolio.png"
+      image: "/work/a5x-studio/hero.webp"
     },
     {
       title: "Video Editing Workflow",
       description: "Optimized editing processes and templates for efficient talking head video production",
-      image: "/work/a5x-studio/editing-workflow.png"
+      image: "/work/a5x-studio/logo.webp"
     }
   ]
 };

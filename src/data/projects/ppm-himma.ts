@@ -34,12 +34,27 @@ export const ppmHimmaData: WorkDetail = {
     {
       title: "Event Information Designs",
       description: "Clear and engaging visual materials to communicate important information to new students",
-      image: "/work/ppm-himma/info-designs.png"
+      image: "/work/ppm-himma-2025/2.webp"
     },
     {
       title: "Event Documentation",
       description: "Comprehensive photo and video documentation capturing key moments of the PPM 2025 event",
-      image: "/work/ppm-himma/event-docs.png"
+      image: "/work/ppm-himma-2025/3.webp"
+    },
+    {
+      title: "Student Welcome Materials",
+      description: "Visual materials designed to welcome and guide new students through their academic journey",
+      image: "/work/ppm-himma-2025/4.webp"
+    },
+    {
+      title: "Vertical Content Format",
+      description: "Optimized content format for mobile viewing and social media engagement",
+      image: "/work/ppm-himma-2025/Export Vertical.webp"
+    },
+    {
+      title: "Event Highlights",
+      description: "Key moments and highlights from the PPM 2025 event captured in visual format",
+      image: "/work/ppm-himma-2025/Export 11.webp"
     }
   ]
 };

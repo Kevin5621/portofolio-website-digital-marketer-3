@@ -29,17 +29,16 @@ export const genzummitData: WorkDetail = {
     "I communicated with the interviewees to make sure I respected their time while getting the best content possible.",
     "Despite the busy environment and tight deadlines, I was able to deliver high-quality content on time and ready for social media."
   ],
-
   creativeProjects: [
     {
       title: "Event Interview Videos",
       description: "Quickly edited interview content capturing participant insights and event energy for social media",
-      image: "/work/genzummit/interview-videos.png"
+      image: "/work/genzummit/hero.webp"
     },
     {
       title: "Behind-the-Scenes Content",
       description: "Real-time content creation showcasing the fast-paced environment and participant engagement",
-      image: "/work/genzummit/behind-scenes.png"
+      image: "/work/genzummit/logo.webp"
     }
   ]
 };

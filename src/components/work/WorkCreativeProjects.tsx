@@ -3,7 +3,7 @@
 import Image from "next/image";
 
 interface WorkCreativeProjectsProps {
-  projects: {
+  projects?: {
     title: string;
     description: string;
     image: string;
@@ -11,6 +11,10 @@ interface WorkCreativeProjectsProps {
 }
 
 export const WorkCreativeProjects = ({ projects }: WorkCreativeProjectsProps) => {
+  if (!projects || projects.length === 0) {
+    return null;
+  }
+
   return (
     <section className="py-24 bg-surface-background">
       <div className="max-w-[95vw] mx-auto px-6">
@@ -23,13 +27,13 @@ export const WorkCreativeProjects = ({ projects }: WorkCreativeProjectsProps) =>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {projects.map((project, index) => (
             <div key={project.image} className="group">
-              <div className="aspect-square bg-surface-secondary rounded-lg overflow-hidden group-hover:scale-105 transition-transform duration-300">
+              <div className="aspect-square rounded-lg overflow-hidden group-hover:scale-105 transition-transform duration-300">
                 <Image
                   src={project.image}
                   alt={`Creative project ${index + 1}`}
                   width={300}
                   height={300}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-contain"
                 />
               </div>
             </div>

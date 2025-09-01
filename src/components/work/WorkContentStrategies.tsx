@@ -53,13 +53,13 @@ export const WorkContentStrategies = ({ strategies, bestContent }: WorkContentSt
               
               <div className="grid grid-cols-3 gap-4">
                 {strategies[0].images.map((image, index) => (
-                  <div key={`${image}-${index}`} className="aspect-square bg-surface-secondary rounded-lg overflow-hidden">
+                  <div key={`${image}-${index}`} className="aspect-square rounded-lg overflow-hidden">
                     <Image
                       src={image}
                       alt={`${strategies[0].title} ${index + 1}`}
                       width={200}
                       height={200}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-contain"
                     />
                   </div>
                 ))}
@@ -84,13 +84,13 @@ export const WorkContentStrategies = ({ strategies, bestContent }: WorkContentSt
             <div className="grid grid-cols-2 gap-6">
               {bestContent.videos.map((video, index) => (
                 <div key={video.image} className="flex gap-4">
-                  <div className="w-50 h-64 bg-surface-secondary rounded-lg overflow-hidden flex-shrink-0">
+                  <div className="aspect-square rounded-lg overflow-hidden flex-shrink-0">
                     <Image
                       src={video.image}
                       alt={`${bestContent.title} ${index + 1}`}
-                      width={96}
-                      height={128}
-                      className="w-full h-full object-cover"
+                      width={200}
+                      height={200}
+                      className="w-full h-full object-contain"
                     />
                   </div>
                   <div className="flex flex-col justify-center space-y-1 text-sm">
@@ -123,13 +123,13 @@ export const WorkContentStrategies = ({ strategies, bestContent }: WorkContentSt
               <div className="grid grid-cols-2 gap-4">
                 {strategies[1].images.map((image, index) => (
                   <div key={`${image}-${index}`} className="space-y-2">
-                    <div className="aspect-[9/16] bg-surface-secondary rounded-lg overflow-hidden">
+                    <div className="aspect-[9/16] rounded-lg overflow-hidden">
                       <Image
                         src={image}
                         alt={`${strategies[1].title} ${index + 1}`}
                         width={250}
                         height={444}
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-contain"
                       />
                     </div>
                     <p className="text-center text-sm text-content-tertiary font-medium">

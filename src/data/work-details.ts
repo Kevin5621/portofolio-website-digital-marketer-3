@@ -54,7 +54,7 @@ export interface WorkDetail {
       };
     }[];
   };
-  creativeProjects: {
+  creativeProjects?: {
     title: string;
     description: string;
     image: string;

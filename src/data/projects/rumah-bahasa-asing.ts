@@ -63,12 +63,12 @@ export const rumahBahasaAsingData: WorkDetail = {
     {
       title: "Korean Daily Phrases Series",
       description: "I created a mix of educational and fun content about Korean laguage. I made videos to educate and engage, makes language based content for credibility, and shared information about Korean culture content to encourage people to learn Korean Language.",
-      images: ["/work/rumah-bahasa-asing/strategy-1.png", "/work/rumah-bahasa-asing/strategy-2.png", "/work/rumah-bahasa-asing/strategy-3.png"]
+      images: ["/work/rumah-bahasa-asing/foto1.webp", "/work/rumah-bahasa-asing/foto2.webp", "/work/rumah-bahasa-asing/foto3.webp"]
     },
     {
       title: "Cultural Integration Content",
       description: "I changed the layout of the TikTok and Instagram feed to make it more consistent and cleaner, so the content looks nicer and is easier to enjoy.",
-      images: ["/work/rumah-bahasa-asing/strategy-4.png", "/work/rumah-bahasa-asing/strategy-5.png", "/work/rumah-bahasa-asing/strategy-6.png"]
+      images: ["/work/rumah-bahasa-asing/before.webp", "/work/rumah-bahasa-asing/after.webp"]
     }
   ],
   bestContent: {
@@ -76,13 +76,23 @@ export const rumahBahasaAsingData: WorkDetail = {
     description: "The best content that was really successful was a language based content that encouraged people to learn Korean language. Another viral video was an Informative content.",
     videos: [
       {
-        image: "/work/rumah-bahasa-asing/best-content.png",
+        image: "/work/rumah-bahasa-asing/foto2.webp",
         stats: {
-          views: "2.1M",
-          engagement: "150K",
-          reach: "85K",
-          comments: "12K",
-          saves: "45K"
+          views: "68K",
+          engagement: "4K",
+          reach: "7",
+          comments: "143",
+          saves: "2K"
+        }
+      },
+      {
+        image: "/work/rumah-bahasa-asing/foto6.webp",
+        stats: {
+          views: "52K",
+          engagement: "1K",
+          reach: "3",
+          comments: "20",
+          saves: "317"
         }
       }
     ]
@@ -91,12 +101,37 @@ export const rumahBahasaAsingData: WorkDetail = {
     {
       title: "Korean Language Learning App UI",
       description: "Designed user interface concepts for a mobile learning application to complement the online courses.",
-      image: "/work/rumah-bahasa-asing/app-ui.png"
+      image: "/work/rumah-bahasa-asing/foto1.webp"
     },
     {
       title: "Student Success Campaign",
       description: "Created a campaign showcasing students who successfully learned Korean through RBA, inspiring new enrollments.",
-      image: "/work/rumah-bahasa-asing/success-campaign.png"
+      image: "/work/rumah-bahasa-asing/foto3.webp"
+    },
+    {
+      title: "Educational Content Series",
+      description: "Comprehensive educational materials for Korean language learning.",
+      image: "/work/rumah-bahasa-asing/foto4.webp"
+    },
+    {
+      title: "Interactive Learning Materials",
+      description: "Engaging visual content for interactive Korean language education.",
+      image: "/work/rumah-bahasa-asing/foto5.webp"
+    },
+    {
+      title: "Cultural Integration Content",
+      description: "Content that combines language learning with Korean cultural insights.",
+      image: "/work/rumah-bahasa-asing/foto7.webp"
+    },
+    {
+      title: "Social Media Campaign Design",
+      description: "Visual campaign materials for Korean language learning awareness.",
+      image: "/work/rumah-bahasa-asing/foto8.webp"
+    },
+    {
+      title: "Community Engagement Content",
+      description: "Behind-the-scenes content building trust and connection with learners.",
+      image: "/work/rumah-bahasa-asing/foto9.webp"
     }
   ],
   nextProject: {

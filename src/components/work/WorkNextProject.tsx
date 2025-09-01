@@ -86,7 +86,7 @@ export const WorkNextProject = ({ nextProject }: WorkNextProjectProps) => {
             
             {/* Hero Image */}
             <div className="relative w-full max-w-md mx-auto mb-12 z-20">
-              <div className="aspect-video bg-surface-secondary rounded-lg overflow-hidden group-hover:scale-105 transition-transform duration-300">
+              <div className="aspect-video rounded-lg overflow-hidden group-hover:scale-105 transition-transform duration-300">
                 <Image
                   src={getHeroImagePath(nextProject.id)}
                   alt={`${nextProject.title} hero image`}

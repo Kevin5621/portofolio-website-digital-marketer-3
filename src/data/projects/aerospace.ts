@@ -32,14 +32,19 @@ export const aerospaceData: WorkDetail = {
   specialText: "Even though the project was paused due to my academic commitments, I successfully created a library of designs and videos that reflected Aerospace's premium identity. This project shows my ability to combine strategic thinking, creative design, and effective communication into a cohesive branding effort.",
   creativeProjects: [
     {
-      title: "Space Exploration Learning App",
-      description: "Designed the complete user interface for a mobile application teaching space exploration concepts to middle school students.",
-      image: "/work/aerospace/learning-app.png"
+      title: "Premium Underwear Design",
+      description: "Designed premium underwear products with focus on comfort and style for various activities.",
+      image: "/work/aerospace/1.webp"
     },
     {
-      title: "Aerospace Career Guide",
-      description: "Created a comprehensive visual guide showcasing various career paths in the aerospace industry for students.",
-      image: "/work/aerospace/career-guide.png"
+      title: "Brand Identity Design",
+      description: "Created comprehensive visual guide showcasing Aerospace's premium brand identity and product range.",
+      image: "/work/aerospace/2.webp"
+    },
+    {
+      title: "Vertical Content Format",
+      description: "Optimized content format for mobile viewing and social media engagement.",
+      image: "/work/aerospace/Export Vertical.webp"
     }
   ]
 };

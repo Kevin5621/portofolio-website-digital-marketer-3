@@ -34,12 +34,12 @@ export const binjasimmenSamaptaData: WorkDetail = {
     {
       title: "Educational & Fun Content Mix",
       description: "I focused on creating testimonial videos and congratulations designs for Instagram, along with carousel designs that shared key information. For TikTok, I made short, informative videos to engage the audience with useful tips.",
-      images: ["/work/binjasiimen-samapta/strategy-1.png", "/work/binjasiimen-samapta/strategy-2.png", "/work/binjasiimen-samapta/strategy-3.png"]
+      images: ["/work/binjasiimen-samapta/1.webp", "/work/binjasiimen-samapta/2.webp", "/work/binjasiimen-samapta/3.webp"]
     },
     {
       title: "Consistent & Clean Feed Layout",
       description: "I propose the layout of the Instagram feed to make it more consistent and cleaner, so the content looks nicer and is easier to enjoy.",
-      images: ["/work/binjasiimen-samapta/strategy-4.png", "/work/binjasiimen-samapta/strategy-5.png", "/work/binjasiimen-samapta/strategy-6.png"]
+      images: ["/work/binjasiimen-samapta/4.webp", "/work/binjasiimen-samapta/5.webp", "/work/binjasiimen-samapta/6.webp"]
     }
   ],
   bestContent: {
@@ -47,7 +47,7 @@ export const binjasimmenSamaptaData: WorkDetail = {
     description: "The best performing content on Instagram was the carousel designs. On TikTok, the short videos performed best, quickly delivering helpful info and boosting engagement.",
     videos: [
       {
-        image: "/work/binjasiimen-samapta/best-content-1.png",
+        image: "/work/binjasiimen-samapta/7.webp",
         stats: {
           views: "101K",
           engagement: "4K",
@@ -57,7 +57,7 @@ export const binjasimmenSamaptaData: WorkDetail = {
         }
       },
       {
-        image: "/work/binjasiimen-samapta/best-content-2.png",
+        image: "/work/binjasiimen-samapta/8.webp",
         stats: {
           views: "757K",
           engagement: "11K",
@@ -70,14 +70,54 @@ export const binjasimmenSamaptaData: WorkDetail = {
   },
   creativeProjects: [
     {
-      title: "Korean Daily Phrases Series",
-      description: "Created engaging videos teaching practical Korean phrases for everyday situations, making language learning accessible and fun.",
-      image: "/work/binjasiimen-samapta/korean-series.png"
+      title: "Educational Content Series",
+      description: "Comprehensive educational materials for test preparation and success stories.",
+      image: "/work/binjasiimen-samapta/1.webp"
     },
     {
-      title: "Cultural Integration Content",
-      description: "Developed content that combines Korean language learning with cultural insights, including K-pop references and Korean customs.",
-      image: "/work/binjasiimen-samapta/cultural-campaign.png"
+      title: "Student Success Campaign",
+      description: "Created a campaign showcasing students who successfully passed entrance exams.",
+      image: "/work/binjasiimen-samapta/2.webp"
+    },
+    {
+      title: "Test Preparation Materials",
+      description: "Engaging visual content for test preparation and study guides.",
+      image: "/work/binjasiimen-samapta/3.webp"
+    },
+    {
+      title: "Motivational Content",
+      description: "Content that inspires and motivates students to achieve their goals.",
+      image: "/work/binjasiimen-samapta/4.webp"
+    },
+    {
+      title: "Study Tips and Strategies",
+      description: "Visual materials sharing effective study techniques and strategies.",
+      image: "/work/binjasiimen-samapta/5.webp"
+    },
+    {
+      title: "Alumni Success Stories",
+      description: "Showcasing successful alumni and their journey to success.",
+      image: "/work/binjasiimen-samapta/6.webp"
+    },
+    {
+      title: "Interactive Learning Content",
+      description: "Engaging content that makes learning fun and interactive.",
+      image: "/work/binjasiimen-samapta/7.webp"
+    },
+    {
+      title: "Community Engagement",
+      description: "Content that builds community and encourages peer support.",
+      image: "/work/binjasiimen-samapta/8.webp"
+    },
+    {
+      title: "Comprehensive Study Guide",
+      description: "Complete visual guide for comprehensive exam preparation.",
+      image: "/work/binjasiimen-samapta/9.webp"
+    },
+    {
+      title: "Vertical Content Format",
+      description: "Optimized content format for mobile viewing and engagement.",
+      image: "/work/binjasiimen-samapta/Export Vertical.webp"
     }
   ],
   nextProject: {
