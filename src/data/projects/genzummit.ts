@@ -33,12 +33,22 @@ export const genzummitData: WorkDetail = {
     {
       title: "Event Interview Videos",
       description: "Quickly edited interview content capturing participant insights and event energy for social media",
-      image: "/work/genzummit/hero.webp"
+      image: "/work/genzummit/Export Vertical (1).webm"
     },
     {
       title: "Behind-the-Scenes Content",
       description: "Real-time content creation showcasing the fast-paced environment and participant engagement",
-      image: "/work/genzummit/logo.webp"
+      image: "/work/genzummit/Export Vertical (2).webm"
+    },
+    {
+      title: "Participant Engagement",
+      description: "Engaging content that captures the energy and excitement of the GenZummit event",
+      image: "/work/genzummit/Export Vertical (3).webm"
+    },
+    {
+      title: "Enhanced Video Editing",
+      description: "Re-edited footage with enhanced style and new short-form video editing techniques",
+      image: "/work/genzummit/Export Vertical (4).webm"
     }
   ]
 };

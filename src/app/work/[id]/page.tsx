@@ -74,7 +74,7 @@ export default function WorkDetailPage() {
         />
       ) : null}
       
-      <WorkCreativeProjects projects={workDetail.creativeProjects} />
+      <WorkCreativeProjects projects={workDetail.creativeProjects} projectId={id} />
       {nextProject && <WorkNextProject nextProject={nextProject} />}
     </main>
   );

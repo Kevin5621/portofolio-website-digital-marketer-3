@@ -25,6 +25,10 @@ interface WorkContentStrategiesProps {
 }
 
 export const WorkContentStrategies = ({ strategies, bestContent }: WorkContentStrategiesProps) => {
+  const isVideo = (url: string) => {
+    return url.includes('.webm') || url.includes('.mp4') || url.includes('.mov');
+  };
+
   return (
     <section className="py-24 bg-surface-background">
       <div className="max-w-[95vw] mx-auto px-6">
@@ -54,13 +58,22 @@ export const WorkContentStrategies = ({ strategies, bestContent }: WorkContentSt
               <div className="grid grid-cols-3 gap-4">
                 {strategies[0].images.map((image, index) => (
                   <div key={`${image}-${index}`} className="aspect-square rounded-lg overflow-hidden">
-                    <Image
-                      src={image}
-                      alt={`${strategies[0].title} ${index + 1}`}
-                      width={200}
-                      height={200}
-                      className="w-full h-full object-contain"
-                    />
+                    {isVideo(image) ? (
+                      <video
+                        src={image}
+                        className="w-full h-full object-contain"
+                        controls
+                        muted
+                      />
+                    ) : (
+                      <Image
+                        src={image}
+                        alt={`${strategies[0].title} ${index + 1}`}
+                        width={200}
+                        height={200}
+                        className="w-full h-full object-contain"
+                      />
+                    )}
                   </div>
                 ))}
               </div>
@@ -124,13 +137,22 @@ export const WorkContentStrategies = ({ strategies, bestContent }: WorkContentSt
                 {strategies[1].images.map((image, index) => (
                   <div key={`${image}-${index}`} className="space-y-2">
                     <div className="aspect-[9/16] rounded-lg overflow-hidden">
-                      <Image
-                        src={image}
-                        alt={`${strategies[1].title} ${index + 1}`}
-                        width={250}
-                        height={444}
-                        className="w-full h-full object-contain"
-                      />
+                      {isVideo(image) ? (
+                        <video
+                          src={image}
+                          className="w-full h-full object-contain"
+                          controls
+                          muted
+                        />
+                      ) : (
+                        <Image
+                          src={image}
+                          alt={`${strategies[1].title} ${index + 1}`}
+                          width={250}
+                          height={444}
+                          className="w-full h-full object-contain"
+                        />
+                      )}
                     </div>
                     <p className="text-center text-sm text-content-tertiary font-medium">
                       {index === 0 ? "Before" : "After"}

@@ -39,7 +39,7 @@ export const binjasimmenSamaptaData: WorkDetail = {
     {
       title: "Consistent & Clean Feed Layout",
       description: "I propose the layout of the Instagram feed to make it more consistent and cleaner, so the content looks nicer and is easier to enjoy.",
-      images: ["/work/binjasiimen-samapta/4.webp", "/work/binjasiimen-samapta/5.webp", "/work/binjasiimen-samapta/6.webp"]
+      images: ["/work/binjasiimen-samapta/Export Vertical.webm", "/work/binjasiimen-samapta/Export Vertical (1).webm"]
     }
   ],
   bestContent: {
@@ -47,7 +47,7 @@ export const binjasimmenSamaptaData: WorkDetail = {
     description: "The best performing content on Instagram was the carousel designs. On TikTok, the short videos performed best, quickly delivering helpful info and boosting engagement.",
     videos: [
       {
-        image: "/work/binjasiimen-samapta/7.webp",
+        image: "/work/binjasiimen-samapta/4.webp",
         stats: {
           views: "101K",
           engagement: "4K",
@@ -57,7 +57,7 @@ export const binjasimmenSamaptaData: WorkDetail = {
         }
       },
       {
-        image: "/work/binjasiimen-samapta/8.webp",
+        image: "/work/binjasiimen-samapta/3.webp",
         stats: {
           views: "757K",
           engagement: "11K",
