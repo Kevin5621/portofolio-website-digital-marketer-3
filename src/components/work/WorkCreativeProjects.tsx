@@ -38,8 +38,8 @@ export const WorkCreativeProjects = ({ projects, projectId }: WorkCreativeProjec
           {/* First 3 videos */}
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
             {firstThreeVideos.map((project) => (
-              <div key={project.image} className="group">
-                <div className="aspect-[9/16] rounded-lg overflow-hidden group-hover:scale-105 transition-transform duration-300">
+              <div key={project.image}>
+                <div className="aspect-[9/16] rounded-lg overflow-hidden">
                   <video
                     src={project.image}
                     className="w-full h-full object-cover"
@@ -61,8 +61,8 @@ export const WorkCreativeProjects = ({ projects, projectId }: WorkCreativeProjec
           {/* Last video */}
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {lastVideo.map((project) => (
-              <div key={project.image} className="group">
-                <div className="aspect-[9/16] rounded-lg overflow-hidden group-hover:scale-105 transition-transform duration-300">
+              <div key={project.image}>
+                <div className="aspect-[9/16] rounded-lg overflow-hidden">
                   <video
                     src={project.image}
                     className="w-full h-full object-cover"
@@ -89,8 +89,8 @@ export const WorkCreativeProjects = ({ projects, projectId }: WorkCreativeProjec
         
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {projects.map((project, index) => (
-            <div key={project.image} className="group">
-              <div className="aspect-square rounded-lg overflow-hidden group-hover:scale-105 transition-transform duration-300">
+            <div key={project.image}>
+              <div className="aspect-square rounded-lg overflow-hidden">
                 {isVideo(project.image) ? (
                   <video
                     src={project.image}
