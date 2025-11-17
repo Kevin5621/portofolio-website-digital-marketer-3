@@ -130,7 +130,7 @@ const ProjectSection = ({ project }: { project: Project }) => {
             
             {/* Category and button positioned below title */}
             <div className="space-y-4">
-              <p className="text-content-inverse text-xl font-normal">
+              <p className="text-content-inverse text-xl font-normal pb-8 pt-8">
                 {category}
               </p>
               <PillButton 
