@@ -1,104 +1,158 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { gsap, ScrollTrigger } from "@/lib/animations/gsap";
 
 export function AboutSection4End() {
   const headerRefs = useRef<(HTMLHeadingElement | null)[]>([]);
   const contentRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const scrollTriggersRef = useRef<ScrollTrigger[]>([]);
 
   useEffect(() => {
-    const headers = headerRefs.current;
     const contents = contentRefs.current;
 
-    // Function untuk update opacity berdasarkan alignment
-    const updateOpacityBasedOnAlignment = () => {
-      headers.forEach((header, headerIndex) => {
-        if (!header) return;
-        
-        const content = contents[headerIndex];
-        if (!content) return;
+    // Cleanup previous ScrollTriggers
+    scrollTriggersRef.current.forEach(trigger => trigger.kill());
+    scrollTriggersRef.current = [];
 
-        // Dapatkan semua elemen p dalam content
-        const paragraphs = content.querySelectorAll('p');
-        if (paragraphs.length === 0) return;
+    // Kumpulkan semua paragraph dari semua section
+    const allParagraphs: HTMLElement[] = [];
+    contents.forEach((content) => {
+      if (!content) return;
+      const paragraphs = content.querySelectorAll('p');
+      paragraphs.forEach((p) => {
+        allParagraphs.push(p as HTMLElement);
+        // Set initial state (0% - tidak aktif)
+        gsap.set(p, {
+          opacity: 0.2,
+          filter: 'blur(10px)',
+          x: '0%',
+        });
+      });
+    });
 
-        // Hitung posisi header
-        const headerRect = header.getBoundingClientRect();
-        const headerCenter = headerRect.top + headerRect.height / 2;
+    if (allParagraphs.length === 0) return;
+
+    // Helper function untuk menghitung progress berdasarkan jarak dari tengah viewport
+    const calculateProgress = (element: HTMLElement): number => {
+      const rect = element.getBoundingClientRect();
+      const elementCenter = rect.top + rect.height / 2;
+      const viewportCenter = window.innerHeight / 2;
+      
+      // Hitung jarak dari tengah viewport
+      const distance = Math.abs(elementCenter - viewportCenter);
+      
+      // Jarak maksimum untuk transisi (semakin besar, semakin smooth)
+      const maxDistance = 400;
+      
+      // Hitung progress: 1 saat di tengah, 0 saat jauh
+      // Gunakan inverse relationship: semakin dekat, semakin besar progress
+      let progress = 1 - Math.min(distance / maxDistance, 1);
+      
+      // Clamp progress antara 0 dan 1
+      progress = Math.max(0, Math.min(1, progress));
+      
+      return progress;
+    };
+
+    // Helper function untuk interpolasi nilai berdasarkan progress
+    const interpolateValues = (progress: number) => {
+      // 0%: blur(10px), translate(0px), opacity: 0.2
+      // 50%: blur(3.8327px), translate(3.0837%, 0%), opacity: 0.6934
+      // 100%: blur(0.0125px), translate(4.9937%, 0%), opacity: 0.999
+      
+      // Linear interpolation untuk blur
+      let blur: number;
+      if (progress <= 0.5) {
+        // 0% to 50%
+        const t = progress / 0.5;
+        blur = 10 + (3.8327 - 10) * t;
+      } else {
+        // 50% to 100%
+        const t = (progress - 0.5) / 0.5;
+        blur = 3.8327 + (0.0125 - 3.8327) * t;
+      }
+      
+      // Linear interpolation untuk translateX (dalam persentase)
+      let translateX: number;
+      if (progress <= 0.5) {
+        // 0% to 50%
+        const t = progress / 0.5;
+        translateX = 0 + (3.0837 - 0) * t;
+      } else {
+        // 50% to 100%
+        const t = (progress - 0.5) / 0.5;
+        translateX = 3.0837 + (4.9937 - 3.0837) * t;
+      }
+      
+      // Linear interpolation untuk opacity
+      let opacity: number;
+      if (progress <= 0.5) {
+        // 0% to 50%
+        const t = progress / 0.5;
+        opacity = 0.2 + (0.6934 - 0.2) * t;
+      } else {
+        // 50% to 100%
+        const t = (progress - 0.5) / 0.5;
+        opacity = 0.6934 + (0.999 - 0.6934) * t;
+      }
+      
+      return { blur, translateX, opacity };
+    };
+
+    // Function untuk update semua paragraph berdasarkan posisi mereka
+    const updateAllParagraphs = () => {
+      allParagraphs.forEach((paragraph) => {
+        const progress = calculateProgress(paragraph);
+        const { blur, translateX, opacity } = interpolateValues(progress);
         
-        // Cari header mana yang paling aktif (paling dekat dengan tengah viewport)
-        let mostActiveHeader = -1;
-        let minDistance = Infinity;
-        
-        headers.forEach((h, hIndex) => {
-          if (h) {
-            const hRect = h.getBoundingClientRect();
-            const hCenter = hRect.top + hRect.height / 2;
-            const viewportCenter = window.innerHeight / 2;
-            const distance = Math.abs(hCenter - viewportCenter);
-            
-            if (distance < minDistance) {
-              minDistance = distance;
-              mostActiveHeader = hIndex;
-            }
-          }
-        });
-        
-        console.log(`Most active header: ${mostActiveHeader}, Current header: ${headerIndex}`);
-        
-        // Update opacity: hanya header yang paling aktif yang dapat spotlight
-        paragraphs.forEach((p, index) => {
-          let opacity;
-          if (headerIndex === mostActiveHeader) {
-            // Header ini yang paling aktif - cari paragraph yang sejajar
-            const pRect = p.getBoundingClientRect();
-            const pCenter = pRect.top + pRect.height / 2;
-            const distance = Math.abs(headerCenter - pCenter);
-            
-            if (distance <= 80) {
-              // Paragraph sejajar dengan header aktif = spotlight on
-              opacity = 1;
-              console.log(`Header ${headerIndex} active - Paragraph ${index} SPOTLIGHT ON`);
-            } else {
-              // Paragraph tidak sejajar = spotlight off
-              opacity = 0.2;
-              console.log(`Header ${headerIndex} active - Paragraph ${index} spotlight off`);
-            }
-          } else {
-            // Header tidak aktif = semua paragraph redup
-            opacity = 0.2;
-            console.log(`Header ${headerIndex} inactive - Paragraph ${index} redup`);
-          }
-          
-          p.style.opacity = opacity.toString();
-        });
+        // Apply values dengan transform string untuk persentase
+        paragraph.style.opacity = opacity.toString();
+        paragraph.style.filter = `blur(${blur}px)`;
+        paragraph.style.transform = `translate(${translateX}%, 0%) translate3d(0px, 0px, 0px)`;
       });
     };
 
-    // Initial update
-    updateOpacityBasedOnAlignment();
+    // Create ScrollTrigger untuk section services yang akan update semua paragraph
+    const servicesSection = document.getElementById('services');
+    if (servicesSection) {
+      const trigger = ScrollTrigger.create({
+        trigger: servicesSection,
+        start: 'top bottom',
+        end: 'bottom top',
+        onUpdate: updateAllParagraphs,
+        onEnter: updateAllParagraphs,
+        onLeave: updateAllParagraphs,
+        onEnterBack: updateAllParagraphs,
+        onLeaveBack: updateAllParagraphs,
+      });
 
-    // Throttled scroll handler untuk performa lebih baik
+      scrollTriggersRef.current.push(trigger);
+    }
+
+    // Initial update
+    updateAllParagraphs();
+
+    // Update on scroll dengan throttling untuk performa
     let ticking = false;
     const scrollHandler = () => {
       if (!ticking) {
         requestAnimationFrame(() => {
-          updateOpacityBasedOnAlignment();
+          updateAllParagraphs();
           ticking = false;
         });
         ticking = true;
       }
     };
 
-    // Update pada scroll dengan throttling
     window.addEventListener('scroll', scrollHandler, { passive: true });
-    
-    // Update pada resize
-    window.addEventListener('resize', updateOpacityBasedOnAlignment, { passive: true });
+    window.addEventListener('resize', updateAllParagraphs, { passive: true });
 
     return () => {
-      window.removeEventListener('scroll', updateOpacityBasedOnAlignment);
-      window.removeEventListener('resize', updateOpacityBasedOnAlignment);
+      scrollTriggersRef.current.forEach(trigger => trigger.kill());
+      scrollTriggersRef.current = [];
+      window.removeEventListener('scroll', scrollHandler);
+      window.removeEventListener('resize', updateAllParagraphs);
     };
   }, []);
 
@@ -131,14 +185,14 @@ export function AboutSection4End() {
                   ref={(el) => { contentRefs.current[0] = el; }}
                   className="lg:w-3/4"
                 >
-                  <div className="space-y-8">
-                    <p className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-content-inverse opacity-30 transition-opacity duration-300 font-bold">
+                  <div>
+                    <p className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-content-inverse font-bold">
                       Social Media Strategy
                     </p>
-                    <p className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-content-inverse opacity-30 transition-opacity duration-300 font-bold">
+                    <p className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-content-inverse font-bold">
                       Analytics & Insights
                     </p>
-                    <p className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-content-inverse opacity-30 transition-opacity duration-300 font-bold">
+                    <p className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-content-inverse font-bold">
                       Campaign Management
                     </p>
                   </div>
@@ -159,26 +213,26 @@ export function AboutSection4End() {
                   ref={(el) => { contentRefs.current[1] = el; }}
                   className="lg:w-3/4"
                 >
-                  <div className="space-y-8">
-                    <p className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-content-inverse opacity-30 transition-opacity duration-300 font-bold">
+                  <div>
+                    <p className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-content-inverse font-bold">
                       Graphic Design
                     </p>
-                    <p className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-content-inverse opacity-30 transition-opacity duration-300 font-bold">
+                    <p className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-content-inverse font-bold">
                       Copywriting
                     </p>
-                    <p className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-content-inverse opacity-30 transition-opacity duration-300 font-bold">
+                    <p className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-content-inverse font-bold">
                       Storytelling
                     </p>
-                    <p className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-content-inverse opacity-30 transition-opacity duration-300 font-bold">
+                    <p className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-content-inverse font-bold">
                       Photography
                     </p>
-                    <p className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-content-inverse opacity-30 transition-opacity duration-300 font-bold">
+                    <p className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-content-inverse font-bold">
                       Videography
                     </p>
-                    <p className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-content-inverse opacity-30 transition-opacity duration-300 font-bold">
+                    <p className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-content-inverse font-bold">
                       Branding
                     </p>
-                    <p className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-content-inverse opacity-30 transition-opacity duration-300 font-bold">
+                    <p className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-content-inverse font-bold">
                       Visual Identity
                     </p>
                   </div>
@@ -199,23 +253,23 @@ export function AboutSection4End() {
                   ref={(el) => { contentRefs.current[2] = el; }}
                   className="lg:w-3/4"
                 >
-                  <div className="space-y-8">
-                    <p className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-content-inverse opacity-30 transition-opacity duration-300 font-bold">
+                  <div>
+                    <p className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-content-inverse font-bold">
                       Editing
                     </p>
-                    <p className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-content-inverse opacity-30 transition-opacity duration-300 font-bold">
+                    <p className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-content-inverse font-bold">
                       Post-production
                     </p>
-                    <p className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-content-inverse opacity-30 transition-opacity duration-300 font-bold">
+                    <p className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-content-inverse font-bold">
                       Motion Graphics
                     </p>
-                    <p className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-content-inverse opacity-30 transition-opacity duration-300 font-bold">
+                    <p className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-content-inverse font-bold">
                       Color Grading
                     </p>
-                    <p className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-content-inverse opacity-30 transition-opacity duration-300 font-bold">
+                    <p className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-content-inverse font-bold">
                       Sound Design
                     </p>
-                    <p className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-content-inverse opacity-30 transition-opacity duration-300 font-bold">
+                    <p className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-content-inverse font-bold">
                       Video Optimization
                     </p>
                   </div>
