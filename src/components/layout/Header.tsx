@@ -191,6 +191,11 @@ export const Header = () => {
       return { isDark: true }
     }
     
+    // Project sections dengan gambar - Variant terang untuk navbar (prioritas tinggi)
+    if (sectionId === 'ortist-specialist' || sectionId === 'rumah-bahasa-asing' || sectionId === 'binjasiimen-samapta') {
+      return { isDark: false }
+    }
+    
     // Project sections - Background dengan gambar (light theme untuk burger)
     if (sectionId === 'project-1' || sectionId === 'project-2' || sectionId === 'project-3') {
       return { isDark: false }
@@ -241,6 +246,7 @@ export const Header = () => {
   // Logika untuk menampilkan menu berdasarkan section aktif
   // Menu text hanya muncul di home section, di section lain transform menjadi burger
   const isHomeSection = activeSection === 'home' || activeSection === 'hello' || activeSection === ''
+  const isSelectedWorksProjectSection = activeSection === 'ortist-specialist' || activeSection === 'rumah-bahasa-asing' || activeSection === 'binjasiimen-samapta'
   const isProjectSection = activeSection === 'project-1' || activeSection === 'project-2' || activeSection === 'project-3'
   const isAboutSection = activeSection === 'about' || activeSection === 'about-section'
   const isContactSection = activeSection === 'contact'
@@ -250,13 +256,21 @@ export const Header = () => {
                                    activeSection === 'about-section-5' || activeSection === 'finally' ||
                                    activeSection === 'flexible-approach' || activeSection === 'oh-also' ||
                                    activeSection === 'graphic-designer'
-  const showTextMenu = isHomeSection && !isMobileMenuOpen && !isWorkPage && !isContactPage && !isProjectSection && !isAboutSection && !isContactSection && !isAboutTransitionSection && isClient
-  const showBurgerMenu = (!isHomeSection) || isMobileMenuOpen || isWorkPage || isContactPage || isProjectSection || isAboutSection || isContactSection || isAboutTransitionSection
+  const showTextMenu = isHomeSection && !isMobileMenuOpen && !isWorkPage && !isContactPage && !isProjectSection && !isAboutSection && !isContactSection && !isAboutTransitionSection && !isSelectedWorksProjectSection && isClient
+  const showBurgerMenu = (!isHomeSection) || isMobileMenuOpen || isWorkPage || isContactPage || isProjectSection || isAboutSection || isContactSection || isAboutTransitionSection || isSelectedWorksProjectSection
 
   // Helper functions untuk styling berdasarkan section
   const getCopyrightTextClass = () => {
-    if (isProjectSection) return "text-white"
-    if (isAboutSection || isContactSection || isContactPage) return "text-foreground"
+    // Project sections dengan gambar - Variant putih untuk navbar (copyright text putih)
+    if (activeSection === 'ortist-specialist' || activeSection === 'rumah-bahasa-asing' || activeSection === 'binjasiimen-samapta') {
+      return "text-foreground-light"
+    }
+    if (activeSection === 'project-1' || activeSection === 'project-2' || activeSection === 'project-3') {
+      return "text-white"
+    }
+    if (activeSection === 'about' || activeSection === 'about-section' || activeSection === 'contact' || isContactPage) {
+      return "text-foreground"
+    }
     // About transition sections dengan background hitam
     if (activeSection === 'also' || activeSection === 'content-creator' || 
         activeSection === 'brands' || activeSection === 'finally' ||
@@ -271,8 +285,16 @@ export const Header = () => {
   }
 
   const getBurgerBgClass = () => {
-    if (isProjectSection) return "bg-white hover:bg-gray-100"
-    if (isAboutSection || isContactSection || isContactPage) return "bg-foreground hover:bg-foreground/90" // About dan Contact section menggunakan light background
+    // Project sections dengan gambar - Variant putih (prioritas tinggi)
+    if (activeSection === 'ortist-specialist' || activeSection === 'rumah-bahasa-asing' || activeSection === 'binjasiimen-samapta') {
+      return "bg-white hover:bg-gray-100"
+    }
+    if (activeSection === 'project-1' || activeSection === 'project-2' || activeSection === 'project-3') {
+      return "bg-white hover:bg-gray-100"
+    }
+    if (activeSection === 'about' || activeSection === 'about-section' || activeSection === 'contact' || isContactPage) {
+      return "bg-foreground hover:bg-foreground/90" // About dan Contact section menggunakan light background
+    }
     // About transition sections dengan background hitam
     if (activeSection === 'also' || activeSection === 'content-creator' || 
         activeSection === 'brands' || activeSection === 'finally' ||
@@ -287,8 +309,16 @@ export const Header = () => {
   }
 
   const getBurgerTextClass = () => {
-    if (isProjectSection) return "text-black"
-    if (isAboutSection || isContactSection || isContactPage) return "text-background" // About dan Contact section menggunakan dark text
+    // Project sections dengan gambar - Variant putih dengan text hitam (prioritas tinggi)
+    if (activeSection === 'ortist-specialist' || activeSection === 'rumah-bahasa-asing' || activeSection === 'binjasiimen-samapta') {
+      return "text-black"
+    }
+    if (activeSection === 'project-1' || activeSection === 'project-2' || activeSection === 'project-3') {
+      return "text-black"
+    }
+    if (activeSection === 'about' || activeSection === 'about-section' || activeSection === 'contact' || isContactPage) {
+      return "text-background" // About dan Contact section menggunakan dark text
+    }
     // About transition sections dengan background hitam
     if (activeSection === 'also' || activeSection === 'content-creator' || 
         activeSection === 'brands' || activeSection === 'finally' ||
