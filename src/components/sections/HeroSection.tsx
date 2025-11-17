@@ -29,9 +29,9 @@ export const HeroSection = () => {
   // =======================================
   // Anda bisa mengubah nilai-nilai ini untuk custom positioning
   const desktopPositions = {
-    // Location Card positioning
-    locationCard: {
-      left: '-left-4 md:-left-4', // Kiri: '-left-4', '-left-8', '-left-12', '-left-16', dll
+    // Motto Section positioning
+    mottoSection: {
+      left: 'left-4 md:left-8', // Kiri: 'left-4', 'left-8', 'left-12', 'left-16', dll
       right: '', // Kanan: 'right-4', 'right-8', 'right-12', 'right-16', dll
       top: 'top-[45%]', // Atas: 'top-1/4', 'top-1/3', 'top-1/2', 'top-2/3', dll
       bottom: '', // Bawah: 'bottom-4', 'bottom-8', 'bottom-12', 'bottom-16', dll
@@ -74,23 +74,13 @@ export const HeroSection = () => {
       {/* Shadow effect at bottom */}
       <div className="absolute bottom-0 left-0 right-0 h-108 bg-gradient-to-t from-black/50 to-transparent z-10"></div>
       <div className="relative h-screen flex items-center justify-center">
-        {/* Location Card - Terpotong di pinggir */}
-        <div className={`absolute ${desktopPositions.locationCard.left} ${desktopPositions.locationCard.right} ${desktopPositions.locationCard.top} ${desktopPositions.locationCard.bottom} ${desktopPositions.locationCard.transform} z-20 hidden md:block`}>
-          <div className="bg-content-inverse rounded-r-full px-8 md:px-12 py-4 md:py-6 flex items-center gap-8 md:gap-10 shadow-xl">
-            <div className="text-left">
-              <div className="text-2xl md:text-3xl font-bold text-content">Based</div>
-              <div className="text-2xl md:text-3xl font-bold text-content">in</div>
-              <div className="text-2xl md:text-3xl font-bold text-content">Indonesia</div>
-            </div>
-            <div className="w-20 md:w-24 h-20 md:h-24 bg-background-dark rounded-full flex items-center justify-center overflow-hidden">
-              <Image
-                src="/landing/gif.gif"
-                alt="Globe Animation"
-                width={64}
-                height={64}
-                className="w-16 md:w-18 h-16 md:h-18 object-cover"
-                unoptimized
-              />
+        {/* Motto Section */}
+        <div className={`absolute ${desktopPositions.mottoSection.left} ${desktopPositions.mottoSection.right} ${desktopPositions.mottoSection.top} ${desktopPositions.mottoSection.bottom} ${desktopPositions.mottoSection.transform} z-20 hidden md:block`}>
+          <div className="text-content-inverse text-left">
+            <div className="text-xl md:text-2xl font-normal mb-6">My Motto Is:</div>
+            <div className="space-y-6">
+              <div className="text-3xl md:text-4xl lg:text-5xl font-normal">&quot;Sepi ing Pamrih,</div>
+              <div className="text-3xl md:text-4xl lg:text-5xl font-normal">Rame ing Gawe&quot;</div>
             </div>
           </div>
         </div>
@@ -174,19 +164,13 @@ export const HeroSection = () => {
             </div>
           </div>
 
-          {/* Mobile Location */}
+          {/* Mobile Motto */}
           <div className="text-center">
-            <div className="bg-content-inverse rounded-full px-6 py-4 flex items-center gap-4 shadow-lg">
-              <div className="text-right">
-                <div className="text-sm font-medium text-content">Based in</div>
-                <div className="text-sm font-medium text-content">Indonesia</div>
-              </div>
-              <div className="w-8 h-8 bg-background-dark rounded-full flex items-center justify-center">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 text-content-inverse">
-                  <circle cx="12" cy="12" r="10"/>
-                  <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/>
-                  <path d="M2 12h20"/>
-                </svg>
+            <div className="text-content-inverse">
+              <div className="text-lg font-normal mb-4">My Motto Is:</div>
+              <div className="space-y-4">
+                <div className="text-content-inverse font-normal" style={{fontSize: '3.5rem'}}>&quot;Sepi ing Pamrih,&quot;</div>
+                <div className="text-content-inverse font-normal" style={{fontSize: '3.5rem'}}>&quot;Rame ing Gawe&quot;</div>
               </div>
             </div>
           </div>
