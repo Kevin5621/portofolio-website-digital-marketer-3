@@ -1,6 +1,7 @@
 'use client'
 
 import Image from 'next/image'
+import { motion } from 'framer-motion'
 import { useParallax } from '@/hooks/useParallax'
 
 export const HeroSection = () => {
@@ -68,10 +69,12 @@ export const HeroSection = () => {
         {/* Motto Section */}
         <div className={`absolute ${desktopPositions.mottoSection.left} ${desktopPositions.mottoSection.right} ${desktopPositions.mottoSection.top} ${desktopPositions.mottoSection.bottom} ${desktopPositions.mottoSection.transform} z-20 hidden md:block`}>
           <div className="text-content-inverse text-left">
-            <div className="text-xl md:text-2xl font-normal mb-6">My Motto Is:</div>
-            <div className="space-y-6">
-              <div className="text-3xl md:text-4xl lg:text-5xl font-normal">&quot;Sepi ing Pamrih,</div>
-              <div className="text-3xl md:text-4xl lg:text-5xl font-normal">Rame ing Gawe&quot;</div>
+            {/* Spacer untuk menyelaraskan dengan arrow icon di skills section */}
+            <div className="mb-2" style={{height: '60px'}}></div>
+            <div>
+              <div className="text-xl md:text-2xl font-normal">My Motto Is:</div>
+              <div className="text-3xl md:text-4xl lg:text-5xl font-normal pt-4">&quot;Sepi ing Pamrih,</div>
+              <div className="text-3xl md:text-4xl lg:text-5xl font-normal pt-4">Rame ing Gawe&quot;</div>
             </div>
           </div>
         </div>
@@ -99,22 +102,30 @@ export const HeroSection = () => {
           <div className="text-content-inverse text-left -ml-8">
             {/* Arrow Icon - Di atas text */}
             <div className="mb-2">
-              <svg
-                width="60"
-                height="60"
+              <motion.svg
+                width="40"
+                height="40"
                 viewBox="0 0 24 24"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
+                initial={{ x: -8, y: -8 }}
+                animate={{ x: 8, y: 8 }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  repeatType: "reverse",
+                  ease: "easeInOut"
+                }}
               >
                 <path
                   d="M5.75739 7.17154L7.1716 5.75732L16.2426 14.8283L16.2426 10.2427H18.2426L18.2426 18.2427H10.2426V16.2427L14.8285 16.2427L5.75739 7.17154Z"
                   fill="currentColor"
                 />
-              </svg>
+              </motion.svg>
             </div>
             
             {/* Skills Text */}
-            <div className="space-y-6">
+            <div className="space-y-6 pt-4">
               <div className="text-3xl md:text-4xl lg:text-5xl font-normal">Social Media Marketing</div>
               <div className="text-3xl md:text-4xl lg:text-5xl font-normal">Content Creator</div>
               <div className="text-3xl md:text-4xl lg:text-5xl font-normal">Short-Form Video Editor</div>
@@ -124,8 +135,9 @@ export const HeroSection = () => {
 
         {/* Name - Full width, static text */}
         <div className={`absolute ${desktopPositions.name.left} ${desktopPositions.name.right} ${desktopPositions.name.top} ${desktopPositions.name.bottom} z-30 ${desktopPositions.name.padding} hidden md:block`}>
-          <h1 className="text-[12rem] md:text-[14rem] lg:text-[18rem] xl:text-[22rem] font-semibold text-content-inverse leading-none tracking-tight text-center w-full">
-            Adhara Eka
+          <h1 className="text-[12rem] md:text-[14rem] lg:text-[18rem] xl:text-[22rem] font-semibold text-content-inverse leading-none tracking-tight text-center w-full flex items-center justify-center gap-4">
+            <span>Adhara</span>
+            <span>Eka</span>
           </h1>
         </div>
 
@@ -133,8 +145,9 @@ export const HeroSection = () => {
         <div className="md:hidden absolute inset-0 flex flex-col items-center justify-center z-20 px-4 sm:px-6">
           {/* Mobile Header */}
           <div className="text-center mb-12">
-            <h1 className="font-semibold text-content-inverse leading-none tracking-tight" style={{fontSize: '8.5rem'}}>
-              Adhara Eka
+            <h1 className="font-semibold text-content-inverse leading-none tracking-tight flex items-center justify-center gap-4" style={{fontSize: '8.5rem'}}>
+              <span>Adhara</span>
+              <span>Eka</span>
             </h1>
           </div>
 
@@ -154,7 +167,7 @@ export const HeroSection = () => {
           {/* Mobile Motto */}
           <div className="text-center">
             <div className="text-content-inverse">
-              <div className="text-lg font-normal mb-4">My Motto Is:</div>
+              <div className="text-content-inverse font-normal mb-4" style={{fontSize: '3.5rem'}}>My Motto Is:</div>
               <div className="space-y-4">
                 <div className="text-content-inverse font-normal" style={{fontSize: '3.5rem'}}>&quot;Sepi ing Pamrih,&quot;</div>
                 <div className="text-content-inverse font-normal" style={{fontSize: '3.5rem'}}>&quot;Rame ing Gawe&quot;</div>
