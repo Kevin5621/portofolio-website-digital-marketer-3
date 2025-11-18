@@ -36,7 +36,7 @@
 /* Dark to Light Variant */
 .pill-button-dark-to-light {
   background-color: #282828 !important;
-  color: #F3F2F2 !important;
+  color: #F2F1EF !important;
   border: 1px solid #282828 !important;
 }
 
@@ -47,7 +47,7 @@
 }
 
 .pill-button-circle-dark {
-  background: #F3F2F2 !important;
+  background: #F2F1EF !important;
   /* Ensure visibility */
   opacity: 1;
   visibility: visible;
@@ -55,13 +55,13 @@
 
 /* Light to Dark Variant */
 .pill-button-light-to-dark {
-  background-color: #F3F2F2 !important;
+  background-color: #F2F1EF !important;
   color: #282828 !important;
-  border: 1px solid #F3F2F2 !important;
+  border: 1px solid #F2F1EF !important;
 }
 
 .pill-button-light-to-dark:hover {
-  color: #F3F2F2 !important;
+  color: #F2F1EF !important;
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
 }

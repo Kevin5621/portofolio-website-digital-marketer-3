@@ -54,7 +54,7 @@ const PillButton: React.FC<PillButtonProps> = ({
         transformOrigin: `50% ${originY}px`,
         opacity: 1,
         visibility: "visible",
-        backgroundColor: variant === "dark-to-light" ? "#F3F2F2" : "#282828",
+        backgroundColor: variant === "dark-to-light" ? "#F2F1EF" : "#282828",
       });
 
       tlRef.current?.kill();
