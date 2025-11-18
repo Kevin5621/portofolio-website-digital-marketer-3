@@ -55,7 +55,7 @@ export function AboutSection2End() {
 interface ParallaxVideoCardProps {
   readonly videoSrc: string;
   readonly index: number;
-  readonly sectionRef: React.RefObject<HTMLElement>;
+  readonly sectionRef: React.RefObject<HTMLElement | null>;
 }
 
 function ParallaxVideoCard({ videoSrc, index, sectionRef }: ParallaxVideoCardProps) {
