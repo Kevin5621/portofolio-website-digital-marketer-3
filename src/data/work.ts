@@ -71,6 +71,22 @@ export const workData: WorkItem[] = [
     role: "Content Creator",
     year: "2025-Now",
     category: "Content Creator"
+  },
+  {
+    id: "ika-binus-ceo-forum",
+    client: "IKA BINUS CEO FORUM",
+    location: "South Jakarta, Indonesia",
+    role: "Content Creator",
+    year: "2025",
+    category: "Content Creator"
+  },
+  {
+    id: "fest-z-2025",
+    client: "FEST Z 2025™",
+    location: "South Jakarta, Indonesia",
+    role: "Content Creator",
+    year: "2025",
+    category: "Content Creator"
   }
 ];
 

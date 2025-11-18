@@ -7,7 +7,9 @@ import {
   genzummitData,
   ppmHimmaData,
   a5xStudioData,
-  genZtriveData
+  genZtriveData,
+  ikaBinusCeoForumData,
+  festZ2025Data
 } from "./projects";
 
 export interface WorkDetail {
@@ -77,6 +79,8 @@ export const workDetailsData: Record<string, WorkDetail> = {
   "ppm-himma-2025": ppmHimmaData,
   "a5x-studio": a5xStudioData,
   "gen-ztrive": genZtriveData,
+  "ika-binus-ceo-forum": ikaBinusCeoForumData,
+  "fest-z-2025": festZ2025Data,
 };
 
 export const getWorkDetail = (id: string): WorkDetail | null => {
