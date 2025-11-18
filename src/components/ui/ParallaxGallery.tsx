@@ -6,6 +6,8 @@ import Lenis from 'lenis';
 
 import { useEffect, useRef, useState } from 'react';
 
+import Image from 'next/image';
+
 interface ParallaxGalleryProps {
   images: string[];
 }
@@ -129,13 +131,17 @@ const Column = ({ images, y }: ColumnProps) => {
 
         <div key={src} className="relative h-full w-full overflow-hidden rounded-lg">
 
-          <img
+          <Image
 
             src={src}
 
             alt=""
 
-            className="pointer-events-none h-full w-full object-cover"
+            fill
+
+            className="pointer-events-none object-cover"
+
+            sizes="(max-width: 768px) 25vw, 25vw"
 
           />
 

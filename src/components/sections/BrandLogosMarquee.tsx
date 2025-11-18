@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
+import Image from 'next/image'
 import { gsap } from '@/lib/animations/gsap'
 
 export const BrandLogosMarquee = () => {
@@ -95,12 +96,14 @@ export const BrandLogosMarquee = () => {
         {logoPaths.map((logoPath, index) => (
           <div 
             key={`first-${index}`}
-            className="flex-shrink-0 w-24 md:w-32 lg:w-40 h-24 md:h-32 lg:h-40 bg-surface-secondary rounded-lg flex items-center justify-center p-4"
+            className="relative flex-shrink-0 w-24 md:w-32 lg:w-40 h-24 md:h-32 lg:h-40 bg-surface-secondary rounded-lg flex items-center justify-center p-4"
           >
-            <img 
+            <Image 
               src={logoPath} 
               alt={`Brand logo ${index + 1}`}
-              className="max-w-full max-h-full object-contain"
+              fill
+              className="object-contain"
+              sizes="(max-width: 768px) 96px, (max-width: 1024px) 128px, 160px"
             />
           </div>
         ))}
@@ -109,12 +112,14 @@ export const BrandLogosMarquee = () => {
         {logoPaths.map((logoPath, index) => (
           <div 
             key={`second-${index}`}
-            className="flex-shrink-0 w-24 md:w-32 lg:w-40 h-24 md:h-32 lg:h-40 bg-surface-secondary rounded-lg flex items-center justify-center p-4"
+            className="relative flex-shrink-0 w-24 md:w-32 lg:w-40 h-24 md:h-32 lg:h-40 bg-surface-secondary rounded-lg flex items-center justify-center p-4"
           >
-            <img 
+            <Image 
               src={logoPath} 
               alt={`Brand logo ${index + 1}`}
-              className="max-w-full max-h-full object-contain"
+              fill
+              className="object-contain"
+              sizes="(max-width: 768px) 96px, (max-width: 1024px) 128px, 160px"
             />
           </div>
         ))}
