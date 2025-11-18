@@ -4,7 +4,7 @@ export const ppmHimmaData: WorkDetail = {
   id: "ppm-himma-2025",
   client: "PPM HIMMA 2025",
   location: "Gading Serpong",
-  role: "Visual & Documentation Team Member",
+  role: "Content Creator",
   year: "2025",
   category: "Content Creator",
   description: "The PPM 2025 is an event organized by the 15th generation of the Management Student Association (HIMMA) to welcome and prepare new students of the 2024 Management program for their studies.",

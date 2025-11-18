@@ -47,7 +47,7 @@ export const WorkDetailHero = ({ workDetail }: WorkDetailHeroProps) => {
             <h3 className="text-sm font-medium text-content-tertiary uppercase tracking-wider mb-4 border-b border-border-primary pb-2">
               ROLE / SERVICES
             </h3>
-            <p className="text-lg text-content-secondary font-medium">
+            <p className="flex items-start gap-3 text-2xl md:text-xl lg:text-1xl xl:text-2xl font-medium text-content-primary leading-[0.95] font-medium">
               {workDetail.role}
             </p>
           </div>
@@ -60,7 +60,7 @@ export const WorkDetailHero = ({ workDetail }: WorkDetailHeroProps) => {
               </h3>
               <div className="space-y-2">
                 {workDetail.credits.map((credit) => (
-                  <p key={credit} className="text-lg text-content-secondary">
+                  <p key={credit} className="flex items-start gap-3 text-2xl md:text-xl lg:text-1xl xl:text-2xl font-medium text-content-primary leading-[0.95]">
                     {credit}
                   </p>
                 ))}
@@ -73,7 +73,7 @@ export const WorkDetailHero = ({ workDetail }: WorkDetailHeroProps) => {
             <h3 className="text-sm font-medium text-content-tertiary uppercase tracking-wider mb-4 border-b border-border-primary pb-2">
               LOCATION & YEAR
             </h3>
-            <p className="text-lg text-content-secondary font-medium">
+            <p className="flex items-start gap-3 text-2xl md:text-xl lg:text-1xl xl:text-2xl font-medium text-content-primary leading-[0.95] font-medium">
               {workDetail.location.split(',')[0]}, {workDetail.year}
             </p>
           </div>
