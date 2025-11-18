@@ -160,7 +160,7 @@ export function AboutSection4End() {
     <>
       {/* Viewport 23: Here's a breakdown - Small text, black bg, white text */}
       <section id="breakdown" className="relative min-h-screen bg-surface-inverse flex items-center justify-center px-6 z-30">
-        <p className="text-6xl md:text-7xl lg:text-8xl text-content-inverse text-center max-w-4xl">
+        <p className="text-8xl md:text-3xl lg:text-4xl xl:text-5xl font-semibold text-content-inverse text-center max-w-7xl">
           Here&apos;s a breakdown of what that includes
         </p>
       </section>
