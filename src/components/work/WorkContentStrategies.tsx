@@ -43,15 +43,15 @@ export const WorkContentStrategies = ({ strategies, bestContent }: WorkContentSt
 
         {/* First Content Strategy Section */}
         {strategies[0] && (
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-20">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.5fr] gap-16 mb-16">
             <div>
-              <h3 className="text-4xl md:text-5xl lg:text-6xl font-bold text-content-primary leading-tight">
+              <h3 className="text-8xl md:text-3xl lg:text-4xl xl:text-5xl font-semibold text-content-primary leading-tight">
                 {strategies[0].title}
               </h3>
             </div>
             
             <div className="space-y-8">
-              <p className="text-content-secondary leading-relaxed">
+              <p className="flex items-start gap-3 text-3xl md:text-xl lg:text-2xl xl:text-3xl font-medium text-content-primary leading-[0.95]">
                 {strategies[0].description}
               </p>
               
@@ -82,15 +82,15 @@ export const WorkContentStrategies = ({ strategies, bestContent }: WorkContentSt
         )}
 
         {/* Best Organic Content Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-20">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.5fr] gap-16 mb-16">
           <div>
-            <h3 className="text-4xl md:text-5xl lg:text-6xl font-bold text-content-primary leading-tight">
+            <h3 className="text-8xl md:text-3xl lg:text-4xl xl:text-5xl font-semibold text-content-primary leading-tight">
               {bestContent.title}
             </h3>
           </div>
           
           <div className="space-y-8">
-            <p className="text-content-secondary leading-relaxed">
+            <p className="flex items-start gap-3 text-3xl md:text-xl lg:text-2xl xl:text-3xl font-medium text-content-primary leading-[0.95]">
               {bestContent.description}
             </p>
             
@@ -106,12 +106,12 @@ export const WorkContentStrategies = ({ strategies, bestContent }: WorkContentSt
                       className="w-full h-full object-contain"
                     />
                   </div>
-                  <div className="flex flex-col justify-center space-y-1 text-sm">
-                    <div className="font-semibold text-content-primary">{video.stats.views} Plays</div>
-                    <div className="text-content-secondary">{video.stats.engagement} Likes</div>
-                    <div className="text-content-secondary">{video.stats.comments} Comment</div>
-                    <div className="text-content-secondary">{video.stats.reach} Shares</div>
-                    <div className="text-content-secondary">{video.stats.saves} Saves</div>
+                  <div className="flex-col justify-center space-y-1 flex items-start gap-3 text-3xl md:text-xl lg:text-2xl xl:text-3xl font-medium text-content-primary leading-[0.95]">
+                    <div><span className="font-bold">{video.stats.views}</span> Plays</div>
+                    <div><span className="font-bold">{video.stats.engagement}</span> Likes</div>
+                    <div><span className="font-bold">{video.stats.comments}</span> Comment</div>
+                    <div><span className="font-bold">{video.stats.reach}</span> Shares</div>
+                    <div><span className="font-bold">{video.stats.saves}</span> Saves</div>
                   </div>
                 </div>
               ))}
@@ -121,15 +121,15 @@ export const WorkContentStrategies = ({ strategies, bestContent }: WorkContentSt
 
         {/* Second Content Strategy Section */}
         {strategies[1] && (
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.5fr] gap-16 mb-16">
             <div>
-              <h3 className="text-4xl md:text-5xl lg:text-6xl font-bold text-content-primary leading-tight">
+              <h3 className="text-8xl md:text-3xl lg:text-4xl xl:text-5xl font-semibold text-content-primary leading-tight">
                 {strategies[1].title}
               </h3>
             </div>
             
             <div className="space-y-8">
-              <p className="text-content-secondary leading-relaxed">
+              <p className="flex items-start gap-3 text-3xl md:text-xl lg:text-2xl xl:text-3xl font-medium text-content-primary leading-[0.95]">
                 {strategies[1].description}
               </p>
               
@@ -154,7 +154,7 @@ export const WorkContentStrategies = ({ strategies, bestContent }: WorkContentSt
                         />
                       )}
                     </div>
-                    <p className="text-center text-sm text-content-tertiary font-medium">
+                    <p className="text-center text-3xl md:text-xl lg:text-2xl xl:text-3xl font-medium text-content-primary leading-[0.95]">
                       {index === 0 ? "Before" : "After"}
                     </p>
                   </div>

@@ -19,7 +19,7 @@ export const WorkSpecialText = ({ text }: WorkSpecialTextProps) => {
 
         {/* Special Text - Centered with same styling as description */}
         <div className="text-center">
-          <p className="text-2xl md:text-4xl font-semibold text-content-secondary leading-relaxed">
+          <p className="text-2xl md:text-4xl font-semibold flex items-start gap-3 text-3xl md:text-xl lg:text-2xl xl:text-3xl font-medium text-content-primary leading-[0.95]">
             {text}
           </p>
         </div>

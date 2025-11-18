@@ -21,7 +21,7 @@ export const WorkBestContent = ({ bestContent }: WorkBestContentProps) => {
           {bestContent.title}
         </h2>
         
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.5fr] gap-16 mb-16 items-center">
           {/* Content Image */}
           <div className="order-2 lg:order-1">
             <div className="aspect-square bg-neutral-200 rounded-xl overflow-hidden">
@@ -35,7 +35,7 @@ export const WorkBestContent = ({ bestContent }: WorkBestContentProps) => {
           
           {/* Content Details */}
           <div className="order-1 lg:order-2">
-            <p className="text-lg text-content-secondary leading-relaxed mb-8">
+            <p className="text-lg flex items-start gap-3 text-3xl md:text-xl lg:text-2xl xl:text-3xl font-medium text-content-primary leading-[0.95] mb-8">
               {bestContent.description}
             </p>
             
