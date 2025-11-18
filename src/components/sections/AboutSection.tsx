@@ -60,26 +60,73 @@ export const AboutSection = () => {
       </div>
 
       {/* Desktop Layout - Only visible on desktop */}
-      <div className="hidden md:block relative h-[200vh]">
-        {/* Photo Container - Desktop */}
-        <div className="absolute left-0 top-0 w-1/3 h-full z-10">
-          <div className="relative w-full h-full p-8 flex items-center justify-center">
-            <div className="w-11/12 h-11/12 relative">
-              <Image 
-                src="/landing/about-man.webp" 
-                alt="About - Digital Designer"
-                width={1920}
-                height={2160}
-                className="w-full h-full object-cover object-center"
-                priority
-              />
+      <div className="hidden md:block px-4 sm:px-6 py-12">
+        {/* intro - Main container */}
+        <div 
+          className="intro"
+          style={{
+            display: 'flex',
+            flexFlow: 'row',
+            width: '100%',
+            minHeight: '100vh',
+            position: 'relative',
+            gridColumnGap: '2em',
+            gridRowGap: '2em'
+          }}
+        >
+          {/* intro_image-container */}
+          <div 
+            className="intro_image-container"
+            style={{
+              width: 'var(--4-columns, 33.333%)',
+              minHeight: '100vh',
+              position: 'relative',
+              flexShrink: 0
+            }}
+          >
+            {/* project_asset-wrapper - Image wrapper */}
+            <div 
+              className="project_asset-wrapper"
+              style={{
+                display: 'flex',
+                flexFlow: 'column',
+                width: '100%',
+                minHeight: '100%',
+                height: '100%',
+                position: 'relative',
+                gridColumnGap: '2em',
+                gridRowGap: '2em'
+              }}
+            >
+              <div className="relative w-full h-full">
+                <Image 
+                  src="/landing/about-man.webp" 
+                  alt="About - Digital Designer"
+                  fill
+                  className="object-cover object-center"
+                  priority
+                  sizes="33.333vw"
+                />
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* VIEWPORT 1 - Desktop: Right side content */}
-        <div className="absolute top-0 left-1/3 w-2/3 h-screen flex items-start justify-start z-20">
-          <div className="px-12 lg:px-16 pt-20">
+          {/* intro_text-container */}
+          <div 
+            className="intro_text-container"
+            style={{
+              display: 'flex',
+              flexFlow: 'column',
+              justifyContent: 'flex-start',
+              alignItems: 'flex-start',
+              flex: '1',
+              gridColumnGap: '18vw',
+              gridRowGap: '18vw',
+              padding: '1rem 1rem',
+              minHeight: '100vh'
+            }}
+          >
+            {/* Main Heading */}
             <h2 className="text-6xl lg:text-7xl xl:text-8xl font-bold text-content-primary leading-[0.95]">
               Helping business
               owners create
@@ -87,27 +134,21 @@ export const AboutSection = () => {
               Together, we will make
               content that converts.
             </h2>
-          </div>
-        </div>
 
-        {/* ABOUT ME - Desktop */}
-        <div className="absolute left-1/3 w-2/3 flex items-end justify-start z-30" style={{top: 'calc(100vh - 120px)'}}>
-          <div className="px-12 lg:px-16 pb-20">
-            <Link href="/about">
-              <PillButton 
-                variant="dark-to-light"
-                className="px-12 py-6 text-2xl lg:text-3xl"
-              >
-                About me
-              </PillButton>
-            </Link>
-          </div>
-        </div>
+            {/* About Me Button */}
+            <div className="pt-6">
+              <Link href="/about">
+                <PillButton 
+                  variant="dark-to-light"
+                  className="px-12 py-6 text-2xl lg:text-3xl"
+                >
+                  About me
+                </PillButton>
+              </Link>
+            </div>
 
-        {/* VIEWPORT 2 - Desktop: Right side content */}
-        <div className="absolute left-1/3 w-2/3 h-screen flex items-end justify-start z-20" style={{top: '100vh'}}>
-          <div className="px-12 lg:px-16 pb-20">
-            <div className="space-y-3">
+            {/* Specialisations */}
+            <div className="space-y-3 pt-6">
               <div className="space-y-1">
                 <div className="text-3xl lg:text-4xl xl:text-5xl text-content-primary font-semibold leading-[0.9]">
                   Specialising in:
