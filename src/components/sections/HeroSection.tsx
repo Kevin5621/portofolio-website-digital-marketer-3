@@ -1,18 +1,9 @@
 'use client'
 
 import Image from 'next/image'
-import { useHorizontalScrollMarquee } from '@/hooks/useScrollMarquee'
 import { useParallax } from '@/hooks/useParallax'
 
 export const HeroSection = () => {
-  // =======================================
-  // SCROLL-RESPONSIVE MARQUEE ANIMATION
-  // =======================================
-  const nameMarqueeRef = useHorizontalScrollMarquee<HTMLHeadingElement>({
-    ease: 'power1.out',
-    defaultDirection: 'right' // Arah default dari kiri ke kanan
-  })
-
   // =======================================
   // PARALLAX EFFECT FOR PHOTO
   // =======================================
@@ -131,14 +122,10 @@ export const HeroSection = () => {
           </div>
         </div>
 
-        {/* Name - Full width, 1 baris dengan scroll-responsive marquee */}
-        <div className={`absolute ${desktopPositions.name.left} ${desktopPositions.name.right} ${desktopPositions.name.top} ${desktopPositions.name.bottom} z-30 ${desktopPositions.name.padding}`}>
-          <h1 
-            ref={nameMarqueeRef}
-            className="text-[10rem] md:text-[12rem] lg:text-[16rem] xl:text-[20rem] font-semibold text-content-inverse leading-none tracking-tight text-center whitespace-nowrap overflow-visible"
-            style={{ willChange: 'transform' }}
-          >
-            Adhara Eka -
+        {/* Name - Full width, static text */}
+        <div className={`absolute ${desktopPositions.name.left} ${desktopPositions.name.right} ${desktopPositions.name.top} ${desktopPositions.name.bottom} z-30 ${desktopPositions.name.padding} hidden md:block`}>
+          <h1 className="text-[12rem] md:text-[14rem] lg:text-[18rem] xl:text-[22rem] font-semibold text-content-inverse leading-none tracking-tight text-center w-full">
+            Adhara Eka
           </h1>
         </div>
 
