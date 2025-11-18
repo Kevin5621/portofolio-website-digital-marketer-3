@@ -1,21 +1,7 @@
-'use client'
-
-import Image from 'next/image'
-import { motion } from 'framer-motion'
-import { useParallax } from '@/hooks/useParallax'
+import { HeroPhoto } from './HeroPhoto'
+import { HeroArrowIcon } from './HeroArrowIcon'
 
 export const HeroSection = () => {
-  // =======================================
-  // PARALLAX EFFECT FOR PHOTO
-  // =======================================
-  const photoParallaxRef = useParallax<HTMLDivElement>({
-    speed: 0.3, // 30% kecepatan scroll normal - lebih subtle
-    direction: 'up', // Bergerak ke atas saat scroll
-    offset: 0
-  })
-
-
-
   // =======================================
   // CUSTOM POSITIONING FOR DESKTOP
   // =======================================
@@ -80,49 +66,15 @@ export const HeroSection = () => {
         </div>
 
         {/* Photo - Full width, overlapping, focus on face with parallax effect */}
-        <div className={`absolute ${desktopPositions.photo.left} ${desktopPositions.photo.right} ${desktopPositions.photo.top} ${desktopPositions.photo.bottom} z-0`}>
-          <div 
-            ref={photoParallaxRef}
-            className="w-full h-full overflow-visible"
-            style={{ willChange: 'transform' }}
-          >
-            <Image 
-              src="/landing/hero-man.webp" 
-              alt="Adhara Eka"
-              width={1920}
-              height={1080}
-              className="w-full h-full object-cover object-top"
-              priority
-            />
-          </div>
-        </div>
+        <HeroPhoto 
+          className={`absolute ${desktopPositions.photo.left} ${desktopPositions.photo.right} ${desktopPositions.photo.top} ${desktopPositions.photo.bottom} z-0`}
+        />
 
         {/* Skills */}
         <div className={`absolute ${desktopPositions.skills.left} ${desktopPositions.skills.right} ${desktopPositions.skills.top} ${desktopPositions.skills.bottom} ${desktopPositions.skills.transform} z-20 hidden md:block`}>
           <div className="text-content-inverse text-left -ml-8">
             {/* Arrow Icon - Di atas text */}
-            <div className="mb-2">
-              <motion.svg
-                width="40"
-                height="40"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                initial={{ x: -8, y: -8 }}
-                animate={{ x: 8, y: 8 }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  repeatType: "reverse",
-                  ease: "easeInOut"
-                }}
-              >
-                <path
-                  d="M5.75739 7.17154L7.1716 5.75732L16.2426 14.8283L16.2426 10.2427H18.2426L18.2426 18.2427H10.2426V16.2427L14.8285 16.2427L5.75739 7.17154Z"
-                  fill="currentColor"
-                />
-              </motion.svg>
-            </div>
+            <HeroArrowIcon />
             
             {/* Skills Text */}
             <div className="space-y-6 pt-4">
