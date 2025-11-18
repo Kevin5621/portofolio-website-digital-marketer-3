@@ -89,8 +89,8 @@ const ProjectSection = ({ project }: ProjectSectionProps) => {
             className="object-cover"
             priority={id === 'ortist-specialist'}
           />
-          {/* Dark overlay untuk memastikan text putih terlihat jelas */}
-          <div className="absolute inset-0 bg-black/30"></div>
+          {/* Primary color overlay 30% untuk memberikan warna pada gambar */}
+          <div className="absolute inset-0 bg-black/55"></div>
         </div>
         
         {/* Year positioned at top left */}
