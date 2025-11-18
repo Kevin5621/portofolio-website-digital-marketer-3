@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { PillButton } from '@/components/ui/pill-button'
+import { TextBlockHighlight } from '@/components/ui/text-block-highlight'
 
 export const AboutSection = () => {
   return (
@@ -17,29 +18,35 @@ export const AboutSection = () => {
         <div className="px-4 sm:px-6 py-12 space-y-12">
           {/* Main Heading */}
           <h2 className="text-4xl sm:text-5xl font-bold text-content-primary leading-tight" style={{fontSize: '8.5rem'}}>
-            Helping business
-            owners create
-            engaging content.
-            Together, we will make
-            content that converts.
+            <TextBlockHighlight delay={0}>Helping business</TextBlockHighlight>
+            <br />
+            <TextBlockHighlight delay={0.1}>owners create</TextBlockHighlight>
+            <br />
+            <TextBlockHighlight delay={0.2}>engaging content.</TextBlockHighlight>
+            <br />
+            <TextBlockHighlight delay={0.3}>Together, we will make</TextBlockHighlight>
+            <br />
+            <TextBlockHighlight delay={0.4}>content that converts.</TextBlockHighlight>
           </h2>
 
           {/* Specializations */}
           <div className="space-y-4">
             <div className="text-2xl sm:text-3xl text-content-primary font-semibold" style={{fontSize: '3.5rem'}}>
-              Specialising in:
+              <TextBlockHighlight delay={0.5}>
+                Specialising in:
+              </TextBlockHighlight>
             </div>
             <div className="text-2xl sm:text-3xl text-content-primary font-semibold" style={{fontSize: '3.5rem'}}>
-              Market Analysis
+              <TextBlockHighlight delay={0.6}>Market Analysis</TextBlockHighlight>
             </div>
             <div className="text-2xl sm:text-3xl text-content-primary font-semibold" style={{fontSize: '3.5rem'}}>
-              Content Strategy
+              <TextBlockHighlight delay={0.7}>Content Strategy</TextBlockHighlight>
             </div>
             <div className="text-2xl sm:text-3xl text-content-primary font-semibold" style={{fontSize: '3.5rem'}}>
-              Content Production
+              <TextBlockHighlight delay={0.8}>Content Production</TextBlockHighlight>
             </div>
             <div className="text-2xl sm:text-3xl text-content-primary font-semibold" style={{fontSize: '3.5rem'}}>
-              Cross-Platform Management
+              <TextBlockHighlight delay={0.9}>Cross-Platform Management</TextBlockHighlight>
             </div>
           </div>
 
@@ -128,11 +135,15 @@ export const AboutSection = () => {
           >
             {/* Main Heading */}
             <h2 className="text-6xl lg:text-7xl xl:text-8xl font-bold text-content-primary leading-[0.95]">
-              Helping business
-              owners create
-              engaging content.
-              Together, we will make
-              content that converts.
+              <TextBlockHighlight delay={0}>Helping business</TextBlockHighlight>
+              <br />
+              <TextBlockHighlight delay={0.1}>owners create</TextBlockHighlight>
+              <br />
+              <TextBlockHighlight delay={0.2}>engaging content.</TextBlockHighlight>
+              <br />
+              <TextBlockHighlight delay={0.3}>Together, we will make</TextBlockHighlight>
+              <br />
+              <TextBlockHighlight delay={0.4}>content that converts.</TextBlockHighlight>
             </h2>
 
             {/* About Me Button */}
@@ -151,19 +162,19 @@ export const AboutSection = () => {
             <div className="space-y-3 pt-6">
               <div className="space-y-1">
                 <div className="text-3xl lg:text-4xl xl:text-5xl text-content-primary font-semibold leading-[0.9]">
-                  Specialising in:
+                  <TextBlockHighlight delay={0.5}>Specialising in:</TextBlockHighlight>
                 </div>
                 <div className="text-3xl lg:text-4xl xl:text-5xl text-content-primary font-semibold leading-[0.9]">
-                  Market Analysis
+                  <TextBlockHighlight delay={0.6}>Market Analysis</TextBlockHighlight>
                 </div>
                 <div className="text-3xl lg:text-4xl xl:text-5xl text-content-primary font-semibold leading-[0.9]">
-                  Content Strategy
+                  <TextBlockHighlight delay={0.7}>Content Strategy</TextBlockHighlight>
                 </div>
                 <div className="text-3xl lg:text-4xl xl:text-5xl text-content-primary font-semibold leading-[0.9]">
-                  Content Production
+                  <TextBlockHighlight delay={0.8}>Content Production</TextBlockHighlight>
                 </div>
                 <div className="text-3xl lg:text-4xl xl:text-5xl text-content-primary font-semibold leading-[0.9]">
-                  Cross-Platform Management
+                  <TextBlockHighlight delay={0.9}>Cross-Platform Management</TextBlockHighlight>
                 </div>
               </div>
             </div>
