@@ -1,0 +1,153 @@
+'use client';
+
+import { motion, MotionValue, useScroll, useTransform } from 'framer-motion';
+
+import Lenis from 'lenis';
+
+import { useEffect, useRef, useState } from 'react';
+
+interface ParallaxGalleryProps {
+  images: string[];
+}
+
+const ParallaxGallery = ({ images }: ParallaxGalleryProps) => {
+  const gallery = useRef<HTMLDivElement>(null);
+
+  const [dimension, setDimension] = useState({ width: 0, height: 0 });
+
+  const { scrollYProgress } = useScroll({
+    target: gallery,
+    offset: ['start end', 'end start'],
+  });
+
+  const { height } = dimension;
+
+  const y = useTransform(scrollYProgress, [0, 1], [0, height * 2]);
+
+  const y2 = useTransform(scrollYProgress, [0, 1], [0, height * 3.3]);
+
+  const y3 = useTransform(scrollYProgress, [0, 1], [0, height * 1.25]);
+
+  const y4 = useTransform(scrollYProgress, [0, 1], [0, height * 3]);
+
+  // Scale transform: start from large (1.5) and progressively shrink to normal size (1)
+  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [1.5, 1.2, 1]);
+
+  useEffect(() => {
+    const lenis = new Lenis();
+
+    let rafId: number;
+
+    const raf = (time: number) => {
+      lenis.raf(time);
+
+      rafId = requestAnimationFrame(raf);
+
+    };
+
+    const resize = () => {
+      setDimension({ width: window.innerWidth, height: window.innerHeight });
+
+    };
+
+    window.addEventListener('resize', resize);
+
+    rafId = requestAnimationFrame(raf);
+
+    resize();
+
+    return () => {
+      window.removeEventListener('resize', resize);
+
+      cancelAnimationFrame(rafId);
+
+      lenis.destroy();
+
+    };
+
+  }, []);
+
+  // Ensure we have at least 9 images by repeating if necessary
+
+  const imageList = images.length >= 9 
+
+    ? images.slice(0, 9)
+
+    : Array.from({ length: 9 }, (_, i) => images[i % images.length]);
+
+  return (
+
+    <div className="w-full bg-surface-background text-content-primary">
+
+      <motion.div
+
+        ref={gallery}
+
+        className="relative box-border flex h-[175vh] gap-[2vw] overflow-hidden bg-surface-background p-[2vw]"
+
+        style={{ scale }}
+
+      >
+
+        <Column images={[imageList[0], imageList[1], imageList[2]]} y={y} />
+
+        <Column images={[imageList[3], imageList[4], imageList[5]]} y={y2} />
+
+        <Column images={[imageList[6], imageList[7], imageList[8]]} y={y3} />
+
+        <Column images={[imageList[0], imageList[1], imageList[2]]} y={y4} />
+
+      </motion.div>
+
+    </div>
+
+  );
+
+};
+
+type ColumnProps = {
+
+  images: string[];
+
+  y: MotionValue<number>;
+
+};
+
+const Column = ({ images, y }: ColumnProps) => {
+
+  return (
+
+    <motion.div
+
+      className="relative -top-[45%] flex h-full w-1/4 min-w-[250px] flex-col gap-[2vw] first:top-[-45%] [&:nth-child(2)]:top-[-95%] [&:nth-child(3)]:top-[-45%] [&:nth-child(4)]:top-[-75%]"
+
+      style={{ y }}
+
+    >
+
+      {images.map((src) => (
+
+        <div key={src} className="relative h-full w-full overflow-hidden rounded-lg">
+
+          <img
+
+            src={src}
+
+            alt=""
+
+            className="pointer-events-none h-full w-full object-cover"
+
+          />
+
+        </div>
+
+      ))}
+
+    </motion.div>
+
+  );
+
+};
+
+export default ParallaxGallery;
+

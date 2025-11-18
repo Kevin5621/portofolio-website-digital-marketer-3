@@ -1,6 +1,6 @@
 "use client";
 
-import CircularGallery from "@/components/ui/CircularGallery";
+import ParallaxGallery from "@/components/ui/ParallaxGallery";
 
 export function AboutSection3End() {
   // Portfolio items for the gallery showcase
@@ -67,29 +67,28 @@ export function AboutSection3End() {
     }
   ];
 
+  // Extract image paths for ParallaxGallery
+  const imagePaths = portfolioItems.map(item => item.image);
+
   return (
     <>
       {/* Viewport 17: Here's a sneak peek - Small text, white bg, black text */}
       <section id="sneak-peek" className="relative min-h-screen bg-surface-background flex items-center justify-center px-6 z-30">
-        <p className="text-8xl md:text-3xl lg:text-4xl xl:text-5xl font-semibold text-content-primary text-center max-w-7xl leading-[1]">
+        <p className="text-8xl md:text-3xl lg:text-4xl xl:text-5xl font-semibold text-content-primary text-center max-w-7xl leading-none">
           Here&apos;s a sneak peek of what that looks like
         </p>
       </section>
 
-      {/* Design showcase with CircularGallery - sticky for overlay effect */}
-      <section id="design-showcase" className="sticky top-0 min-h-screen bg-surface-background flex items-center justify-center px-6 overflow-visible z-10">
-        <div style={{ height: '70vh', width: '100%', position: 'relative' }}>
-          <CircularGallery 
-            items={portfolioItems}
-            bend={3} 
-            textColor="#1f2937" 
-            borderRadius={0.05} 
-            scrollEase={0.02}
-            waveIntensity={0.1}
-            scrollSpeed={2}
-            font="bold 24px Inter"
-          />
-        </div>
+      {/* Design showcase with ParallaxGallery - normal section for continuous scroll */}
+      <section id="design-showcase" className="relative bg-surface-background flex items-center justify-center px-6 overflow-visible z-10">
+        <ParallaxGallery images={imagePaths} />
+        {/* Fade-out gradient at the bottom for smooth transition */}
+        <div 
+          className="absolute bottom-0 left-0 right-0 h-[400px] z-20 pointer-events-none"
+          style={{
+            background: 'linear-gradient(to bottom, transparent 0%, rgba(22, 26, 29, 0.3) 40%, rgba(22, 26, 29, 0.7) 80%, rgba(22, 26, 29, 0.95) 100%)',
+          }}
+        />
       </section>
     </>
   );
