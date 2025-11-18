@@ -63,6 +63,14 @@ export const workData: WorkItem[] = [
     role: "Video Editing Agency",
     year: "2023-Now",
     category: "Content Creator"
+  },
+  {
+    id: "gen-ztrive",
+    client: "GEN-ZTRIVE™",
+    location: "West Jakarta, Indonesia",
+    role: "Content Creator",
+    year: "2025-Now",
+    category: "Content Creator"
   }
 ];
 

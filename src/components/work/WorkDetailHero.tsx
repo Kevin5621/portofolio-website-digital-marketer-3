@@ -9,6 +9,13 @@ interface WorkDetailHeroProps {
 }
 
 export const WorkDetailHero = ({ workDetail }: WorkDetailHeroProps) => {
+  // Helper function to get string from client (for alt text)
+  const getClientString = () => {
+    return typeof workDetail.client === 'string' 
+      ? workDetail.client 
+      : workDetail.id;
+  };
+
   // Parallax untuk foto
   const photoParallaxRef = useParallax<HTMLDivElement>({
     speed: 0.2,
@@ -85,7 +92,7 @@ export const WorkDetailHero = ({ workDetail }: WorkDetailHeroProps) => {
           >
             <Image
               src={`/work/${workDetail.id}/hero.webp`}
-              alt={`${workDetail.client} hero image`}
+              alt={`${getClientString()} hero image`}
               fill
               className="object-cover"
               priority
@@ -121,7 +128,7 @@ export const WorkDetailHero = ({ workDetail }: WorkDetailHeroProps) => {
                 <div className="relative w-full h-full rounded-full overflow-hidden">
                   <Image
                     src={`/work/${workDetail.id}/logo.webp`}
-                    alt={`${workDetail.client} logo`}
+                    alt={`${getClientString()} logo`}
                     fill
                     className="object-cover"
                   />

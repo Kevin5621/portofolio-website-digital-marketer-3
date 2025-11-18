@@ -6,3 +6,4 @@ export { aerospaceData } from "./aerospace";
 export { genzummitData } from "./genzummit";
 export { ppmHimmaData } from "./ppm-himma";
 export { a5xStudioData } from "./a5x-studio";
+export { genZtriveData } from "./gen-ztrive";

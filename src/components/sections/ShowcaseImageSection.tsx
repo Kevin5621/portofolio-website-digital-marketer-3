@@ -2,7 +2,6 @@
 
 import Image from 'next/image'
 import { useEffect, useRef } from 'react'
-import type { ReactNode } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { PillButton } from '@/components/ui/pill-button'
@@ -15,7 +14,7 @@ if (globalThis.window !== undefined) {
 interface Project {
   id: string
   image: string
-  title: string | ReactNode
+  title: string
   year: string
   category: string
 }
@@ -85,7 +84,7 @@ const ProjectSection = ({ project }: ProjectSectionProps) => {
         >
           <Image
             src={image}
-            alt={typeof title === 'string' ? title : id}
+            alt={title}
             fill
             className="object-cover"
             priority={id === 'ortist-specialist'}
@@ -157,12 +156,8 @@ const projects = [
   {
     id: 'gen-ztrive',
     image: '/landing/4.webp',
-    title: (
-      <>
-        GEN-ZTRIVE<sup className="text-[0.5em]">TM</sup>
-      </>
-    ),
-    year: '2023 - 2024',
+    title: 'GEN-ZTRIVE™',
+    year: '2025-Now',
     category: 'Content Creator'
   }
 ]

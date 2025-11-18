@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { 
   ortistSpecialistData,
   rumahBahasaAsingData, 
@@ -5,12 +6,13 @@ import {
   aerospaceData,
   genzummitData,
   ppmHimmaData,
-  a5xStudioData
+  a5xStudioData,
+  genZtriveData
 } from "./projects";
 
 export interface WorkDetail {
   id: string;
-  client: string;
+  client: string | ReactNode;
   location: string;
   role: string;
   year: string;
@@ -74,6 +76,7 @@ export const workDetailsData: Record<string, WorkDetail> = {
   "genzummit": genzummitData,
   "ppm-himma-2025": ppmHimmaData,
   "a5x-studio": a5xStudioData,
+  "gen-ztrive": genZtriveData,
 };
 
 export const getWorkDetail = (id: string): WorkDetail | null => {
@@ -95,5 +98,12 @@ export const getNextProject = (currentId: string): { id: string; title: string }
   const nextId = workIds[nextIndex];
   const nextWork = workDetailsData[nextId];
   
-  return nextWork ? { id: nextId, title: nextWork.client } : null;
+  if (!nextWork) return null;
+  
+  // Convert client to string for title
+  const title = typeof nextWork.client === 'string' 
+    ? nextWork.client 
+    : 'Next Project';
+  
+  return { id: nextId, title };
 };
