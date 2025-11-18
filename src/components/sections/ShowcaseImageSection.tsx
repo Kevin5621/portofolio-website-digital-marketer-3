@@ -2,19 +2,20 @@
 
 import Image from 'next/image'
 import { useEffect, useRef } from 'react'
+import type { ReactNode } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { PillButton } from '@/components/ui/pill-button'
 
 // Register ScrollTrigger plugin
-if (typeof window !== 'undefined') {
+if (globalThis.window !== undefined) {
   gsap.registerPlugin(ScrollTrigger)
 }
 
 interface Project {
   id: string
   image: string
-  title: string
+  title: string | ReactNode
   year: string
   category: string
 }
@@ -84,7 +85,7 @@ const ProjectSection = ({ project }: ProjectSectionProps) => {
         >
           <Image
             src={image}
-            alt={title}
+            alt={typeof title === 'string' ? title : id}
             fill
             className="object-cover"
             priority={id === 'ortist-specialist'}
@@ -117,7 +118,7 @@ const ProjectSection = ({ project }: ProjectSectionProps) => {
                 className="px-8 py-4 text-lg"
                 onClick={() => {
                   // Navigate to specific project using correct route
-                  window.location.href = `/work/${id}`
+                  globalThis.window.location.href = `/work/${id}`
                 }}
               >
                 View project
@@ -152,6 +153,17 @@ const projects = [
     title: 'Binjasiimen Samapta',
     year: '2023 - 2024',
     category: 'Brand Strategy'
+  },
+  {
+    id: 'gen-ztrive',
+    image: '/landing/4.webp',
+    title: (
+      <>
+        GEN-ZTRIVE<sup className="text-[0.5em]">TM</sup>
+      </>
+    ),
+    year: '2023 - 2024',
+    category: 'Content Creator'
   }
 ]
 
