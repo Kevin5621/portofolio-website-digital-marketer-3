@@ -69,7 +69,23 @@ export const BrandLogosMarquee = () => {
   }, [])
 
   return (
-    <div className="w-full overflow-hidden">
+    <div className="w-full overflow-hidden relative">
+      {/* Left fade gradient */}
+      <div 
+        className="absolute left-0 top-0 bottom-0 w-24 md:w-32 lg:w-40 z-10 pointer-events-none"
+        style={{
+          background: 'linear-gradient(to right, hsl(var(--color-background)), transparent)'
+        }}
+      />
+      
+      {/* Right fade gradient */}
+      <div 
+        className="absolute right-0 top-0 bottom-0 w-24 md:w-32 lg:w-40 z-10 pointer-events-none"
+        style={{
+          background: 'linear-gradient(to left, hsl(var(--color-background)), transparent)'
+        }}
+      />
+      
       <div 
         ref={containerRef}
         className="flex items-center gap-8 md:gap-12 lg:gap-16"
