@@ -5,6 +5,7 @@ import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { PillButton } from '@/components/ui/pill-button'
+import { TextBlockHighlight } from '@/components/ui/text-block-highlight'
 
 // Register ScrollTrigger plugin
 if (globalThis.window !== undefined) {
@@ -96,7 +97,7 @@ const ProjectSection = ({ project }: ProjectSectionProps) => {
         {/* Year positioned at top left */}
         <div className="absolute top-8 left-8 z-10">
           <p className="text-content-inverse text-lg font-normal">
-            {year}
+            <TextBlockHighlight delay={0}>{year}</TextBlockHighlight>
           </p>
         </div>
 
@@ -104,13 +105,13 @@ const ProjectSection = ({ project }: ProjectSectionProps) => {
         <div className="absolute inset-0 flex items-center z-10">
           <div className="ml-8 space-y-6">
             <h1 className="text-content-inverse text-[3rem] md:text-[4rem] lg:text-[5rem] xl:text-[6rem] font-bold leading-none tracking-tight">
-              {title}
+              <TextBlockHighlight delay={0.1}>{title}</TextBlockHighlight>
             </h1>
             
             {/* Category and button positioned below title */}
             <div className="space-y-4">
               <p className="text-content-inverse text-xl font-normal pb-8 pt-8">
-                {category}
+                <TextBlockHighlight delay={0.2}>{category}</TextBlockHighlight>
               </p>
               <PillButton 
                 variant="light-to-dark"
