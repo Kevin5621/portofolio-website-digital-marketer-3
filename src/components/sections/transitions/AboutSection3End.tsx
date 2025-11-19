@@ -6,63 +6,63 @@ export function AboutSection3End() {
   // Portfolio items for the gallery showcase
   const portfolioItems = [
     {
-      image: "/about/photo/1.png",
+      image: "/about/photo/1.webp",
       text: "Aerospace"
     },
     {
-      image: "/about/photo/2.png", 
+      image: "/about/photo/2.webp", 
       text: "Aerospace"
     },
     {
-      image: "/about/photo/3.png",
+      image: "/about/photo/3.webp",
       text: "Aerospace"
     },
     {
-      image: "/about/photo/4.png",
+      image: "/about/photo/4-1.webp",
       text: "Ortist Spesialist"
     },
     {
-      image: "/about/photo/5.png",
+      image: "/about/photo/5.webp",
       text: "Ortist Spesialist"
     },
     {
-      image: "/about/photo/6.png",
+      image: "/about/photo/6.webp",
       text: "Ortist Spesialist"
     },
     {
-      image: "/about/photo/7.png",
+      image: "/about/photo/7.webp",
       text: "RBA"
     },
     {
-      image: "/about/photo/8.png",
+      image: "/about/photo/8.webp",
       text: "RBA"
     },
     {
-      image: "/about/photo/9.png",
+      image: "/about/photo/9.webp",
       text: "RBA"
     },
     {
-      image: "/about/photo/foto1.png",
+      image: "/about/photo/10.webp",
       text: "Binjasiimen Samapta"
     },
     {
-      image: "/about/photo/foto2.png",
+      image: "/about/photo/11.webp",
       text: "Binjasiimen Samapta"
     },
     {
-      image: "/about/photo/foto3.png",
+      image: "/about/photo/12.webp",
       text: "Binjasiimen Samapta"
     },
     {
-      image: "/about/photo/foto4.png",
+      image: "/about/photo/13.webp",
       text: "Toyota Runners Club"
     },
     {
-      image: "/about/photo/foto5.png",
+      image: "/about/photo/14.webp",
       text: "Aerospace"
     },
     {
-      image: "/about/photo/foto6.png",
+      image: "/about/photo/15.webp",
       text: "Aerospace"
     }
   ];

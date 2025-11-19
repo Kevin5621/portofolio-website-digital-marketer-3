@@ -156,6 +156,10 @@ const Column = ({ images, y }: ColumnProps) => {
 
             sizes="(max-width: 768px) 25vw, 25vw"
 
+            loading={index < 3 ? "eager" : "lazy"}
+
+            quality={85}
+
           />
 
         </div>
