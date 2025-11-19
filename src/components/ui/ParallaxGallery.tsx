@@ -69,13 +69,15 @@ const ParallaxGallery = ({ images }: ParallaxGalleryProps) => {
 
   }, []);
 
-  // Ensure we have at least 9 images by repeating if necessary
+  // Filter out empty or invalid images
+  const validImages = images.filter(img => img && img.trim() !== '');
 
-  const imageList = images.length >= 9 
+  // Ensure we have at least 15 images by repeating if necessary
+  const imageList = validImages.length >= 15 
 
-    ? images.slice(0, 9)
+    ? validImages.slice(0, 15)
 
-    : Array.from({ length: 9 }, (_, i) => images[i % images.length]);
+    : Array.from({ length: 15 }, (_, i) => validImages[i % validImages.length]).filter(img => img && img.trim() !== '');
 
   return (
 
@@ -99,13 +101,13 @@ const ParallaxGallery = ({ images }: ParallaxGalleryProps) => {
 
       >
 
-        <Column images={[imageList[0], imageList[1], imageList[2]]} y={y} />
+        <Column images={[imageList[0], imageList[1], imageList[2]].filter(Boolean)} y={y} />
 
-        <Column images={[imageList[3], imageList[4], imageList[5]]} y={y2} />
+        <Column images={[imageList[3], imageList[4], imageList[5]].filter(Boolean)} y={y2} />
 
-        <Column images={[imageList[6], imageList[7], imageList[8]]} y={y3} />
+        <Column images={[imageList[6], imageList[7], imageList[8]].filter(Boolean)} y={y3} />
 
-        <Column images={[imageList[0], imageList[1], imageList[2]]} y={y4} />
+        <Column images={[imageList[9], imageList[10], imageList[11]].filter(Boolean)} y={y4} />
 
       </motion.div>
 
@@ -125,6 +127,9 @@ type ColumnProps = {
 
 const Column = ({ images, y }: ColumnProps) => {
 
+  // Filter out empty or invalid images
+  const validImages = images.filter(img => img && img.trim() !== '');
+
   return (
 
     <motion.div
@@ -135,9 +140,9 @@ const Column = ({ images, y }: ColumnProps) => {
 
     >
 
-      {images.map((src) => (
+      {validImages.map((src, index) => (
 
-        <div key={src} className="relative h-full w-full overflow-hidden rounded-lg">
+        <div key={`${src}-${index}`} className="relative h-full w-full overflow-hidden rounded-lg">
 
           <Image
 
