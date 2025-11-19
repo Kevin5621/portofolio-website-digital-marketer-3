@@ -79,13 +79,21 @@ const ParallaxGallery = ({ images }: ParallaxGalleryProps) => {
 
   return (
 
-    <div className="w-full bg-surface-background text-content-primary">
+    <div className="relative w-full bg-surface-background text-content-primary">
+
+      {/* Fade in gradient overlay at the top - white gradient for smooth transition */}
+      <div 
+        className="absolute top-0 left-0 right-0 h-[400px] z-30 pointer-events-none"
+        style={{
+          background: 'linear-gradient(to bottom, hsl(var(--color-background)) 0%, hsl(var(--color-background) / 0.95) 20%, hsl(var(--color-background) / 0.7) 50%, hsl(var(--color-background) / 0.3) 80%, transparent 100%)',
+        }}
+      />
 
       <motion.div
 
         ref={gallery}
 
-        className="relative box-border flex h-[175vh] gap-[2vw] overflow-hidden bg-surface-background p-[2vw]"
+        className="relative box-border flex h-[175vh] gap-[2vw] overflow-hidden bg-surface-background p-[2vw] z-10"
 
         style={{ scale }}
 

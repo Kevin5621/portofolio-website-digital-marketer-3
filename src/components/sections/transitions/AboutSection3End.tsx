@@ -80,7 +80,7 @@ export function AboutSection3End() {
       </section>
 
       {/* Design showcase with ParallaxGallery - normal section for continuous scroll */}
-      <section id="design-showcase" className="relative bg-surface-background flex items-center justify-center px-6 overflow-visible z-10">
+      <section id="design-showcase" className="relative bg-surface-background flex items-center justify-center overflow-visible z-10">
         <ParallaxGallery images={imagePaths} />
         {/* Fade-out gradient at the bottom for smooth transition */}
         <div 
