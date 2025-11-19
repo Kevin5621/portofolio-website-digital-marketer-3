@@ -4,7 +4,6 @@ import { Magnetic } from '@/components/ui/magnetic'
 import { PillButton } from '@/components/ui/pill-button'
 import { InstagramIcon } from '@/components/ui/instagram-icon'
 import { LinkedInIcon } from '@/components/ui/linkedin-icon'
-import { TextBlockHighlight } from '@/components/ui/text-block-highlight'
 
 export const ContactSection = () => {
   return (
@@ -19,7 +18,7 @@ export const ContactSection = () => {
           {/* Header */}
           <div className="text-center">
             <h2 className="font-bold text-content-primary leading-none tracking-tight" style={{fontSize: '8.5rem'}}>
-              <TextBlockHighlight delay={0}>Contact</TextBlockHighlight>
+              Contact
             </h2>
           </div>
 
@@ -139,7 +138,7 @@ export const ContactSection = () => {
               {/* Contact Title - Made larger and takes more space */}
               <div className="w-full">
                 <h2 className="text-[12rem] md:text-[14rem] lg:text-[16rem] font-bold text-content-primary leading-none tracking-tight">
-                  <TextBlockHighlight delay={0}>Contact</TextBlockHighlight>
+                  Contact
                 </h2>
               </div>
             </div>
@@ -175,7 +174,7 @@ export const ContactSection = () => {
                 {/* Email - Right aligned */}
                 <div className="text-right mb-16">
                   <div className="text-4xl font-normal text-content-primary">
-                    <TextBlockHighlight delay={0.1}>ekaadharabusiness@gmail.com</TextBlockHighlight>
+                    ekaadharabusiness@gmail.com
                   </div>
                 </div>
 
@@ -185,7 +184,7 @@ export const ContactSection = () => {
                 {/* Phone - Right aligned */}
                 <div className="text-right">
                   <div className="text-4xl font-normal text-content-primary">
-                    <TextBlockHighlight delay={0.2}>+62 896-9734-6868</TextBlockHighlight>
+                    +62 896-9734-6868
                   </div>
                 </div>
               </div>
