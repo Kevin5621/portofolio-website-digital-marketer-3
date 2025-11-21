@@ -100,13 +100,13 @@ const ProjectSection = ({ project }: ProjectSectionProps) => {
             <div className="ml-8 space-y-6">
               {/* Year */}
               <div className="ml-32 pb-24">
-                <p className="text-content-inverse text-2xl font-extrabold">
+                <p className="text-content-inverse text-2xl font-semibold">
                   <TextBlockHighlight delay={0}>{year}</TextBlockHighlight>
                 </p>
               </div>
 
               {/* Title */}
-              <h1 className="text-8xl sm:text-9xl md:text-[6rem] lg:text-[8rem] xl:text-[10rem] text-content-primary leading-[0.8] tracking-tight" style={{ fontWeight: 900 }}>
+              <h1 className="text-8xl sm:text-9xl md:text-[6rem] lg:text-[8rem] xl:text-[10rem] font-bold text-content-primary leading-[0.8] tracking-tight">
                 <TextBlockHighlight delay={0.1}>{title}</TextBlockHighlight>
               </h1>
               
@@ -117,7 +117,7 @@ const ProjectSection = ({ project }: ProjectSectionProps) => {
                 </p>
                 <PillButton 
                   variant="light-to-dark"
-                  className="px-12 py-6 text-2xl lg:text-3xl"
+                  className="px-12 py-6 text-2xl font-bold lg:text-3xl"
                   onClick={() => {
                     // Navigate to specific project using correct route
                     globalThis.window.location.href = `/work/${id}`
