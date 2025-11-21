@@ -8,6 +8,7 @@ import { scrollToElement } from '@/lib/animations/lenis'
 import { cn } from '@/lib/utils'
 import { Magnetic } from '@/components/ui/magnetic'
 import { PDFViewer } from '@/components/ui/pdf-viewer'
+import { TextRoll } from '@/components/ui/text-roll'
 
 const navigation = [
   { name: 'Home', href: '/' },
@@ -427,7 +428,13 @@ export const Header = () => {
                       transitionDuration: showTextMenu ? '800ms' : '1200ms',
                     } as React.CSSProperties}
                   >
-                    {item.name}
+                    <TextRoll className={cn(
+                      isDark 
+                        ? "text-foreground-light" 
+                        : "text-foreground"
+                    )}>
+                      {item.name}
+                    </TextRoll>
                   </Link>
                 ))}
               </div>
@@ -603,10 +610,10 @@ export const Header = () => {
                     className="mb-16"
                   >
                     <Magnetic 
-                      strength={0.4} 
-                      range={150} 
+                      strength={0.2} 
+                      range={100} 
                       onlyOnHover={true} 
-                      textStrength={0.6}
+                      textStrength={0.3}
                       className="inline-block"
                     >
                       <Link
@@ -623,7 +630,9 @@ export const Header = () => {
                         }}
                         className="block text-5xl font-bold text-foreground-light hover:text-foreground-light/80 transition-all duration-300 ease-out leading-tight"
                       >
-                        <span className="magnetic-text">{item.name}</span>
+                        <TextRoll className="text-foreground-light magnetic-text">
+                          {item.name}
+                        </TextRoll>
                       </Link>
                     </Magnetic>
                   </motion.div>
