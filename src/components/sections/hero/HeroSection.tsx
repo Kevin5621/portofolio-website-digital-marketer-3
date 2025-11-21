@@ -55,7 +55,7 @@ export const HeroSection = () => {
       <div className="relative h-screen flex items-center justify-center">
         {/* Motto Section */}
         <div className={`absolute ${desktopPositions.mottoSection.left} ${desktopPositions.mottoSection.right} ${desktopPositions.mottoSection.top} ${desktopPositions.mottoSection.bottom} ${desktopPositions.mottoSection.transform} z-20 hidden md:block`}>
-          <div className="text-content-inverse text-left">
+          <div className="text-content-inverse text-left pb-32">
             {/* Spacer untuk menyelaraskan dengan arrow icon di skills section */}
             <div className="mb-2" style={{height: '60px'}}></div>
             <div>
@@ -79,7 +79,7 @@ export const HeroSection = () => {
 
         {/* Skills */}
         <div className={`absolute ${desktopPositions.skills.left} ${desktopPositions.skills.right} ${desktopPositions.skills.top} ${desktopPositions.skills.bottom} ${desktopPositions.skills.transform} z-20 hidden md:block`}>
-          <div className="text-content-inverse text-left -ml-8">
+          <div className="text-content-inverse text-left -ml-8 pb-32">
             {/* Arrow Icon - Di atas text */}
             <HeroArrowIcon />
             
