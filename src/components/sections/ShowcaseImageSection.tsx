@@ -94,35 +94,38 @@ const ProjectSection = ({ project }: ProjectSectionProps) => {
           <div className="absolute inset-0 bg-black/55"></div>
         </div>
         
-        {/* Year positioned at top left */}
-        <div className="absolute top-8 left-8 z-10">
-          <p className="text-content-inverse text-lg font-normal">
-            <TextBlockHighlight delay={0}>{year}</TextBlockHighlight>
-          </p>
-        </div>
+        {/* Content wrapper with vertical center alignment */}
+        <div className="absolute inset-0 flex items-center z-10 pt-28 pl-20">
+          <div className="w-full">
+            <div className="ml-8 space-y-6">
+              {/* Year */}
+              <div className="ml-32 pb-24">
+                <p className="text-content-inverse text-2xl font-extrabold">
+                  <TextBlockHighlight delay={0}>{year}</TextBlockHighlight>
+                </p>
+              </div>
 
-        {/* Main title positioned in center-left */}
-        <div className="absolute inset-0 flex items-center z-10">
-          <div className="ml-8 space-y-6">
-            <h1 className="text-content-inverse text-[3rem] md:text-[4rem] lg:text-[5rem] xl:text-[6rem] font-bold leading-none tracking-tight">
-              <TextBlockHighlight delay={0.1}>{title}</TextBlockHighlight>
-            </h1>
-            
-            {/* Category and button positioned below title */}
-            <div className="space-y-4">
-              <p className="text-content-inverse text-xl font-normal pb-8 pt-8">
-                <TextBlockHighlight delay={0.2}>{category}</TextBlockHighlight>
-              </p>
-              <PillButton 
-                variant="light-to-dark"
-                className="px-8 py-4 text-lg"
-                onClick={() => {
-                  // Navigate to specific project using correct route
-                  globalThis.window.location.href = `/work/${id}`
-                }}
-              >
-                View project
-              </PillButton>
+              {/* Title */}
+              <h1 className="text-8xl sm:text-9xl md:text-[6rem] lg:text-[8rem] xl:text-[10rem] text-content-primary leading-[0.8] tracking-tight" style={{ fontWeight: 900 }}>
+                <TextBlockHighlight delay={0.1}>{title}</TextBlockHighlight>
+              </h1>
+              
+              {/* Category and button */}
+              <div className="space-y-4 ml-32">
+                <p className="text-xl md:text-xl lg:text-xl xl:text-3xl font-semibold text-content-primary pt-24 pb-24">
+                  <TextBlockHighlight delay={0.2}>{category}</TextBlockHighlight>
+                </p>
+                <PillButton 
+                  variant="light-to-dark"
+                  className="px-12 py-6 text-2xl lg:text-3xl"
+                  onClick={() => {
+                    // Navigate to specific project using correct route
+                    globalThis.window.location.href = `/work/${id}`
+                  }}
+                >
+                  View project
+                </PillButton>
+              </div>
             </div>
           </div>
         </div>
@@ -145,14 +148,14 @@ const projects = [
     image: '/landing/2.webp',
     title: 'Rumah Bahasa Asing',
     year: '2023 - 2024',
-    category: 'Digital Marketing'
+    category: 'Content Creator'
   },
   {
     id: 'binjasiimen-samapta',
     image: '/landing/3.webp', 
     title: 'Binjasiimen Samapta',
     year: '2023 - 2024',
-    category: 'Brand Strategy'
+    category: 'Content Creator'
   },
   {
     id: 'gen-ztrive',
