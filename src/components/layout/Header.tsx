@@ -3,6 +3,7 @@
 import { useState, useLayoutEffect, useEffect } from 'react'
 import Link from 'next/link'
 import { Menu, X } from 'lucide-react'
+import { motion} from 'framer-motion'
 import { scrollToElement } from '@/lib/animations/lenis'
 import { cn } from '@/lib/utils'
 import { Magnetic } from '@/components/ui/magnetic'
@@ -338,12 +339,6 @@ export const Header = () => {
     return "translate-x-0 rounded-none"
   }
 
-  const getContentTransformClass = () => {
-    if (isMenuEntering) return "opacity-0 translate-x-16"
-    if (isMenuSliding) return "opacity-0 translate-x-16"
-    return "opacity-100 translate-x-0"
-  }
-
   // Jika belum di client, render dengan default state
   if (!isClient) {
     return (
@@ -546,25 +541,67 @@ export const Header = () => {
             )}
           >
             {/* Navigation Content */}
-            <div className={cn(
-              "pt-24 px-8 pl-12 transition-all duration-800 ease-out",
-              getContentTransformClass()
-            )}>
+            <motion.div 
+              className="pt-24 px-8 pl-12"
+              initial={{ opacity: 0 }}
+              animate={{ 
+                opacity: isMenuEntering || isMenuSliding ? 0 : 1 
+              }}
+              transition={{ 
+                duration: 0.6, 
+                delay: isMenuSliding ? 0 : 0.8,
+                ease: [0.25, 0.1, 0.25, 1]
+              }}
+            >
               {/* Navigation Header */}
-              <div className={cn(
-                "mb-8 transition-all duration-800 ease-out",
-                isMenuSliding
-                  ? "opacity-0 translate-x-8"
-                  : "opacity-100 translate-x-0"
-              )}>
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ 
+                  opacity: isMenuSliding ? 0 : 1,
+                  x: isMenuSliding ? 20 : 0
+                }}
+                transition={{ 
+                  duration: 0.5,
+                  delay: isMenuSliding ? 0 : 0.9,
+                  ease: [0.25, 0.1, 0.25, 1]
+                }}
+                className="mb-8"
+              >
                 <h2 className="text-sm font-medium text-gray-400 mb-2">Navigation</h2>
-                <div className="w-full h-px bg-gray-400"></div>
-              </div>
+                <motion.div
+                  initial={{ scaleX: 0, transformOrigin: 'right' }}
+                  animate={{ 
+                    scaleX: isMenuSliding ? 0 : 1,
+                    transformOrigin: isMenuSliding ? 'left' : 'right'
+                  }}
+                  transition={{ 
+                    duration: 0.6,
+                    delay: isMenuSliding ? 0 : 0.95,
+                    ease: [0.16, 1, 0.3, 1]
+                  }}
+                  className="w-full h-px bg-gray-400"
+                />
+              </motion.div>
 
               {/* Navigation Links */}
               <nav className="mb-20">
                 {navigation.map((item, index) => (
-                  <div key={item.name} className="mb-16">
+                  <motion.div
+                    key={item.name}
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ 
+                      opacity: isMenuSliding ? 0 : 1,
+                      x: isMenuSliding ? 20 : 0
+                    }}
+                    transition={{ 
+                      duration: 0.5,
+                      delay: isMenuSliding 
+                        ? (navigation.length - index - 1) * 0.05 
+                        : 0.95 + (index * 0.08),
+                      ease: [0.25, 0.1, 0.25, 1]
+                    }}
+                    className="mb-16"
+                  >
                     <Magnetic 
                       strength={0.4} 
                       range={150} 
@@ -584,65 +621,79 @@ export const Header = () => {
                             handleSmoothScroll(item.href)
                           }
                         }}
-                        className={cn(
-                          "block text-5xl font-bold text-foreground-light hover:text-foreground-light/80 transition-all duration-300 ease-out leading-tight",
-                          isMenuSliding
-                            ? "opacity-0 translate-x-12"
-                            : "opacity-100 translate-x-0"
-                        )}
-                        style={{
-                          transitionDelay: isMenuSliding
-                            ? `${index * 25}ms`
-                            : `${150 + index * 75}ms`
-                        }}
+                        className="block text-5xl font-bold text-foreground-light hover:text-foreground-light/80 transition-all duration-300 ease-out leading-tight"
                       >
                         <span className="magnetic-text">{item.name}</span>
                       </Link>
                     </Magnetic>
-                  </div>
+                  </motion.div>
                 ))}
               </nav>
 
               {/* Social Links */}
-              <div className={cn(
-                "pt-12 transition-all duration-800 ease-out delay-300",
-                isMenuSliding
-                  ? "opacity-0 translate-x-8"
-                  : "opacity-100 translate-x-0"
-              )}>
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ 
+                  opacity: isMenuSliding ? 0 : 1,
+                  x: isMenuSliding ? 20 : 0
+                }}
+                transition={{ 
+                  duration: 0.5,
+                  delay: isMenuSliding ? 0 : 1.35,
+                  ease: [0.25, 0.1, 0.25, 1]
+                }}
+                className="pt-12"
+              >
                 <h3 className="text-sm font-medium text-gray-400 mb-4">Socials</h3>
-                <div className="w-full h-px bg-gray-400 mb-4"></div>
+                <motion.div
+                  initial={{ scaleX: 0, transformOrigin: 'right' }}
+                  animate={{ 
+                    scaleX: isMenuSliding ? 0 : 1,
+                    transformOrigin: isMenuSliding ? 'left' : 'right'
+                  }}
+                  transition={{ 
+                    duration: 0.6,
+                    delay: isMenuSliding ? 0 : 1.4,
+                    ease: [0.16, 1, 0.3, 1]
+                  }}
+                  className="w-full h-px bg-gray-400 mb-4"
+                />
                 <div className="flex space-x-8">
                   {socials.map((social, index) => (
-                    <Magnetic 
+                    <motion.div
                       key={social.name}
-                      strength={0.25} 
-                      range={60} 
-                      onlyOnHover={true}
-                      textStrength={0.4}
-                      className="inline-block"
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ 
+                        opacity: isMenuSliding ? 0 : 1,
+                        y: isMenuSliding ? 10 : 0
+                      }}
+                      transition={{ 
+                        duration: 0.4,
+                        delay: isMenuSliding
+                          ? (socials.length - index - 1) * 0.05
+                          : 1.45 + (index * 0.08),
+                        ease: [0.25, 0.1, 0.25, 1]
+                      }}
                     >
-                      <button
-                        onClick={() => handleSocialClick(social.href)}
-                        className={cn(
-                          "text-lg text-foreground-light hover:text-foreground-light/80 transition-all duration-800 ease-out",
-                          isMenuSliding
-                            ? "opacity-0 translate-y-4"
-                            : "opacity-100 translate-y-0"
-                        )}
-                        style={{
-                          transitionDelay: isMenuSliding
-                            ? `${index * 25}ms`
-                            : `${350 + index * 75}ms`
-                        }}
+                      <Magnetic 
+                        strength={0.25} 
+                        range={60} 
+                        onlyOnHover={true}
+                        textStrength={0.4}
+                        className="inline-block"
                       >
-                        <span className="magnetic-text">{social.name}</span>
-                      </button>
-                    </Magnetic>
+                        <button
+                          onClick={() => handleSocialClick(social.href)}
+                          className="text-lg text-foreground-light hover:text-foreground-light/80 transition-all duration-300 ease-out"
+                        >
+                          <span className="magnetic-text">{social.name}</span>
+                        </button>
+                      </Magnetic>
+                    </motion.div>
                   ))}
                 </div>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           </div>
         </>
       )}
