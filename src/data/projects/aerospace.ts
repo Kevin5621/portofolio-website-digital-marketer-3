@@ -31,19 +31,25 @@ export const aerospaceData: WorkDetail = {
   
   specialText: "Even though the project was paused due to my academic commitments, I successfully created a library of designs and videos that reflected Aerospace's premium identity. This project shows my ability to combine strategic thinking, creative design, and effective communication into a cohesive branding effort.",
   creativeProjects: [
+    // Layer 1: Grid cols 3 - Video kiri, 2 foto tengah (vertikal), image kanan
     {
-      title: "Premium Underwear Design",
-      description: "Designed premium underwear products with focus on comfort and style for various activities.",
+      title: "LAYER_1_LEFT_VIDEO",
+      description: "Left video",
+      image: "/work/aerospace/Export Vertical.webm"
+    },
+    {
+      title: "LAYER_1_CENTER_TOP",
+      description: "Center top image",
       image: "/work/aerospace/1.webp"
     },
     {
-      title: "Brand Identity Design",
-      description: "Created comprehensive visual guide showcasing Aerospace's premium brand identity and product range.",
+      title: "LAYER_1_CENTER_BOTTOM",
+      description: "Center bottom image",
       image: "/work/aerospace/2.webp"
     },
     {
-      title: "Vertical Content Format",
-      description: "Optimized content format for mobile viewing and social media engagement.",
+      title: "LAYER_1_RIGHT_IMAGE",
+      description: "Right image",
       image: "/work/aerospace/Export Vertical.webp"
     }
   ]
