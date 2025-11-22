@@ -391,7 +391,7 @@ export const Header = () => {
               {/* Menu Text - Adaptif berdasarkan section aktif */}
               <div 
                 className={cn(
-                  "flex items-baseline space-x-12 transition-all duration-1000 ease-out",
+                  "flex items-baseline space-x-12 transition-all duration-500 ease-out",
                   !showTextMenu && "pointer-events-none"
                 )}
               >
@@ -410,7 +410,7 @@ export const Header = () => {
                       }
                     }}
                     className={cn(
-                      "text-2xl transition-all duration-1000 ease-out",
+                      "text-2xl transition-all duration-500 ease-out",
                       "transform hover:scale-105 hover:-translate-y-0.5",
                       // Warna text berdasarkan section
                       isDark 
@@ -423,9 +423,9 @@ export const Header = () => {
                     )}
                     style={{
                       transitionDelay: showTextMenu 
-                        ? `${index * 100}ms` 
-                        : `${(navigation.length - index - 1) * 150}ms`,
-                      transitionDuration: showTextMenu ? '800ms' : '1200ms',
+                        ? `${index * 50}ms` 
+                        : `${(navigation.length - index - 1) * 80}ms`,
+                      transitionDuration: showTextMenu ? '400ms' : '600ms',
                     } as React.CSSProperties}
                   >
                     <TextRoll className={cn(
@@ -442,15 +442,15 @@ export const Header = () => {
               {/* Burger Button - Adaptif berdasarkan section aktif */}
               <div 
                 className={cn(
-                  "absolute top-1/2 right-0 transform -translate-y-1/2 transition-all duration-1000 ease-out",
+                  "absolute top-1/2 right-0 transform -translate-y-1/2 transition-all duration-500 ease-out",
                   showBurgerMenu 
                     ? "opacity-100 scale-100 translate-x-0" 
                     : "opacity-0 scale-0 translate-x-0 pointer-events-none"
                 )}
                 style={{
                   // Burger muncul setelah menu text hilang
-                  transitionDelay: showBurgerMenu ? '400ms' : '0ms',
-                  transitionDuration: showBurgerMenu ? '800ms' : '400ms'
+                  transitionDelay: showBurgerMenu ? '200ms' : '0ms',
+                  transitionDuration: showBurgerMenu ? '500ms' : '300ms'
                 }}
               >
                 <button
