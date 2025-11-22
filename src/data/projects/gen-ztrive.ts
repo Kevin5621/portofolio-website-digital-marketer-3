@@ -26,6 +26,22 @@ export const genZtriveData: WorkDetail = {
     "Created readable and engaging subtitles to improve accessibility and keep the audience engaged.",
     "Applied zoom-in and zoom-out effects, along with creative graphic design elements and sound effects (SFX), to make the videos more dynamic and visually appealing."
   ],
-  creativeProjects: []
+  creativeProjects: [
+    {
+      title: "Re-edited Interview Content",
+      description: "Enhanced interview video with improved audio quality, visual adjustments, and engaging subtitles",
+      image: "/about/video/Finishing v2.webm"
+    },
+    {
+      title: "Interview with Pak Oscar Darmawan",
+      description: "Professional interview content showcasing insights and experiences, enhanced with high-quality editing",
+      image: "/about/video/Interview - Pak Oscar Darmawan.webm"
+    },
+    {
+      title: "Final Enhanced Video",
+      description: "Polished video content with creative effects, improved audio, and dynamic visual elements",
+      image: "/about/video/Finishing_1.webm"
+    }
+  ]
 };
 

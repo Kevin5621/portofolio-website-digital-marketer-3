@@ -21,6 +21,37 @@ export const WorkCreativeProjects = ({ projects, projectId }: WorkCreativeProjec
   };
 
   const isGenzummit = projectId === "genzummit";
+  const isGenZtrive = projectId === "gen-ztrive";
+
+  if (isGenZtrive) {
+    return (
+      <section className="py-24 bg-surface-background">
+        <div className="max-w-full mx-auto px-6">
+          <hr className="border-border-primary mb-16" />
+          
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-content-primary mb-16 text-center">
+            My Creative Projects
+          </h2>
+          
+          {/* 3 videos in centered grid - full width, 3 columns */}
+          <div className="grid grid-cols-3 gap-4 w-full">
+            {projects.map((project) => (
+              <div key={project.image} className="w-full">
+                <div className="aspect-[9/16] rounded-lg overflow-hidden">
+                  <video
+                    src={project.image}
+                    className="w-full h-full object-cover"
+                    controls
+                    muted
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   if (isGenzummit) {
     const firstThreeVideos = projects.slice(0, 3);
