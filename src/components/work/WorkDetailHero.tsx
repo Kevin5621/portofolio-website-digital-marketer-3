@@ -91,7 +91,7 @@ export const WorkDetailHero = ({ workDetail }: WorkDetailHeroProps) => {
             }}
           >
             <Image
-              src="/landing/4.webp"
+              src={`/work/${workDetail.id}/hero.webp`}
               alt={`${getClientString()} hero image`}
               fill
               className="object-cover"
@@ -127,7 +127,7 @@ export const WorkDetailHero = ({ workDetail }: WorkDetailHeroProps) => {
               <div className="w-full h-full p-2">
                 <div className="relative w-full h-full rounded-full overflow-hidden">
                   <Image
-                    src="/logo/9 (1).webp"
+                    src={`/work/${workDetail.id}/logo.webp`}
                     alt={`${getClientString()} logo`}
                     fill
                     className="object-cover"

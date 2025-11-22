@@ -49,27 +49,19 @@ export const workData: WorkItem[] = [
     category: "Content Creator"
   },
   {
-    id: "ppm-himma-2025",
-    client: "PPM HIMMA 2025",
-    location: "Gading Serpong, Indonesia",
-    role: "Content Creator",
-    year: "2025",
-    category: "Content Creator"
-  },
-  {
-    id: "a5x-studio",
-    client: "A5X Studio",
-    location: "Gading Serpong, Indonesia",
-    role: "Video Editing Agency",
-    year: "2023-Now",
-    category: "Content Creator"
-  },
-  {
     id: "gen-ztrive",
     client: "GEN-ZTRIVE™",
     location: "West Jakarta, Indonesia",
     role: "Content Creator",
     year: "2025-Now",
+    category: "Content Creator"
+  },
+  {
+    id: "ppm-himma-2025",
+    client: "PPM HIMMA 2025",
+    location: "Gading Serpong, Indonesia",
+    role: "Content Creator",
+    year: "2025",
     category: "Content Creator"
   },
   {
@@ -86,6 +78,14 @@ export const workData: WorkItem[] = [
     location: "South Jakarta, Indonesia",
     role: "Content Creator",
     year: "2025",
+    category: "Content Creator"
+  },
+  {
+    id: "a5x-studio",
+    client: "A5X Studio",
+    location: "Gading Serpong, Indonesia",
+    role: "Video Editing Agency",
+    year: "2023-Now",
     category: "Content Creator"
   }
 ];

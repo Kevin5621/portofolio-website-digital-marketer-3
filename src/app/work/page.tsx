@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useMemo } from "react";
 import { motion, useSpring } from 'framer-motion';
 import { useRouter } from "next/navigation";
 import { gsap } from "gsap";
@@ -19,8 +19,10 @@ const categories = [
 export default function WorkPage() {
   const [activeFilter, setActiveFilter] = useState("All");
   const router = useRouter();
-  const workData = getAllWorkItems();
-  const filteredWork = activeFilter === "All" ? workData : workData.filter(item => item.category === activeFilter);
+  const workData = useMemo(() => getAllWorkItems(), []);
+  const filteredWork = useMemo(() => {
+    return activeFilter === "All" ? workData : workData.filter(item => item.category === activeFilter);
+  }, [workData, activeFilter]);
 
   // Hover image reveal state
   const [hovered, setHovered] = useState<{ src: string; alt: string; opacity: number; direction: 'up' | 'down' }>({ src: '', alt: '', opacity: 0, direction: 'down' });
