@@ -1,6 +1,5 @@
 import { HeroPhoto } from './HeroPhoto'
 import { HeroArrowIcon } from './HeroArrowIcon'
-import { TextBlockHighlight } from '@/components/ui/text-block-highlight'
 
 export const HeroSection = () => {
   // =======================================
@@ -60,13 +59,13 @@ export const HeroSection = () => {
             <div className="mb-2" style={{height: '60px'}}></div>
             <div>
               <div className="text-xl md:text-2xl font-normal">
-                <TextBlockHighlight delay={0}>My Motto Is:</TextBlockHighlight>
+                My Motto Is:
               </div>
               <div className="text-3xl md:text-4xl lg:text-5xl font-normal pt-4">
-                <TextBlockHighlight delay={0.1}>&quot;Sepi ing Pamrih,</TextBlockHighlight>
+                &quot;Sepi ing Pamrih,
               </div>
               <div className="text-3xl md:text-4xl lg:text-5xl font-normal pt-4">
-                <TextBlockHighlight delay={0.2}>Rame ing Gawe&quot;</TextBlockHighlight>
+                Rame ing Gawe&quot;
               </div>
             </div>
           </div>
@@ -86,13 +85,13 @@ export const HeroSection = () => {
             {/* Skills Text */}
             <div className="space-y-6 pt-4">
               <div className="text-3xl md:text-4xl lg:text-5xl font-normal">
-                <TextBlockHighlight delay={0.3}>Social Media Marketing</TextBlockHighlight>
+                Social Media Marketing
               </div>
               <div className="text-3xl md:text-4xl lg:text-5xl font-normal">
-                <TextBlockHighlight delay={0.4}>Content Creator</TextBlockHighlight>
+                Content Creator
               </div>
               <div className="text-3xl md:text-4xl lg:text-5xl font-normal">
-                <TextBlockHighlight delay={0.5}>Short-Form Video Editor</TextBlockHighlight>
+                Short-Form Video Editor
               </div>
             </div>
           </div>
@@ -119,13 +118,13 @@ export const HeroSection = () => {
           {/* Mobile Skills */}
           <div className="text-center space-y-6 mb-12">
             <div className="text-content-inverse font-normal" style={{fontSize: '3.5rem'}}>
-              <TextBlockHighlight delay={0.2}>Social Media Marketing</TextBlockHighlight>
+              Social Media Marketing
             </div>
             <div className="text-content-inverse font-normal" style={{fontSize: '3.5rem'}}>
-              <TextBlockHighlight delay={0.3}>Content Creator</TextBlockHighlight>
+              Content Creator
             </div>
             <div className="text-content-inverse font-normal" style={{fontSize: '3.5rem'}}>
-              <TextBlockHighlight delay={0.4}>Short-Form Video Editor</TextBlockHighlight>
+              Short-Form Video Editor
             </div>
           </div>
 
@@ -133,14 +132,14 @@ export const HeroSection = () => {
           <div className="text-center">
             <div className="text-content-inverse">
               <div className="text-content-inverse font-normal mb-4" style={{fontSize: '3.5rem'}}>
-                <TextBlockHighlight delay={0.5}>My Motto Is:</TextBlockHighlight>
+                My Motto Is:
               </div>
               <div className="space-y-4">
                 <div className="text-content-inverse font-normal" style={{fontSize: '3.5rem'}}>
-                  <TextBlockHighlight delay={0.6}>&quot;Sepi ing Pamrih,&quot;</TextBlockHighlight>
+                  &quot;Sepi ing Pamrih,&quot;
                 </div>
                 <div className="text-content-inverse font-normal" style={{fontSize: '3.5rem'}}>
-                  <TextBlockHighlight delay={0.7}>&quot;Rame ing Gawe&quot;</TextBlockHighlight>
+                  &quot;Rame ing Gawe&quot;
                 </div>
               </div>
             </div>
