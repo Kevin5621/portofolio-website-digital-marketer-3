@@ -29,6 +29,7 @@ export const WorkCreativeProjects = ({ projects, projectId }: WorkCreativeProjec
   const isBinjasiimen = projectId === "binjasiimen-samapta";
   const isAerospace = projectId === "aerospace";
   const isPpmHimma = projectId === "ppm-himma-2025";
+  const isA5x = projectId === "a5x-studio";
 
   // Helper function to extract Google Drive file ID from URL
   const extractDriveFileId = (url: string): string | null => {
@@ -770,6 +771,106 @@ export const WorkCreativeProjects = ({ projects, projectId }: WorkCreativeProjec
               )}
             </div>
           </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (isA5x && projects) {
+    // Separate projects by row
+    const row1Col1 = projects.find(p => p.title === "ROW_1_COL1");
+    const row1Col2 = projects.find(p => p.title === "ROW_1_COL2");
+    const row1Col3 = projects.find(p => p.title === "ROW_1_COL3");
+    const row2Col1 = projects.find(p => p.title === "ROW_2_COL1");
+    const row2Col2 = projects.find(p => p.title === "ROW_2_COL2");
+    const row2Col3 = projects.find(p => p.title === "ROW_2_COL3");
+    const row3Full = projects.find(p => p.title === "ROW_3_FULL");
+
+    const renderVideoOrDrive = (project: ProjectType | undefined, index: number) => {
+      if (!project) return null;
+      
+      const isDriveLink = project.image.includes('drive.google.com');
+      
+      if (isDriveLink) {
+        return (
+          <div className="col-span-1 rounded-lg overflow-hidden bg-black relative group cursor-pointer">
+            <div className="aspect-[9/16]">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={getDriveThumbnail(project.image)}
+                alt={`Video ${index + 1}`}
+                className="w-full h-full object-cover"
+                style={{ objectPosition: 'center' }}
+              />
+              <div className="absolute inset-0 flex items-center justify-center bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity">
+                <div className="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center">
+                  <svg className="w-8 h-8 text-black ml-1" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z"/>
+                  </svg>
+                </div>
+              </div>
+              <iframe
+                src={getDriveEmbedUrl(project.image)}
+                className="absolute inset-0 w-full h-full opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-opacity"
+                allow="autoplay"
+                allowFullScreen
+                title={`Video ${index + 1}`}
+              />
+            </div>
+          </div>
+        );
+      } else {
+        return (
+          <div className="col-span-1 rounded-lg overflow-hidden">
+            <div className="aspect-[9/16]">
+              <video
+                src={project.image}
+                className="w-full h-full object-cover"
+                controls
+                muted
+              />
+            </div>
+          </div>
+        );
+      }
+    };
+
+    return (
+      <section className="py-24 bg-surface-background">
+        <div className="max-w-full mx-auto px-6">
+          <hr className="border-border-primary mb-16" />
+          
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-content-primary mb-16 text-center">
+            My Creative Projects
+          </h2>
+          
+          {/* Row 1 (atas): 3 item horizontal */}
+          <div className="grid grid-cols-3 gap-4 w-full mb-4">
+            {renderVideoOrDrive(row1Col1, 1)}
+            {renderVideoOrDrive(row1Col2, 2)}
+            {renderVideoOrDrive(row1Col3, 3)}
+          </div>
+
+          {/* Row 2 (tengah): 3 item horizontal */}
+          <div className="grid grid-cols-3 gap-4 w-full mb-4">
+            {renderVideoOrDrive(row2Col1, 4)}
+            {renderVideoOrDrive(row2Col2, 5)}
+            {renderVideoOrDrive(row2Col3, 6)}
+          </div>
+
+          {/* Row 3 (bawah): 1 item full width */}
+          {row3Full && (
+            <div className="w-full rounded-lg overflow-hidden">
+              <div className="relative w-full" style={{ aspectRatio: 'auto', minHeight: '400px' }}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={getDriveThumbnail(row3Full.image)}
+                  alt="Full width image"
+                  className="w-full h-full object-contain"
+                />
+              </div>
+            </div>
+          )}
         </div>
       </section>
     );

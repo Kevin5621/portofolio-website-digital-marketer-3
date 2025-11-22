@@ -25,15 +25,44 @@ export const a5xStudioData: WorkDetail = {
     "Mastered advanced techniques like color grading, motion graphics, and audio enhancement"
   ],
   creativeProjects: [
+    // Row 1 (atas): 3 item horizontal
     {
-      title: "Talking Head Video Portfolio",
-      description: "Collection of high-quality talking head videos showcasing various editing styles and techniques",
-      image: "/work/a5x-studio/hero.webp"
+      title: "ROW_1_COL1",
+      description: "Row 1 col 1",
+      image: "/about/video/Finishing_1.webm"
     },
     {
-      title: "Video Editing Workflow",
-      description: "Optimized editing processes and templates for efficient talking head video production",
-      image: "/work/a5x-studio/logo.webp"
+      title: "ROW_1_COL2",
+      description: "Row 1 col 2",
+      image: "/about/video/Interview - Pak Oscar Darmawan.webm"
+    },
+    {
+      title: "ROW_1_COL3",
+      description: "Row 1 col 3",
+      image: "/about/video/Finishing v2.webm"
+    },
+    // Row 2 (tengah): 3 item horizontal
+    {
+      title: "ROW_2_COL1",
+      description: "Row 2 col 1",
+      image: "https://drive.google.com/file/d/1mIX7y_v3BQXlgzsH8yE9fUThqWkS_gqx/view?usp=drive_link"
+    },
+    {
+      title: "ROW_2_COL2",
+      description: "Row 2 col 2",
+      image: "/about/video/Done Final.webm"
+    },
+    {
+      title: "ROW_2_COL3",
+      description: "Row 2 col 3",
+      image: "https://drive.google.com/file/d/1mIX7y_v3BQXlgzsH8yE9fUThqWkS_gqx/view?usp=drive_link"
+    },
+    // Row 3 (bawah): 1 item full width
+    {
+      title: "ROW_3_FULL",
+      description: "Row 3 full width",
+      image: "https://drive.google.com/file/d/1W_tU6yRXmszsBAg2JJCReEHboExnlPgM/view?usp=drive_link"
     }
   ]
 };
+
