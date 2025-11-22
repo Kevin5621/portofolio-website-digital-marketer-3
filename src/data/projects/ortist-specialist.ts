@@ -101,45 +101,58 @@ export const ortistSpecialistData: WorkDetail = {
     ]
   },
   creativeProjects: [
+    // Layer 1: Grid cols 3 - Google Drive Videos
     {
-      title: "Brand Identity Refresh",
-      description: "Redesigned social media templates and visual guidelines to create a more modern, trustworthy appearance for the clinic.",
+      title: "LAYER_1_VIDEO",
+      description: "Video content layer 1",
+      image: "/work/ortist-specialist/video3.webm"
+    },
+    {
+      title: "LAYER_1_VIDEO",
+      description: "Video content layer 1",
+      image: "/work/ortist-specialist/video2.webm"
+    },
+    {
+      title: "LAYER_1_VIDEO",
+      description: "Video content layer 1",
+      image: "/work/ortist-specialist/video1.webm"
+    },
+    // Layer 2: Grid cols 3 - Images
+    {
+      title: "LAYER_2_IMAGE",
+      description: "Image content layer 2",
       image: "/work/ortist-specialist/foto1.webp"
     },
     {
-      title: "Educational Infographic Series", 
-      description: "Created a series of infographics explaining common orthopedic conditions in simple, patient-friendly language.",
+      title: "LAYER_2_IMAGE",
+      description: "Image content layer 2",
       image: "/work/ortist-specialist/foto2.webp"
     },
     {
-      title: "Patient Journey Content",
-      description: "Documentary-style content showcasing real patient experiences and transformations.",
+      title: "LAYER_2_IMAGE",
+      description: "Image content layer 2",
+      image: "/work/ortist-specialist/foto3.webp"
+    },
+    // Layer 3: Grid cols 4 - Images
+    {
+      title: "LAYER_3_IMAGE",
+      description: "Image content layer 3",
       image: "/work/ortist-specialist/foto3.webp"
     },
     {
-      title: "Social Media Campaign Design",
-      description: "Visual campaign materials for dental health awareness targeting young adults.",
-      image: "/work/ortist-specialist/foto4.webp"
-    },
-    {
-      title: "Interactive Educational Posts",
-      description: "Engaging carousel posts explaining dental procedures and oral health tips.",
-      image: "/work/ortist-specialist/foto5.webp"
-    },
-    {
-      title: "Orthodontic Process Documentation",
-      description: "Step-by-step visual content showing the orthodontic treatment journey.",
-      image: "/work/ortist-specialist/foto6.webp"
-    },
-    {
-      title: "Community Engagement Content",
-      description: "Behind-the-scenes content building trust and connection with the audience.",
+      title: "LAYER_3_IMAGE",
+      description: "Image content layer 3",
       image: "/work/ortist-specialist/foto7.webp"
     },
     {
-      title: "Treatment Result Showcase",
-      description: "Professional photography showcasing successful treatment outcomes.",
-      image: "/work/ortist-specialist/foto8.webp"
+      title: "LAYER_3_IMAGE",
+      description: "Image content layer 3",
+      image: "/work/ortist-specialist/foto5.webp"
+    },
+    {
+      title: "LAYER_3_IMAGE",
+      description: "Image content layer 3",
+      image: "/work/ortist-specialist/foto6.webp"
     }
   ],
   nextProject: {
