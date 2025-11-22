@@ -31,29 +31,30 @@ export const ppmHimmaData: WorkDetail = {
   ],
 
   creativeProjects: [
+    // Layer 1: Grid cols 2 - Cols 1: 2,3,4 (vertikal), Cols 2: Export Vertical, Export 11 (vertikal)
     {
-      title: "Event Information Designs",
-      description: "Clear and engaging visual materials to communicate important information to new students",
+      title: "LAYER_1_COL1_TOP",
+      description: "Col 1 top image",
       image: "/work/ppm-himma-2025/2.webp"
     },
     {
-      title: "Event Documentation",
-      description: "Comprehensive photo and video documentation capturing key moments of the PPM 2025 event",
+      title: "LAYER_1_COL1_MIDDLE",
+      description: "Col 1 middle image",
       image: "/work/ppm-himma-2025/3.webp"
     },
     {
-      title: "Student Welcome Materials",
-      description: "Visual materials designed to welcome and guide new students through their academic journey",
+      title: "LAYER_1_COL1_BOTTOM",
+      description: "Col 1 bottom image",
       image: "/work/ppm-himma-2025/4.webp"
     },
     {
-      title: "Vertical Content Format",
-      description: "Optimized content format for mobile viewing and social media engagement",
+      title: "LAYER_1_COL2_TOP",
+      description: "Col 2 top image",
       image: "/work/ppm-himma-2025/Export Vertical.webp"
     },
     {
-      title: "Event Highlights",
-      description: "Key moments and highlights from the PPM 2025 event captured in visual format",
+      title: "LAYER_1_COL2_BOTTOM",
+      description: "Col 2 bottom image",
       image: "/work/ppm-himma-2025/Export 11.webp"
     }
   ]

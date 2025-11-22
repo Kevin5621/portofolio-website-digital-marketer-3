@@ -28,6 +28,7 @@ export const WorkCreativeProjects = ({ projects, projectId }: WorkCreativeProjec
   const isRumahBahasa = projectId === "rumah-bahasa-asing";
   const isBinjasiimen = projectId === "binjasiimen-samapta";
   const isAerospace = projectId === "aerospace";
+  const isPpmHimma = projectId === "ppm-himma-2025";
 
   // Helper function to extract Google Drive file ID from URL
   const extractDriveFileId = (url: string): string | null => {
@@ -681,6 +682,93 @@ export const WorkCreativeProjects = ({ projects, projectId }: WorkCreativeProjec
                 </div>
               </div>
             )}
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (isPpmHimma && projects) {
+    // Separate projects by position
+    const col1Top = projects.find(p => p.title === "LAYER_1_COL1_TOP");
+    const col1Middle = projects.find(p => p.title === "LAYER_1_COL1_MIDDLE");
+    const col1Bottom = projects.find(p => p.title === "LAYER_1_COL1_BOTTOM");
+    const col2Top = projects.find(p => p.title === "LAYER_1_COL2_TOP");
+    const col2Bottom = projects.find(p => p.title === "LAYER_1_COL2_BOTTOM");
+
+    return (
+      <section className="py-24 bg-surface-background">
+        <div className="max-w-full mx-auto px-6">
+          <hr className="border-border-primary mb-16" />
+          
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-content-primary mb-16 text-center">
+            My Creative Projects
+          </h2>
+          
+          {/* Layer 1: Grid cols 3 - Cols 1: 2,3,4 (vertikal, lebih lebar), Cols 2: Export Vertical, Export 11 (vertikal, lebih kecil) */}
+          <div className="grid grid-cols-3 gap-4 w-full">
+            {/* Cols 1: 2, 3, 4 (vertikal, lebih lebar - col-span-2) */}
+            <div className="col-span-2 flex flex-col gap-4">
+              {col1Top && (
+                <div className="flex-1 rounded-lg overflow-hidden">
+                  <Image
+                    src={col1Top.image}
+                    alt="Col 1 top image"
+                    width={400}
+                    height={400}
+                    className="w-full h-full object-contain"
+                  />
+                </div>
+              )}
+              {col1Middle && (
+                <div className="flex-1 rounded-lg overflow-hidden">
+                  <Image
+                    src={col1Middle.image}
+                    alt="Col 1 middle image"
+                    width={400}
+                    height={400}
+                    className="w-full h-full object-contain"
+                  />
+                </div>
+              )}
+              {col1Bottom && (
+                <div className="flex-1 rounded-lg overflow-hidden">
+                  <Image
+                    src={col1Bottom.image}
+                    alt="Col 1 bottom image"
+                    width={400}
+                    height={400}
+                    className="w-full h-full object-contain"
+                  />
+                </div>
+              )}
+            </div>
+            
+            {/* Cols 2: Export Vertical, Export 11 (vertikal, lebih kecil - col-span-1) */}
+            <div className="col-span-1 flex flex-col gap-4">
+              {col2Top && (
+                <div className="flex-1 rounded-lg overflow-hidden">
+                  <Image
+                    src={col2Top.image}
+                    alt="Col 2 top image"
+                    width={400}
+                    height={400}
+                    className="w-full h-full object-contain"
+                  />
+                </div>
+              )}
+              {col2Bottom && (
+                <div className="flex-1 rounded-lg overflow-hidden">
+                  <Image
+                    src={col2Bottom.image}
+                    alt="Col 2 bottom image"
+                    width={400}
+                    height={400}
+                    className="w-full h-full object-contain"
+                  />
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </section>
