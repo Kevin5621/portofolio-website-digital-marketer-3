@@ -26,6 +26,27 @@ export const festZ2025Data: WorkDetail = {
     "I approached each speaker with respect and courage, making sure the interviews ran smoothly.",
     "I edited the videos carefully, adding subtitles, clean cuts, and clear pacing so the content felt sharp, simple, and enjoyable for viewers."
   ],
-  creativeProjects: []
+  creativeProjects: [
+    {
+      title: "FEST Z 2025",
+      description: "FestZ 2025 video content",
+      image: "https://drive.google.com/file/d/1QYXJSTF0o6XO9NPfjMUHEM1Ld4CS9oLY/view?usp=drive_link"
+    },
+    {
+      title: "FEST Z 2025",
+      description: "FestZ 2025 video content",
+      image: "https://drive.google.com/file/d/1cv40JKKUhRRaReS-ntUGUmQhheaS8S4P/view?usp=drive_link"
+    },
+    {
+      title: "FEST Z 2025",
+      description: "FestZ 2025 video content",
+      image: "https://drive.google.com/file/d/1Q3FezInbdbyaTtSB8t23AZfQVonJmyDe/view?usp=drive_link"
+    },
+    {
+      title: "FEST Z 2025",
+      description: "FestZ 2025 video content",
+      image: "https://drive.google.com/file/d/1luFrRT1sVs3nON2RL1P0VFHqfOMUJAh3/view?usp=drive_link"
+    }
+  ]
 };
 
