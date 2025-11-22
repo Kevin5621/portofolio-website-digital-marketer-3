@@ -76,11 +76,11 @@ export const workDetailsData: Record<string, WorkDetail> = {
   "binjasiimen-samapta": binjasimmenSamaptaData,
   "aerospace": aerospaceData,
   "genzummit": genzummitData,
-  "ppm-himma-2025": ppmHimmaData,
-  "a5x-studio": a5xStudioData,
   "gen-ztrive": genZtriveData,
+  "ppm-himma-2025": ppmHimmaData,
   "ika-binus-ceo-forum": ikaBinusCeoForumData,
   "fest-z-2025": festZ2025Data,
+  "a5x-studio": a5xStudioData,
 };
 
 export const getWorkDetail = (id: string): WorkDetail | null => {
