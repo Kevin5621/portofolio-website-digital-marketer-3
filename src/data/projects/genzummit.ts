@@ -49,6 +49,16 @@ export const genzummitData: WorkDetail = {
       title: "Enhanced Video Editing",
       description: "Re-edited footage with enhanced style and new short-form video editing techniques",
       image: "/work/genzummit/Export Vertical (4).webm"
+    },
+    {
+      title: "LAYER_2_VIDEO_1",
+      description: "Re-edited interview video",
+      image: "/about/video/Interview - Pak Oscar Darmawan.webm"
+    },
+    {
+      title: "LAYER_2_VIDEO_2",
+      description: "Re-edited finishing video",
+      image: "/about/video/Finishing v2.webm"
     }
   ]
 };

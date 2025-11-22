@@ -525,6 +525,8 @@ export const WorkCreativeProjects = ({ projects, projectId }: WorkCreativeProjec
   if (isGenzummit) {
     const firstThreeVideos = projects.slice(0, 3);
     const lastVideo = projects.slice(3, 4);
+    const layer2Video1 = projects.find(p => p.title === "LAYER_2_VIDEO_1");
+    const layer2Video2 = projects.find(p => p.title === "LAYER_2_VIDEO_2");
 
     return (
       <section className="py-24 bg-surface-background">
@@ -558,10 +560,11 @@ export const WorkCreativeProjects = ({ projects, projectId }: WorkCreativeProjec
             </span>
           </div>
 
-          {/* Last video */}
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          {/* Grid cols 3: video sekarang, Interview, Finishing v2 */}
+          <div className="grid grid-cols-3 gap-4">
+            {/* Cols 1: Video sekarang (Export Vertical (4).webm) */}
             {lastVideo.map((project) => (
-              <div key={project.image}>
+              <div key={project.image} className="col-span-1">
                 <div className="aspect-[9/16] rounded-lg overflow-hidden">
                   <video
                     src={project.image}
@@ -572,6 +575,34 @@ export const WorkCreativeProjects = ({ projects, projectId }: WorkCreativeProjec
                 </div>
               </div>
             ))}
+            
+            {/* Cols 2: Interview - Pak Oscar Darmawan */}
+            {layer2Video1 && (
+              <div className="col-span-1">
+                <div className="aspect-[9/16] rounded-lg overflow-hidden">
+                  <video
+                    src={layer2Video1.image}
+                    className="w-full h-full object-cover"
+                    controls
+                    muted
+                  />
+                </div>
+              </div>
+            )}
+            
+            {/* Cols 3: Finishing v2 */}
+            {layer2Video2 && (
+              <div className="col-span-1">
+                <div className="aspect-[9/16] rounded-lg overflow-hidden">
+                  <video
+                    src={layer2Video2.image}
+                    className="w-full h-full object-cover"
+                    controls
+                    muted
+                  />
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </section>
