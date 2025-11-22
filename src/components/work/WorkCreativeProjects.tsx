@@ -25,6 +25,7 @@ export const WorkCreativeProjects = ({ projects, projectId }: WorkCreativeProjec
   const isIkaBinus = projectId === "ika-binus-ceo-forum";
   const isFestZ = projectId === "fest-z-2025";
   const isOrtist = projectId === "ortist-specialist";
+  const isRumahBahasa = projectId === "rumah-bahasa-asing";
 
   // Helper function to extract Google Drive file ID from URL
   const extractDriveFileId = (url: string): string | null => {
@@ -268,6 +269,103 @@ export const WorkCreativeProjects = ({ projects, projectId }: WorkCreativeProjec
             <div className="grid grid-cols-4 gap-4 w-full">
               {layer3Images.map((project, index) => (
                 <div key={`layer3-${project.image}-${index}`} className="col-span-1">
+                  <div className="aspect-square rounded-lg overflow-hidden">
+                    <Image
+                      src={project.image}
+                      alt={`Image ${index + 1}`}
+                      width={400}
+                      height={400}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
+    );
+  }
+
+  if (isRumahBahasa && projects) {
+    // Separate projects by layer
+    const leftVideo = projects.find(p => p.title === "LAYER_1_LEFT_VIDEO");
+    const centerTopImage = projects.find(p => p.title === "LAYER_1_CENTER_TOP_IMAGE");
+    const centerBottomImage = projects.find(p => p.title === "LAYER_1_CENTER_BOTTOM_IMAGE");
+    const rightVideo = projects.find(p => p.title === "LAYER_1_RIGHT_VIDEO");
+    const layer2Images = projects.filter(p => p.title === "LAYER_2_IMAGE");
+
+    return (
+      <section className="py-24 bg-surface-background">
+        <div className="max-w-full mx-auto px-6">
+          <hr className="border-border-primary mb-16" />
+          
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-content-primary mb-16 text-center">
+            My Creative Projects
+          </h2>
+          
+          {/* Layer 1: Grid cols 3 - Video kiri, 2 image tengah, video kanan */}
+          <div className="grid grid-cols-3 gap-4 w-full mb-16">
+            {/* Kolom kiri: Video */}
+            {leftVideo && (
+              <div className="col-span-1">
+                <div className="aspect-[9/16] rounded-lg overflow-hidden">
+                  <video
+                    src={leftVideo.image}
+                    className="w-full h-full object-cover"
+                    controls
+                    muted
+                  />
+                </div>
+              </div>
+            )}
+            
+            {/* Kolom tengah: 2 image kecil (foto7 atas, foto9 bawah) */}
+            <div className="col-span-1 flex flex-col gap-4 items-center">
+              {centerTopImage && (
+                <div className="flex-1 rounded-lg overflow-hidden">
+                  <Image
+                    src={centerTopImage.image}
+                    alt="Center top image"
+                    width={350}
+                    height={350}
+                    className="w-fit h-full"
+                  />
+                </div>
+              )}
+              {centerBottomImage && (
+                <div className="flex-1 rounded-lg overflow-hidden">
+                  <Image
+                    src={centerBottomImage.image}
+                    alt="Center bottom image"
+                    width={350}
+                    height={350}
+                    className="w-fit h-full"
+                  />
+                </div>
+              )}
+            </div>
+            
+            {/* Kolom kanan: Video */}
+            {rightVideo && (
+              <div className="col-span-1">
+                <div className="aspect-[9/16] rounded-lg overflow-hidden">
+                  <video
+                    src={rightVideo.image}
+                    className="w-full h-full object-cover"
+                    controls
+                    muted
+                  />
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Layer 2: Grid cols 2 - Images */}
+          {layer2Images.length > 0 && (
+            <div className="grid grid-cols-2 gap-4 w-full">
+              {layer2Images.map((project, index) => (
+                <div key={`layer2-${project.image}-${index}`} className="col-span-1">
                   <div className="aspect-square rounded-lg overflow-hidden">
                     <Image
                       src={project.image}

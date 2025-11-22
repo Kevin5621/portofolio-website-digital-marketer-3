@@ -98,40 +98,37 @@ export const rumahBahasaAsingData: WorkDetail = {
     ]
   },
   creativeProjects: [
+    // Layer 1: Grid cols 3 - Video kiri, 2 image tengah (foto7 atas, foto9 bawah), video kanan
     {
-      title: "Korean Language Learning App UI",
-      description: "Designed user interface concepts for a mobile learning application to complement the online courses.",
-      image: "/work/rumah-bahasa-asing/foto1.webp"
+      title: "LAYER_1_LEFT_VIDEO",
+      description: "Video left",
+      image: "/work/rumah-bahasa-asing/video1.webm"
     },
     {
-      title: "Student Success Campaign",
-      description: "Created a campaign showcasing students who successfully learned Korean through RBA, inspiring new enrollments.",
-      image: "/work/rumah-bahasa-asing/foto3.webp"
-    },
-    {
-      title: "Educational Content Series",
-      description: "Comprehensive educational materials for Korean language learning.",
-      image: "/work/rumah-bahasa-asing/foto4.webp"
-    },
-    {
-      title: "Interactive Learning Materials",
-      description: "Engaging visual content for interactive Korean language education.",
-      image: "/work/rumah-bahasa-asing/foto5.webp"
-    },
-    {
-      title: "Cultural Integration Content",
-      description: "Content that combines language learning with Korean cultural insights.",
+      title: "LAYER_1_CENTER_TOP_IMAGE",
+      description: "Center top image",
       image: "/work/rumah-bahasa-asing/foto7.webp"
     },
     {
-      title: "Social Media Campaign Design",
-      description: "Visual campaign materials for Korean language learning awareness.",
-      image: "/work/rumah-bahasa-asing/foto8.webp"
+      title: "LAYER_1_CENTER_BOTTOM_IMAGE",
+      description: "Center bottom image",
+      image: "/work/rumah-bahasa-asing/foto9.webp"
     },
     {
-      title: "Community Engagement Content",
-      description: "Behind-the-scenes content building trust and connection with learners.",
-      image: "/work/rumah-bahasa-asing/foto9.webp"
+      title: "LAYER_1_RIGHT_VIDEO",
+      description: "Video right",
+      image: "/work/rumah-bahasa-asing/video2.webm"
+    },
+    // Layer 2: Grid cols 2 - Images
+    {
+      title: "LAYER_2_IMAGE",
+      description: "Image layer 2",
+      image: "/work/rumah-bahasa-asing/foto4.webp"
+    },
+    {
+      title: "LAYER_2_IMAGE",
+      description: "Image layer 2",
+      image: "/work/rumah-bahasa-asing/foto5.webp"
     }
   ],
   nextProject: {
