@@ -52,13 +52,14 @@ export const WorkCreativeProjects = ({ projects, projectId }: WorkCreativeProjec
   };
 
   // Helper function to group videos by speaker (based on title)
-  const groupVideosBySpeaker = (projects: typeof projects) => {
-    if (!projects) return [];
-    const groups: { speaker: string; videos: typeof projects }[] = [];
+  type ProjectType = NonNullable<WorkCreativeProjectsProps['projects']>[number];
+  const groupVideosBySpeaker = (projectsList: ProjectType[]) => {
+    if (!projectsList) return [];
+    const groups: { speaker: string; videos: ProjectType[] }[] = [];
     let currentSpeaker = '';
-    let currentGroup: typeof projects = [];
+    let currentGroup: ProjectType[] = [];
 
-    for (const project of projects) {
+    for (const project of projectsList) {
       const speaker = project.title;
       
       if (speaker === currentSpeaker) {
@@ -104,7 +105,7 @@ export const WorkCreativeProjects = ({ projects, projectId }: WorkCreativeProjec
                     </h3>
                   </div>
                   {/* Videos */}
-                  {group.videos.slice(0, 4).map((project, index) => (
+                  {group.videos.slice(0, 4).map((project: ProjectType, index: number) => (
                     <div key={`${project.image}-${index}`} className="col-span-1">
                       <div className="aspect-[9/16] rounded-lg overflow-hidden bg-black relative group cursor-pointer">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
