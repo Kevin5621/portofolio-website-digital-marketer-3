@@ -69,54 +69,35 @@ export const binjasimmenSamaptaData: WorkDetail = {
     ]
   },
   creativeProjects: [
+    // Layer 1: Grid cols 4 - Video kiri, foto6&8 di grid 2, foto7&9 di grid 3, image kanan
     {
-      title: "Educational Content Series",
-      description: "Comprehensive educational materials for test preparation and success stories.",
-      image: "/work/binjasiimen-samapta/1.webp"
+      title: "LAYER_1_LEFT_VIDEO",
+      description: "Left video",
+      image: "/work/binjasiimen-samapta/Export Vertical (2).webm"
     },
     {
-      title: "Student Success Campaign",
-      description: "Created a campaign showcasing students who successfully passed entrance exams.",
-      image: "/work/binjasiimen-samapta/2.webp"
-    },
-    {
-      title: "Test Preparation Materials",
-      description: "Engaging visual content for test preparation and study guides.",
-      image: "/work/binjasiimen-samapta/3.webp"
-    },
-    {
-      title: "Motivational Content",
-      description: "Content that inspires and motivates students to achieve their goals.",
-      image: "/work/binjasiimen-samapta/4.webp"
-    },
-    {
-      title: "Study Tips and Strategies",
-      description: "Visual materials sharing effective study techniques and strategies.",
-      image: "/work/binjasiimen-samapta/5.webp"
-    },
-    {
-      title: "Alumni Success Stories",
-      description: "Showcasing successful alumni and their journey to success.",
+      title: "LAYER_1_GRID2_TOP",
+      description: "Grid 2 top image",
       image: "/work/binjasiimen-samapta/6.webp"
     },
     {
-      title: "Interactive Learning Content",
-      description: "Engaging content that makes learning fun and interactive.",
-      image: "/work/binjasiimen-samapta/7.webp"
-    },
-    {
-      title: "Community Engagement",
-      description: "Content that builds community and encourages peer support.",
+      title: "LAYER_1_GRID2_BOTTOM",
+      description: "Grid 2 bottom image",
       image: "/work/binjasiimen-samapta/8.webp"
     },
     {
-      title: "Comprehensive Study Guide",
-      description: "Complete visual guide for comprehensive exam preparation.",
+      title: "LAYER_1_GRID3_TOP",
+      description: "Grid 3 top image",
+      image: "/work/binjasiimen-samapta/7.webp"
+    },
+    {
+      title: "LAYER_1_GRID3_BOTTOM",
+      description: "Grid 3 bottom image",
       image: "/work/binjasiimen-samapta/9.webp"
     },
     {
-      title: "Vertical Content Format",
-      description: "Optimized content format for mobile viewing and engagement.",
+      title: "LAYER_1_RIGHT_IMAGE",
+      description: "Right image",
       image: "/work/binjasiimen-samapta/Export Vertical.webp"
     }
   ],

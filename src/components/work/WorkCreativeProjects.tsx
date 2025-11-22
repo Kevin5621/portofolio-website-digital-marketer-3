@@ -26,6 +26,7 @@ export const WorkCreativeProjects = ({ projects, projectId }: WorkCreativeProjec
   const isFestZ = projectId === "fest-z-2025";
   const isOrtist = projectId === "ortist-specialist";
   const isRumahBahasa = projectId === "rumah-bahasa-asing";
+  const isBinjasiimen = projectId === "binjasiimen-samapta";
 
   // Helper function to extract Google Drive file ID from URL
   const extractDriveFileId = (url: string): string | null => {
@@ -379,6 +380,112 @@ export const WorkCreativeProjects = ({ projects, projectId }: WorkCreativeProjec
               ))}
             </div>
           )}
+        </div>
+      </section>
+    );
+  }
+
+  if (isBinjasiimen && projects) {
+    // Separate projects by position
+    const leftVideo = projects.find(p => p.title === "LAYER_1_LEFT_VIDEO");
+    const grid2Top = projects.find(p => p.title === "LAYER_1_GRID2_TOP");
+    const grid2Bottom = projects.find(p => p.title === "LAYER_1_GRID2_BOTTOM");
+    const grid3Top = projects.find(p => p.title === "LAYER_1_GRID3_TOP");
+    const grid3Bottom = projects.find(p => p.title === "LAYER_1_GRID3_BOTTOM");
+    const rightImage = projects.find(p => p.title === "LAYER_1_RIGHT_IMAGE");
+
+    return (
+      <section className="py-24 bg-surface-background">
+        <div className="max-w-full mx-auto px-6">
+          <hr className="border-border-primary mb-16" />
+          
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-content-primary mb-16 text-center">
+            My Creative Projects
+          </h2>
+          
+          {/* Layer 1: Grid cols 4 - Video kiri, foto6&8 di grid 2, foto7&9 di grid 3, image kanan */}
+          <div className="grid grid-cols-4 gap-4 w-full">
+            {/* Grid 1: Video kiri */}
+            {leftVideo && (
+              <div className="col-span-1">
+                <div className="aspect-[9/16] rounded-lg overflow-hidden">
+                  <video
+                    src={leftVideo.image}
+                    className="w-full h-full object-cover"
+                    controls
+                    muted
+                  />
+                </div>
+              </div>
+            )}
+            
+            {/* Grid 2: foto6 (atas) dan foto8 (bawah) - vertikal */}
+            <div className="col-span-1 flex flex-col gap-4">
+              {grid2Top && (
+                <div className="flex-1 rounded-lg overflow-hidden">
+                  <Image
+                    src={grid2Top.image}
+                    alt="Grid 2 top image"
+                    width={400}
+                    height={400}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              )}
+              {grid2Bottom && (
+                <div className="flex-1 rounded-lg overflow-hidden">
+                  <Image
+                    src={grid2Bottom.image}
+                    alt="Grid 2 bottom image"
+                    width={400}
+                    height={400}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              )}
+            </div>
+            
+            {/* Grid 3: foto7 (atas) dan foto9 (bawah) - vertikal */}
+            <div className="col-span-1 flex flex-col gap-4">
+              {grid3Top && (
+                <div className="flex-1 rounded-lg overflow-hidden">
+                  <Image
+                    src={grid3Top.image}
+                    alt="Grid 3 top image"
+                    width={400}
+                    height={400}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              )}
+              {grid3Bottom && (
+                <div className="flex-1 rounded-lg overflow-hidden">
+                  <Image
+                    src={grid3Bottom.image}
+                    alt="Grid 3 bottom image"
+                    width={400}
+                    height={400}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              )}
+            </div>
+            
+            {/* Grid 4: Image kanan */}
+            {rightImage && (
+              <div className="col-span-1">
+                <div className="aspect-[9/16] rounded-lg overflow-hidden">
+                  <Image
+                    src={rightImage.image}
+                    alt="Right image"
+                    width={400}
+                    height={711}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </section>
     );
