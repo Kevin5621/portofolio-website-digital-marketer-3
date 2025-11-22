@@ -26,6 +26,93 @@ export const ikaBinusCeoForumData: WorkDetail = {
     "Improved the audio quality during post-production to make the final content clearer and more professional.",
     "Edited the videos with smooth pacing, readable subtitles, and sharp visuals to make the content engaging and easy for viewers to understand."
   ],
-  creativeProjects: []
+  creativeProjects: [
+    // Dr. Nelly
+    {
+      title: "Dr. Nelly",
+      description: "Interview with Dr. Nelly",
+      image: "https://drive.google.com/file/d/1hYz6uh7zIRRKgfxYGziDCNiJ5a-6Z5fL/view?usp=drive_link"
+    },
+    {
+      title: "Dr. Nelly",
+      description: "Interview with Dr. Nelly",
+      image: "https://drive.google.com/file/d/13EdCwkC5OX-8K0EXIhRtZ9KRNzailAw4/view?usp=drive_link"
+    },
+    {
+      title: "Dr. Nelly",
+      description: "Interview with Dr. Nelly",
+      image: "https://drive.google.com/file/d/1BVcvJfdqunrWi4uSiOWU9ZUbA8aNOOd4/view?usp=drive_link"
+    },
+    // Pak Oscar
+    {
+      title: "Pak Oscar",
+      description: "Interview with Pak Oscar",
+      image: "https://drive.google.com/file/d/1a3hJel393_HamrXkeENSpZuD-NwBYVQs/view?usp=drive_link"
+    },
+    {
+      title: "Pak Oscar",
+      description: "Interview with Pak Oscar",
+      image: "https://drive.google.com/file/d/1IQ7Ob0GiZuWdw0yajsHCQR32mAL3HpyP/view?usp=drive_link"
+    },
+    // Pak Adrian
+    {
+      title: "Pak Adrian",
+      description: "Interview with Pak Adrian",
+      image: "https://drive.google.com/file/d/1qB9kdYuvOjR9Rc2BBS0juCmctIDav9cE/view?usp=drive_link"
+    },
+    {
+      title: "Pak Adrian",
+      description: "Interview with Pak Adrian",
+      image: "https://drive.google.com/file/d/1OldOrqcsnHgZccYUsSrK3c8QN_iWwVsj/view?usp=drive_link"
+    },
+    // Pak Adrian
+    {
+      title: "Pak Adrian",
+      description: "Interview with Pak Adrian",
+      image: "https://drive.google.com/file/d/1anxSRbduGONPjmx8N2Zs9cBMuOCvbo3h/view?usp=drive_link"
+    },
+    {
+      title: "Pak Budiasto",
+      description: "Interview with Pak Budiasto",
+      image: "https://drive.google.com/file/d/1Hy959_XRL9iG6hHSPm1lVQhNs8Pv7jE6/view?usp=drive_link"
+    },
+    {
+      title: "Pak Budiasto",
+      description: "Interview with Pak Budiasto",
+      image: "https://drive.google.com/file/d/1kjkLrGGyYKxyccAyM-SCCRDOL3DPDp9h/view?usp=drive_link"
+    },
+    // Pak Budiasto
+    {
+      title: "Pak Budiasto",
+      description: "Interview with Pak Budiasto",
+      image: "https://drive.google.com/file/d/1bOH_-82_QSrZsNWS7WCLyIpxVPbvNm4q/view?usp=drive_link"
+    },
+    {
+      title: "Pak Budiasto",
+      description: "Interview with Pak Budiasto",
+      image: "https://drive.google.com/file/d/14_TEDyIQHKwV4N4fQlE7YWvkc2ad3r83/view?usp=drive_link"
+    },
+    // Pak Wilson
+    {
+      title: "Pak Wilson",
+      description: "Interview with Pak Wilson",
+      image: "https://drive.google.com/file/d/1ke1whqUbQRbntzYxZrH_W2iTD31wZeEg/view?usp=drive_link"
+    },
+    {
+      title: "Pak Wilson",
+      description: "Interview with Pak Wilson",
+      image: "https://drive.google.com/file/d/1xUTGSfpdzUap4UKjMxkmmZ7woPkd9NcG/view?usp=drive_link"
+    },
+    {
+      title: "Pak Wilson",
+      description: "Interview with Pak Wilson",
+      image: "https://drive.google.com/file/d/1uVuMuWmS0RA4giM4vnptZT3Don2y8lYb/view?usp=drive_link"
+    },
+    {
+      title: "Pak Wilson",
+      description: "Interview with Pak Wilson",
+      image: "https://drive.google.com/file/d/1HUfSPJaJ0CZvb3Bq7qzpDoxaSoANXvqs/view?usp=drive_link"
+    }
+  ]
 };
 

@@ -22,6 +22,127 @@ export const WorkCreativeProjects = ({ projects, projectId }: WorkCreativeProjec
 
   const isGenzummit = projectId === "genzummit";
   const isGenZtrive = projectId === "gen-ztrive";
+  const isIkaBinus = projectId === "ika-binus-ceo-forum";
+
+  // Helper function to extract Google Drive file ID from URL
+  const extractDriveFileId = (url: string): string | null => {
+    const regex = /\/file\/d\/([a-zA-Z0-9_-]+)/;
+    const match = regex.exec(url);
+    return match ? match[1] : null;
+  };
+
+  // Helper function to get Google Drive thumbnail URL (9:16 aspect ratio for TikTok format)
+  const getDriveThumbnail = (url: string): string => {
+    const fileId = extractDriveFileId(url);
+    if (fileId) {
+      // Use Google Drive thumbnail API with 9:16 aspect ratio (w800-h1422)
+      return `https://drive.google.com/thumbnail?id=${fileId}&sz=w800-h1422`;
+    }
+    return url;
+  };
+
+  // Helper function to convert Google Drive view link to embed/preview link
+  const getDriveEmbedUrl = (url: string): string => {
+    const fileId = extractDriveFileId(url);
+    if (fileId) {
+      return `https://drive.google.com/file/d/${fileId}/preview`;
+    }
+    return url;
+  };
+
+  // Helper function to group videos by speaker (based on title)
+  const groupVideosBySpeaker = (projects: typeof projects) => {
+    if (!projects) return [];
+    const groups: { speaker: string; videos: typeof projects }[] = [];
+    let currentSpeaker = '';
+    let currentGroup: typeof projects = [];
+
+    for (const project of projects) {
+      const speaker = project.title;
+      
+      if (speaker === currentSpeaker) {
+        currentGroup.push(project);
+      } else {
+        if (currentGroup.length > 0) {
+          groups.push({ speaker: currentSpeaker, videos: currentGroup });
+        }
+        currentSpeaker = speaker;
+        currentGroup = [project];
+      }
+    }
+
+    if (currentGroup.length > 0) {
+      groups.push({ speaker: currentSpeaker, videos: currentGroup });
+    }
+
+    return groups;
+  };
+
+  if (isIkaBinus && projects) {
+    const groups = groupVideosBySpeaker(projects);
+
+    return (
+      <section className="py-24 bg-surface-background">
+        <div className="max-w-full mx-auto px-6">
+          <hr className="border-border-primary mb-16" />
+          
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-content-primary mb-16 text-center">
+            My Creative Projects
+          </h2>
+          
+          {groups.map((group, groupIndex) => {
+            const videoCount = group.videos.length;
+
+            return (
+              <div key={`${group.speaker}-${groupIndex}`} className={groupIndex > 0 ? "mt-16" : ""}>
+                {/* Layout 5 grid: 1 nama + videos */}
+                <div className="grid grid-cols-5 gap-4 w-full">
+                  {/* Grid pertama: Nama Speaker */}
+                  <div className="col-span-1 flex items-center justify-center">
+                    <h3 className="text-2xl md:text-3xl font-bold text-content-primary text-center">
+                      {group.speaker}:
+                    </h3>
+                  </div>
+                  {/* Videos */}
+                  {group.videos.slice(0, 4).map((project, index) => (
+                    <div key={`${project.image}-${index}`} className="col-span-1">
+                      <div className="aspect-[9/16] rounded-lg overflow-hidden bg-black relative group cursor-pointer">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={getDriveThumbnail(project.image)}
+                          alt={project.title || `Video ${index + 1}`}
+                          className="w-full h-full object-cover"
+                          style={{ objectPosition: 'center' }}
+                        />
+                        <div className="absolute inset-0 flex items-center justify-center bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity">
+                          <div className="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center">
+                            <svg className="w-8 h-8 text-black ml-1" fill="currentColor" viewBox="0 0 24 24">
+                              <path d="M8 5v14l11-7z"/>
+                            </svg>
+                          </div>
+                        </div>
+                        <iframe
+                          src={getDriveEmbedUrl(project.image)}
+                          className="absolute inset-0 w-full h-full opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-opacity"
+                          allow="autoplay"
+                          allowFullScreen
+                          title={project.title || `Video ${index + 1}`}
+                        />
+                      </div>
+                    </div>
+                  ))}
+                  {/* Fill remaining columns if less than 4 videos */}
+                  {videoCount < 4 && Array.from({ length: 4 - videoCount }).map((_, i) => (
+                    <div key={`empty-${group.speaker}-${i}`} className="col-span-1"></div>
+                  ))}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+    );
+  }
 
   if (isGenZtrive) {
     return (
