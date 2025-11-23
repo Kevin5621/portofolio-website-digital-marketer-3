@@ -30,11 +30,12 @@ export default function AboutLayout({
     const originalBodyOverflowX = bodyElement.style.overflowX;
     
     // Apply styles for sticky behavior
+    // Keep overflow visible for vertical scrolling but prevent horizontal scroll
     htmlElement.style.overflow = 'visible';
-    htmlElement.style.overflowX = 'visible';
+    htmlElement.style.overflowX = 'hidden';
     htmlElement.style.scrollBehavior = 'auto';
     bodyElement.style.overflow = 'visible';
-    bodyElement.style.overflowX = 'visible';
+    bodyElement.style.overflowX = 'hidden';
     
     // Cleanup function to restore original styles
     return () => {
@@ -47,9 +48,9 @@ export default function AboutLayout({
   }, []);
 
   return (
-    <div className={`${poppins.variable} antialiased font-poppins`} style={{ overflow: 'visible' }}>
+    <div className={`${poppins.variable} antialiased font-poppins`} style={{ overflow: 'visible', overflowX: 'hidden', width: '100%', maxWidth: '100vw' }}>
       <Header />
-      <main style={{ overflow: 'visible' }}>{children}</main>
+      <main style={{ overflow: 'visible', overflowX: 'hidden', width: '100%', maxWidth: '100vw' }}>{children}</main>
     </div>
   );
 }
