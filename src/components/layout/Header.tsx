@@ -19,8 +19,8 @@ const navigation = [
 ]
 
 const socials = [
-  { name: 'Instagram', href: 'https://instagram.com' },
-  { name: 'LinkedIn', href: 'https://linkedin.com' },
+  { name: 'Instagram', href: 'https://instagram.com/adharaeka' },
+  { name: 'LinkedIn', href: 'https://linkedin.com/in/adharaeka' },
 ]
 
 export const Header = () => {
@@ -695,7 +695,9 @@ export const Header = () => {
                           onClick={() => handleSocialClick(social.href)}
                           className="text-lg text-foreground-light hover:text-foreground-light/80 transition-all duration-300 ease-out"
                         >
-                          <span className="magnetic-text">{social.name}</span>
+                          <TextRoll className="text-foreground-light magnetic-text">
+                            {social.name}
+                          </TextRoll>
                         </button>
                       </Magnetic>
                     </motion.div>

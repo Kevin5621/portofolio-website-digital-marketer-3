@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { TextRoll } from "@/components/ui/text-roll";
 
 interface WorkNextProjectProps {
   nextProject: {
@@ -127,8 +128,26 @@ export const WorkNextProject = ({ nextProject }: WorkNextProjectProps) => {
             <div className="text-right">
               <div className="text-white/60 mb-1">SOCIALS</div>
               <div className="flex gap-4">
-                <span>Instagram</span>
-                <span>Linkedin</span>
+                <a
+                  href="https://instagram.com/adharaeka"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white hover:text-white/80 transition-colors duration-300"
+                >
+                  <TextRoll className="text-white">
+                    Instagram
+                  </TextRoll>
+                </a>
+                <a
+                  href="https://linkedin.com/in/adharaeka"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white hover:text-white/80 transition-colors duration-300"
+                >
+                  <TextRoll className="text-white">
+                    Linkedin
+                  </TextRoll>
+                </a>
               </div>
             </div>
           </div>
