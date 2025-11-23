@@ -99,18 +99,22 @@ export const WorkNextProject = ({ nextProject }: WorkNextProjectProps) => {
               </div>
             </div>
 
-            <div className="flex items-center justify-center relative z-30 mb-8">
-              <button
-                className="px-12 py-6 text-2xl lg:text-3xl font-medium text-white bg-transparent border-4 border-white rounded-full hover:bg-white hover:text-black transition-all duration-300"
-                onClick={(e) => {
-                  e.preventDefault();
-                  router.push('/work');
-                }}
-              >
-                All work
-              </button>
-            </div>
           </Link>
+
+          <div className="flex items-center justify-center relative z-30 mb-8">
+            <Link
+              href="/work"
+              className="px-12 py-6 text-2xl lg:text-3xl font-medium text-white bg-transparent border-4 border-white rounded-full hover:bg-white hover:text-black transition-all duration-300 inline-block"
+              onClick={() => {
+                // Force scroll to top before navigation
+                window.scrollTo(0, 0);
+                document.documentElement.scrollTop = 0;
+                document.body.scrollTop = 0;
+              }}
+            >
+              All work
+            </Link>
+          </div>
 
           {/* Horizontal line yang memotong foto - tebal dan sebagian */}
           <div className="absolute left-1/2 top-[55%] w-full h-[1px] bg-white transform -translate-x-1/2 -translate-y-1/2 z-30 pointer-events-none rounded-full overflow-hidden"></div>
