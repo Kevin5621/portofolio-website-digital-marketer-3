@@ -28,13 +28,9 @@ export const ContactSection = () => {
               variant="dark-to-light"
               className="w-full py-8 text-lg"
               onClick={() => {
-                // Scroll to contact form or trigger contact action
-                if (typeof document !== 'undefined') {
-                  const contactInfo = document.querySelector('#contact .text-right')
-                  contactInfo?.scrollIntoView({ behavior: 'smooth' })
-                }
+                window.open('http://api.whatsapp.com/send?phone=6289697346868', '_blank')
               }}
-              aria-label="Get in touch - scroll to contact information"
+              aria-label="Get in touch - Contact via WhatsApp"
             >
               <div className="text-center">
                 <h3 className="text-3xl font-medium">
@@ -115,13 +111,9 @@ export const ContactSection = () => {
                       variant="dark-to-light"
                       className="w-80 h-80 rounded-full flex items-center justify-center cursor-pointer group transition-all duration-300 hover:shadow-2xl"
                       onClick={() => {
-                        // Scroll to contact form or trigger contact action
-                        if (typeof document !== 'undefined') {
-                          const contactInfo = document.querySelector('#contact .text-right')
-                          contactInfo?.scrollIntoView({ behavior: 'smooth' })
-                        }
+                        window.open('http://api.whatsapp.com/send?phone=6289697346868', '_blank')
                       }}
-                      aria-label="Get in touch - scroll to contact information"
+                      aria-label="Get in touch - Contact via WhatsApp"
                     >
                       <div className="text-center relative z-20">
                         <h3 
