@@ -47,7 +47,7 @@ export const archiveData: ArchiveItem[] = [
         title: "Educational Content Design",
         description: "Comprehensive visual materials for academic purposes including infographics, presentation designs, and educational content layouts.",
         images: [
-          "/archive/mis-final-exam/Export Horizontal.webp"
+          "https://drive.google.com/file/d/1W_tU6yRXmszsBAg2JJCReEHboExnlPgM/view?usp=sharing"
         ]
       }
     ]

@@ -45,10 +45,27 @@ export function ArchiveContent({ archiveItem }: ArchiveContentProps) {
     return url.includes("drive.google.com");
   };
 
+  const isMisFinalExam = archiveItem.id === "mis-final-exam";
+
   const renderMediaItem = (url: string, alt: string) => {
+    // Special handling for MIS Final Exam - full width layout with direct embed
+    if (isMisFinalExam && isGoogleDriveLink(url)) {
+      return (
+        <div className="w-full rounded-lg overflow-hidden">
+          <iframe
+            src={getDriveEmbedUrl(url)}
+            className="w-full h-[640px]"
+            allow="autoplay"
+            allowFullScreen
+            title={alt}
+          />
+        </div>
+      );
+    }
+
     if (isGoogleDriveLink(url)) {
       return (
-        <div className="aspect-[9/16] rounded-lg overflow-hidden bg-black relative group cursor-pointer w-full">
+        <div>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={getDriveThumbnail(url)}
@@ -105,13 +122,25 @@ export function ArchiveContent({ archiveItem }: ArchiveContentProps) {
             </div>
 
             {/* Simple Grid Layout */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {project.images.map((image, index) => (
-                <div key={`${image}-${index}`} className="w-full">
-                  {renderMediaItem(image, `${project.title} - Image ${index + 1}`)}
-                </div>
-              ))}
-            </div>
+            {isMisFinalExam ? (
+              // Full width layout for MIS Final Exam
+              <div className="w-full">
+                {project.images.map((image, index) => (
+                  <div key={`${image}-${index}`} className="w-full">
+                    {renderMediaItem(image, `${project.title} - Image ${index + 1}`)}
+                  </div>
+                ))}
+              </div>
+            ) : (
+              // Grid layout for other archives
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {project.images.map((image, index) => (
+                  <div key={`${image}-${index}`} className="w-full">
+                    {renderMediaItem(image, `${project.title} - Image ${index + 1}`)}
+                  </div>
+                ))}
+              </div>
+            )}
 
             {/* Archive Button with PillButton */}
             <div className="text-center mt-12">
