@@ -55,7 +55,7 @@ export const a5xStudioData: WorkDetail = {
     {
       title: "ROW_2_COL3",
       description: "Row 2 col 3",
-      image: "https://drive.google.com/file/d/1mIX7y_v3BQXlgzsH8yE9fUThqWkS_gqx/view?usp=drive_link"
+      image: "https://drive.google.com/file/d/1jX3hbPWBaAcNGpHACgylRYugrkyZskDQ/view?usp=drive_link"
     },
     // Row 3 (bawah): 1 item full width
     {
