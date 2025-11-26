@@ -861,14 +861,13 @@ export const WorkCreativeProjects = ({ projects, projectId }: WorkCreativeProjec
           {/* Row 3 (bawah): 1 item full width */}
           {row3Full && (
             <div className="w-full rounded-lg overflow-hidden">
-              <div className="relative w-full" style={{ aspectRatio: 'auto', minHeight: '400px' }}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={getDriveThumbnail(row3Full.image)}
-                  alt="Full width image"
-                  className="w-full h-full object-contain"
-                />
-              </div>
+              <iframe
+                src={getDriveEmbedUrl(row3Full.image)}
+                className="w-full h-[1050px]"
+                allow="autoplay"
+                allowFullScreen
+                title="Full width video"
+              />
             </div>
           )}
         </div>
