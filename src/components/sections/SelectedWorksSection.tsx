@@ -39,7 +39,7 @@ export const SelectedWorksSection = () => {
                 globalThis.window.location.href = '/work'
               }}
             >
-              view all projects
+              View all projects
             </PillButton>
           </div>
         </div>
