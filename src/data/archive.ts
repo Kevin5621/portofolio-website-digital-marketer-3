@@ -15,23 +15,39 @@ export interface ArchiveItem {
 
 export const archiveData: ArchiveItem[] = [
   {
-    id: "kronju",
-    client: "Kronju",
-    location: "Semarang, Indonesia",
-    role: "Graphic Designer",
-    year: "2023",
-    category: "Graphic Design",
-    description: "Creative visual identity and marketing materials design for Kronju snack brand focusing on bold, engaging visual communication that resonates with the target audience.",
+    id: "omb-umn-2024",
+    client: "OMB UMN 2024",
+    location: "Gading Serpong, Indonesia",
+    role: "Content Creator",
+    year: "2024",
+    category: "Content Creator",
+    description: "Content creation for OMB UMN 2024, focusing on engaging visual storytelling and event documentation.",
     creativeProjects: [
       {
         title: "My Creative Projects",
-        description: "A collection of creative visual designs including social media content, product packaging concepts, and marketing materials that showcase the brand's personality and appeal to consumers.",
+        description: "",
         images: [
-          "/archive/kronju/1.webp",
-          "/archive/kronju/2.webp", 
-          "/archive/kronju/3.webp",
-          "/archive/kronju/4.webp",
-          "/archive/kronju/5.webp"
+          "https://drive.google.com/file/d/1FFGYDzixyZL6jKgeaYo5t4XC2l92TR2V/view?usp=drive_link",
+          "https://drive.google.com/file/d/1APDzigvsmuNz1YrZsqCQyle93KzBx5KD/view?usp=drive_link",
+          "https://drive.google.com/file/d/1xuRFlahYcXglE-03BPJIlyUYjLhmpRgM/view?usp=drive_link"
+        ]
+      }
+    ]
+  },
+  {
+    id: "mis-final-exam",
+    client: "MIS Final Exam",
+    location: "Gading Serpong, Indonesia",
+    role: "Content Creator",
+    year: "2025",
+    category: "Content Creator",
+    description: "Educational content creation for Management Information Systems final examination materials, focusing on clear visual communication and information design.",
+    creativeProjects: [
+      {
+        title: "Educational Content Design",
+        description: "Comprehensive visual materials for academic purposes including infographics, presentation designs, and educational content layouts.",
+        images: [
+          "/archive/mis-final-exam/Export Horizontal.webp"
         ]
       }
     ]
@@ -80,7 +96,7 @@ export const archiveData: ArchiveItem[] = [
   {
     id: "opak-sehot",
     client: "Opak Sehot",
-    location: "Banjarregara, Indonesia",
+    location: "Banjarnegara, Indonesia",
     role: "Graphic Designer",
     year: "2024",
     category: "Graphic Design", 
@@ -96,19 +112,23 @@ export const archiveData: ArchiveItem[] = [
     ]
   },
   {
-    id: "mis-final-exam",
-    client: "MIS Final Exam",
-    location: "Gading Serpong, Indonesia",
-    role: "Content Creator",
-    year: "2025",
-    category: "Content Creator",
-    description: "Educational content creation for Management Information Systems final examination materials, focusing on clear visual communication and information design.",
+    id: "kronju",
+    client: "Kronju",
+    location: "Semarang, Indonesia",
+    role: "Graphic Designer",
+    year: "2024",
+    category: "Graphic Design",
+    description: "Creative visual identity and marketing materials design for Kronju snack brand focusing on bold, engaging visual communication that resonates with the target audience.",
     creativeProjects: [
       {
-        title: "Educational Content Design",
-        description: "Comprehensive visual materials for academic purposes including infographics, presentation designs, and educational content layouts.",
+        title: "My Creative Projects",
+        description: "A collection of creative visual designs including social media content, product packaging concepts, and marketing materials that showcase the brand's personality and appeal to consumers.",
         images: [
-          "/archive/mis-final-exam/Export Horizontal.webp"
+          "/archive/kronju/1.webp",
+          "/archive/kronju/2.webp", 
+          "/archive/kronju/3.webp",
+          "/archive/kronju/4.webp",
+          "/archive/kronju/5.webp"
         ]
       }
     ]

@@ -16,174 +16,73 @@ export function ArchiveContent({ archiveItem }: ArchiveContentProps) {
     router.push("/archive");
   };
 
-  // Function to render images dynamically based on count
-  const renderImages = (images: string[], projectTitle: string) => {
-    if (images.length === 0) return null;
+  // Helper function to extract Google Drive file ID from URL
+  const extractDriveFileId = (url: string): string | null => {
+    const regex = /\/file\/d\/([a-zA-Z0-9_-]+)/;
+    const match = regex.exec(url);
+    return match ? match[1] : null;
+  };
 
-    // For single image
-    if (images.length === 1) {
+  // Helper function to get Google Drive thumbnail URL
+  const getDriveThumbnail = (url: string): string => {
+    const fileId = extractDriveFileId(url);
+    if (fileId) {
+      return `https://drive.google.com/thumbnail?id=${fileId}&sz=w800-h1422`;
+    }
+    return url;
+  };
+
+  // Helper function to convert Google Drive view link to embed/preview link
+  const getDriveEmbedUrl = (url: string): string => {
+    const fileId = extractDriveFileId(url);
+    if (fileId) {
+      return `https://drive.google.com/file/d/${fileId}/preview`;
+    }
+    return url;
+  };
+
+  const isGoogleDriveLink = (url: string) => {
+    return url.includes("drive.google.com");
+  };
+
+  const renderMediaItem = (url: string, alt: string) => {
+    if (isGoogleDriveLink(url)) {
       return (
-        <div>
-          <Image
-            src={images[0]}
-            alt={`${projectTitle} - Featured Image`}
-            width={1200}
-            height={675}
-            className="w-full h-auto"
-            priority
+        <div className="aspect-[9/16] rounded-lg overflow-hidden bg-black relative group cursor-pointer w-full">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={getDriveThumbnail(url)}
+            alt={alt}
+            className="w-full h-full object-cover"
+            style={{ objectPosition: 'center' }}
+          />
+          <div className="absolute inset-0 flex items-center justify-center bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity">
+            <div className="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center">
+              <svg className="w-8 h-8 text-black ml-1" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M8 5v14l11-7z"/>
+              </svg>
+            </div>
+          </div>
+          <iframe
+            src={getDriveEmbedUrl(url)}
+            className="absolute inset-0 w-full h-full opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-opacity"
+            allow="autoplay"
+            allowFullScreen
+            title={alt}
           />
         </div>
       );
     }
 
-    // For 2 images
-    if (images.length === 2) {
-      return (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {images.map((image, index) => (
-            <div key={index}>
-              <Image
-                src={image}
-                alt={`${projectTitle} - Image ${index + 1}`}
-                width={600}
-                height={600}
-                className="w-full h-auto"
-                priority={index === 0}
-              />
-            </div>
-          ))}
-        </div>
-      );
-    }
-
-    // For 3 images
-    if (images.length === 3) {
-      return (
-        <div className="grid gap-6">
-          <div>
-            <Image
-              src={images[0]}
-              alt={`${projectTitle} - Featured Image`}
-              width={1200}
-              height={675}
-              className="w-full h-auto"
-              priority
-            />
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {images.slice(1, 3).map((image, index) => (
-              <div key={index + 1}>
-                <Image
-                  src={image}
-                  alt={`${projectTitle} - Image ${index + 2}`}
-                  width={600}
-                  height={600}
-                  className="w-full h-auto"
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-      );
-    }
-
-    // For 4 images
-    if (images.length === 4) {
-      return (
-        <div className="grid gap-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {images.slice(0, 2).map((image, index) => (
-              <div key={index}>
-                <Image
-                  src={image}
-                  alt={`${projectTitle} - Image ${index + 1}`}
-                  width={600}
-                  height={600}
-                  className="w-full h-auto"
-                  priority={index === 0}
-                />
-              </div>
-            ))}
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {images.slice(2, 4).map((image, index) => (
-              <div key={index + 2}>
-                <Image
-                  src={image}
-                  alt={`${projectTitle} - Image ${index + 3}`}
-                  width={600}
-                  height={600}
-                  className="w-full h-auto"
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-      );
-    }
-
-    // For 5+ images
     return (
-      <div className="grid gap-6">
-        {/* First Row - 2 columns */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {images.slice(0, 2).map((image, index) => (
-            <div key={index}>
-              <Image
-                src={image}
-                alt={`${projectTitle} - Image ${index + 1}`}
-                width={600}
-                height={600}
-                className="w-full h-auto"
-                priority={index === 0}
-              />
-            </div>
-          ))}
-        </div>
-
-        {/* Second Row - Large image if available */}
-        {images[2] && (
-          <div>
-            <Image
-              src={images[2]}
-              alt={`${projectTitle} - Featured Image`}
-              width={1200}
-              height={675}
-              className="w-full h-auto"
-              priority
-            />
-          </div>
-        )}
-
-        {/* Third Row - 2 columns for remaining images */}
-        {images.length > 3 && (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {images.slice(3, 5).map((image, index) => (
-              <div key={index + 3}>
-                <Image
-                  src={image}
-                  alt={`${projectTitle} - Image ${index + 4}`}
-                  width={600}
-                  height={600}
-                  className="w-full h-auto"
-                />
-              </div>
-            ))}
-          </div>
-        )}
-
-        {/* Fourth Row - Single image if there's a 6th image */}
-        {images[5] && (
-          <div>
-            <Image
-              src={images[5]}
-              alt={`${projectTitle} - Final Image`}
-              width={1000}
-              height={750}
-              className="w-full h-auto"
-            />
-          </div>
-        )}
+      <div className="rounded-lg overflow-hidden w-full">
+        <Image
+          src={url}
+          alt={alt}
+          width={1200}
+          height={675}
+          className="w-full h-auto object-cover"
+        />
       </div>
     );
   };
@@ -192,10 +91,10 @@ export function ArchiveContent({ archiveItem }: ArchiveContentProps) {
     <div className="pb-16">
       <div className="max-w-7xl mx-auto px-6">
         {archiveItem.creativeProjects.map((project, projectIndex) => (
-          <div key={projectIndex} className="mb-16">
+          <div key={`${project.title}-${projectIndex}`} className="mb-16">
             {/* Project Title */}
             <div className="text-center mb-12">
-              <h2 className="text-[3rem] md:text-[4rem] lg:text-[5rem] font-bold leading-none text-content-primary tracking-tight mb-6">
+              <h2 className="mt-24 text-[2rem] md:text-[3rem] lg:text-[3rem] font-semibold leading-none text-content-primary tracking-tight mb-6">
                 {project.title}
               </h2>
               {project.description && (
@@ -205,14 +104,20 @@ export function ArchiveContent({ archiveItem }: ArchiveContentProps) {
               )}
             </div>
 
-            {/* Dynamic Image Grid */}
-            {renderImages(project.images, project.title)}
+            {/* Simple Grid Layout */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {project.images.map((image, index) => (
+                <div key={`${image}-${index}`} className="w-full">
+                  {renderMediaItem(image, `${project.title} - Image ${index + 1}`)}
+                </div>
+              ))}
+            </div>
 
             {/* Archive Button with PillButton */}
             <div className="text-center mt-12">
               <PillButton
-                variant="light-to-dark"
-                className="px-8 py-3 text-lg"
+                variant="dark-to-light"
+                className="px-16 py-6 text-2xl"
                 onClick={handleArchiveClick}
               >
                 Archive
