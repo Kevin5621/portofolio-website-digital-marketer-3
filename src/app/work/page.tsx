@@ -110,8 +110,8 @@ export default function WorkPage() {
           {/* Archive Button - Centered */}
           <div className="flex justify-center mt-20">
             <PillButton 
-              variant="light-to-dark"
-              className="px-12 py-4 text-lg"
+              variant="dark-to-light"
+              className="px-10 md:px-20 py-4 md:py-5 text-base md:text-2xl tracking-wide"
               onClick={() => router.push('/archive')}
             >
               Archive
