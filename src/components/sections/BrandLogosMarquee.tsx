@@ -9,14 +9,16 @@ export const BrandLogosMarquee = () => {
   const animationRef = useRef<gsap.core.Timeline | null>(null)
 
   const logoPaths = [
-    '/logo/1 (2).webp',
-    '/logo/2 (2).webp',
-    '/logo/3 (2).webp',
-    '/logo/4 (2).webp',
-    '/logo/5 (1).webp',
-    '/logo/6 (1).webp',
-    '/logo/7 (1).webp',
-    '/logo/8 (1).webp'
+    { src: '/work/fest-z-2025/logo.webp', id: 'fest-z-2025' },
+    { src: '/work/ika-binus-ceo-forum/logo.webp', id: 'ika-binus-ceo-forum' },
+    { src: '/work/ortist-specialist/logo.webp', id: 'ortist-specialist' },
+    { src: '/work/gen-ztrive/logo.webp', id: 'gen-ztrive' },
+    { src: '/work/a5x-studio/logo.webp', id: 'a5x-studio' },
+    { src: '/work/aerospace/logo.webp', id: 'aerospace' },
+    { src: '/work/binjasiimen-samapta/logo.webp', id: 'binjasiimen-samapta' },
+    { src: '/work/genzummit/logo.webp', id: 'genzummit' },
+    { src: '/work/rumah-bahasa-asing/logo.webp', id: 'rumah-bahasa-asing' },
+    { src: '/work/ppm-himma-2025/logo.webp', id: 'ppm-himma-2025' }
   ]
 
   useEffect(() => {
@@ -93,14 +95,14 @@ export const BrandLogosMarquee = () => {
         style={{ willChange: 'transform' }}
       >
         {/* First set of logos */}
-        {logoPaths.map((logoPath, index) => (
+        {logoPaths.map((logo) => (
           <div 
-            key={`first-${index}`}
-            className="relative flex-shrink-0 w-24 md:w-32 lg:w-40 h-24 md:h-32 lg:h-40 bg-surface-secondary rounded-lg flex items-center justify-center p-4"
+            key={`first-${logo.id}`}
+            className="relative shrink-0 w-24 md:w-32 lg:w-40 h-24 md:h-32 lg:h-40 bg-surface-secondary rounded-lg flex items-center justify-center p-4"
           >
             <Image 
-              src={logoPath} 
-              alt={`Brand logo ${index + 1}`}
+              src={logo.src} 
+              alt={`Brand logo ${logo.id}`}
               fill
               className="object-contain"
               sizes="(max-width: 768px) 96px, (max-width: 1024px) 128px, 160px"
@@ -109,14 +111,14 @@ export const BrandLogosMarquee = () => {
         ))}
         
         {/* Duplicate set for seamless infinite scroll */}
-        {logoPaths.map((logoPath, index) => (
+        {logoPaths.map((logo) => (
           <div 
-            key={`second-${index}`}
-            className="relative flex-shrink-0 w-24 md:w-32 lg:w-40 h-24 md:h-32 lg:h-40 bg-surface-secondary rounded-lg flex items-center justify-center p-4"
+            key={`second-${logo.id}`}
+            className="relative shrink-0 w-24 md:w-32 lg:w-40 h-24 md:h-32 lg:h-40 bg-surface-secondary rounded-lg flex items-center justify-center p-4"
           >
             <Image 
-              src={logoPath} 
-              alt={`Brand logo ${index + 1}`}
+              src={logo.src} 
+              alt={`Brand logo ${logo.id}`}
               fill
               className="object-contain"
               sizes="(max-width: 768px) 96px, (max-width: 1024px) 128px, 160px"
