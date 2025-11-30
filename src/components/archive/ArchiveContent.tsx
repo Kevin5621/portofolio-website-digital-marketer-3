@@ -160,6 +160,18 @@ export function ArchiveContent({ archiveItem }: ArchiveContentProps) {
                     );
                   })}
                 </div>
+              ) : mediaItems.length === 1 ? (
+                // Center layout for single image/video
+                <div className="flex justify-center">
+                  {mediaItems.map((item) => {
+                    const itemId = extractDriveFileId(item) || item;
+                    return (
+                      <div key={`${archiveItem.id}-${itemId}`} className="w-full max-w-md relative group">
+                        {renderMediaItem(item, `${archiveItem.client} - ${isVideo ? 'Video' : 'Image'}`, isVideo)}
+                      </div>
+                    );
+                  })}
+                </div>
               ) : (
                 // Grid layout for other archives (including OMB UMN with 3 columns)
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
