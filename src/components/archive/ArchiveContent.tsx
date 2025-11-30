@@ -47,6 +47,7 @@ export function ArchiveContent({ archiveItem }: ArchiveContentProps) {
 
   const isMisFinalExam = archiveItem.id === "mis-final-exam";
   const isOmbUmn = archiveItem.id === "omb-umn-2024";
+  const isKronju = archiveItem.id === "kronju";
 
   const renderMediaItem = (url: string, alt: string, isVideo: boolean = false) => {
     // Special handling for MIS Final Exam - full width layout with direct embed
@@ -159,6 +160,53 @@ export function ArchiveContent({ archiveItem }: ArchiveContentProps) {
                       </div>
                     );
                   })}
+                </div>
+              ) : isKronju && mediaItems.length >= 5 ? (
+                // Special layout for Kronju: 3 grids
+                // Grid 1: Foto 1-2 (2 kolom, row 1)
+                // Grid 2: Foto 5 (full width di kanan, span 2 rows)
+                // Grid 3: Foto 3-4 (2 kolom, row 2)
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  {/* Grid 1: Foto 1 (row 1, col 1) */}
+                  <div className="w-full relative group">
+                    {(() => {
+                      const item = mediaItems[0];
+                      const itemId = extractDriveFileId(item) || item;
+                      return renderMediaItem(item, `${archiveItem.client} - ${isVideo ? 'Video' : 'Image'} 1`, isVideo);
+                    })()}
+                  </div>
+                  {/* Grid 2: Foto 2 (row 1, col 2) */}
+                  <div className="w-full relative group">
+                    {(() => {
+                      const item = mediaItems[1];
+                      const itemId = extractDriveFileId(item) || item;
+                      return renderMediaItem(item, `${archiveItem.client} - ${isVideo ? 'Video' : 'Image'} 2`, isVideo);
+                    })()}
+                  </div>
+                  {/* Grid 3: Foto 5 (row 1-2, col 3, span 2 rows) */}
+                  <div className="w-full relative group row-span-2">
+                    {(() => {
+                      const item = mediaItems[4];
+                      const itemId = extractDriveFileId(item) || item;
+                      return renderMediaItem(item, `${archiveItem.client} - ${isVideo ? 'Video' : 'Image'} 5`, isVideo);
+                    })()}
+                  </div>
+                  {/* Grid 4: Foto 3 (row 2, col 1) */}
+                  <div className="w-full relative group">
+                    {(() => {
+                      const item = mediaItems[2];
+                      const itemId = extractDriveFileId(item) || item;
+                      return renderMediaItem(item, `${archiveItem.client} - ${isVideo ? 'Video' : 'Image'} 3`, isVideo);
+                    })()}
+                  </div>
+                  {/* Grid 5: Foto 4 (row 2, col 2) */}
+                  <div className="w-full relative group">
+                    {(() => {
+                      const item = mediaItems[3];
+                      const itemId = extractDriveFileId(item) || item;
+                      return renderMediaItem(item, `${archiveItem.client} - ${isVideo ? 'Video' : 'Image'} 4`, isVideo);
+                    })()}
+                  </div>
                 </div>
               ) : mediaItems.length === 1 ? (
                 // Center layout for single image/video
