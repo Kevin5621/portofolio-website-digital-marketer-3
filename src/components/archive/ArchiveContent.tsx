@@ -127,26 +127,13 @@ export function ArchiveContent({ archiveItem }: ArchiveContentProps) {
   return (
     <div className="pb-16">
       <div className="max-w-7xl mx-auto px-6">
-        {archiveItem.creativeProjects.map((project) => {
+        {archiveItem.creativeProjects.map((project, projectIndex) => {
           const mediaItems = project.videos || project.images || [];
           const isVideo = !!project.videos;
-          const projectKey = project.title || `${archiveItem.id}-project-${mediaItems[0]?.slice(0, 20)}`;
+          const projectKey = `${archiveItem.id}-project-${projectIndex}-${mediaItems[0]?.slice(0, 20) || 'empty'}`;
           
           return (
             <div key={projectKey} className="mb-16">
-              {/* Project Title */}
-              {project.title && (
-                <div className="text-center mb-12">
-                  <h2 className="mt-24 text-[2rem] md:text-[3rem] lg:text-[3rem] font-semibold leading-none text-content-primary tracking-tight mb-6">
-                    {project.title}
-                  </h2>
-                  {project.description && (
-                    <p className="text-lg text-content-secondary max-w-4xl mx-auto leading-relaxed">
-                      {project.description}
-                    </p>
-                  )}
-                </div>
-              )}
 
               {/* Simple Grid Layout */}
               {isMisFinalExam ? (
@@ -169,43 +156,23 @@ export function ArchiveContent({ archiveItem }: ArchiveContentProps) {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   {/* Grid 1: Foto 1 (row 1, col 1) */}
                   <div className="w-full relative group">
-                    {(() => {
-                      const item = mediaItems[0];
-                      const itemId = extractDriveFileId(item) || item;
-                      return renderMediaItem(item, `${archiveItem.client} - ${isVideo ? 'Video' : 'Image'} 1`, isVideo);
-                    })()}
+                    {renderMediaItem(mediaItems[0], `${archiveItem.client} - ${isVideo ? 'Video' : 'Image'} 1`, isVideo)}
                   </div>
                   {/* Grid 2: Foto 2 (row 1, col 2) */}
                   <div className="w-full relative group">
-                    {(() => {
-                      const item = mediaItems[1];
-                      const itemId = extractDriveFileId(item) || item;
-                      return renderMediaItem(item, `${archiveItem.client} - ${isVideo ? 'Video' : 'Image'} 2`, isVideo);
-                    })()}
+                    {renderMediaItem(mediaItems[1], `${archiveItem.client} - ${isVideo ? 'Video' : 'Image'} 2`, isVideo)}
                   </div>
                   {/* Grid 3: Foto 5 (row 1-2, col 3, span 2 rows) */}
                   <div className="w-full relative group row-span-2">
-                    {(() => {
-                      const item = mediaItems[4];
-                      const itemId = extractDriveFileId(item) || item;
-                      return renderMediaItem(item, `${archiveItem.client} - ${isVideo ? 'Video' : 'Image'} 5`, isVideo);
-                    })()}
+                    {renderMediaItem(mediaItems[4], `${archiveItem.client} - ${isVideo ? 'Video' : 'Image'} 5`, isVideo)}
                   </div>
                   {/* Grid 4: Foto 3 (row 2, col 1) */}
                   <div className="w-full relative group">
-                    {(() => {
-                      const item = mediaItems[2];
-                      const itemId = extractDriveFileId(item) || item;
-                      return renderMediaItem(item, `${archiveItem.client} - ${isVideo ? 'Video' : 'Image'} 3`, isVideo);
-                    })()}
+                    {renderMediaItem(mediaItems[2], `${archiveItem.client} - ${isVideo ? 'Video' : 'Image'} 3`, isVideo)}
                   </div>
                   {/* Grid 5: Foto 4 (row 2, col 2) */}
                   <div className="w-full relative group">
-                    {(() => {
-                      const item = mediaItems[3];
-                      const itemId = extractDriveFileId(item) || item;
-                      return renderMediaItem(item, `${archiveItem.client} - ${isVideo ? 'Video' : 'Image'} 4`, isVideo);
-                    })()}
+                    {renderMediaItem(mediaItems[3], `${archiveItem.client} - ${isVideo ? 'Video' : 'Image'} 4`, isVideo)}
                   </div>
                 </div>
               ) : mediaItems.length === 1 ? (
