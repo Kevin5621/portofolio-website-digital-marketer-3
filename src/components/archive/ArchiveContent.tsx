@@ -46,8 +46,9 @@ export function ArchiveContent({ archiveItem }: ArchiveContentProps) {
   };
 
   const isMisFinalExam = archiveItem.id === "mis-final-exam";
+  const isOmbUmn = archiveItem.id === "omb-umn-2024";
 
-  const renderMediaItem = (url: string, alt: string) => {
+  const renderMediaItem = (url: string, alt: string, isVideo: boolean = false) => {
     // Special handling for MIS Final Exam - full width layout with direct embed
     if (isMisFinalExam && isGoogleDriveLink(url)) {
       return (
@@ -63,9 +64,27 @@ export function ArchiveContent({ archiveItem }: ArchiveContentProps) {
       );
     }
 
+    // Special handling for OMB UMN - videos with TikTok portrait dimensions
+    if (isOmbUmn && isGoogleDriveLink(url) && isVideo) {
+      return (
+        <div 
+          className="w-full rounded-lg overflow-hidden" 
+          style={{ aspectRatio: '9/16' }}
+        >
+          <iframe
+            src={getDriveEmbedUrl(url)}
+            className="w-full h-full"
+            allow="autoplay"
+            allowFullScreen
+            title={alt}
+          />
+        </div>
+      );
+    }
+
     if (isGoogleDriveLink(url)) {
       return (
-        <div>
+        <div className="relative">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={getDriveThumbnail(url)}
@@ -107,53 +126,67 @@ export function ArchiveContent({ archiveItem }: ArchiveContentProps) {
   return (
     <div className="pb-16">
       <div className="max-w-7xl mx-auto px-6">
-        {archiveItem.creativeProjects.map((project, projectIndex) => (
-          <div key={`${project.title}-${projectIndex}`} className="mb-16">
-            {/* Project Title */}
-            <div className="text-center mb-12">
-              <h2 className="mt-24 text-[2rem] md:text-[3rem] lg:text-[3rem] font-semibold leading-none text-content-primary tracking-tight mb-6">
-                {project.title}
-              </h2>
-              {project.description && (
-                <p className="text-lg text-content-secondary max-w-4xl mx-auto leading-relaxed">
-                  {project.description}
-                </p>
+        {archiveItem.creativeProjects.map((project) => {
+          const mediaItems = project.videos || project.images || [];
+          const isVideo = !!project.videos;
+          const projectKey = project.title || `${archiveItem.id}-project-${mediaItems[0]?.slice(0, 20)}`;
+          
+          return (
+            <div key={projectKey} className="mb-16">
+              {/* Project Title */}
+              {project.title && (
+                <div className="text-center mb-12">
+                  <h2 className="mt-24 text-[2rem] md:text-[3rem] lg:text-[3rem] font-semibold leading-none text-content-primary tracking-tight mb-6">
+                    {project.title}
+                  </h2>
+                  {project.description && (
+                    <p className="text-lg text-content-secondary max-w-4xl mx-auto leading-relaxed">
+                      {project.description}
+                    </p>
+                  )}
+                </div>
               )}
-            </div>
 
-            {/* Simple Grid Layout */}
-            {isMisFinalExam ? (
-              // Full width layout for MIS Final Exam
-              <div className="w-full">
-                {project.images.map((image, index) => (
-                  <div key={`${image}-${index}`} className="w-full">
-                    {renderMediaItem(image, `${project.title} - Image ${index + 1}`)}
-                  </div>
-                ))}
-              </div>
-            ) : (
-              // Grid layout for other archives
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {project.images.map((image, index) => (
-                  <div key={`${image}-${index}`} className="w-full">
-                    {renderMediaItem(image, `${project.title} - Image ${index + 1}`)}
-                  </div>
-                ))}
-              </div>
-            )}
+              {/* Simple Grid Layout */}
+              {isMisFinalExam ? (
+                // Full width layout for MIS Final Exam
+                <div className="w-full">
+                  {mediaItems.map((item) => {
+                    const itemId = extractDriveFileId(item) || item;
+                    return (
+                      <div key={`${archiveItem.id}-${itemId}`} className="w-full mb-6">
+                        {renderMediaItem(item, `${archiveItem.client} - ${isVideo ? 'Video' : 'Image'}`, isVideo)}
+                      </div>
+                    );
+                  })}
+                </div>
+              ) : (
+                // Grid layout for other archives (including OMB UMN with 3 columns)
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {mediaItems.map((item) => {
+                    const itemId = extractDriveFileId(item) || item;
+                    return (
+                      <div key={`${archiveItem.id}-${itemId}`} className="w-full relative group">
+                        {renderMediaItem(item, `${archiveItem.client} - ${isVideo ? 'Video' : 'Image'}`, isVideo)}
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
 
-            {/* Archive Button with PillButton */}
-            <div className="text-center mt-12">
-              <PillButton
-                variant="dark-to-light"
-                className="px-16 py-6 text-2xl"
-                onClick={handleArchiveClick}
-              >
-                Archive
-              </PillButton>
+              {/* Archive Button with PillButton */}
+              <div className="text-center mt-12">
+                <PillButton
+                  variant="dark-to-light"
+                  className="px-16 py-6 text-2xl"
+                  onClick={handleArchiveClick}
+                >
+                  Archive
+                </PillButton>
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );

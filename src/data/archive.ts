@@ -7,9 +7,8 @@ export interface ArchiveItem {
   category: string;
   description: string;
   creativeProjects: {
-    title: string;
-    description: string;
-    images: string[];
+    images?: string[];
+    videos?: string[];
   }[];
 }
 
@@ -24,9 +23,7 @@ export const archiveData: ArchiveItem[] = [
     description: "Content creation for OMB UMN 2024, focusing on engaging visual storytelling and event documentation.",
     creativeProjects: [
       {
-        title: "My Creative Projects",
-        description: "",
-        images: [
+        videos: [
           "https://drive.google.com/file/d/1FFGYDzixyZL6jKgeaYo5t4XC2l92TR2V/view?usp=drive_link",
           "https://drive.google.com/file/d/1APDzigvsmuNz1YrZsqCQyle93KzBx5KD/view?usp=drive_link",
           "https://drive.google.com/file/d/1xuRFlahYcXglE-03BPJIlyUYjLhmpRgM/view?usp=drive_link"
@@ -44,8 +41,6 @@ export const archiveData: ArchiveItem[] = [
     description: "Educational content creation for Management Information Systems final examination materials, focusing on clear visual communication and information design.",
     creativeProjects: [
       {
-        title: "Educational Content Design",
-        description: "Comprehensive visual materials for academic purposes including infographics, presentation designs, and educational content layouts.",
         images: [
           "https://drive.google.com/file/d/1W_tU6yRXmszsBAg2JJCReEHboExnlPgM/view?usp=sharing"
         ]
@@ -62,8 +57,6 @@ export const archiveData: ArchiveItem[] = [
     description: "Visual storytelling through storyboard creation for film and video production, translating scripts into compelling visual narratives.",
     creativeProjects: [
       {
-        title: "Storyboard Collection",
-        description: "Professional storyboard designs for various film projects, showcasing visual narrative skills and cinematic understanding.",
         images: [
           "/archive/shinji-film/1.webp",
           "/archive/shinji-film/2.webp",
@@ -85,8 +78,6 @@ export const archiveData: ArchiveItem[] = [
     description: "Brand visual design for Toyota Runners Club events and promotional materials, creating energetic and motivational designs for the running community.",
     creativeProjects: [
       {
-        title: "Event Visual Identity",
-        description: "Comprehensive visual design for running events including posters, banners, social media content, and merchandise designs.",
         images: [
           "/archive/toyota-runners-club/Export 12.webp"
         ]
@@ -103,8 +94,6 @@ export const archiveData: ArchiveItem[] = [
     description: "Traditional snack brand visual identity and packaging design, blending modern design aesthetics with cultural heritage elements.",
     creativeProjects: [
       {
-        title: "Brand & Packaging Design",
-        description: "Complete visual identity including logo design, packaging concepts, and marketing materials for traditional Indonesian snack brand.",
         images: [
           "/archive/opak-sehot/Export 11.webp"
         ]
@@ -121,8 +110,6 @@ export const archiveData: ArchiveItem[] = [
     description: "Creative visual identity and marketing materials design for Kronju snack brand focusing on bold, engaging visual communication that resonates with the target audience.",
     creativeProjects: [
       {
-        title: "My Creative Projects",
-        description: "A collection of creative visual designs including social media content, product packaging concepts, and marketing materials that showcase the brand's personality and appeal to consumers.",
         images: [
           "/archive/kronju/1.webp",
           "/archive/kronju/2.webp", 
