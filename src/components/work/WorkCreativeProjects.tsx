@@ -771,6 +771,22 @@ export const WorkCreativeProjects = ({ projects, projectId }: WorkCreativeProjec
               )}
             </div>
           </div>
+
+          {/* Aftermovie PPM 2025 Section */}
+          <div className="mt-24">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-content-primary mb-16 text-center">
+              Aftermovie PPM 2025
+            </h2>
+            <div className="w-full rounded-lg overflow-hidden">
+              <iframe
+                src={getDriveEmbedUrl("https://drive.google.com/file/d/1Xm821K86EJZe1sk_LzH5KvEXPj5t6MOZ/view?usp=drive_link")}
+                className="w-full h-[800px] md:h-[900px] lg:h-[1000px]"
+                allow="autoplay"
+                allowFullScreen
+                title="Aftermovie PPM 2025"
+              />
+            </div>
+          </div>
         </div>
       </section>
     );
