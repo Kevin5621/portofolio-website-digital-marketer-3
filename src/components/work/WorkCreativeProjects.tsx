@@ -787,6 +787,22 @@ export const WorkCreativeProjects = ({ projects, projectId }: WorkCreativeProjec
               />
             </div>
           </div>
+
+          {/* Aftermovie for the Comittee Section */}
+          <div className="mt-24">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-content-primary mb-16 text-center">
+              Aftermovie for the Comittee
+            </h2>
+            <div className="w-full rounded-lg overflow-hidden">
+              <iframe
+                src={getDriveEmbedUrl("https://drive.google.com/file/d/15cicH8Zmpd9AUk54oJTWAqLScUhvIff_/view?usp=drive_link")}
+                className="w-full h-[800px] md:h-[900px] lg:h-[1000px]"
+                allow="autoplay"
+                allowFullScreen
+                title="Aftermovie for the Comittee"
+              />
+            </div>
+          </div>
         </div>
       </section>
     );
