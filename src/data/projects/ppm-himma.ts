@@ -31,31 +31,10 @@ export const ppmHimmaData: WorkDetail = {
   ],
 
   creativeProjects: [
-    // Layer 1: Grid cols 2 - Cols 1: 2,3,4 (vertikal), Cols 2: Export Vertical, Export 11 (vertikal)
     {
-      title: "LAYER_1_COL1_TOP",
-      description: "Col 1 top image",
-      image: "/work/ppm-himma-2025/2.webp"
-    },
-    {
-      title: "LAYER_1_COL1_MIDDLE",
-      description: "Col 1 middle image",
-      image: "/work/ppm-himma-2025/3.webp"
-    },
-    {
-      title: "LAYER_1_COL1_BOTTOM",
-      description: "Col 1 bottom image",
-      image: "/work/ppm-himma-2025/4.webp"
-    },
-    {
-      title: "LAYER_1_COL2_TOP",
-      description: "Col 2 top image",
-      image: "/work/ppm-himma-2025/Export Vertical.webp"
-    },
-    {
-      title: "LAYER_1_COL2_BOTTOM",
-      description: "Col 2 bottom image",
-      image: "/work/ppm-himma-2025/Export 11.webp"
+      title: "All Creative Projects",
+      description: "All PPM HIMA 2025 creative projects",
+      image: "/work/ppm-himma-2025/all.png"
     }
   ]
 };

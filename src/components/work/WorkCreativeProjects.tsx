@@ -695,12 +695,7 @@ export const WorkCreativeProjects = ({ projects, projectId }: WorkCreativeProjec
   }
 
   if (isPpmHimma && projects) {
-    // Separate projects by position
-    const col1Top = projects.find(p => p.title === "LAYER_1_COL1_TOP");
-    const col1Middle = projects.find(p => p.title === "LAYER_1_COL1_MIDDLE");
-    const col1Bottom = projects.find(p => p.title === "LAYER_1_COL1_BOTTOM");
-    const col2Top = projects.find(p => p.title === "LAYER_1_COL2_TOP");
-    const col2Bottom = projects.find(p => p.title === "LAYER_1_COL2_BOTTOM");
+    const mainProject = projects[0];
 
     return (
       <section className="py-24 bg-surface-background">
@@ -711,71 +706,17 @@ export const WorkCreativeProjects = ({ projects, projectId }: WorkCreativeProjec
             My Creative Projects
           </h2>
           
-          {/* Layer 1: Grid cols 3 - Cols 1: 2,3,4 (vertikal, lebih lebar), Cols 2: Export Vertical, Export 11 (vertikal, lebih kecil) */}
-          <div className="grid grid-cols-3 gap-4 w-full">
-            {/* Cols 1: 2, 3, 4 (vertikal, lebih lebar - col-span-2) */}
-            <div className="col-span-2 flex flex-col gap-4">
-              {col1Top && (
-                <div className="flex-1 rounded-lg overflow-hidden">
-                  <Image
-                    src={col1Top.image}
-                    alt="Col 1 top image"
-                    width={400}
-                    height={400}
-                    className="w-full h-full object-contain"
-                  />
-                </div>
-              )}
-              {col1Middle && (
-                <div className="flex-1 rounded-lg overflow-hidden">
-                  <Image
-                    src={col1Middle.image}
-                    alt="Col 1 middle image"
-                    width={400}
-                    height={400}
-                    className="w-full h-full object-contain"
-                  />
-                </div>
-              )}
-              {col1Bottom && (
-                <div className="flex-1 rounded-lg overflow-hidden">
-                  <Image
-                    src={col1Bottom.image}
-                    alt="Col 1 bottom image"
-                    width={400}
-                    height={400}
-                    className="w-full h-full object-contain"
-                  />
-                </div>
-              )}
+          {mainProject && (
+            <div className="w-full rounded-lg overflow-hidden">
+              <Image
+                src={mainProject.image}
+                alt={mainProject.description || "Creative project"}
+                width={1200}
+                height={800}
+                className="w-full h-auto object-contain"
+              />
             </div>
-            
-            {/* Cols 2: Export Vertical, Export 11 (vertikal, lebih kecil - col-span-1) */}
-            <div className="col-span-1 flex flex-col gap-4">
-              {col2Top && (
-                <div className="flex-1 rounded-lg overflow-hidden">
-                  <Image
-                    src={col2Top.image}
-                    alt="Col 2 top image"
-                    width={400}
-                    height={400}
-                    className="w-full h-full object-contain"
-                  />
-                </div>
-              )}
-              {col2Bottom && (
-                <div className="flex-1 rounded-lg overflow-hidden">
-                  <Image
-                    src={col2Bottom.image}
-                    alt="Col 2 bottom image"
-                    width={400}
-                    height={400}
-                    className="w-full h-full object-contain"
-                  />
-                </div>
-              )}
-            </div>
-          </div>
+          )}
 
           {/* Aftermovie PPM 2025 Section */}
           <div className="mt-24">
