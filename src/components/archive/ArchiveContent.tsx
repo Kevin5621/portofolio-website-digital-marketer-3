@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { ArchiveItem } from "@/data/archive";
 import { PillButton } from "@/components/ui/pill-button";
 
@@ -49,18 +50,63 @@ export function ArchiveContent({ archiveItem }: ArchiveContentProps) {
   const isOmbUmn = archiveItem.id === "omb-umn-2024";
   const isKronju = archiveItem.id === "kronju";
 
+  const DriveVideoPlayer = ({ url, alt, className }: { url: string; alt: string; className?: string }) => {
+    const [isPlaying, setIsPlaying] = useState(false);
+    
+    const handlePlay = () => {
+      setIsPlaying(true);
+    };
+
+    const handleKeyDown = (e: React.KeyboardEvent) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        handlePlay();
+      }
+    };
+    
+    if (isPlaying) {
+      return (
+        <iframe
+          src={getDriveEmbedUrl(url)}
+          className={className || 'w-full h-full'}
+          allowFullScreen
+          title={alt}
+        />
+      );
+    }
+    
+    return (
+      <button 
+        type="button"
+        className={`relative group cursor-pointer border-0 p-0 bg-transparent w-full h-full ${className || ''}`}
+        onClick={handlePlay}
+        onKeyDown={handleKeyDown}
+        aria-label={`Play video: ${alt}`}
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={getDriveThumbnail(url)}
+          alt={alt}
+          className="w-full h-full object-cover"
+          style={{ objectPosition: 'center' }}
+        />
+        <div className="absolute inset-0 flex items-center justify-center bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity">
+          <div className="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center">
+            <svg className="w-8 h-8 text-black ml-1" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M8 5v14l11-7z"/>
+            </svg>
+          </div>
+        </div>
+      </button>
+    );
+  };
+
   const renderMediaItem = (url: string, alt: string, isVideo: boolean = false) => {
-    // Special handling for MIS Final Exam - full width layout with direct embed
+    // Special handling for MIS Final Exam - full width layout with thumbnail and click to play
     if (isMisFinalExam && isGoogleDriveLink(url)) {
       return (
         <div className="w-full rounded-lg overflow-hidden">
-          <iframe
-            src={getDriveEmbedUrl(url)}
-            className="w-full h-[640px]"
-            allow="autoplay"
-            allowFullScreen
-            title={alt}
-          />
+          <DriveVideoPlayer url={url} alt={alt} className="w-full h-[640px]" />
         </div>
       );
     }
@@ -72,42 +118,14 @@ export function ArchiveContent({ archiveItem }: ArchiveContentProps) {
           className="w-full rounded-lg overflow-hidden" 
           style={{ aspectRatio: '9/16' }}
         >
-          <iframe
-            src={getDriveEmbedUrl(url)}
-            className="w-full h-full"
-            allow="autoplay"
-            allowFullScreen
-            title={alt}
-          />
+          <DriveVideoPlayer url={url} alt={alt} className="w-full h-full" />
         </div>
       );
     }
 
     if (isGoogleDriveLink(url)) {
       return (
-        <div className="relative">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={getDriveThumbnail(url)}
-            alt={alt}
-            className="w-full h-full object-cover"
-            style={{ objectPosition: 'center' }}
-          />
-          <div className="absolute inset-0 flex items-center justify-center bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity">
-            <div className="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center">
-              <svg className="w-8 h-8 text-black ml-1" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M8 5v14l11-7z"/>
-              </svg>
-            </div>
-          </div>
-          <iframe
-            src={getDriveEmbedUrl(url)}
-            className="absolute inset-0 w-full h-full opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-opacity"
-            allow="autoplay"
-            allowFullScreen
-            title={alt}
-          />
-        </div>
+        <DriveVideoPlayer url={url} alt={alt} className="w-full h-full" />
       );
     }
 

@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { useState } from "react";
 
 interface WorkCreativeProjectsProps {
   projects?: {
@@ -18,6 +19,58 @@ export const WorkCreativeProjects = ({ projects, projectId }: WorkCreativeProjec
 
   const isVideo = (url: string) => {
     return url.includes('.webm') || url.includes('.mp4') || url.includes('.mov');
+  };
+
+  // Component for Google Drive video with click-to-play
+  const DriveVideoPlayer = ({ url, alt, className }: { url: string; alt: string; className?: string }) => {
+    const [isPlaying, setIsPlaying] = useState(false);
+    
+    const handlePlay = () => {
+      setIsPlaying(true);
+    };
+
+    const handleKeyDown = (e: React.KeyboardEvent) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        handlePlay();
+      }
+    };
+    
+    if (isPlaying) {
+      return (
+        <iframe
+          src={getDriveEmbedUrl(url)}
+          className={className || 'w-full h-full'}
+          allowFullScreen
+          title={alt}
+        />
+      );
+    }
+    
+    return (
+      <button 
+        type="button"
+        className={`relative group cursor-pointer border-0 p-0 bg-transparent w-full h-full ${className || ''}`}
+        onClick={handlePlay}
+        onKeyDown={handleKeyDown}
+        aria-label={`Play video: ${alt}`}
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={getDriveThumbnail(url)}
+          alt={alt}
+          className="w-full h-full object-cover"
+          style={{ objectPosition: 'center' }}
+        />
+        <div className="absolute inset-0 flex items-center justify-center bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity">
+          <div className="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center">
+            <svg className="w-8 h-8 text-black ml-1" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M8 5v14l11-7z"/>
+            </svg>
+          </div>
+        </div>
+      </button>
+    );
   };
 
   const isGenzummit = projectId === "genzummit";
@@ -113,27 +166,11 @@ export const WorkCreativeProjects = ({ projects, projectId }: WorkCreativeProjec
                   {/* Videos */}
                   {group.videos.slice(0, 4).map((project: ProjectType, index: number) => (
                     <div key={`${project.image}-${index}`} className="col-span-1">
-                      <div className="aspect-[9/16] rounded-lg overflow-hidden bg-black relative group cursor-pointer">
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img
-                          src={getDriveThumbnail(project.image)}
+                      <div className="aspect-[9/16] rounded-lg overflow-hidden bg-black">
+                        <DriveVideoPlayer 
+                          url={project.image} 
                           alt={project.title || `Video ${index + 1}`}
-                          className="w-full h-full object-cover"
-                          style={{ objectPosition: 'center' }}
-                        />
-                        <div className="absolute inset-0 flex items-center justify-center bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity">
-                          <div className="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center">
-                            <svg className="w-8 h-8 text-black ml-1" fill="currentColor" viewBox="0 0 24 24">
-                              <path d="M8 5v14l11-7z"/>
-                            </svg>
-                          </div>
-                        </div>
-                        <iframe
-                          src={getDriveEmbedUrl(project.image)}
-                          className="absolute inset-0 w-full h-full opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-opacity"
-                          allow="autoplay"
-                          allowFullScreen
-                          title={project.title || `Video ${index + 1}`}
+                          className="w-full h-full"
                         />
                       </div>
                     </div>
@@ -170,27 +207,11 @@ export const WorkCreativeProjects = ({ projects, projectId }: WorkCreativeProjec
           <div className="grid grid-cols-4 gap-4 w-full">
             {projects.slice(0, 4).map((project, index) => (
               <div key={`${project.image}-${index}`} className="col-span-1">
-                <div className="aspect-[9/16] rounded-lg overflow-hidden bg-black relative group cursor-pointer">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={getDriveThumbnail(project.image)}
+                <div className="aspect-[9/16] rounded-lg overflow-hidden bg-black">
+                  <DriveVideoPlayer 
+                    url={project.image} 
                     alt={project.title || `Video ${index + 1}`}
-                    className="w-full h-full object-cover"
-                    style={{ objectPosition: 'center' }}
-                  />
-                  <div className="absolute inset-0 flex items-center justify-center bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <div className="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center">
-                      <svg className="w-8 h-8 text-black ml-1" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M8 5v14l11-7z"/>
-                      </svg>
-                    </div>
-                  </div>
-                  <iframe
-                    src={getDriveEmbedUrl(project.image)}
-                    className="absolute inset-0 w-full h-full opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-opacity"
-                    allow="autoplay"
-                    allowFullScreen
-                    title={project.title || `Video ${index + 1}`}
+                    className="w-full h-full"
                   />
                 </div>
               </div>
@@ -221,27 +242,11 @@ export const WorkCreativeProjects = ({ projects, projectId }: WorkCreativeProjec
             <div className="grid grid-cols-3 gap-4 w-full mb-16">
               {layer1Videos.map((project, index) => (
                 <div key={`layer1-${project.image}-${index}`} className="col-span-1">
-                  <div className="aspect-[9/16] rounded-lg overflow-hidden bg-black relative group cursor-pointer">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={getDriveThumbnail(project.image)}
+                  <div className="aspect-[9/16] rounded-lg overflow-hidden bg-black">
+                    <DriveVideoPlayer 
+                      url={project.image} 
                       alt={`Video ${index + 1}`}
-                      className="w-full h-full object-cover"
-                      style={{ objectPosition: 'center' }}
-                    />
-                    <div className="absolute inset-0 flex items-center justify-center bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity">
-                      <div className="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center">
-                        <svg className="w-8 h-8 text-black ml-1" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M8 5v14l11-7z"/>
-                        </svg>
-                      </div>
-                    </div>
-                    <iframe
-                      src={getDriveEmbedUrl(project.image)}
-                      className="absolute inset-0 w-full h-full opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-opacity"
-                      allow="autoplay"
-                      allowFullScreen
-                      title={`Video ${index + 1}`}
+                      className="w-full h-full"
                     />
                   </div>
                 </div>
@@ -778,12 +783,10 @@ export const WorkCreativeProjects = ({ projects, projectId }: WorkCreativeProjec
               Aftermovie PPM 2025
             </h2>
             <div className="w-full rounded-lg overflow-hidden">
-              <iframe
-                src={getDriveEmbedUrl("https://drive.google.com/file/d/1Xm821K86EJZe1sk_LzH5KvEXPj5t6MOZ/view?usp=drive_link")}
+              <DriveVideoPlayer 
+                url="https://drive.google.com/file/d/1Xm821K86EJZe1sk_LzH5KvEXPj5t6MOZ/view?usp=drive_link" 
+                alt="Aftermovie PPM 2025"
                 className="w-full h-[800px] md:h-[900px] lg:h-[1000px]"
-                allow="autoplay"
-                allowFullScreen
-                title="Aftermovie PPM 2025"
               />
             </div>
           </div>
@@ -794,12 +797,10 @@ export const WorkCreativeProjects = ({ projects, projectId }: WorkCreativeProjec
               Aftermovie for the Comittee
             </h2>
             <div className="w-full rounded-lg overflow-hidden">
-              <iframe
-                src={getDriveEmbedUrl("https://drive.google.com/file/d/15cicH8Zmpd9AUk54oJTWAqLScUhvIff_/view?usp=drive_link")}
+              <DriveVideoPlayer 
+                url="https://drive.google.com/file/d/15cicH8Zmpd9AUk54oJTWAqLScUhvIff_/view?usp=drive_link" 
+                alt="Aftermovie for the Comittee"
                 className="w-full h-[800px] md:h-[900px] lg:h-[1000px]"
-                allow="autoplay"
-                allowFullScreen
-                title="Aftermovie for the Comittee"
               />
             </div>
           </div>
@@ -825,28 +826,12 @@ export const WorkCreativeProjects = ({ projects, projectId }: WorkCreativeProjec
       
       if (isDriveLink) {
         return (
-          <div className="col-span-1 rounded-lg overflow-hidden bg-black relative group cursor-pointer">
+          <div className="col-span-1 rounded-lg overflow-hidden bg-black">
             <div className="aspect-[9/16]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={getDriveThumbnail(project.image)}
+              <DriveVideoPlayer 
+                url={project.image} 
                 alt={`Video ${index + 1}`}
-                className="w-full h-full object-cover"
-                style={{ objectPosition: 'center' }}
-              />
-              <div className="absolute inset-0 flex items-center justify-center bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity">
-                <div className="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center">
-                  <svg className="w-8 h-8 text-black ml-1" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M8 5v14l11-7z"/>
-                  </svg>
-                </div>
-              </div>
-              <iframe
-                src={getDriveEmbedUrl(project.image)}
-                className="absolute inset-0 w-full h-full opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-opacity"
-                allow="autoplay"
-                allowFullScreen
-                title={`Video ${index + 1}`}
+                className="w-full h-full"
               />
             </div>
           </div>
@@ -893,12 +878,10 @@ export const WorkCreativeProjects = ({ projects, projectId }: WorkCreativeProjec
           {/* Row 3 (bawah): 1 item full width */}
           {row3Full && (
             <div className="w-full rounded-lg overflow-hidden">
-              <iframe
-                src={getDriveEmbedUrl(row3Full.image)}
+              <DriveVideoPlayer 
+                url={row3Full.image} 
+                alt="Full width video"
                 className="w-full h-[1050px]"
-                allow="autoplay"
-                allowFullScreen
-                title="Full width video"
               />
             </div>
           )}
