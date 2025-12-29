@@ -31,6 +31,7 @@ export const TextSlideUp: React.FC<TextSlideUpProps> = ({
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const containerElement = containerRef.current;
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -58,13 +59,13 @@ export const TextSlideUp: React.FC<TextSlideUpProps> = ({
       }
     );
 
-    if (containerRef.current) {
-      observer.observe(containerRef.current);
+    if (containerElement) {
+      observer.observe(containerElement);
     }
 
     return () => {
-      if (containerRef.current) {
-        observer.unobserve(containerRef.current);
+      if (containerElement) {
+        observer.unobserve(containerElement);
       }
     };
   }, [delay, onAnimationComplete]);
@@ -131,6 +132,7 @@ export const TextSlideUpHeading: React.FC<TextSlideUpHeadingProps> = ({
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const containerElement = containerRef.current;
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -158,13 +160,13 @@ export const TextSlideUpHeading: React.FC<TextSlideUpHeadingProps> = ({
       }
     );
 
-    if (containerRef.current) {
-      observer.observe(containerRef.current);
+    if (containerElement) {
+      observer.observe(containerElement);
     }
 
     return () => {
-      if (containerRef.current) {
-        observer.unobserve(containerRef.current);
+      if (containerElement) {
+        observer.unobserve(containerElement);
       }
     };
   }, [delay, onAnimationComplete]);
@@ -315,6 +317,7 @@ export const TextSlideUpList: React.FC<TextSlideUpListProps> = ({
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const containerElement = containerRef.current;
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -342,13 +345,13 @@ export const TextSlideUpList: React.FC<TextSlideUpListProps> = ({
       }
     );
 
-    if (containerRef.current) {
-      observer.observe(containerRef.current);
+    if (containerElement) {
+      observer.observe(containerElement);
     }
 
     return () => {
-      if (containerRef.current) {
-        observer.unobserve(containerRef.current);
+      if (containerElement) {
+        observer.unobserve(containerElement);
       }
     };
   }, [delay, onAnimationComplete]);

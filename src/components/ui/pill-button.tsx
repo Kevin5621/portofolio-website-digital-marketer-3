@@ -81,7 +81,7 @@ const PillButton: React.FC<PillButtonProps> = ({
       window.removeEventListener("resize", onResize);
       tlRef.current?.kill();
     };
-  }, []);
+  }, [variant]);
 
   const handleEnter = () => {
     const tl = tlRef.current;
