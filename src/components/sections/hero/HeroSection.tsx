@@ -1,5 +1,8 @@
+'use client'
+
 import { HeroPhoto } from './HeroPhoto'
 import { HeroArrowIcon } from './HeroArrowIcon'
+
 
 export const HeroSection = () => {
   // =======================================
@@ -38,8 +41,8 @@ export const HeroSection = () => {
     photo: {
       left: '-left-8 md:-left-26', // Kiri: 'left-0', '-left-4', '-left-8', '-left-12', dll
       right: '-right-1 md:-right-1', // Kanan: 'right-0', '-right-4', '-right-8', '-right-12', dll
-      top: '-top-8 md:-top-24', // Atas: 'top-0', '-top-4', '-top-8', '-top-12', dll
-      bottom: '-bottom-8 md:-bottom-12' // Bawah: 'bottom-0', '-bottom-4', '-bottom-8', '-bottom-12', dll
+      top: 'top-0 scale-[1.35] origin-[50%_35%] md:scale-100 md:origin-center md:-top-24', // Mobile: scale up to zoom in (half body effect)
+      bottom: 'bottom-0 md:-bottom-12' // Mobile: full height
     }
   }
 
@@ -105,42 +108,32 @@ export const HeroSection = () => {
           </h1>
         </div>
 
-        {/* Mobile Layout - Completely separate from desktop */}
-        <div className="md:hidden absolute inset-0 flex flex-col items-center justify-center z-20 px-4 sm:px-6">
-          {/* Mobile Header */}
-          <div className="text-center mb-12">
-            <h1 className="font-semibold text-content-inverse leading-none tracking-tight flex items-center justify-center gap-4" style={{fontSize: '8.5rem'}}>
-              <span>Adhara</span>
-              <span>Eka</span>
-            </h1>
+        {/* Mobile Layout - Infinite Marquee & Full Image */}
+        <div className="md:hidden absolute inset-0 z-20 overflow-hidden pointer-events-none">
+          {/* Marquee Name - Spans > 1 window */}
+          {/* Name - Massive Static Text (Spans > 1 window via overflow) */}
+          <div className="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 w-full text-center">
+             <div className="whitespace-nowrap">
+                <h1 className="font-bold text-content-inverse leading-none tracking-tighter text-[35vw]">
+                  Adhara Eka
+                </h1>
+             </div>
           </div>
 
-          {/* Mobile Skills */}
-          <div className="text-center space-y-6 mb-12">
-            <div className="text-content-inverse font-normal" style={{fontSize: '3.5rem'}}>
-              Social Media Marketing
+          {/* Bottom Left Info - Arrow & Jobs */}
+          <div className="absolute bottom-8 left-6 text-left flex flex-col gap-4 pointer-events-auto">
+            {/* Arrow */}
+            <div className="w-8 h-8 text-content-inverse">
+               <HeroArrowIcon />
             </div>
-            <div className="text-content-inverse font-normal" style={{fontSize: '3.5rem'}}>
-              Content Creator
-            </div>
-            <div className="text-content-inverse font-normal" style={{fontSize: '3.5rem'}}>
-              Short-Form Video Editor
-            </div>
-          </div>
-
-          {/* Mobile Motto */}
-          <div className="text-center">
-            <div className="text-content-inverse">
-              <div className="text-content-inverse font-normal mb-4" style={{fontSize: '3.5rem'}}>
-                My Motto Is:
-              </div>
-              <div className="space-y-4">
-                <div className="text-content-inverse font-normal" style={{fontSize: '3.5rem'}}>
-                  &quot;Sepi ing Pamrih,&quot;
-                </div>
-                <div className="text-content-inverse font-normal" style={{fontSize: '3.5rem'}}>
-                  &quot;Rame ing Gawe&quot;
-                </div>
+            
+            {/* Job Titles */}
+            <div className="flex flex-col gap-1">
+              <span className="text-content-inverse/80 text-base font-medium">Freelance</span>
+              <div className="flex flex-col">
+                <span className="text-content-inverse text-xl font-medium leading-tight">Social Media Marketing</span>
+                <span className="text-content-inverse text-xl font-medium leading-tight">Content Creator</span>
+                <span className="text-content-inverse text-xl font-medium leading-tight">Video Editor</span>
               </div>
             </div>
           </div>
