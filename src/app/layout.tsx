@@ -21,8 +21,43 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Adhara Eka - Portfolio",
-  description: "Social Media Marketing, Content Creator, Short-Form Video Editor",
+  title: {
+    default: "Adhara Eka - Social Media Marketing Specialist & Digital Marketer",
+    template: "%s | Adhara Eka",
+  },
+  description:
+    "Portfolio of Adhara Eka, a Social Media Marketing Specialist and Digital Marketer available for hire. Top-notch strategies for growth and engagement.",
+  keywords: [
+    "Adhara Eka",
+    "Social Media Marketing",
+    "Digital Marketer",
+    "Content Creator",
+    "Short-Form Video Editor",
+    "Portfolio",
+    "Social Media Specialist",
+  ],
+  authors: [{ name: "Adhara Eka" }],
+  creator: "Adhara Eka",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://adharaeka.com",
+    title: "Adhara Eka - Social Media Marketing Specialist & Digital Marketer",
+    description:
+      "Portfolio of Adhara Eka, a Social Media Marketing Specialist and Digital Marketer available for hire. Top-notch strategies for growth and engagement.",
+    siteName: "Adhara Eka Portfolio",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Adhara Eka - Social Media Marketing Specialist & Digital Marketer",
+    description:
+      "Portfolio of Adhara Eka, a Social Media Marketing Specialist and Digital Marketer available for hire. Top-notch strategies for growth and engagement.",
+    creator: "@adharaeka",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({
