@@ -12,16 +12,16 @@ export const SelectedWorksSection = () => {
       <div className="container mx-auto px-6 md:px-8 py-20 md:py-24">
         <div className="max-w-7xl mx-auto text-center space-y-16">
           <div className="space-y-0">
-            <h1 className="text-8xl sm:text-9xl md:text-[12rem] lg:text-[14rem] xl:text-[16rem] font-extrabold text-content-primary leading-[0.8] tracking-tight">
+            <h1 className="text-6xl sm:text-8xl md:text-[12rem] lg:text-[14rem] xl:text-[16rem] font-extrabold text-content-primary leading-[0.8] tracking-tight">
               Selected
             </h1>
-            <h1 className="text-8xl sm:text-9xl md:text-[12rem] lg:text-[14rem] xl:text-[16rem] font-extrabold text-content-primary leading-[0.8] tracking-tight">
+            <h1 className="text-6xl sm:text-8xl md:text-[12rem] lg:text-[14rem] xl:text-[16rem] font-extrabold text-content-primary leading-[0.8] tracking-tight">
               Works
             </h1>
           </div>
           
           <div className="max-w-7xl mx-auto">
-            <p className="text-8xl md:text-3xl lg:text-4xl xl:text-5xl font-semibold text-content-primary text-center leading-[1]">
+            <p className="text-lg sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-semibold text-content-primary text-center leading-[1]">
               A selection of project that represent my journey in the
               <br />
               creative world, showing the projects I&apos;m proud of and

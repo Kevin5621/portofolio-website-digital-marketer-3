@@ -5,14 +5,14 @@ export function AboutSection4Start() {
     <div className="relative bg-surface-inverse rounded-tr-2xl rounded-tl-2xl z-20">
       {/* Viewport 19: Finally - Big text, black bg, white text */}
       <section id="finally" className="min-h-screen bg-surface-inverse flex items-center justify-center">
-        <h2 className="text-[7.5rem] md:text-[9rem] lg:text-[12rem] xl:text-[16rem] font-bold text-content-inverse leading-none">
+        <h2 className="text-[5rem] sm:text-[7.5rem] md:text-[9rem] lg:text-[12rem] xl:text-[16rem] font-bold text-content-inverse leading-none">
           Finally
         </h2>
       </section>
 
       {/* Viewport 20: Small text, black bg, white text */}
       <section id="flexible-approach" className="min-h-screen bg-surface-inverse flex items-center justify-center px-6">
-        <p className="text-8xl md:text-3xl lg:text-4xl xl:text-5xl font-semibold text-content-inverse text-center max-w-7xl">
+        <p className="text-2xl sm:text-3xl md:text-3xl lg:text-4xl xl:text-5xl font-semibold text-content-inverse text-center max-w-7xl">
           I take a flexible approach in
         </p>
       </section>

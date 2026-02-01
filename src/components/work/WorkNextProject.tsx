@@ -80,7 +80,7 @@ export const WorkNextProject = ({ nextProject }: WorkNextProjectProps) => {
             className="group inline-block relative"
             onClick={handleNextProjectClick}
           >
-            <h3 className="text-6xl md:text-8xl lg:text-[4rem] xl:text-[8rem] font-bold text-white leading-[0.8] tracking-tight group-hover:opacity-80 transition-opacity duration-300 mb-12 relative z-30">
+            <h3 className="text-4xl sm:text-5xl md:text-6xl lg:text-[4rem] xl:text-[8rem] font-bold text-white leading-[0.8] tracking-tight group-hover:opacity-80 transition-opacity duration-300 mb-12 relative z-30">
               {nextProject.title}
             </h3>
             
@@ -104,7 +104,7 @@ export const WorkNextProject = ({ nextProject }: WorkNextProjectProps) => {
           <div className="flex items-center justify-center relative z-30 mb-8">
             <Link
               href="/work"
-              className="px-12 py-6 text-2xl lg:text-3xl font-medium text-white bg-transparent border-4 border-white rounded-full hover:bg-white hover:text-black transition-all duration-300 inline-block"
+              className="px-8 py-4 text-base md:text-lg lg:text-3xl font-medium text-white bg-transparent border-2 md:border-4 border-white rounded-full hover:bg-white hover:text-black transition-all duration-300 inline-block"
               onClick={() => {
                 // Force scroll to top before navigation
                 window.scrollTo(0, 0);
@@ -125,20 +125,20 @@ export const WorkNextProject = ({ nextProject }: WorkNextProjectProps) => {
           {/* Bottom Section with VERSION and SOCIALS - consistent with container width */}
           <div className="flex items-center justify-between text-white text-2xl lg:text-3xl font-medium mt-16 relative z-30">
             <div className="text-left">
-              <div className="text-white/60 mb-1">VERSION</div>
-              <div>2025 © Edition</div>
+              <div className="text-white/60 mb-1 text-sm md:text-base">VERSION</div>
+              <div className="text-base md:text-2xl lg:text-3xl">2025 © Edition</div>
             </div>
             
             <div className="text-right">
-              <div className="text-white/60 mb-1">SOCIALS</div>
-              <div className="flex gap-4">
+              <div className="text-white/60 mb-1 text-sm md:text-base">SOCIALS</div>
+              <div className="flex flex-col md:flex-row gap-2 md:gap-4 text-right">
                 <a
                   href="https://instagram.com/adharaeka"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-white hover:text-white/80 transition-colors duration-300"
                 >
-                  <TextRoll className="text-white">
+                  <TextRoll className="text-white text-base md:text-2xl lg:text-3xl">
                     Instagram
                   </TextRoll>
                 </a>
@@ -148,7 +148,7 @@ export const WorkNextProject = ({ nextProject }: WorkNextProjectProps) => {
                   rel="noopener noreferrer"
                   className="text-white hover:text-white/80 transition-colors duration-300"
                 >
-                  <TextRoll className="text-white">
+                  <TextRoll className="text-white text-base md:text-2xl lg:text-3xl">
                     Linkedin
                   </TextRoll>
                 </a>

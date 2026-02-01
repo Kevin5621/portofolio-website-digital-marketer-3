@@ -17,7 +17,7 @@ export const ContactSection = () => {
         <div className="px-4 sm:px-6 py-12 space-y-12">
           {/* Header */}
           <div className="text-center">
-            <h2 className="font-bold text-content-primary leading-none tracking-tight" style={{fontSize: '8.5rem'}}>
+            <h2 className="font-bold text-content-primary leading-none tracking-tight text-6xl">
               Contact
             </h2>
           </div>
@@ -48,34 +48,32 @@ export const ContactSection = () => {
                 href="https://instagram.com/adharaeka" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-content-primary flex items-center gap-3"
-                style={{fontSize: '3.5rem'}}
+                className="text-content-primary flex items-center gap-2 text-xl"
               >
-                <InstagramIcon size={32} />
+                <InstagramIcon size={24} />
                 Instagram
               </a>
               <a 
                 href="https://linkedin.com/in/adharaeka" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-content-primary flex items-center gap-3"
-                style={{fontSize: '3.5rem'}}
+                className="text-content-primary flex items-center gap-2 text-xl"
               >
-                <LinkedInIcon size={32} />
+                <LinkedInIcon size={24} />
                 Linkedin
               </a>
             </div>
 
             {/* Email */}
             <div className="text-center">
-              <div className="text-content-primary" style={{fontSize: '3.5rem'}}>
+              <div className="text-content-primary text-2xl font-medium">
                 ekaadharabusiness@gmail.com
               </div>
             </div>
 
             {/* Phone */}
             <div className="text-center">
-              <div className="text-content-primary" style={{fontSize: '3.5rem'}}>
+              <div className="text-content-primary text-2xl font-medium">
                 +62 896-9734-6868
               </div>
             </div>
@@ -85,8 +83,7 @@ export const ContactSection = () => {
           <div className="text-center pt-8">
             <a 
               href="#home" 
-              className="text-content-primary tracking-wide"
-              style={{fontSize: '3.5rem'}}
+              className="text-content-primary tracking-wide text-lg"
             >
               ( Back to top ) ↑
             </a>

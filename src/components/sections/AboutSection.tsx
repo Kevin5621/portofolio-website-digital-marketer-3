@@ -16,7 +16,7 @@ export const AboutSection = () => {
         {/* Content Container - Mobile */}
         <div className="px-4 sm:px-6 py-12 space-y-12">
           {/* Main Heading */}
-          <h2 className="text-4xl sm:text-5xl font-bold text-content-primary leading-tight" style={{fontSize: '8.5rem'}}>
+          <h2 className="text-4xl sm:text-5xl font-bold text-content-primary leading-tight">
             Helping business
             <br />
             owners create
@@ -30,19 +30,19 @@ export const AboutSection = () => {
 
           {/* Specializations */}
           <div className="space-y-4">
-            <div className="text-2xl sm:text-3xl text-content-primary font-semibold" style={{fontSize: '3.5rem'}}>
+            <div className="text-2xl sm:text-3xl text-content-primary font-semibold">
               Specialising in:
             </div>
-            <div className="text-2xl sm:text-3xl text-content-primary font-semibold" style={{fontSize: '3.5rem'}}>
+            <div className="text-2xl sm:text-3xl text-content-primary font-semibold">
               Market Analysis
             </div>
-            <div className="text-2xl sm:text-3xl text-content-primary font-semibold" style={{fontSize: '3.5rem'}}>
+            <div className="text-2xl sm:text-3xl text-content-primary font-semibold">
               Content Strategy
             </div>
-            <div className="text-2xl sm:text-3xl text-content-primary font-semibold" style={{fontSize: '3.5rem'}}>
+            <div className="text-2xl sm:text-3xl text-content-primary font-semibold">
               Content Production
             </div>
-            <div className="text-2xl sm:text-3xl text-content-primary font-semibold" style={{fontSize: '3.5rem'}}>
+            <div className="text-2xl sm:text-3xl text-content-primary font-semibold">
               Cross-Platform Management
             </div>
           </div>
@@ -50,7 +50,7 @@ export const AboutSection = () => {
           {/* About Me Button */}
           <div className="pt-6">
             <Link href="/about">
-              <div style={{fontSize: '1.5rem'}}>
+              <div>
                 <PillButton 
                   variant="dark-to-light"
                   className="w-full px-8 py-6 text-2xl sm:text-3xl"

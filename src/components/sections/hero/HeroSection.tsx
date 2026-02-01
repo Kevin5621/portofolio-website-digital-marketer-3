@@ -129,7 +129,6 @@ export const HeroSection = () => {
             
             {/* Job Titles */}
             <div className="flex flex-col gap-1">
-              <span className="text-content-inverse/80 text-base font-medium">Freelance</span>
               <div className="flex flex-col">
                 <span className="text-content-inverse text-xl font-medium leading-tight">Social Media Marketing</span>
                 <span className="text-content-inverse text-xl font-medium leading-tight">Content Creator</span>

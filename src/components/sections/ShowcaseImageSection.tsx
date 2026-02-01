@@ -94,24 +94,24 @@ const ProjectSection = ({ project }: ProjectSectionProps) => {
         </div>
         
         {/* Content wrapper with vertical center alignment */}
-        <div className="absolute inset-0 flex items-center z-10 pt-28 pl-20">
+        <div className="absolute inset-0 flex items-center z-10 pt-20 pl-4 md:pt-28 md:pl-20">
           <div className="w-full">
             <div className="ml-8 space-y-6">
               {/* Year */}
-              <div className="ml-32 pb-24">
+              <div className="ml-4 md:ml-32 pb-12 md:pb-24">
                 <p className="text-content-inverse text-2xl font-semibold">
                   {year}
                 </p>
               </div>
 
               {/* Title */}
-              <h1 className="text-8xl sm:text-9xl md:text-[6rem] lg:text-[8rem] xl:text-[10rem] font-bold text-content-primary leading-[0.8] tracking-tight">
+              <h1 className="text-6xl sm:text-8xl md:text-[6rem] lg:text-[8rem] xl:text-[10rem] font-bold text-content-primary leading-[0.8] tracking-tight">
                 {title}
               </h1>
               
               {/* Category and button */}
-              <div className="space-y-4 ml-32">
-                <p className="text-xl md:text-xl lg:text-xl xl:text-3xl font-semibold text-content-primary pt-24 pb-24">
+              <div className="space-y-4 ml-4 md:ml-32">
+                <p className="text-xl md:text-xl lg:text-xl xl:text-3xl font-semibold text-content-primary pt-12 pb-12 md:pt-24 md:pb-24">
                   {category}
                 </p>
                 <PillButton 

@@ -542,7 +542,7 @@ export const Header = () => {
           {/* Sidebar */}
           <div 
             className={cn(
-              "fixed top-0 right-0 h-full w-1/3 bg-background-dark z-[1000] shadow-2xl",
+              "fixed top-0 right-0 h-full w-full md:w-1/3 bg-background-dark z-[1000] shadow-2xl",
               "transition-all duration-800 ease-out",
               getSidebarTransformClass()
             )}
