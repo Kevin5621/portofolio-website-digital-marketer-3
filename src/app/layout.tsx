@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     template: "%s | Adhara Eka",
   },
   description:
-    "Portfolio of Adhara Eka, a Social Media Marketing Specialist and Digital Marketer available for hire. Top-notch strategies for growth and engagement.",
+    "Portfolio of Adhara Eka, a Social Media Marketing Specialist and Digital Marketer. Top-notch strategies for growth and engagement.",
   keywords: [
     "Adhara Eka",
     "Social Media Marketing",
@@ -44,15 +44,18 @@ export const metadata: Metadata = {
     url: "https://adharaeka.com",
     title: "Adhara Eka - Social Media Marketing Specialist & Digital Marketer",
     description:
-      "Portfolio of Adhara Eka, a Social Media Marketing Specialist and Digital Marketer available for hire. Top-notch strategies for growth and engagement.",
+      "Portfolio of Adhara Eka, a Social Media Marketing Specialist and Digital Marketer. Top-notch strategies for growth and engagement.",
     siteName: "Adhara Eka Portfolio",
   },
   twitter: {
     card: "summary_large_image",
     title: "Adhara Eka - Social Media Marketing Specialist & Digital Marketer",
     description:
-      "Portfolio of Adhara Eka, a Social Media Marketing Specialist and Digital Marketer available for hire. Top-notch strategies for growth and engagement.",
+      "Portfolio of Adhara Eka, a Social Media Marketing Specialist and Digital Marketer. Top-notch strategies for growth and engagement.",
     creator: "@adharaeka",
+  },
+  verification: {
+    google: "b_ykXVllonAcopGVO8eDBkLB2Mn1I481YCov33Vzh_o",
   },
   robots: {
     index: true,
