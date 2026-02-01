@@ -74,7 +74,7 @@ export function AboutSection3End() {
     <>
       {/* Viewport 17: Here's a sneak peek - Small text, white bg, black text */}
       <section id="sneak-peek" className="relative min-h-screen bg-surface-background flex items-center justify-center px-6 z-30">
-        <p className="text-8xl md:text-3xl lg:text-4xl xl:text-5xl font-semibold text-content-primary text-center max-w-7xl leading-none">
+        <p className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold text-content-primary text-center max-w-7xl leading-none">
           Here&apos;s a sneak peek of what that looks like
         </p>
       </section>

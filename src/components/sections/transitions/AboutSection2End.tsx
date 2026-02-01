@@ -16,7 +16,7 @@ export function AboutSection2End() {
     <>
       {/* Viewport 11: Here's a glimpse - Small text, black bg, white text */}
       <section id="glimpse" className="relative min-h-screen bg-surface-inverse flex items-center justify-center px-6 z-30">
-        <p className="text-8xl md:text-3xl lg:text-4xl xl:text-5xl font-semibold text-content-inverse text-center max-w-7xl">
+        <p className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold text-content-inverse text-center max-w-7xl">
           Here&apos;s a glimpse of what that looks like
         </p>
       </section>

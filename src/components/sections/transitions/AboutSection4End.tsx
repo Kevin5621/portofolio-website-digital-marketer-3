@@ -160,7 +160,7 @@ export function AboutSection4End() {
     <>
       {/* Viewport 23: Here's a breakdown - Small text, black bg, white text */}
       <section id="breakdown" className="relative min-h-screen bg-surface-inverse flex items-center justify-center px-6 z-30">
-        <p className="text-8xl md:text-3xl lg:text-4xl xl:text-5xl font-semibold text-content-inverse text-center max-w-7xl">
+        <p className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold text-content-inverse text-center max-w-7xl">
           Here&apos;s a breakdown of what that includes
         </p>
       </section>
@@ -186,13 +186,13 @@ export function AboutSection4End() {
                   className="lg:w-3/4"
                 >
                   <div>
-                    <p className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-content-inverse font-bold">
+                    <p className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl text-content-inverse font-bold">
                       Social Media Strategy
                     </p>
-                    <p className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-content-inverse font-bold">
+                    <p className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl text-content-inverse font-bold">
                       Analytics & Insights
                     </p>
-                    <p className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-content-inverse font-bold">
+                    <p className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl text-content-inverse font-bold">
                       Campaign Management
                     </p>
                   </div>
@@ -214,25 +214,25 @@ export function AboutSection4End() {
                   className="lg:w-3/4"
                 >
                   <div>
-                    <p className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-content-inverse font-bold">
+                    <p className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl text-content-inverse font-bold">
                       Graphic Design
                     </p>
-                    <p className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-content-inverse font-bold">
+                    <p className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl text-content-inverse font-bold">
                       Copywriting
                     </p>
-                    <p className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-content-inverse font-bold">
+                    <p className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl text-content-inverse font-bold">
                       Storytelling
                     </p>
-                    <p className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-content-inverse font-bold">
+                    <p className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl text-content-inverse font-bold">
                       Photography
                     </p>
-                    <p className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-content-inverse font-bold">
+                    <p className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl text-content-inverse font-bold">
                       Videography
                     </p>
-                    <p className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-content-inverse font-bold">
+                    <p className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl text-content-inverse font-bold">
                       Branding
                     </p>
-                    <p className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-content-inverse font-bold">
+                    <p className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl text-content-inverse font-bold">
                       Visual Identity
                     </p>
                   </div>
@@ -254,22 +254,22 @@ export function AboutSection4End() {
                   className="lg:w-3/4"
                 >
                   <div>
-                    <p className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-content-inverse font-bold">
+                    <p className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl text-content-inverse font-bold">
                       Editing
                     </p>
-                    <p className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-content-inverse font-bold">
+                    <p className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl text-content-inverse font-bold">
                       Post-production
                     </p>
-                    <p className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-content-inverse font-bold">
+                    <p className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl text-content-inverse font-bold">
                       Motion Graphics
                     </p>
-                    <p className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-content-inverse font-bold">
+                    <p className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl text-content-inverse font-bold">
                       Color Grading
                     </p>
-                    <p className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-content-inverse font-bold">
+                    <p className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl text-content-inverse font-bold">
                       Sound Design
                     </p>
-                    <p className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-content-inverse font-bold">
+                    <p className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl text-content-inverse font-bold">
                       Video Optimization
                     </p>
                   </div>
