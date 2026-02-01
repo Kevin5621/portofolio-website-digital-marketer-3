@@ -376,11 +376,11 @@ export const Header = () => {
   return (
     <>
       <header className="fixed top-0 left-0 right-0 z-[999] bg-transparent">
-        <nav className="w-full px-8 py-12">
+        <nav className="w-full px-4 py-6 md:px-8 md:py-12">
           <div className="flex items-center justify-between">
             {/* Copyright - Adaptif berdasarkan section aktif */}
             <div className={cn(
-              "text-2xl transition-colors duration-300",
+              "text-sm md:text-base lg:text-xl transition-colors duration-300",
               getCopyrightTextClass()
             )}>
               © Adhara Eka Sakti
@@ -391,7 +391,7 @@ export const Header = () => {
               {/* Menu Text - Adaptif berdasarkan section aktif */}
               <div 
                 className={cn(
-                  "flex items-baseline space-x-12 transition-all duration-500 ease-out",
+                  "flex items-baseline space-x-6 lg:space-x-12 transition-all duration-500 ease-out",
                   !showTextMenu && "pointer-events-none"
                 )}
               >
@@ -410,7 +410,7 @@ export const Header = () => {
                       }
                     }}
                     className={cn(
-                      "text-2xl transition-all duration-500 ease-out",
+                      "text-sm md:text-base lg:text-xl transition-all duration-500 ease-out",
                       "transform hover:scale-105 hover:-translate-y-0.5",
                       // Warna text berdasarkan section
                       isDark 
@@ -475,14 +475,14 @@ export const Header = () => {
               <button
                 onClick={handleOpenMenu}
                 className={cn(
-                  "w-16 h-16 rounded-full flex items-center justify-center transition-all duration-300",
+                  "w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300",
                   "transform hover:scale-105 active:scale-95",
                   getBurgerBgClass()
                 )}
                 aria-label="Open menu"
               >
                 <Menu className={cn(
-                  "h-8 w-8 transition-all duration-300",
+                  "h-6 w-6 transition-all duration-300",
                   getBurgerTextClass()
                 )} />
               </button>

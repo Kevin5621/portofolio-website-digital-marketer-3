@@ -41,7 +41,7 @@ export const HeroSection = () => {
     photo: {
       left: '-left-8 md:-left-26', // Kiri: 'left-0', '-left-4', '-left-8', '-left-12', dll
       right: '-right-1 md:-right-1', // Kanan: 'right-0', '-right-4', '-right-8', '-right-12', dll
-      top: 'top-0 scale-[1.35] origin-[50%_35%] md:scale-100 md:origin-center md:-top-24', // Mobile: scale up to zoom in (half body effect)
+      top: 'top-0 scale-100 origin-center md:scale-100 md:origin-center md:-top-24', // Mobile: scale up to zoom in (half body effect)
       bottom: 'bottom-0 md:-bottom-12' // Mobile: full height
     }
   }
@@ -64,10 +64,10 @@ export const HeroSection = () => {
               <div className="text-xl md:text-2xl font-normal">
                 My Motto Is:
               </div>
-              <div className="text-3xl md:text-4xl lg:text-5xl font-normal pt-4">
+              <div className="text-2xl md:text-3xl lg:text-4xl font-normal pt-4">
                 &quot;Sepi ing Pamrih,
               </div>
-              <div className="text-3xl md:text-4xl lg:text-5xl font-normal pt-4">
+              <div className="text-2xl md:text-3xl lg:text-4xl font-normal pt-4">
                 Rame ing Gawe&quot;
               </div>
             </div>
@@ -86,14 +86,14 @@ export const HeroSection = () => {
             <HeroArrowIcon />
             
             {/* Skills Text */}
-            <div className="space-y-6 pt-4">
-              <div className="text-3xl md:text-4xl lg:text-5xl font-normal">
+            <div className="space-y-4 pt-4">
+              <div className="text-2xl md:text-3xl lg:text-4xl font-normal">
                 Social Media Marketing
               </div>
-              <div className="text-3xl md:text-4xl lg:text-5xl font-normal">
+              <div className="text-2xl md:text-3xl lg:text-4xl font-normal">
                 Content Creator
               </div>
-              <div className="text-3xl md:text-4xl lg:text-5xl font-normal">
+              <div className="text-2xl md:text-3xl lg:text-4xl font-normal">
                 Short-Form Video Editor
               </div>
             </div>
@@ -102,7 +102,7 @@ export const HeroSection = () => {
 
         {/* Name - Full width, static text */}
         <div className={`absolute ${desktopPositions.name.left} ${desktopPositions.name.right} ${desktopPositions.name.top} ${desktopPositions.name.bottom} z-30 ${desktopPositions.name.padding} hidden md:block`}>
-          <h1 className="text-[12rem] md:text-[14rem] lg:text-[18rem] xl:text-[22rem] font-semibold text-content-inverse leading-none tracking-tight text-center w-full flex items-center justify-center gap-4">
+          <h1 className="text-[15vw] font-semibold text-content-inverse leading-none tracking-tight text-center w-full flex items-center justify-center gap-4">
             <span>Adhara</span>
             <span>Eka</span>
           </h1>
@@ -114,7 +114,7 @@ export const HeroSection = () => {
           {/* Name - Massive Static Text (Spans > 1 window via overflow) */}
           <div className="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 w-full text-center">
              <div className="whitespace-nowrap">
-                <h1 className="font-bold text-content-inverse leading-none tracking-tighter text-[35vw]">
+                <h1 className="font-bold text-content-inverse leading-none tracking-tighter text-[20vw]">
                   Adhara Eka
                 </h1>
              </div>
