@@ -69,7 +69,7 @@ const ProjectSection = ({ project }: ProjectSectionProps) => {
     <section 
       ref={sectionRef}
       id={id}
-      className="relative w-full h-screen overflow-hidden"
+      className="relative w-full min-h-screen overflow-hidden"
       data-theme="dark"
     >
       <div className="relative w-full h-full">
@@ -94,8 +94,8 @@ const ProjectSection = ({ project }: ProjectSectionProps) => {
         </div>
         
         {/* Content wrapper with vertical center alignment */}
-        <div className="absolute inset-0 flex items-center z-10 pt-20 pl-4 md:pt-28 md:pl-20">
-          <div className="w-full">
+        <div className="relative z-10 min-h-screen flex flex-col justify-center items-center py-20 md:py-28 pointer-events-none">
+          <div className="w-full max-w-screen-2xl px-4 md:px-20 pointer-events-auto">
             <div className="ml-8 space-y-6">
               {/* Year */}
               <div className="ml-4 md:ml-32 pb-12 md:pb-24">
